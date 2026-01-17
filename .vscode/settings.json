@@ -65,5 +65,6 @@
     "edu.wpi.first.math.**.struct.*",
   ],
   "git.pullBeforeCheckout": true,
-  "java.saveActions.organizeImports": true
+  "java.saveActions.organizeImports": true,
+  "workbench.iconTheme": "material-icon-theme"
 }

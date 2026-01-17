@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "bierner.markdown-mermaid",
-    "tldraw-org.tldraw-vscode"
+    "tldraw-org.tldraw-vscode",
+    "pkief.material-icon-theme"
   ]
 }
