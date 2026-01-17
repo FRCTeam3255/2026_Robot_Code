@@ -2,6 +2,7 @@
   "recommendations": [
     "bierner.markdown-mermaid",
     "tldraw-org.tldraw-vscode",
-    "pkief.material-icon-theme"
+    "pkief.material-icon-theme",
+    "richardkotze.git-mob"
   ]
 }
