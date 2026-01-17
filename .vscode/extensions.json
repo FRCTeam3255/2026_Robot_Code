@@ -1,5 +1,8 @@
 {
   "recommendations": [
-    "bierner.markdown-mermaid"
+    "bierner.markdown-mermaid",
+    "tldraw-org.tldraw-vscode",
+    "pkief.material-icon-theme",
+    "richardkotze.git-mob"
   ]
 }
