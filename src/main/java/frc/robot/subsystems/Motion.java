@@ -30,15 +30,15 @@ public class Motion extends SubsystemBase {
 
   }
 
-  public void pivotIntake(double speed) {
+  public void setPivotIntakeSpeed(double speed) {
     intakePivot.set(speed);
   }
 
-  public void startClimb(double speed) {
+  public void setClimbSpeed(double speed) {
     climber.set(speed);
   }
 
-  public void pivotHood(double speed) {
+  public void setPivotHoodSpeed(double speed) {
     hood.set(speed);
   }
 }
