@@ -101,6 +101,7 @@ public class RobotContainer {
         true, // If alliance flipping should be enabled
         subDriverStateMachine // The drive subsystem
     );
+
     // make our entries name
     final Map<Command, String> autoStartingPoses = Map.ofEntries(
     // Example
@@ -116,6 +117,14 @@ public class RobotContainer {
             .schedule();
       }
     });
+
+    // Example: Add autonomous routines to the chooser
+    autoChooser.setDefaultOption("Do Nothing", Commands.none());
+    autoChooser.addOption("Example Path", runPath("ExamplePath"));
+    // Add more autonomous routines as needed, e.g.:
+    // autoChooser.addOption("Score and Leave", runPath("ScoreAndLeave"));
+
+    SmartDashboard.putData("Auto Chooser", autoChooser);
   }
 
   public Command runPath(String pathName) {
