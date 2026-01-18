@@ -4,17 +4,41 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.hardware.TalonFX;
+
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.DeviceIDs;
+import frc.robot.constants.ConstMotion;
 
 @Logged
 public class Motion extends SubsystemBase {
   /** Creates a new Motion. */
+  final TalonFX intakePivot = new TalonFX(DeviceIDs.motionIDs.INTAKE_PIVOT_CAN);
+  final TalonFX climber = new TalonFX(DeviceIDs.motionIDs.CLIMBER_CAN);
+  final TalonFX hood = new TalonFX(DeviceIDs.motionIDs.HOOD_CAN);
+
   public Motion() {
+    intakePivot.getConfigurator().apply(ConstMotion.INTAKE_PIVOT_CONFIGURATION);
+    climber.getConfigurator().apply(ConstMotion.CLIMBER_CONFIGURATION);
+    hood.getConfigurator().apply(ConstMotion.HOOD_CONFIGURATION);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+
+  }
+
+  public void setIntakePivotSpeed(double speed) {
+    intakePivot.set(speed);
+  }
+
+  public void setClimbSpeed(double speed) {
+    climber.set(speed);
+  }
+
+  public void setHoodSpeed(double speed) {
+    hood.set(speed);
   }
 }
