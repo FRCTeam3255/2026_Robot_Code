@@ -14,42 +14,42 @@ import frc.robot.constants.ConstRotors;
 @Logged
 public class Rotors extends SubsystemBase {
 
-  final TalonFX serializerRollersMotor = new TalonFX(rotorIDs.SERIALIZER_ROLLERS_CAN);
-  final TalonFX intakeRollerMotor = new TalonFX(rotorIDs.INTAKE_ROLLERS_CAN);
-  final TalonFX serializerVFunnelMotor = new TalonFX(rotorIDs.SERIALIZER_V_FUNNEL_CAN);
-  final TalonFX shooterTransferMotor = new TalonFX(rotorIDs.SHOOTER_TRANSFER_CAN);
-  final TalonFX flywheelLeftMotor = new TalonFX(rotorIDs.FLYWHEEL_LEFT_CAN);
-  final TalonFX flywheelRightMotor = new TalonFX(rotorIDs.FLYWHEEL_RIGHT_CAN);
+  final TalonFX serializerRollers = new TalonFX(rotorIDs.SERIALIZER_ROLLERS_CAN);
+  final TalonFX intakeRoller = new TalonFX(rotorIDs.INTAKE_ROLLERS_CAN);
+  final TalonFX serializerVFunnel = new TalonFX(rotorIDs.SERIALIZER_V_FUNNEL_CAN);
+  final TalonFX shooterTransfer = new TalonFX(rotorIDs.SHOOTER_TRANSFER_CAN);
+  final TalonFX flywheelLeft = new TalonFX(rotorIDs.FLYWHEEL_LEFT_CAN);
+  final TalonFX flywheelRight = new TalonFX(rotorIDs.FLYWHEEL_RIGHT_CAN);
 
   /** Creates a new Rotors. */
   public Rotors() {
-    serializerRollersMotor.getConfigurator().apply(ConstRotors.SERIALIZER_ROLLERS_CONFIGURATION);
-    intakeRollerMotor.getConfigurator().apply(ConstRotors.INTAKE_ROLLER_CONFIGURATION);
-    serializerVFunnelMotor.getConfigurator().apply(ConstRotors.SERIALIZER_V_FUNNEL_CONFIGURATION);
-    shooterTransferMotor.getConfigurator().apply(ConstRotors.SHOOTER_TRANSFER_CONFIGURATION);
-    flywheelLeftMotor.getConfigurator().apply(ConstRotors.FLYWHEEL_LEFT_CONFIGURATION);
-    flywheelLeftMotor.getConfigurator().apply(ConstRotors.FLYWHEEL_RIGHT_CONFIGURATION);
+    serializerRollers.getConfigurator().apply(ConstRotors.SERIALIZER_ROLLERS_CONFIGURATION);
+    intakeRoller.getConfigurator().apply(ConstRotors.INTAKE_ROLLER_CONFIGURATION);
+    serializerVFunnel.getConfigurator().apply(ConstRotors.SERIALIZER_V_FUNNEL_CONFIGURATION);
+    shooterTransfer.getConfigurator().apply(ConstRotors.SHOOTER_TRANSFER_CONFIGURATION);
+    flywheelLeft.getConfigurator().apply(ConstRotors.FLYWHEEL_LEFT_CONFIGURATION);
+    flywheelRight.getConfigurator().apply(ConstRotors.FLYWHEEL_RIGHT_CONFIGURATION);
   }
 
-  public void setSerializerRollersMotorSpeed(double speed) {
-    serializerRollersMotor.set(speed);
+  public void setSerializerRollersSpeed(double speed) {
+    serializerRollers.set(speed);
   }
 
-  public void setIntakeRollersMotorSpeed(double speed) {
-    intakeRollerMotor.set(speed);
+  public void setIntakeRollersSpeed(double speed) {
+    intakeRoller.set(speed);
   }
 
-  public void setShooterTransferMotorSpeed(double speed) {
-    shooterTransferMotor.set(speed);
+  public void setShooterTransferSpeed(double speed) {
+    shooterTransfer.set(speed);
   }
 
-  public void setSerializerVFunnelMotorSpeed(double speed) {
-    serializerVFunnelMotor.set(speed);
+  public void setSerializerVFunnelSpeed(double speed) {
+    serializerVFunnel.set(speed);
   }
 
-  public void setFlywheelMotorSpeed(double speed) {
-    flywheelLeftMotor.set(speed);
-    flywheelRightMotor.set(speed);
+  public void setFlywheelSpeed(double speed) {
+    flywheelLeft.set(speed);
+    flywheelRight.set(speed);
   }
 
   @Override
