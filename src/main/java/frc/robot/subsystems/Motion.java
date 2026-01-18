@@ -9,15 +9,19 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DeviceIDs;
+import frc.robot.constants.ConstMotion;
 
 @Logged
 public class Motion extends SubsystemBase {
   /** Creates a new Motion. */
-  final TalonFX IntakePivot = new TalonFX(DeviceIDs.motionIDs.INTAKE_PIVOT_CAN);
-  final TalonFX Climber = new TalonFX(DeviceIDs.motionIDs.CLIMBER_CAN);
-  final TalonFX Hood = new TalonFX(DeviceIDs.motionIDs.HOOD_CAN);
+  final TalonFX intakePivot = new TalonFX(DeviceIDs.motionIDs.INTAKE_PIVOT_CAN);
+  final TalonFX climber = new TalonFX(DeviceIDs.motionIDs.CLIMBER_CAN);
+  final TalonFX hood = new TalonFX(DeviceIDs.motionIDs.HOOD_CAN);
 
   public Motion() {
+    intakePivot.getConfigurator().apply(ConstMotion.INTAKE_PIVOT_CONFIGURATION);
+    climber.getConfigurator().apply(ConstMotion.CLIMBER_CONFIGURATION);
+    hood.getConfigurator().apply(ConstMotion.HOOD_CONFIGURATION);
   }
 
   @Override
@@ -27,14 +31,14 @@ public class Motion extends SubsystemBase {
   }
 
   public void pivotIntake(double speed) {
-    IntakePivot.set(speed);
+    intakePivot.set(speed);
   }
 
   public void startClimb(double speed) {
-    Climber.set(speed);
+    climber.set(speed);
   }
 
   public void pivotHood(double speed) {
-    Hood.set(speed);
+    hood.set(speed);
   }
 }
