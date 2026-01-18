@@ -105,7 +105,7 @@ public class RobotContainer {
     // make our entries name
     final Map<Command, String> autoStartingPoses = Map.ofEntries(
     // Example
-    // Map.entry(what does it do, "how to call it"),
+    // Map.entry(autoCommand, "choreoStartingPath"),
     );
     // enter which we want to do based on name
     autoChooser.onChange(selectedAuto -> {
