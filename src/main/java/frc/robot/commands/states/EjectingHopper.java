@@ -5,7 +5,8 @@
 package frc.robot.commands.states;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.*;
+import frc.robot.constants.ConstRotors;
+import frc.robot.RobotContainer;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class EjectingHopper extends Command {
@@ -20,6 +21,7 @@ public class EjectingHopper extends Command {
   @Override
   public void initialize() {
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(-1);
+    RobotContainer.rotorsInstance.setIntakeRollerSpeed(-1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -31,6 +33,7 @@ public class EjectingHopper extends Command {
   @Override
   public void end(boolean interrupted) {
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(0);
+    RobotContainer.rotorsInstance.setIntakeRollerSpeed(0);
   }
 
   // Returns true when the command should end.
