@@ -50,3 +50,4 @@ public class DeviceIDs {
   public static class motionIDs {
 
   }
+}
