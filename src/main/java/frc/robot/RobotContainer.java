@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import java.util.Map;
 import java.util.Set;
 
 import com.frcteam3255.joystick.SN_XboxController;
@@ -100,14 +101,21 @@ public class RobotContainer {
         true, // If alliance flipping should be enabled
         subDriverStateMachine // The drive subsystem
     );
-
-    // Example: Add autonomous routines to the chooser
-    autoChooser.setDefaultOption("Do Nothing", Commands.none());
-    autoChooser.addOption("Example Path", runPath("ExamplePath"));
-    // Add more autonomous routines as needed, e.g.:
-    // autoChooser.addOption("Score and Leave", runPath("ScoreAndLeave"));
-
-    SmartDashboard.putData("Auto Chooser", autoChooser);
+    // make our entries name
+    final Map<Command, String> autoStartingPoses = Map.ofEntries(
+    // Example
+    // Map.entry(what does it do, "how to call it"),
+    );
+    // enter which we want to do based on name
+    autoChooser.onChange(selectedAuto -> {
+      String startingPose = autoStartingPoses.get(selectedAuto);
+      // if there is a stating pose, reset to it
+      if (startingPose != null) {
+        autoFactory.resetOdometry(startingPose)
+            .ignoringDisable(true) // Run even when disabled
+            .schedule();
+      }
+    });
   }
 
   public Command runPath(String pathName) {
