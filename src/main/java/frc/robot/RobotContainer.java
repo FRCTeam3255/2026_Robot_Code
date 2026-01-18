@@ -54,7 +54,7 @@ public class RobotContainer {
   private final Vision loggedSubVision = subVision;
 
   Command TRY_NONE = Commands.deferredProxy(
-      () -> subDriverStateMachine.tryState(RobotState.NONE));
+      () -> subStateMachine.tryState(RobotState.NONE));
 
   Command MANUAL = new DeferredCommand(
       subDriverStateMachine.tryState(
