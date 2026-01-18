@@ -25,11 +25,10 @@ public class Rotors extends SubsystemBase {
   /** Creates a new Rotors. */
   public Rotors() {
     serializerRollersMotor.getConfigurator().apply(ConstRotors.SERIALIZER_ROLLERS_CONFIGURATION);
-    intakeRollerMotor.getConfigurator().apply(ConstRotors.INTAKE_ROLLERS_CONFIGURATION);
+    intakeRollerMotor.getConfigurator().apply(ConstRotors.INTAKE_ROLLER_CONFIGURATION);
     serializerVFunnelMotor.getConfigurator().apply(ConstRotors.SERIALIZER_V_FUNNEL_CONFIGURATION);
     shooterTransferMotor.getConfigurator().apply(ConstRotors.SHOOTER_TRANSFER_CONFIGURATION);
-    flywheelLeftMotor.getConfigurator().apply(ConstRotors.FLYWHEEL_LEFT_CONFIGURATION);
-    flywheelRightMotor.getConfigurator().apply(ConstRotors.FLYWHEEL_RIGHT_CONFIGURATION);
+    flywheelLeftMotor.getConfigurator().apply(ConstRotors.FLYWHEEL_CONFIGURATION);
   }
 
   public void setSerializerRollersMotorSpeed(double speed) {
