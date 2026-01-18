@@ -11,8 +11,6 @@ import com.frcteam3255.joystick.SN_XboxController;
 import choreo.auto.AutoFactory;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -72,24 +70,9 @@ public class RobotContainer {
 
     subDriverStateMachine
         .setDefaultCommand(MANUAL);
-
-    configDriverBindings();
-    configOperatorBindings();
     configAutonomous();
 
     // subDrivetrain.resetModulesToAbsolute();
-  }
-
-  private void configDriverBindings() {
-    // conDriver.btn_B.onTrue(Commands.runOnce(() ->
-    // subDrivetrain.resetModulesToAbsolute()));
-    conDriver.btn_Back
-        .onTrue(Commands.runOnce(() -> subDrivetrain.resetPose(new Pose2d(0, 0, new Rotation2d()))));
-
-    // Example Pose Drive
-    conDriver.btn_X
-        .whileTrue(EXAMPLE_POSE_DRIVE)
-        .onFalse(Commands.runOnce(() -> subDriverStateMachine.setDriverState(DriverState.MANUAL)));
   }
 
   public void configAutonomous() {
@@ -117,10 +100,6 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     return autoChooser.getSelected();
-  }
-
-  private void configOperatorBindings() {
-    // Add operator bindings here if needed
   }
 
   public RobotState getRobotState() {
