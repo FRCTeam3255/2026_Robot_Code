@@ -63,7 +63,7 @@ public class RobotContainer {
           conDriver.axis_LeftX,
           conDriver.axis_RightX,
           conDriver.btn_RightBumper),
-      Set.of(loggedSubDriverStateMachine));
+      Set.of(subDriverStateMachine));
 
   Command EXAMPLE_POSE_DRIVE = new DeferredCommand(
     subDriverStateMachine.tryState(
@@ -72,12 +72,12 @@ public class RobotContainer {
           conDriver.axis_LeftX,
           conDriver.axis_RightX,
           conDriver.btn_RightBumper),
-      Set.of(loggedSubDriverStateMachine));
+      Set.of(subDriverStateMachine));
 
   public RobotContainer() {
     conDriver.setLeftDeadband(constControllers.DRIVER_LEFT_STICK_DEADBAND);
 
-    loggedSubDriverStateMachine
+    subDriverStateMachine
         .setDefaultCommand(MANUAL);
 
     configDriverBindings();
@@ -96,7 +96,7 @@ public class RobotContainer {
     // Example Pose Drive
     conDriver.btn_X
         .whileTrue(EXAMPLE_POSE_DRIVE)
-        .onFalse(Commands.runOnce(() -> loggedSubDriverStateMachine.setDriverState(DriverState.MANUAL)));
+        .onFalse(Commands.runOnce(() -> subDriverStateMachine.setDriverState(DriverState.MANUAL)));
   }
 
   public void configAutonomous() {
@@ -105,7 +105,7 @@ public class RobotContainer {
         subDrivetrain::resetPose, // A function that resets the current robot pose to the provided Pose2d
         subDrivetrain::followTrajectory, // The drive subsystem trajectory follower
         true, // If alliance flipping should be enabled
-        loggedSubDriverStateMachine // The drive subsystem
+        subDriverStateMachine // The drive subsystem
     );
 
     // Example: Add autonomous routines to the chooser
@@ -119,7 +119,7 @@ public class RobotContainer {
 
   public Command runPath(String pathName) {
     return autoFactory.trajectoryCmd(pathName).asProxy()
-        .alongWith(Commands.runOnce(() -> loggedSubDriverStateMachine.setDriverState(DriverState.CHOREO)));
+        .alongWith(Commands.runOnce(() -> subDriverStateMachine.setDriverState(DriverState.CHOREO)));
   }
 
   public Command getAutonomousCommand() {
@@ -131,11 +131,11 @@ public class RobotContainer {
   }
 
   public RobotState getRobotState() {
-    return loggedSubStateMachine.getRobotState();
+    return subStateMachine.getRobotState();
   }
 
   public Command addVisionMeasurement() {
-    return new AddVisionMeasurement(subDrivetrain, loggedSubVision)
+    return new AddVisionMeasurement(subDrivetrain, subVision)
         .withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming).ignoringDisable(true);
   }
 }
