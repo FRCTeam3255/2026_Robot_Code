@@ -38,7 +38,12 @@ public class DeviceIDs {
 
   // Rotor and Motion IDs: 10~29
   public static class rotorIDs {
-
+    public static final int SERIALIZER_ROLLERS_CAN = 10;
+    public static final int INTAKE_ROLLERS_CAN = 11;
+    public static final int SHOOTER_TRANSFER_CAN = 12;
+    public static final int SERIALIZER_V_FUNNEL_CAN = 13;
+    public static final int FLYWHEEL_RIGHT_CAN = 14;
+    public static final int FLYWHEEL_LEFT_CAN = 15;
   }
 
   // Motion Profile IDs: 30~49
