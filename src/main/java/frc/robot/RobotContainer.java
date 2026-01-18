@@ -41,23 +41,23 @@ public class RobotContainer {
 
 
   public static Rotors rotorsInstance = new Rotors();
-  public final Rotors loggedRotorsInstance = rotorsInstance;
+  private final Rotors loggedRotorsInstance = rotorsInstance;
   public static Drivetrain subDrivetrain = new Drivetrain();
-  public final Drivetrain loggedSubDrivetrain = subDrivetrain;
+  private final Drivetrain loggedSubDrivetrain = subDrivetrain;
   public static DriverStateMachine subDriverStateMachine = new DriverStateMachine(subDrivetrain);
-  public final DriverStateMachine loggedSubDriverStateMachine = subDriverStateMachine;
+  private final DriverStateMachine loggedSubDriverStateMachine = subDriverStateMachine;
   public static StateMachine subStateMachine = new StateMachine(subDrivetrain);
-  public final StateMachine loggedSubStateMachine = subStateMachine;
+  private final StateMachine loggedSubStateMachine = subStateMachine;
   public static RobotPoses robotPose = new RobotPoses(subDrivetrain);
-  public final RobotPoses loggedRobotPose = robotPose;
+  private final RobotPoses loggedRobotPose = robotPose;
   public static Vision subVision = new Vision();
-  public final Vision loggedSubVision = subVision;
+  private final Vision loggedSubVision = subVision;
 
   Command TRY_NONE = Commands.deferredProxy(
       () -> loggedSubStateMachine.tryState(RobotState.NONE));
 
   Command MANUAL = new DeferredCommand(
-      loggedSubDriverStateMachine.tryState(
+      subDriverStateMachine.tryState(
           DriverStateMachine.DriverState.MANUAL,
           conDriver.axis_LeftY,
           conDriver.axis_LeftX,
@@ -66,7 +66,7 @@ public class RobotContainer {
       Set.of(loggedSubDriverStateMachine));
 
   Command EXAMPLE_POSE_DRIVE = new DeferredCommand(
-    loggedSubDriverStateMachine.tryState(
+    subDriverStateMachine.tryState(
           DriverStateMachine.DriverState.EXAMPLE_POSE_DRIVE,
           conDriver.axis_LeftY,
           conDriver.axis_LeftX,
