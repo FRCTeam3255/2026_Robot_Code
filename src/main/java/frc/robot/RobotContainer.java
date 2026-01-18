@@ -4,10 +4,6 @@
 
 package frc.robot;
 
-import java.util.Set;
-
-import com.frcteam3255.joystick.SN_XboxController;
-
 import choreo.auto.AutoFactory;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
@@ -15,10 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.DeferredCommand;
-import frc.robot.DeviceIDs.controllerIDs;
 import frc.robot.commands.AddVisionMeasurement;
-import frc.robot.constants.ConstSystem.constControllers;
+
 import frc.robot.subsystems.DriverStateMachine;
 import frc.robot.subsystems.DriverStateMachine.DriverState;
 import frc.robot.subsystems.Drivetrain;
@@ -34,9 +28,6 @@ public class RobotContainer {
   SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   private AutoFactory autoFactory;
-
-  private final SN_XboxController conDriver = new SN_XboxController(controllerIDs.DRIVER_USB);
-
   public final static Rotors rotorsInstance = new Rotors();
   public final static Drivetrain subDrivetrain = new Drivetrain();
   public final static DriverStateMachine subDriverStateMachine = new DriverStateMachine(subDrivetrain);
@@ -44,32 +35,7 @@ public class RobotContainer {
   public final RobotPoses robotPose = new RobotPoses(subDrivetrain);
   public final static Vision subVision = new Vision();
 
-  Command TRY_NONE = Commands.deferredProxy(
-      () -> subStateMachine.tryState(RobotState.NONE));
-
-  Command MANUAL = new DeferredCommand(
-      subDriverStateMachine.tryState(
-          DriverStateMachine.DriverState.MANUAL,
-          conDriver.axis_LeftY,
-          conDriver.axis_LeftX,
-          conDriver.axis_RightX,
-          conDriver.btn_RightBumper),
-      Set.of(subDriverStateMachine));
-
-  Command EXAMPLE_POSE_DRIVE = new DeferredCommand(
-      subDriverStateMachine.tryState(
-          DriverStateMachine.DriverState.EXAMPLE_POSE_DRIVE,
-          conDriver.axis_LeftY,
-          conDriver.axis_LeftX,
-          conDriver.axis_RightX,
-          conDriver.btn_RightBumper),
-      Set.of(subDriverStateMachine));
-
   public RobotContainer() {
-    conDriver.setLeftDeadband(constControllers.DRIVER_LEFT_STICK_DEADBAND);
-
-    subDriverStateMachine
-        .setDefaultCommand(MANUAL);
     ControllerMap.configDriverBindings();
     ControllerMap.configOperatorBindings();
     configAutonomous();
