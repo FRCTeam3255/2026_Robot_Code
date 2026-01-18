@@ -21,38 +21,35 @@ import frc.robot.subsystems.StateMachine;
 import frc.robot.subsystems.StateMachine.RobotState;
 
 public class ControllerMap extends SubsystemBase {
-  public final static Drivetrain subDrivetrain = new Drivetrain();
-  public final static DriverStateMachine subDriverStateMachine = new DriverStateMachine(subDrivetrain);
   private static final SN_XboxController conDriver = new SN_XboxController(controllerIDs.DRIVER_USB);
   private static final SN_XboxController conOperator = new SN_XboxController(controllerIDs.OPERATOR_USB);
-  public final static StateMachine subStateMachine = new StateMachine(subDrivetrain);
 
   static Command EXAMPLE_POSE_DRIVE = new DeferredCommand(
-      subDriverStateMachine.tryState(
+      RobotContainer.subDriverStateMachine.tryState(
           DriverStateMachine.DriverState.EXAMPLE_POSE_DRIVE,
           conDriver.axis_LeftY,
           conDriver.axis_LeftX,
           conDriver.axis_RightX,
           conDriver.btn_RightBumper),
-      Set.of(subDriverStateMachine));
+      Set.of(RobotContainer.subDriverStateMachine));
 
   Command TRY_NONE = Commands.deferredProxy(
-      () -> subStateMachine.tryState(RobotState.NONE));
+      () -> RobotContainer.subStateMachine.tryState(RobotState.NONE));
 
   Command MANUAL = new DeferredCommand(
-      subDriverStateMachine.tryState(
+      RobotContainer.subDriverStateMachine.tryState(
           DriverStateMachine.DriverState.MANUAL,
           conDriver.axis_LeftY,
           conDriver.axis_LeftX,
           conDriver.axis_RightX,
           conDriver.btn_RightBumper),
-      Set.of(subDriverStateMachine));
+      Set.of(RobotContainer.subDriverStateMachine));
 
   /** Creates a new ControllerMap. */
   public ControllerMap() {
     conDriver.setLeftDeadband(constControllers.DRIVER_LEFT_STICK_DEADBAND);
 
-    subDriverStateMachine
+    RobotContainer.subDriverStateMachine
         .setDefaultCommand(MANUAL);
 
   }
@@ -62,12 +59,12 @@ public class ControllerMap extends SubsystemBase {
     // (what you want to do)));
 
     conDriver.btn_Back
-        .onTrue(Commands.runOnce(() -> subDrivetrain.resetPose(new Pose2d(0, 0, new Rotation2d()))));
+        .onTrue(Commands.runOnce(() -> RobotContainer.subDrivetrain.resetPose(new Pose2d(0, 0, new Rotation2d()))));
 
     // Example Pose Drive
     conDriver.btn_X
         .whileTrue(EXAMPLE_POSE_DRIVE)
-        .onFalse(Commands.runOnce(() -> subDriverStateMachine.setDriverState(DriverState.MANUAL)));
+        .onFalse(Commands.runOnce(() -> RobotContainer.subDriverStateMachine.setDriverState(DriverState.MANUAL)));
 
   }
 
