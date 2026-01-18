@@ -8,7 +8,6 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.DeviceIDs;
 import frc.robot.DeviceIDs.rotorIDs;
 import frc.robot.constants.ConstRotors;
 
@@ -28,7 +27,8 @@ public class Rotors extends SubsystemBase {
     intakeRollerMotor.getConfigurator().apply(ConstRotors.INTAKE_ROLLER_CONFIGURATION);
     serializerVFunnelMotor.getConfigurator().apply(ConstRotors.SERIALIZER_V_FUNNEL_CONFIGURATION);
     shooterTransferMotor.getConfigurator().apply(ConstRotors.SHOOTER_TRANSFER_CONFIGURATION);
-    flywheelLeftMotor.getConfigurator().apply(ConstRotors.FLYWHEEL_CONFIGURATION);
+    flywheelLeftMotor.getConfigurator().apply(ConstRotors.FLYWHEEL_LEFT_CONFIGURATION);
+    flywheelLeftMotor.getConfigurator().apply(ConstRotors.FLYWHEEL_RIGHT_CONFIGURATION);
   }
 
   public void setSerializerRollersMotorSpeed(double speed) {
@@ -49,7 +49,7 @@ public class Rotors extends SubsystemBase {
 
   public void setFlywheelMotorSpeed(double speed) {
     flywheelLeftMotor.set(speed);
-    flywheelRightMotor.set(-speed);
+    flywheelRightMotor.set(speed);
   }
 
   @Override
