@@ -16,17 +16,15 @@ public class ControllerMap extends SubsystemBase {
 
   /** Creates a new ControllerMap. */
   public ControllerMap() {
-    configDriverBindings();
-    configOperatorBindings();
   }
 
-  private void configDriverBindings() {
+  public static void configDriverBindings() {
     // remember conDriver.(what button).on/while,True/False(Commands.runOnce(() ->
     // (what you want to do)));
 
   }
 
-  private void configOperatorBindings() {
+  public static void configOperatorBindings() {
 
   }
 

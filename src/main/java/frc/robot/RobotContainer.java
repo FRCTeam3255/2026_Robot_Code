@@ -70,6 +70,8 @@ public class RobotContainer {
 
     subDriverStateMachine
         .setDefaultCommand(MANUAL);
+    ControllerMap.configDriverBindings();
+    ControllerMap.configOperatorBindings();
     configAutonomous();
 
     // subDrivetrain.resetModulesToAbsolute();
