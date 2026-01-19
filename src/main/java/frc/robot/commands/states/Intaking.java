@@ -31,8 +31,8 @@ public class Intaking extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.rotorsInstance.setIntakeRollersSpeed(0);
-    RobotContainer.motionInstance.setIntakePivotSpeed(0);
+    RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.STOP);
+    RobotContainer.motionInstance.setIntakePivotSpeed(ConstMotion.STOP);
   }
 
   // Returns true when the command should end.
