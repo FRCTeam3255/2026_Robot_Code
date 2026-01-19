@@ -4,6 +4,10 @@
 
 package frc.robot.subsystems;
 
+import static edu.wpi.first.units.Units.Radians;
+
+import java.util.function.DoubleSupplier;
+
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.swerve.SwerveDrivetrainConstants;
@@ -17,6 +21,7 @@ import choreo.trajectory.SwerveSample;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.units.measure.Angle;
 import frc.robot.DeviceIDs;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstDrivetrain;
@@ -26,6 +31,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
 
   public PoseDriveGroup lastDesiredPoseGroup;
   public Pose2d lastDesiredTarget;
+  double manualDriveRotation = 0.0;
 
   /** Creates a new Drivetrain. */
   public static final SwerveModuleConstantsFactory<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> constantCreator = new SwerveModuleConstantsFactory<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>()
@@ -55,7 +61,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
           DeviceIDs.drivetrainIDs.FRONT_LEFT_DRIVE_CAN,
           DeviceIDs.drivetrainIDs.FRONT_LEFT_ABSOLUTE_ENCODER_CAN,
           (RobotContainer.isPracticeBot()) ? ConstDrivetrain.PRACTICE_BOT.FRONT_LEFT_ABS_ENCODER_OFFSET
-          : ConstDrivetrain.FRONT_LEFT_ABS_ENCODER_OFFSET,
+              : ConstDrivetrain.FRONT_LEFT_ABS_ENCODER_OFFSET,
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS,
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS,
           ConstDrivetrain.INVERT_LEFT_SIDE_DRIVE,
@@ -67,7 +73,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
           DeviceIDs.drivetrainIDs.FRONT_RIGHT_DRIVE_CAN,
           DeviceIDs.drivetrainIDs.FRONT_RIGHT_ABSOLUTE_ENCODER_CAN,
           (RobotContainer.isPracticeBot()) ? ConstDrivetrain.PRACTICE_BOT.FRONT_RIGHT_ABS_ENCODER_OFFSET
-          : ConstDrivetrain.FRONT_RIGHT_ABS_ENCODER_OFFSET,
+              : ConstDrivetrain.FRONT_RIGHT_ABS_ENCODER_OFFSET,
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS,
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS.unaryMinus(),
           ConstDrivetrain.INVERT_RIGHT_SIDE_DRIVE,
@@ -79,7 +85,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
           DeviceIDs.drivetrainIDs.BACK_LEFT_DRIVE_CAN,
           DeviceIDs.drivetrainIDs.BACK_LEFT_ABSOLUTE_ENCODER_CAN,
           (RobotContainer.isPracticeBot()) ? ConstDrivetrain.PRACTICE_BOT.BACK_LEFT_ABS_ENCODER_OFFSET
-          : ConstDrivetrain.BACK_LEFT_ABS_ENCODER_OFFSET,
+              : ConstDrivetrain.BACK_LEFT_ABS_ENCODER_OFFSET,
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS.unaryMinus(),
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS,
           ConstDrivetrain.INVERT_LEFT_SIDE_DRIVE,
@@ -91,7 +97,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
           DeviceIDs.drivetrainIDs.BACK_RIGHT_DRIVE_CAN,
           DeviceIDs.drivetrainIDs.BACK_RIGHT_ABSOLUTE_ENCODER_CAN,
           (RobotContainer.isPracticeBot()) ? ConstDrivetrain.PRACTICE_BOT.BACK_RIGHT_ABS_ENCODER_OFFSET
-          : ConstDrivetrain.BACK_RIGHT_ABS_ENCODER_OFFSET,
+              : ConstDrivetrain.BACK_RIGHT_ABS_ENCODER_OFFSET,
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS.unaryMinus(),
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS.unaryMinus(),
           ConstDrivetrain.INVERT_RIGHT_SIDE_DRIVE,
@@ -158,6 +164,18 @@ public class Drivetrain extends SN_SuperSwerveV2 {
       automatedDTVelocity.vyMetersPerSecond = manualVelocities.vyMetersPerSecond;
     }
     drive(automatedDTVelocity);
+  }
+
+  public Angle getStickDegrees(DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis) {
+    double rightStickX = rotationXAxis.getAsDouble();
+    double rightStickY = rotationYAxis.getAsDouble();
+    double hypotenuse = Math.hypot(rightStickX, rightStickY);
+
+    if (hypotenuse < 1.15 && hypotenuse > 0.85) {
+      manualDriveRotation = Math.atan2(rightStickY, rightStickX) - Math.PI / 2;
+    }
+    return Radians.of(manualDriveRotation);
+
   }
 
 }

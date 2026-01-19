@@ -7,6 +7,7 @@ package frc.robot.commands;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.constants.ConstDrivetrain;
@@ -16,20 +17,21 @@ import frc.robot.subsystems.Drivetrain;
 
 public class DriveManual extends Command {
   Drivetrain subDrivetrain;
-  DoubleSupplier xAxis, yAxis, rotationAxis;
+  DoubleSupplier xAxis, yAxis, rotationXAxis, rotationYAxis;
   boolean isOpenLoop;
   DriverStateMachine subDriverStateMachine;
   BooleanSupplier slowMode;
 
   public DriveManual(Drivetrain subDrivetrain, DoubleSupplier xAxis, DoubleSupplier yAxis,
-      DoubleSupplier rotationAxis, DriverStateMachine subDriverStateMachine, BooleanSupplier slowMode) {
+      DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis, DriverStateMachine subDriverStateMachine,
+      BooleanSupplier slowMode) {
     this.subDrivetrain = subDrivetrain;
     this.subDriverStateMachine = subDriverStateMachine;
     this.xAxis = xAxis;
     this.yAxis = yAxis;
-    this.rotationAxis = rotationAxis;
+    this.rotationXAxis = rotationXAxis;
+    this.rotationYAxis = rotationYAxis;
     this.slowMode = slowMode;
-
     isOpenLoop = true;
 
     addRequirements(this.subDrivetrain);
@@ -41,10 +43,12 @@ public class DriveManual extends Command {
 
   @Override
   public void execute() {
+    Rotation2d heading = new Rotation2d(subDrivetrain.getStickDegrees(rotationXAxis, rotationYAxis));
+    System.out.println(heading);
     ChassisSpeeds velocities = subDrivetrain.calculateVelocitiesFromInput(
         xAxis,
         yAxis,
-        rotationAxis,
+        rotationXAxis,
         slowMode,
         ConstField.isRedAlliance(),
         ConstDrivetrain.SLOW_MODE_MULTIPLIER,
@@ -53,7 +57,7 @@ public class DriveManual extends Command {
 
     subDriverStateMachine.setDriverState(DriverStateMachine.DriverState.MANUAL);
 
-    subDrivetrain.drive(velocities);
+    subDrivetrain.drive(velocities, heading, 4.0, 0.0, 0.0);
   }
 
   @Override

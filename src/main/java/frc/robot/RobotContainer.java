@@ -68,6 +68,7 @@ public class RobotContainer {
           conDriver.axis_LeftY,
           conDriver.axis_LeftX,
           conDriver.axis_RightX,
+          conDriver.axis_RightY,
           conDriver.btn_RightBumper),
       Set.of(subDriverStateMachine));
 
@@ -77,6 +78,7 @@ public class RobotContainer {
           conDriver.axis_LeftY,
           conDriver.axis_LeftX,
           conDriver.axis_RightX,
+          conDriver.axis_RightY,
           conDriver.btn_RightBumper),
       Set.of(subDriverStateMachine));
 
