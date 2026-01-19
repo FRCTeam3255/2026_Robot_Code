@@ -145,7 +145,7 @@ public class RobotContainer {
 
   private void configOperatorBindings() {
     // Add operator bindings here if needed
-    conOperator.btn_East.whileTrue(new ReverseShooter());
+
   }
 
   public RobotState getRobotState() {
