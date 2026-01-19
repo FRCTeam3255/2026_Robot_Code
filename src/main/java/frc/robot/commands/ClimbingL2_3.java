@@ -29,7 +29,7 @@ public class ClimbingL2_3 extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.motionInstance.setClimbSpeed(0);
+    RobotContainer.motionInstance.setClimbSpeed(ConstMotion.STOP);
   }
 
   // Returns true when the command should end.
