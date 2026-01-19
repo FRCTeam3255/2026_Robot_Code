@@ -12,17 +12,17 @@ import frc.robot.RobotContainer;
 public class EjectingHopper extends Command {
   /** Creates a new None. */
 
-  public EjectingHopper () {
+  public EjectingHopper() {
     // Use addRequirements() here to declare subsystem dependencies.
-  
-  }`
+
+  }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.rotorsInstance.setSerializerRollersSpeed(-1);
-    RobotContainer.rotorsInstance.setIntakeRollerSpeed(-1);
-    RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(-1);
+    RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.REVERSE_SERIALIZER_ROLLERS_SPEED);
+    RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.REVERSE_INTAKE_ROLLER_SPEED);
+    RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(ConstRotors.REVERSE_SERIALIZER_V_FUNNEL_SPEED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -34,7 +34,7 @@ public class EjectingHopper extends Command {
   @Override
   public void end(boolean interrupted) {
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(0);
-    RobotContainer.rotorsInstance.setIntakeRollerSpeed(0);
+    RobotContainer.rotorsInstance.setIntakeRollersSpeed(0);
     RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(0);
   }
 
