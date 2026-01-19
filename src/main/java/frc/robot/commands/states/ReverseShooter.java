@@ -20,8 +20,7 @@ public class ReverseShooter extends Command {
   @Override
   public void initialize() {
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.REVERSE_SHOOTER_TRANSFER_SPEED);
-    RobotContainer.rotorsInstance.setFlywheelLeftSpeed(ConstRotors.REVERSE_FLYWHEEL_LEFT_SPEED);
-    RobotContainer.rotorsInstance.setFlywheelRightSpeed(ConstRotors.REVERSE_FLYWHEEL_RIGHT_SPEED);
+    RobotContainer.rotorsInstance.setFlywheelSpeed(ConstRotors.REVERSE_FLYWHEEL_SPEED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -33,8 +32,7 @@ public class ReverseShooter extends Command {
   @Override
   public void end(boolean interrupted) {
     RobotContainer.rotorsInstance.setShooterTransferSpeed(0);
-    RobotContainer.rotorsInstance.setFlywheelLeftSpeed(0);
-    RobotContainer.rotorsInstance.setFlywheelRightSpeed(0);
+    RobotContainer.rotorsInstance.setFlywheelSpeed(0);
   }
 
   // Returns true when the command should end.
