@@ -15,9 +15,4 @@ public class PrepNonOutpost extends BasePrepShooter {
     super(ConstRotors.FLYWHEEL_NONE_OUTPOST_SPEED, ConstMotion.HOOD_NONE_OUTPOST_ANGLE);
     // Use addRequirements() here to declare subsystem dependencies.
   }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-  }
 }

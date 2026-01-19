@@ -15,9 +15,4 @@ public class PrepAnywhere extends BasePrepShooter {
     super(ConstRotors.FLYWHEEL_ANYWHERE_SPEED, ConstMotion.HOOD_ANYWHERE_ANGLE);
     // Use addRequirements() here to declare subsystem dependencies.
   }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-  }
 }

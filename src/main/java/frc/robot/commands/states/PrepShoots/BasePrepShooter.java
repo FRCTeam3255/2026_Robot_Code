@@ -8,6 +8,7 @@ import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
+import frc.robot.constants.ConstRotors;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class BasePrepShooter extends Command {
@@ -38,7 +39,7 @@ public class BasePrepShooter extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.rotorsInstance.setFlywheelSpeed(0);
+    RobotContainer.rotorsInstance.setFlywheelSpeed(ConstRotors.STOP);
     RobotContainer.motionInstance.setHoodAngle(ConstMotion.HOOD_NONE_ANGLE);
   }
 
