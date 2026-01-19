@@ -30,7 +30,7 @@ public class PrepClimb extends Command {
     // globalDrivetrain.rotationalAlign(ConstField.TOWER_POSE,
     // ConstDrivetrain.TURN_SPEED);
     RobotContainer.motionInstance.setIntakePivotSpeed(ConstMotion.RETRACT_INTAKE_PIVOT_SPEED);
-    RobotContainer.motionInstance.setClimbSpeed(ConstMotion.EXTEND_CLIMBER_MOTOR_SPEED);
+    RobotContainer.motionInstance.setClimbSpeed(ConstMotion.EXTEND_CLIMBER_SPEED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -41,8 +41,8 @@ public class PrepClimb extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.motionInstance.setClimbSpeed(0);
-    RobotContainer.motionInstance.setIntakePivotSpeed(0);
+    RobotContainer.motionInstance.setClimbSpeed(ConstMotion.STOP);
+    RobotContainer.motionInstance.setIntakePivotSpeed(ConstMotion.STOP);
   }
 
   // Returns true when the command should end.
