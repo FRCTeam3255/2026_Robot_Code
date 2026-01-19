@@ -17,7 +17,6 @@ public class ConstMotion {
   public static final double INTAKE_PIVOT_SPEED = 0.5;
   public static final double RETRACT_INTAKE_PIVOT_SPEED = -.5;
   public static final double EXTEND_CLIMBER_SPEED = 0;
-  public static final double STOP_CLIMBER_MOTOR = 0;
   public static final double RETRACT_CLIMBER_SPEED = -0.5;
   public static final double ANGLE_HOOD_SPEED = 0.5;
   static {

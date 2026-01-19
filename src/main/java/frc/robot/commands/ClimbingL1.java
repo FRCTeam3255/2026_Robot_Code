@@ -18,7 +18,7 @@ public class ClimbingL1 extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.motionInstance.setClimbSpeed(ConstMotion.EXTEND_CLIMBER_MOTOR_SPEED);
+    RobotContainer.motionInstance.setClimbSpeed(ConstMotion.EXTEND_CLIMBER_SPEED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
