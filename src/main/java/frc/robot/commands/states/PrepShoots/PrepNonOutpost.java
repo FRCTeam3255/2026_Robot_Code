@@ -12,7 +12,7 @@ import frc.robot.constants.ConstRotors;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PrepNonOutpost extends BasePrepShooter {
   public PrepNonOutpost() {
-    super(ConstRotors.FLYWHEEL_NONE_OUTPOST_SPEED, ConstMotion.HOOD_NONE_OUTPOST_ANGLE);
+    super(ConstRotors.FLYWHEEL_NON_OUTPOST_SPEED, ConstMotion.HOOD_NON_OUTPOST_ANGLE);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 }

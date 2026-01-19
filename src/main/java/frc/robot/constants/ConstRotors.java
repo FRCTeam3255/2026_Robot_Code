@@ -25,7 +25,7 @@ public class ConstRotors {
   // different shooting locations shooting speeds
   public static final double FLYWHEEL_TRENCH_SPEED = 0.6;
   public static final double FLYWHEEL_OUTPOST_SPEED = 0.5;
-  public static final double FLYWHEEL_NONE_OUTPOST_SPEED = 0.5;
+  public static final double FLYWHEEL_NON_OUTPOST_SPEED = 0.5;
   public static final double FLYWHEEL_DEPOT_SPEED = 0.5;
   public static final double FLYWHEEL_ANYWHERE_SPEED = 0.5;
   public static final double FLYWHEEL_NUETRAL_TO_ALLIANCE_SPEED = 0.5;
