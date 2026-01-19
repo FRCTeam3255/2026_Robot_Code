@@ -6,20 +6,15 @@ package frc.robot.commands.states.Climbing;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
-import frc.robot.constants.ConstDrivetrain;
-import frc.robot.constants.ConstField;
 import frc.robot.constants.ConstMotion;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Motion;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class PrepClimb extends Command {
-  Drivetrain globalDrivetrain;
+  Drivetrain globalDrivetrain = RobotContainer.subDrivetrain;
 
   /** Creates a new PrepClimb. */
-  public PrepClimb(Drivetrain subDrivetrain) {
-    globalDrivetrain = subDrivetrain;
-
+  public PrepClimb() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
