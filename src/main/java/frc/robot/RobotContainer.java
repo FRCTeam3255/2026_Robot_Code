@@ -145,7 +145,7 @@ public class RobotContainer {
 
   private void configOperatorBindings() {
     // Add operator bindings here if needed
-    conOperator.btn_South.whileTrue(new EjectingHopper());
+
   }
 
   public RobotState getRobotState() {
