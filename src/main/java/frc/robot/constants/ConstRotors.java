@@ -17,7 +17,6 @@ public class ConstRotors {
   public static final TalonFXConfiguration SHOOTER_TRANSFER_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration FLYWHEEL_LEFT_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration FLYWHEEL_RIGHT_CONFIGURATION = new TalonFXConfiguration();
-  public static final double STOP = 0.0;
   public static final double INTAKE_ROLLER_SPEED = 1;
   public static final double SERIALIZER_V_FUNNEL_SPEED = 1;
   public static final double SERIALIZER_ROLLERS_SPEED = 1;
