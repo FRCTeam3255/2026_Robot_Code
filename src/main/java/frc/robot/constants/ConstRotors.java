@@ -23,7 +23,7 @@ public class ConstRotors {
   public static final double SHOOTER_TRANSFER_SPEED = 1;
   public static final double FLYWHEEL_LEFT_SPEED = 1;
   public static final double FLYWHEEL_RIGHT_SPEED = 1;
-  public static final double REVERSE_INTAKE_ROLLER_SPEED = 1;
+  public static final double REVERSE_INTAKE_ROLLER_SPEED = -1;
   public static final double REVERSE_SERIALIZER_V_FUNNEL_SPEED = -1;
   public static final double REVERSE_SERIALIZER_ROLLERS_SPEED = -1;
   public static final double REVERSE_SHOOTER_TRANSFER_SPEED = -1;
