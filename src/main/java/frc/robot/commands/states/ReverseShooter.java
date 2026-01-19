@@ -31,8 +31,8 @@ public class ReverseShooter extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.rotorsInstance.setShooterTransferSpeed(0);
-    RobotContainer.rotorsInstance.setFlywheelSpeed(0);
+    RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.STOP);
+    RobotContainer.rotorsInstance.setFlywheelSpeed(ConstRotors.STOP);
   }
 
   // Returns true when the command should end.
