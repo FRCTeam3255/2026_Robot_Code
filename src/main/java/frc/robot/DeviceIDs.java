@@ -5,6 +5,8 @@ import com.ctre.phoenix6.CANBus;
 // Contains all ports on our robot
 
 public class DeviceIDs {
+  public static final int PRAC_BOT_DIO = 0;
+
   public static class controllerIDs {
     public static final int DRIVER_USB = 0;
     public static final int OPERATOR_USB = 1;
