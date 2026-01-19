@@ -28,6 +28,7 @@ public class ConstMotion {
   public static final Angle HOOD_ANYWHERE_ANGLE = Units.Degrees.of(5);
   public static final Angle HOOD_NUETRAL_TO_ALLIANCE_ANGLE = Units.Degrees.of(5);
   public static final Angle HOOD_OPPENENT_TO_ALLIANCE_ANGLE = Units.Degrees.of(5);
+  public static final Angle HOOD_NONE_ANGLE = Units.Degrees.of(0);
   static {
 
     INTAKE_PIVOT_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;

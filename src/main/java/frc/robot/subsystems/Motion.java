@@ -21,7 +21,9 @@ public class Motion extends SubsystemBase {
   final TalonFX climber = new TalonFX(DeviceIDs.motionIDs.CLIMBER_CAN);
   final TalonFX hood = new TalonFX(DeviceIDs.motionIDs.HOOD_CAN);
 
-  MotionMagicVoltage motionRequest = new MotionMagicVoltage(0);
+  MotionMagicVoltage climberMotionRequest = new MotionMagicVoltage(0);
+  MotionMagicVoltage hoodMotionRequest = new MotionMagicVoltage(0);
+  MotionMagicVoltage intakePivotMotionRequest = new MotionMagicVoltage(0);
 
   public Motion() {
     intakePivot.getConfigurator().apply(ConstMotion.INTAKE_PIVOT_CONFIGURATION);
@@ -44,7 +46,7 @@ public class Motion extends SubsystemBase {
   }
 
   public void setHoodAngle(Angle setPoint) {
-    hood.setControl(motionRequest.withPosition(setPoint.in(Units.Rotation)));
+    hood.setControl(hoodMotionRequest.withPosition(setPoint));
 
   }
 }

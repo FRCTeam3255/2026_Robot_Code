@@ -4,9 +4,6 @@
 
 package frc.robot.commands.states.PrepShoots;
 
-import com.fasterxml.jackson.databind.JsonSerializable.Base;
-
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
 
@@ -15,7 +12,7 @@ import frc.robot.constants.ConstRotors;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PrepAnywhere extends BasePrepShooter {
   public PrepAnywhere() {
-    super(ConstRotors.FLYWHEEL_ANYWHERE_SPEED, ConstMotion.HOOD_ANYWHERE_ANGLE, null);
+    super(ConstRotors.FLYWHEEL_ANYWHERE_SPEED, ConstMotion.HOOD_ANYWHERE_ANGLE);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

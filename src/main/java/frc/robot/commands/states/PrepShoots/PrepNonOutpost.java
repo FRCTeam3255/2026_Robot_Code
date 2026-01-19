@@ -4,7 +4,6 @@
 
 package frc.robot.commands.states.PrepShoots;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
 
@@ -13,7 +12,7 @@ import frc.robot.constants.ConstRotors;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PrepNonOutpost extends BasePrepShooter {
   public PrepNonOutpost() {
-    super(ConstRotors.FLYWHEEL_NONE_OUTPOST_SPEED, ConstMotion.HOOD_NONE_OUTPOST_ANGLE, null);
+    super(ConstRotors.FLYWHEEL_NONE_OUTPOST_SPEED, ConstMotion.HOOD_NONE_OUTPOST_ANGLE);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
