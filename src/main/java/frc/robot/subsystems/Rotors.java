@@ -4,9 +4,12 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.controls.Follower;
+import com.ctre.phoenix6.controls.MotionMagicVelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.epilogue.Logged;
+import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DeviceIDs.rotorIDs;
 import frc.robot.constants.ConstRotors;
@@ -31,6 +34,8 @@ public class Rotors extends SubsystemBase {
     flywheelRight.getConfigurator().apply(ConstRotors.FLYWHEEL_RIGHT_CONFIGURATION);
   }
 
+  final MotionMagicVelocityVoltage flywheelVelocityRequest = new MotionMagicVelocityVoltage(0);
+
   public void setSerializerRollersSpeed(double speed) {
     serializerRollers.set(speed);
   }
@@ -48,8 +53,8 @@ public class Rotors extends SubsystemBase {
   }
 
   public void setFlywheelSpeed(double speed) {
-    flywheelLeft.set(speed);
     flywheelRight.set(speed);
+    flywheelLeft.setControl(new Follower(flywheelRight.getDeviceID(), true));
   }
 
   @Override
