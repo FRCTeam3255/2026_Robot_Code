@@ -4,9 +4,12 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.epilogue.Logged;
+import edu.wpi.first.units.Units;
+import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DeviceIDs;
 import frc.robot.constants.ConstMotion;
@@ -17,6 +20,8 @@ public class Motion extends SubsystemBase {
   final TalonFX intakePivot = new TalonFX(DeviceIDs.motionIDs.INTAKE_PIVOT_CAN);
   final TalonFX climber = new TalonFX(DeviceIDs.motionIDs.CLIMBER_CAN);
   final TalonFX hood = new TalonFX(DeviceIDs.motionIDs.HOOD_CAN);
+
+  MotionMagicVoltage motionRequest = new MotionMagicVoltage(0);
 
   public Motion() {
     intakePivot.getConfigurator().apply(ConstMotion.INTAKE_PIVOT_CONFIGURATION);
@@ -38,7 +43,8 @@ public class Motion extends SubsystemBase {
     climber.set(speed);
   }
 
-  public void setHoodSpeed(double speed) {
-    hood.set(speed);
+  public void setHoodAngle(Angle setPoint) {
+    hood.setControl(motionRequest.withPosition(setPoint.in(Units.Rotation)));
+
   }
 }

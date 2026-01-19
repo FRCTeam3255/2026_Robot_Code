@@ -24,6 +24,15 @@ public class ConstRotors {
   public static final double FLYWHEEL_LEFT_SPEED = 1;
   public static final double FLYWHEEL_RIGHT_SPEED = 1;
 
+  // different shooting locations shooting speeds
+  public static final double FLYWHEEL_TRENCH_SPEED = 0.6;
+  public static final double FLYWHEEL_OUTPOST_SPEED = 0.5;
+  public static final double FLYWHEEL_NONE_OUTPOST_SPEED = 0.5;
+  public static final double FLYWHEEL_DEPOT_SPEED = 0.5;
+  public static final double FLYWHEEL_ANYWHERE_SPEED = 0.5;
+  public static final double FLYWHEEL_NUETRAL_TO_ALLIANCE_SPEED = 0.5;
+  public static final double FLYWHEEL_OPPONENT_TO_ALLIANCE_SPEED = 0.5;
+
   static {
     INTAKE_ROLLER_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     INTAKE_ROLLER_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;

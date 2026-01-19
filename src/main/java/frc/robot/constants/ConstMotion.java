@@ -8,6 +8,9 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.units.Units;
+import edu.wpi.first.units.measure.Angle;
+
 /** Add your docs here. */
 public class ConstMotion {
   public static final TalonFXConfiguration INTAKE_PIVOT_CONFIGURATION = new TalonFXConfiguration();
@@ -18,6 +21,13 @@ public class ConstMotion {
   public static final double STOP_CLIMBER_MOTOR = 0;
   public static final double RETRACT_CLIMBER_MOTOR_SPEED = -0.5;
   public static final double ANGLE_HOOD_SPEED = 0.5;
+  public static final Angle HOOD_TRENCH_ANGLE = Units.Degrees.of(5);
+  public static final Angle HOOD_OUTPOST_ANGLE = Units.Degrees.of(5);
+  public static final Angle HOOD_NONE_OUTPOST_ANGLE = Units.Degrees.of(5);
+  public static final Angle HOOD_DEPOT_ANGLE = Units.Degrees.of(5);
+  public static final Angle HOOD_ANYWHERE_ANGLE = Units.Degrees.of(5);
+  public static final Angle HOOD_NUETRAL_TO_ALLIANCE_ANGLE = Units.Degrees.of(5);
+  public static final Angle HOOD_OPPENENT_TO_ALLIANCE_ANGLE = Units.Degrees.of(5);
   static {
 
     INTAKE_PIVOT_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
