@@ -22,6 +22,7 @@ public class EjectingHopper extends Command {
   public void initialize() {
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(-1);
     RobotContainer.rotorsInstance.setIntakeRollerSpeed(-1);
+     RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(-1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -34,6 +35,7 @@ public class EjectingHopper extends Command {
   public void end(boolean interrupted) {
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(0);
     RobotContainer.rotorsInstance.setIntakeRollerSpeed(0);
+    RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(0);
   }
 
   // Returns true when the command should end.
