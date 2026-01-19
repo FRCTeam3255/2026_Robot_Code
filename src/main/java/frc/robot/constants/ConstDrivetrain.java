@@ -49,6 +49,13 @@ import edu.wpi.first.units.measure.Voltage;
  * easier to update configuration values in a single location.
  */
 public class ConstDrivetrain {
+  public static class PRACTICE_BOT {
+    // TODO: Swoffsets
+    public static final Angle FRONT_LEFT_ABS_ENCODER_OFFSET = Rotations.of(-0.178466796875);
+    public static final Angle FRONT_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(-0.498779296875);
+    public static final Angle BACK_LEFT_ABS_ENCODER_OFFSET = Rotations.of(-0.459716796875);
+    public static final Angle BACK_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(-0.31201171875);
+  }
   // TODO: Swoffsets
   public static final Angle FRONT_LEFT_ABS_ENCODER_OFFSET = Rotations.of(-0.178466796875);
   public static final Angle FRONT_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(-0.498779296875);
