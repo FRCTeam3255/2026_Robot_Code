@@ -17,6 +17,7 @@ public class ConstMotion {
   public static final double EXTEND_CLIMBER_SPEED = 0.3;
   public static final double RETRACT_CLIMBER_SPEED = -0.5;
   public static final double ANGLE_HOOD_SPEED = 0.5;
+  public static final double STOP = 0.0;
   static {
 
     INTAKE_PIVOT_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
