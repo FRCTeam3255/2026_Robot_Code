@@ -23,7 +23,6 @@ public class ConstRotors {
   public static final double SHOOTER_TRANSFER_SPEED = 1;
   public static final double FLYWHEEL_LEFT_SPEED = 1;
   public static final double FLYWHEEL_RIGHT_SPEED = 1;
-  public static final double STOP = 0.0;
 
   static {
     INTAKE_ROLLER_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
