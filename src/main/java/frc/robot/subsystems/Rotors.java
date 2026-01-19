@@ -52,7 +52,7 @@ public class Rotors extends SubsystemBase {
     serializerVFunnel.set(speed);
   }
 
-  public void setFlywheelMotorSpeed(AngularVelocity speed) {
+  public void setFlywheelMotorSpeed(double speed) {
     flywheelRight.setControl(flywheelVelocityRequest.withVelocity(speed));
     flywheelLeft.setControl(new Follower(flywheelRight.getDeviceID(), true));
   }
