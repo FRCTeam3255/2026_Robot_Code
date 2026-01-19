@@ -32,9 +32,9 @@ public class Shooting extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.rotorsInstance.setSerializerRollersSpeed(0);
-    RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(0);
-    RobotContainer.rotorsInstance.setShooterTransferSpeed(0);
+    RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.STOP);
+    RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(ConstRotors.STOP);
+    RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.STOP);
   }
 
   // Returns true when the command should end.
