@@ -12,8 +12,6 @@ import frc.robot.constants.ConstRotors;
 public class ReverseShooter extends Command {
   /** Creates a new None. */
 
-
-
   public ReverseShooter() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -21,9 +19,9 @@ public class ReverseShooter extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.rotorsInstance.setShooterTransferSpeed(-1);
-    RobotContainer.rotorsInstance.setFlywheelLeftSpeed(-1)
-    RobotContainer.rotorsInstance.setFlywheelRightSpeed(-1)
+    RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.REVERSE_SHOOTER_TRANSFER_SPEED);
+    RobotContainer.rotorsInstance.setFlywheelLeftSpeed(ConstRotors.REVERSE_FLYWHEEL_LEFT_SPEED);
+    RobotContainer.rotorsInstance.setFlywheelRightSpeed(ConstRotors.REVERSE_FLYWHEEL_RIGHT_SPEED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -34,9 +32,9 @@ public class ReverseShooter extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-     RobotContainer.rotorsInstance.setShooterTransferSpeed(0);
-    RobotContainer.rotorsInstance.setFlywheelLeftSpeed(0)
-    RobotContainer.rotorsInstance.setFlywheelRightSpeed(0)
+    RobotContainer.rotorsInstance.setShooterTransferSpeed(0);
+    RobotContainer.rotorsInstance.setFlywheelLeftSpeed(0);
+    RobotContainer.rotorsInstance.setFlywheelRightSpeed(0);
   }
 
   // Returns true when the command should end.
