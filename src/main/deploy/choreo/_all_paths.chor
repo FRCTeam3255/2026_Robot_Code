@@ -1,10 +1,53 @@
 {
  "name":"_all_paths",
- "version":1,
+ "version":2,
  "type":"Swerve",
  "variables":{
   "expressions":{},
-  "poses":{}
+  "poses":{
+   "hub":{
+    "x":{
+     "exp":"13.233393669128418 m",
+     "val":13.233393669128418
+    },
+    "y":{
+     "exp":"4.937488555908203 m",
+     "val":4.937488555908203
+    },
+    "heading":{
+     "exp":"3.6433748135381627 rad",
+     "val":3.6433748135381623
+    }
+   },
+   "neutral":{
+    "x":{
+     "exp":"8.838845252990723 m",
+     "val":8.838845252990723
+    },
+    "y":{
+     "exp":"5.992589950561523 m",
+     "val":5.992589950561523
+    },
+    "heading":{
+     "exp":"70 deg",
+     "val":1.2217304763960306
+    }
+   },
+   "trench":{
+    "x":{
+     "exp":"12.967057228088379 m",
+     "val":12.96705722808838
+    },
+    "y":{
+     "exp":"7.375489711761475 m",
+     "val":7.375489711761475
+    },
+    "heading":{
+     "exp":"0 deg",
+     "val":0.0
+    }
+   }
+  }
  },
  "config":{
   "frontLeft":{
@@ -74,5 +117,11 @@
    "val":0.5588
   }
  },
- "generationFeatures":[]
+ "generationFeatures":[],
+ "codegen":{
+  "root":null,
+  "genVars":true,
+  "genTrajData":true,
+  "useChoreoLib":true
+ }
 }
