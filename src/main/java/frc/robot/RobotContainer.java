@@ -21,11 +21,11 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.DeferredCommand;
 import frc.robot.DeviceIDs.controllerIDs;
 import frc.robot.commands.AddVisionMeasurement;
-import frc.robot.commands.states.EjectingHopper;
 import frc.robot.constants.ConstSystem.constControllers;
 import frc.robot.subsystems.DriverStateMachine;
 import frc.robot.subsystems.DriverStateMachine.DriverState;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Motion;
 import frc.robot.subsystems.RobotPoses;
 import frc.robot.subsystems.Rotors;
 import frc.robot.subsystems.StateMachine;
@@ -43,6 +43,8 @@ public class RobotContainer {
 
   public static Rotors rotorsInstance = new Rotors();
   private final Rotors loggedRotorsInstance = rotorsInstance;
+  public static Motion motionInstance = new Motion();
+  private final Motion loggedMotorsInstance = motionInstance;
   public static Drivetrain subDrivetrain = new Drivetrain();
   private final Drivetrain loggedSubDrivetrain = subDrivetrain;
   public static DriverStateMachine subDriverStateMachine = new DriverStateMachine(subDrivetrain);
@@ -145,7 +147,6 @@ public class RobotContainer {
 
   private void configOperatorBindings() {
     // Add operator bindings here if needed
-
   }
 
   public RobotState getRobotState() {
