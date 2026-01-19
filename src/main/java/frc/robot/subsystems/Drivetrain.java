@@ -18,6 +18,7 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import frc.robot.DeviceIDs;
+import frc.robot.RobotContainer;
 import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstPoseDrive.PoseDriveGroup;
 
@@ -53,7 +54,8 @@ public class Drivetrain extends SN_SuperSwerveV2 {
           DeviceIDs.drivetrainIDs.FRONT_LEFT_STEER_CAN,
           DeviceIDs.drivetrainIDs.FRONT_LEFT_DRIVE_CAN,
           DeviceIDs.drivetrainIDs.FRONT_LEFT_ABSOLUTE_ENCODER_CAN,
-          ConstDrivetrain.FRONT_LEFT_ABS_ENCODER_OFFSET,
+          (RobotContainer.isPracticeBot()) ? ConstDrivetrain.PRACTICE_BOT.FRONT_LEFT_ABS_ENCODER_OFFSET
+          : ConstDrivetrain.FRONT_LEFT_ABS_ENCODER_OFFSET,
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS,
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS,
           ConstDrivetrain.INVERT_LEFT_SIDE_DRIVE,
@@ -64,7 +66,8 @@ public class Drivetrain extends SN_SuperSwerveV2 {
           DeviceIDs.drivetrainIDs.FRONT_RIGHT_STEER_CAN,
           DeviceIDs.drivetrainIDs.FRONT_RIGHT_DRIVE_CAN,
           DeviceIDs.drivetrainIDs.FRONT_RIGHT_ABSOLUTE_ENCODER_CAN,
-          ConstDrivetrain.FRONT_RIGHT_ABS_ENCODER_OFFSET,
+          (RobotContainer.isPracticeBot()) ? ConstDrivetrain.PRACTICE_BOT.FRONT_RIGHT_ABS_ENCODER_OFFSET
+          : ConstDrivetrain.FRONT_RIGHT_ABS_ENCODER_OFFSET,
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS,
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS.unaryMinus(),
           ConstDrivetrain.INVERT_RIGHT_SIDE_DRIVE,
@@ -75,7 +78,8 @@ public class Drivetrain extends SN_SuperSwerveV2 {
           DeviceIDs.drivetrainIDs.BACK_LEFT_STEER_CAN,
           DeviceIDs.drivetrainIDs.BACK_LEFT_DRIVE_CAN,
           DeviceIDs.drivetrainIDs.BACK_LEFT_ABSOLUTE_ENCODER_CAN,
-          ConstDrivetrain.BACK_LEFT_ABS_ENCODER_OFFSET,
+          (RobotContainer.isPracticeBot()) ? ConstDrivetrain.PRACTICE_BOT.BACK_LEFT_ABS_ENCODER_OFFSET
+          : ConstDrivetrain.BACK_LEFT_ABS_ENCODER_OFFSET,
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS.unaryMinus(),
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS,
           ConstDrivetrain.INVERT_LEFT_SIDE_DRIVE,
@@ -86,7 +90,8 @@ public class Drivetrain extends SN_SuperSwerveV2 {
           DeviceIDs.drivetrainIDs.BACK_RIGHT_STEER_CAN,
           DeviceIDs.drivetrainIDs.BACK_RIGHT_DRIVE_CAN,
           DeviceIDs.drivetrainIDs.BACK_RIGHT_ABSOLUTE_ENCODER_CAN,
-          ConstDrivetrain.BACK_RIGHT_ABS_ENCODER_OFFSET,
+          (RobotContainer.isPracticeBot()) ? ConstDrivetrain.PRACTICE_BOT.BACK_RIGHT_ABS_ENCODER_OFFSET
+          : ConstDrivetrain.BACK_RIGHT_ABS_ENCODER_OFFSET,
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS.unaryMinus(),
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS.unaryMinus(),
           ConstDrivetrain.INVERT_RIGHT_SIDE_DRIVE,
