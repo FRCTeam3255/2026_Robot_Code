@@ -36,10 +36,6 @@ public class Motion extends SubsystemBase {
 
   }
 
-  public void setIntakePivotSpeed(double speed) {
-    intakePivot.set(speed);
-  }
-
   public void setIntakePivotAngle(Angle setPoint) {
     intakePivot.setControl(intakePivotMotionRequest.withPosition(setPoint));
   }
