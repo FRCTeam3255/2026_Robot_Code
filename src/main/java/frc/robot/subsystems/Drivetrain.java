@@ -4,7 +4,6 @@
 
 package frc.robot.subsystems;
 
-import static edu.wpi.first.units.Units.Degree;
 import static edu.wpi.first.units.Units.Radians;
 
 import java.util.function.DoubleSupplier;
@@ -24,10 +23,8 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.units.measure.Angle;
 import frc.robot.DeviceIDs;
 import frc.robot.RobotContainer;
-import frc.robot.commands.DriveManual;
 import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstPoseDrive.PoseDriveGroup;
 
@@ -172,7 +169,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     drive(automatedDTVelocity);
   }
 
-  public double getStickDegrees(DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis) {
+  public double getStickRadians(DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis) {
     double rightStickX = rotationXAxis.getAsDouble();
     double rightStickY = rotationYAxis.getAsDouble();
     double hypotenuse = Math.hypot(rightStickX, rightStickY);

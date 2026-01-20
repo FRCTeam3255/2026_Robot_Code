@@ -44,7 +44,7 @@ public class DriveManual extends Command {
 
   @Override
   public void execute() {
-    targetHeading = Rotation2d.fromRadians(subDrivetrain.getStickDegrees(rotationXAxis, rotationYAxis));
+    targetHeading = Rotation2d.fromRadians(subDrivetrain.getStickRadians(rotationXAxis, rotationYAxis));
     System.out.println(targetHeading);
     ChassisSpeeds velocities = subDrivetrain.calculateVelocitiesFromInput(
         xAxis,
@@ -58,7 +58,12 @@ public class DriveManual extends Command {
 
     subDriverStateMachine.setDriverState(DriverStateMachine.DriverState.MANUAL);
 
-    subDrivetrain.drive(velocities, subDrivetrain.getDriveRotation(targetHeading), 4.0, 0.0, 0.0);
+    subDrivetrain.drive(
+        velocities,
+        subDrivetrain.getDriveRotation(targetHeading),
+        ConstDrivetrain.DRIVE_MANUAL_PID.kP,
+        ConstDrivetrain.DRIVE_MANUAL_PID.kI,
+        ConstDrivetrain.DRIVE_MANUAL_PID.kD);
   }
 
   @Override

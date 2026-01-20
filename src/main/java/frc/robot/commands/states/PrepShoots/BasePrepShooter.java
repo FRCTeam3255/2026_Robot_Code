@@ -29,7 +29,6 @@ public class BasePrepShooter extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.drivetrainInstance.resetDriveRotationBool();
     RobotContainer.rotorsInstance.setFlywheelSpeed(globalFlyWheelSpeed);
     RobotContainer.motionInstance.setHoodAngle(globalHoodAngle);
     RobotContainer.drivetrainInstance.setDriveRotation(globalDrivetrainAngle);
