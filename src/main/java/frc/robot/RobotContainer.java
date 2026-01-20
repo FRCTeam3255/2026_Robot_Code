@@ -109,6 +109,22 @@ public class RobotContainer {
   }
 
   private void configDriverBindings() {
+    conDriver.btn_South.whileTrue(new EjectingHopper());
+    conDriver.btn_RightTrigger.whileTrue(new Shooting());
+    conDriver.btn_East.whileTrue(new ReverseShooter());
+    conDriver.btn_Start.whileTrue(new ClimbingL1());
+    conDriver.btn_Start.whileTrue(new ClimbingL2_3());
+    conDriver.btn_LeftTrigger.whileTrue(new Intaking());
+    conDriver.btn_Back.whileTrue(new Unclimb());
+    conDriver.btn_RightBumper.whileTrue(new PrepAnywhere());
+    conDriver.btn_A.whileTrue(new PrepDepot());
+    conDriver.btn_West.whileTrue(new PrepNeutralToAlliance());
+    conDriver.btn_B.whileTrue(new PrepOutpost());
+    conDriver.btn_Y.whileTrue(new PrepTrench());
+    conDriver.btn_West.whileTrue(new PrepOpponentToAlliance());
+    conDriver.btn_X.whileTrue(new PrepNonOutpost());
+    conDriver.btn_North.whileTrue(new resetPose());
+    conDriver.btn_LeftBumper.whileTrue(new slowMode());
     // conDriver.btn_B.onTrue(Commands.runOnce(() ->
     // subDrivetrain.resetModulesToAbsolute()));
     conDriver.btn_Back
@@ -169,22 +185,6 @@ public class RobotContainer {
 
   private void configOperatorBindings() {
     // Add operator bindings here if needed
-    conDriver.btn_South.whileTrue(new EjectingHopper());
-    conDriver.btn_RightTrigger.whileTrue(new Shooting());
-    conDriver.btn_East.whileTrue(new ReverseShooter());
-    conDriver.btn_Start.whileTrue(new ClimbingL1());
-    conDriver.btn_Start.whileTrue(new ClimbingL2_3());
-    conDriver.btn_LeftTrigger.whileTrue(new Intaking());
-    conDriver.btn_Back.whileTrue(new Unclimb());
-    conDriver.btn_RightBumper.whileTrue(new PrepAnywhere());
-    conDriver.btn_A.whileTrue(new PrepDepot());
-    conDriver.btn_West.whileTrue(new PrepNeutralToAlliance());
-    conDriver.btn_B.whileTrue(new PrepOutpost());
-    conDriver.btn_Y.whileTrue(new PrepTrench());
-    conDriver.btn_West.whileTrue(new PrepOpponentToAlliance());
-    conDriver.btn_X.whileTrue(new PrepNonOutpost());
-    conDriver.btn_North.whileTrue(new resetPose());
-    conDriver.btn_LeftBumper.whileTrue(new slowMode());
   }
 
   public RobotState getRobotState() {
