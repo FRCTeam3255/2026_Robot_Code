@@ -16,7 +16,7 @@ public class ConstMotion {
   public static final TalonFXConfiguration INTAKE_PIVOT_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration CLIMBER_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration HOOD_CONFIGURATION = new TalonFXConfiguration();
-  public static final Angle INTAKE_PIVOT_DOWN_ANGLE = Units.Degrees.of(0); // TODO: set angle for intake pivot
+  public static final Angle DEPLOY_INTAKE_PIVOT_ANGLE = Units.Degrees.of(0); // TODO: set angle for intake pivot
   public static final Angle RETRACT_INTAKE_PIVOT_ANGLE = Units.Degrees.of(0); // TODO: set angle for intake pivot
   public static final double EXTEND_CLIMBER_SPEED = 0;
   public static final double RETRACT_CLIMBER_SPEED = -0.5;
