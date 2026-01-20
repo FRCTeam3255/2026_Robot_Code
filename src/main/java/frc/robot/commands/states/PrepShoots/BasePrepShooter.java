@@ -18,7 +18,6 @@ public class BasePrepShooter extends Command {
   Angle globalHoodAngle;
   double globalDrivetrainAngle;
 
-  // TODO: add drivetrain angle
   public BasePrepShooter(double flyWheelSpeed, Angle hoodAngle, double drivetrainAngle) {
     // Use addRequirements() here to declare subsystem dependencies.
     globalFlyWheelSpeed = flyWheelSpeed;

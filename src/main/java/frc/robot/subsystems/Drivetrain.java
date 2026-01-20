@@ -32,7 +32,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
 
   public PoseDriveGroup lastDesiredPoseGroup;
   public Pose2d lastDesiredTarget;
-  private Rotation2d driveRotation = new Rotation2d(Radians.of(0.0));
+  private Rotation2d driveRotation = new Rotation2d();
   double manualDriveRotation = 0.0;
   private boolean isDriveRotationSet = false;
 
