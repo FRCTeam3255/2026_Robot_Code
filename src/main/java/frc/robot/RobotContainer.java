@@ -83,7 +83,7 @@ public class RobotContainer {
           conDriver.axis_LeftY,
           conDriver.axis_LeftX,
           conDriver.axis_RightX,
-          conDriver.btn_RightBumper),
+          conDriver.btn_LeftBumper),
       Set.of(subDriverStateMachine));
 
   Command EXAMPLE_POSE_DRIVE = new DeferredCommand(
@@ -123,11 +123,9 @@ public class RobotContainer {
     conDriver.btn_Y.whileTrue(new PrepTrench());
     conDriver.btn_West.whileTrue(new PrepOpponentToAlliance());
     conDriver.btn_X.whileTrue(new PrepNonOutpost());
-    conDriver.btn_North.whileTrue(new resetPose());
-    conDriver.btn_LeftBumper.whileTrue(new slowMode());
     // conDriver.btn_B.onTrue(Commands.runOnce(() ->
     // subDrivetrain.resetModulesToAbsolute()));
-    conDriver.btn_Back
+    conDriver.btn_North
         .onTrue(Commands.runOnce(() -> subDrivetrain.resetPose(new Pose2d(0, 0, new Rotation2d()))));
 
     // Example Pose Drive
