@@ -15,16 +15,23 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 
 /**
- * Provides constants and utilities for field dimensions and alliance-specific pose management.
+ * Provides constants and utilities for field dimensions and alliance-specific
+ * pose management.
  * <p>
- * This class defines the field size and contains logic for handling poses that need to be mirrored
- * between the blue and red alliances. The {@link Pose2dAllianceSet} inner class allows you to define
- * a set of poses for the blue alliance and automatically generates the corresponding mirrored poses
+ * This class defines the field size and contains logic for handling poses that
+ * need to be mirrored
+ * between the blue and red alliances. The {@link Pose2dAllianceSet} inner class
+ * allows you to define
+ * a set of poses for the blue alliance and automatically generates the
+ * corresponding mirrored poses
  * for the red alliance, as well as a combined set for both alliances.
  * <p>
- * The field mirroring functionality is essential for autonomous routines and path planning, ensuring
- * that robot positions and trajectories can be easily adapted for both sides of the field. The
- * {@link #isRedAlliance()} method can be used to determine the current alliance and select the
+ * The field mirroring functionality is essential for autonomous routines and
+ * path planning, ensuring
+ * that robot positions and trajectories can be easily adapted for both sides of
+ * the field. The
+ * {@link #isRedAlliance()} method can be used to determine the current alliance
+ * and select the
  * appropriate pose set.
  */
 public class ConstField {
@@ -32,13 +39,18 @@ public class ConstField {
 
   // Wrapper for blue-side Pose2d arrays with helpers for red/all
   /**
-   * Represents a set of {@link Pose2d} objects for alliance-specific field positions.
+   * Represents a set of {@link Pose2d} objects for alliance-specific field
+   * positions.
    * <p>
-   * This class stores a list of blue-side poses and automatically computes the corresponding
-   * red-side poses by mirroring them across the field. It provides access to the blue, red,
-   * and combined lists of poses, allowing code to easily retrieve poses for the current alliance.
+   * This class stores a list of blue-side poses and automatically computes the
+   * corresponding
+   * red-side poses by mirroring them across the field. It provides access to the
+   * blue, red,
+   * and combined lists of poses, allowing code to easily retrieve poses for the
+   * current alliance.
    * <p>
-   * The transformation to red-side poses is performed by reflecting the blue-side pose
+   * The transformation to red-side poses is performed by reflecting the blue-side
+   * pose
    * across the field's length and width, and rotating the heading by 180 degrees.
    */
   public static final class Pose2dAllianceSet {
@@ -118,5 +130,6 @@ public class ConstField {
         FieldElements.RESET_POSE);
   }
 
+  public static final Pose2d TOWER_POSE = new Pose2d(1.02, 4.02, new Rotation2d(0));
   public static final Pose2d WORKSHOP_STARTING_POSE = new Pose2d(5.98, 2.60, new Rotation2d(0));
 }
