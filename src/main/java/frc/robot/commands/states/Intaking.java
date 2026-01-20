@@ -19,6 +19,7 @@ public class Intaking extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    RobotContainer.motionInstance.setClimbSpeed(ConstMotion.RETRACT_CLIMBER_SPEED);
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.INTAKE_ROLLER_SPEED);
     RobotContainer.motionInstance.setIntakePivotSpeed(ConstMotion.INTAKE_PIVOT_SPEED);
   }
