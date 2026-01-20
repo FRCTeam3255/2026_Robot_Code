@@ -17,7 +17,8 @@ public class ConstMotion {
   public static final TalonFXConfiguration CLIMBER_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration HOOD_CONFIGURATION = new TalonFXConfiguration();
   public static final double INTAKE_PIVOT_SPEED = 0.5;
-  public static final double EXTEND_CLIMBER_SPEED = 0.3;
+  public static final double RETRACT_INTAKE_PIVOT_SPEED = -.5;
+  public static final double EXTEND_CLIMBER_SPEED = 0;
   public static final double RETRACT_CLIMBER_SPEED = -0.5;
   public static final double ANGLE_HOOD_SPEED = 0.5;
   public static final Angle HOOD_TRENCH_ANGLE = Units.Degrees.of(5);
