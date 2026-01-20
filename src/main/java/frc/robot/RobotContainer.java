@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import java.util.IntSummaryStatistics;
 import java.util.Map;
 import java.util.Set;
 
@@ -22,6 +23,20 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.DeferredCommand;
 import frc.robot.DeviceIDs.controllerIDs;
 import frc.robot.commands.AddVisionMeasurement;
+import frc.robot.commands.ClimbingL1;
+import frc.robot.commands.ClimbingL2_3;
+import frc.robot.commands.Shooting;
+import frc.robot.commands.states.EjectingHopper;
+import frc.robot.commands.states.Intaking;
+import frc.robot.commands.states.ReverseShooter;
+import frc.robot.commands.states.Unclimb;
+import frc.robot.commands.states.PrepShoots.PrepAnywhere;
+import frc.robot.commands.states.PrepShoots.PrepDepot;
+import frc.robot.commands.states.PrepShoots.PrepNeutralToAlliance;
+import frc.robot.commands.states.PrepShoots.PrepNonOutpost;
+import frc.robot.commands.states.PrepShoots.PrepOpponentToAlliance;
+import frc.robot.commands.states.PrepShoots.PrepOutpost;
+import frc.robot.commands.states.PrepShoots.PrepTrench;
 import frc.robot.constants.ConstSystem.constControllers;
 import frc.robot.subsystems.DriverStateMachine;
 import frc.robot.subsystems.DriverStateMachine.DriverState;
@@ -154,6 +169,22 @@ public class RobotContainer {
 
   private void configOperatorBindings() {
     // Add operator bindings here if needed
+    ConOperator.btn_South.whileTrue(new EjectingHopper());
+    ConOperator.btn_RightTrigger.whileTrue(new Shooting());
+    ConOperator.btn_East.whileTrue(new ReverseShooter());
+    ConOperator.btn_Start.whileTrue(new ClimbingL1());
+    ConOperator.btn_Start.whileTrue(new ClimbingL2_3());
+    ConOperator.btn_LeftTrigger.whileTrue(new Intaking());
+    ConOperator.btn_.whileTrue(new Unclimb());
+    ConOperator.btn_RightBumper.whileTrue(new PrepAnywhere());
+    ConOperator.btn_A.whileTrue(new PrepDepot());
+    ConOperator.btn_West.whileTrue(new PrepNeutralToAlliance());
+    ConOperator.btn_B.whileTrue(new PrepOutpost());
+    ConOperator.btn_Y.whileTrue(new PrepTrench());
+    ConOperator.btn_West.whileTrue(new PrepOpponentToAlliance());
+    ConOperator.btn_X.whileTrue(new PrepNonOutpost());
+    ConOperator.btn_North.whileTrue(new resetPose());
+    ConOperator.btn_LeftBumper.whileTrue(new slowMode());
   }
 
   public RobotState getRobotState() {
