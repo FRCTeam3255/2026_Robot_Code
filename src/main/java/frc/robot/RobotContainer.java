@@ -169,22 +169,22 @@ public class RobotContainer {
 
   private void configOperatorBindings() {
     // Add operator bindings here if needed
-    ConOperator.btn_South.whileTrue(new EjectingHopper());
-    ConOperator.btn_RightTrigger.whileTrue(new Shooting());
-    ConOperator.btn_East.whileTrue(new ReverseShooter());
-    ConOperator.btn_Start.whileTrue(new ClimbingL1());
-    ConOperator.btn_Start.whileTrue(new ClimbingL2_3());
-    ConOperator.btn_LeftTrigger.whileTrue(new Intaking());
-    ConOperator.btn_.whileTrue(new Unclimb());
-    ConOperator.btn_RightBumper.whileTrue(new PrepAnywhere());
-    ConOperator.btn_A.whileTrue(new PrepDepot());
-    ConOperator.btn_West.whileTrue(new PrepNeutralToAlliance());
-    ConOperator.btn_B.whileTrue(new PrepOutpost());
-    ConOperator.btn_Y.whileTrue(new PrepTrench());
-    ConOperator.btn_West.whileTrue(new PrepOpponentToAlliance());
-    ConOperator.btn_X.whileTrue(new PrepNonOutpost());
-    ConOperator.btn_North.whileTrue(new resetPose());
-    ConOperator.btn_LeftBumper.whileTrue(new slowMode());
+    conDriver.btn_South.whileTrue(new EjectingHopper());
+    conDriver.btn_RightTrigger.whileTrue(new Shooting());
+    conDriver.btn_East.whileTrue(new ReverseShooter());
+    conDriver.btn_Start.whileTrue(new ClimbingL1());
+    conDriver.btn_Start.whileTrue(new ClimbingL2_3());
+    conDriver.btn_LeftTrigger.whileTrue(new Intaking());
+    conDriver.btn_Back.whileTrue(new Unclimb());
+    conDriver.btn_RightBumper.whileTrue(new PrepAnywhere());
+    conDriver.btn_A.whileTrue(new PrepDepot());
+    conDriver.btn_West.whileTrue(new PrepNeutralToAlliance());
+    conDriver.btn_B.whileTrue(new PrepOutpost());
+    conDriver.btn_Y.whileTrue(new PrepTrench());
+    conDriver.btn_West.whileTrue(new PrepOpponentToAlliance());
+    conDriver.btn_X.whileTrue(new PrepNonOutpost());
+    conDriver.btn_North.whileTrue(new resetPose());
+    conDriver.btn_LeftBumper.whileTrue(new slowMode());
   }
 
   public RobotState getRobotState() {
