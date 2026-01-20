@@ -45,6 +45,17 @@ public class ConstPoseDrive {
    * states,
    * axis locks, and tolerances for distance and rotation.
    */
+
+  public static class PrepShootRotations {
+    public static final double TRENCH_PREP_SHOOT_ROTATION = 0.0;
+    public static final double OUTPOST_PREP_SHOOT_ROTATION = 0.0;
+    public static final double NON_OUTPOST_PREP_SHOOT_ROTATION = 0.0;
+    public static final double DEPOT_PREP_SHOOT_ROTATION = 0.0;
+    public static final double NEUTRAL_TO_ALLIANCE_PREP_SHOOT_ROTATION = 0.0;
+    public static final double OPPONENT_TO_ALLIANCE_PREP_SHOOT_ROTATION = 0.0;
+    public static final double ANYWHERE_PREP_SHOOT_ROTATION = 0.0;
+  }
+
   public static class PoseDriveGroup {
     public Distance minDistanceBeforeDrive;
     public List<Pose2d> targetPoseGroup;

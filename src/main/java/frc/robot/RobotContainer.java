@@ -48,13 +48,13 @@ public class RobotContainer {
   private final Rotors loggedRotorsInstance = rotorsInstance;
   public static Motion motionInstance = new Motion();
   private final Motion loggedMotorsInstance = motionInstance;
-  public static Drivetrain subDrivetrain = new Drivetrain();
-  private final Drivetrain loggedSubDrivetrain = subDrivetrain;
-  public static DriverStateMachine subDriverStateMachine = new DriverStateMachine(subDrivetrain);
+  public static Drivetrain drivetrainInstance = new Drivetrain();
+  private final Drivetrain loggedSubDrivetrain = drivetrainInstance;
+  public static DriverStateMachine subDriverStateMachine = new DriverStateMachine(drivetrainInstance);
   private final DriverStateMachine loggedSubDriverStateMachine = subDriverStateMachine;
-  public static StateMachine subStateMachine = new StateMachine(subDrivetrain);
+  public static StateMachine subStateMachine = new StateMachine(drivetrainInstance);
   private final StateMachine loggedSubStateMachine = subStateMachine;
-  public static RobotPoses robotPose = new RobotPoses(subDrivetrain);
+  public static RobotPoses robotPose = new RobotPoses(drivetrainInstance);
   private final RobotPoses loggedRobotPose = robotPose;
   public static Vision subVision = new Vision();
   private final Vision loggedSubVision = subVision;
@@ -99,7 +99,7 @@ public class RobotContainer {
     // conDriver.btn_B.onTrue(Commands.runOnce(() ->
     // subDrivetrain.resetModulesToAbsolute()));
     conDriver.btn_Back
-        .onTrue(Commands.runOnce(() -> subDrivetrain.resetPose(new Pose2d(0, 0, new Rotation2d()))));
+        .onTrue(Commands.runOnce(() -> drivetrainInstance.resetPose(new Pose2d(0, 0, new Rotation2d()))));
 
     // Example Pose Drive
     conDriver.btn_X
@@ -109,9 +109,9 @@ public class RobotContainer {
 
   public void configAutonomous() {
     autoFactory = new AutoFactory(
-        subDrivetrain::getPose, // A function that returns the current robot pose
-        subDrivetrain::resetPose, // A function that resets the current robot pose to the provided Pose2d
-        subDrivetrain::followTrajectory, // The drive subsystem trajectory follower
+        drivetrainInstance::getPose, // A function that returns the current robot pose
+        drivetrainInstance::resetPose, // A function that resets the current robot pose to the provided Pose2d
+        drivetrainInstance::followTrajectory, // The drive subsystem trajectory follower
         true, // If alliance flipping should be enabled
         subDriverStateMachine // The drive subsystem
     );
@@ -163,7 +163,7 @@ public class RobotContainer {
   }
 
   public Command addVisionMeasurement() {
-    return new AddVisionMeasurement(subDrivetrain, subVision)
+    return new AddVisionMeasurement(drivetrainInstance, subVision)
         .withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming).ignoringDisable(true);
   }
 }

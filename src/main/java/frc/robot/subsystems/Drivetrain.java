@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import static edu.wpi.first.units.Units.Degree;
 import static edu.wpi.first.units.Units.Radians;
 
 import java.util.function.DoubleSupplier;
@@ -20,10 +21,12 @@ import com.ctre.phoenix6.swerve.SwerveModuleConstantsFactory;
 import choreo.trajectory.SwerveSample;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.units.measure.Angle;
 import frc.robot.DeviceIDs;
 import frc.robot.RobotContainer;
+import frc.robot.commands.DriveManual;
 import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstPoseDrive.PoseDriveGroup;
 
@@ -31,7 +34,9 @@ public class Drivetrain extends SN_SuperSwerveV2 {
 
   public PoseDriveGroup lastDesiredPoseGroup;
   public Pose2d lastDesiredTarget;
+  private Rotation2d driveRotation = new Rotation2d(Radians.of(0.0));
   double manualDriveRotation = 0.0;
+  private boolean isDriveRotationSet = false;
 
   /** Creates a new Drivetrain. */
   public static final SwerveModuleConstantsFactory<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> constantCreator = new SwerveModuleConstantsFactory<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>()
@@ -166,7 +171,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     drive(automatedDTVelocity);
   }
 
-  public Angle getStickDegrees(DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis) {
+  public double getStickDegrees(DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis) {
     double rightStickX = rotationXAxis.getAsDouble();
     double rightStickY = rotationYAxis.getAsDouble();
     double hypotenuse = Math.hypot(rightStickX, rightStickY);
@@ -174,8 +179,24 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     if (hypotenuse < 1.15 && hypotenuse > 0.85) {
       manualDriveRotation = Math.atan2(rightStickY, rightStickX) - Math.PI / 2;
     }
-    return Radians.of(manualDriveRotation);
+    return manualDriveRotation;
 
+  }
+
+  public void setDriveRotation(double rotation) {
+    this.driveRotation = Rotation2d.fromDegrees(rotation);
+    this.isDriveRotationSet = true;
+  }
+
+  public Rotation2d getDriveRotation(Rotation2d manualDefault) {
+    if (!isDriveRotationSet) {
+      return manualDefault;
+    }
+    return this.driveRotation;
+  }
+
+  public void resetDriveRotationBool() {
+    this.isDriveRotationSet = false;
   }
 
 }

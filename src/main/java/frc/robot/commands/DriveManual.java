@@ -21,6 +21,7 @@ public class DriveManual extends Command {
   boolean isOpenLoop;
   DriverStateMachine subDriverStateMachine;
   BooleanSupplier slowMode;
+  public Rotation2d targetHeading;
 
   public DriveManual(Drivetrain subDrivetrain, DoubleSupplier xAxis, DoubleSupplier yAxis,
       DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis, DriverStateMachine subDriverStateMachine,
@@ -43,8 +44,8 @@ public class DriveManual extends Command {
 
   @Override
   public void execute() {
-    Rotation2d heading = new Rotation2d(subDrivetrain.getStickDegrees(rotationXAxis, rotationYAxis));
-    System.out.println(heading);
+    targetHeading = Rotation2d.fromRadians(subDrivetrain.getStickDegrees(rotationXAxis, rotationYAxis));
+    System.out.println(targetHeading);
     ChassisSpeeds velocities = subDrivetrain.calculateVelocitiesFromInput(
         xAxis,
         yAxis,
@@ -57,7 +58,7 @@ public class DriveManual extends Command {
 
     subDriverStateMachine.setDriverState(DriverStateMachine.DriverState.MANUAL);
 
-    subDrivetrain.drive(velocities, heading, 4.0, 0.0, 0.0);
+    subDrivetrain.drive(velocities, subDrivetrain.getDriveRotation(targetHeading), 4.0, 0.0, 0.0);
   }
 
   @Override
