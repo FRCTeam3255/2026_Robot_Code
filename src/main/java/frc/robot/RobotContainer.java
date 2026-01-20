@@ -128,7 +128,7 @@ public class RobotContainer {
     // conDriver.btn_B.onTrue(Commands.runOnce(() ->
     // subDrivetrain.resetModulesToAbsolute()));
     conDriver.btn_North
-        .onTrue(Commands.runOnce(() -> subDrivetrain.resetPose(new Pose2d(0, 0, new Rotation2d()))));
+        .onTrue(Commands.runOnce(() -> drivetrainInstance.resetPose(new Pose2d(0, 0, new Rotation2d()))));
 
     // Example Pose Drive
     conDriver.btn_X

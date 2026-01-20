@@ -45,7 +45,6 @@ public class BasePrepShooter extends Command {
   public void end(boolean interrupted) {
     RobotContainer.rotorsInstance.setFlywheelSpeed(ConstRotors.STOP);
     RobotContainer.motionInstance.setHoodAngle(ConstMotion.HOOD_NONE_ANGLE);
-    RobotContainer.drivetrainInstance.resetDriveRotationBool();
   }
 
   // Returns true when the command should end.

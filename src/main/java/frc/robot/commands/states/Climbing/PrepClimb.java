@@ -11,7 +11,7 @@ import frc.robot.subsystems.Drivetrain;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class PrepClimb extends Command {
-  Drivetrain globalDrivetrain = RobotContainer.subDrivetrain;
+  Drivetrain globalDrivetrain = RobotContainer.drivetrainInstance;
 
   /** Creates a new PrepClimb. */
   public PrepClimb() {
