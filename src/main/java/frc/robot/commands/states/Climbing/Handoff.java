@@ -2,23 +2,24 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.states;
+package frc.robot.commands.states.Climbing;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class Unclimb extends Command {
-  /** Creates a new Unclimb. */
-  public Unclimb() {
+public class Handoff extends Command {
+  /** Creates a new Handoff. */
+  public Handoff() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
+  // todo: add actual measurements
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.motionInstance.setClimbSpeed(ConstMotion.EXTEND_CLIMBER_SPEED);
+    RobotContainer.motionInstance.setClimbSpeed(ConstMotion.RETRACT_CLIMBER_SPEED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

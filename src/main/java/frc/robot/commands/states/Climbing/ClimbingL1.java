@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.states.Climbing;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
@@ -18,7 +18,7 @@ public class ClimbingL1 extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.motionInstance.setClimbSpeed(ConstMotion.EXTEND_CLIMBER_SPEED);
+    RobotContainer.motionInstance.setClimbSpeed(ConstMotion.RETRACT_CLIMBER_SPEED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
