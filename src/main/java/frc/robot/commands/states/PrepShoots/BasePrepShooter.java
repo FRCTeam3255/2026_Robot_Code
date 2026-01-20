@@ -4,6 +4,8 @@
 
 package frc.robot.commands.states.PrepShoots;
 
+import static edu.wpi.first.units.Units.RPM;
+
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
@@ -27,7 +29,7 @@ public class BasePrepShooter extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.rotorsInstance.setFlywheelSpeed(globalFlyWheelSpeed);
+    RobotContainer.rotorsInstance.setFlywheelSpeed(RPM.of(globalFlyWheelSpeed));
     RobotContainer.motionInstance.setHoodAngle(globalHoodAngle);
   }
 
@@ -39,7 +41,7 @@ public class BasePrepShooter extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.rotorsInstance.setFlywheelSpeed(ConstRotors.STOP);
+    RobotContainer.rotorsInstance.setFlywheelSpeed(RPM.of(ConstRotors.STOP));
     RobotContainer.motionInstance.setHoodAngle(ConstMotion.HOOD_NONE_ANGLE);
   }
 

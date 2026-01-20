@@ -4,6 +4,8 @@
 
 package frc.robot.commands.states;
 
+import static edu.wpi.first.units.Units.RPM;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstRotors;
@@ -20,7 +22,7 @@ public class ReverseShooter extends Command {
   @Override
   public void initialize() {
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.REVERSE_SHOOTER_TRANSFER_SPEED);
-    RobotContainer.rotorsInstance.setFlywheelSpeed(ConstRotors.REVERSE_FLYWHEEL_SPEED);
+    RobotContainer.rotorsInstance.setFlywheelSpeed(RPM.of(ConstRotors.REVERSE_FLYWHEEL_SPEED));
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -32,7 +34,7 @@ public class ReverseShooter extends Command {
   @Override
   public void end(boolean interrupted) {
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.STOP);
-    RobotContainer.rotorsInstance.setFlywheelSpeed(ConstRotors.STOP);
+    RobotContainer.rotorsInstance.setFlywheelSpeed(RPM.of(ConstRotors.STOP));
   }
 
   // Returns true when the command should end.
