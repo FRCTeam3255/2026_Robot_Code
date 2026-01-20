@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import java.util.IntSummaryStatistics;
 import java.util.Map;
 import java.util.Set;
 
@@ -22,6 +23,20 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.DeferredCommand;
 import frc.robot.DeviceIDs.controllerIDs;
 import frc.robot.commands.AddVisionMeasurement;
+import frc.robot.commands.ClimbingL1;
+import frc.robot.commands.ClimbingL2_3;
+import frc.robot.commands.Shooting;
+import frc.robot.commands.states.EjectingHopper;
+import frc.robot.commands.states.Intaking;
+import frc.robot.commands.states.ReverseShooter;
+import frc.robot.commands.states.Unclimb;
+import frc.robot.commands.states.PrepShoots.PrepAnywhere;
+import frc.robot.commands.states.PrepShoots.PrepDepot;
+import frc.robot.commands.states.PrepShoots.PrepNeutralToAlliance;
+import frc.robot.commands.states.PrepShoots.PrepNonOutpost;
+import frc.robot.commands.states.PrepShoots.PrepOpponentToAlliance;
+import frc.robot.commands.states.PrepShoots.PrepOutpost;
+import frc.robot.commands.states.PrepShoots.PrepTrench;
 import frc.robot.constants.ConstSystem.constControllers;
 import frc.robot.subsystems.DriverStateMachine;
 import frc.robot.subsystems.DriverStateMachine.DriverState;
@@ -69,7 +84,7 @@ public class RobotContainer {
           conDriver.axis_LeftX,
           conDriver.axis_RightX,
           conDriver.axis_RightY,
-          conDriver.btn_RightBumper),
+          conDriver.btn_LeftBumper),
       Set.of(subDriverStateMachine));
 
   Command EXAMPLE_POSE_DRIVE = new DeferredCommand(
@@ -96,10 +111,24 @@ public class RobotContainer {
   }
 
   private void configDriverBindings() {
+    conDriver.btn_South.whileTrue(new EjectingHopper());
+    conDriver.btn_RightTrigger.whileTrue(new Shooting());
+    conDriver.btn_East.whileTrue(new ReverseShooter());
+    conDriver.btn_Start.whileTrue(new ClimbingL1());
+    conDriver.btn_Start.whileTrue(new ClimbingL2_3());
+    conDriver.btn_LeftTrigger.whileTrue(new Intaking());
+    conDriver.btn_Back.whileTrue(new Unclimb());
+    conDriver.btn_RightBumper.whileTrue(new PrepAnywhere());
+    conDriver.btn_A.whileTrue(new PrepDepot());
+    conDriver.btn_West.whileTrue(new PrepNeutralToAlliance());
+    conDriver.btn_B.whileTrue(new PrepOutpost());
+    conDriver.btn_Y.whileTrue(new PrepTrench());
+    conDriver.btn_West.whileTrue(new PrepOpponentToAlliance());
+    conDriver.btn_X.whileTrue(new PrepNonOutpost());
     // conDriver.btn_B.onTrue(Commands.runOnce(() ->
     // subDrivetrain.resetModulesToAbsolute()));
-    conDriver.btn_Back
-        .onTrue(Commands.runOnce(() -> drivetrainInstance.resetPose(new Pose2d(0, 0, new Rotation2d()))));
+    conDriver.btn_North
+        .onTrue(Commands.runOnce(() -> subDrivetrain.resetPose(new Pose2d(0, 0, new Rotation2d()))));
 
     // Example Pose Drive
     conDriver.btn_X
