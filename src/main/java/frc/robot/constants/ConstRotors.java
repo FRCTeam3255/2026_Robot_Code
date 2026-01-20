@@ -19,7 +19,7 @@ public class ConstRotors {
   public static final TalonFXConfiguration FLYWHEEL_RIGHT_CONFIGURATION = new TalonFXConfiguration();
   public static final double INTAKE_ROLLER_SPEED = 1;
   public static final double SERIALIZER_V_FUNNEL_SPEED = 0;
-  public static final double SERIALIZER_ROLLERS_SPEED = 0;
+  public static final double SERIALIZER_ROLLERS_SPEED = 1;
   public static final double SHOOTER_TRANSFER_SPEED = 1;
 
   // different shooting locations shooting speeds
@@ -34,7 +34,7 @@ public class ConstRotors {
   public static final double FLYWHEEL_SPEED = 1;
   public static final double REVERSE_INTAKE_ROLLER_SPEED = -1;
   public static final double REVERSE_SERIALIZER_V_FUNNEL_SPEED = 0;
-  public static final double REVERSE_SERIALIZER_ROLLERS_SPEED = 0;
+  public static final double REVERSE_SERIALIZER_ROLLERS_SPEED = -1;
   public static final double REVERSE_FLYWHEEL_SPEED = -1;
   public static final double REVERSE_SHOOTER_TRANSFER_SPEED = -1;
   public static final double STOP = 0.0;
