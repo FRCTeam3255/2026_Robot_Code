@@ -22,6 +22,8 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.DeferredCommand;
 import frc.robot.DeviceIDs.controllerIDs;
 import frc.robot.commands.AddVisionMeasurement;
+import frc.robot.commands.Shooting;
+import frc.robot.commands.states.PrepShoots.PrepTrench;
 import frc.robot.constants.ConstSystem.constControllers;
 import frc.robot.subsystems.DriverStateMachine;
 import frc.robot.subsystems.DriverStateMachine.DriverState;
@@ -119,20 +121,31 @@ public class RobotContainer {
     // Example
     // Map.entry(autoCommand, "choreoStartingPath"),
     );
-    // enter which we want to do based on name
-    autoChooser.onChange(selectedAuto -> {
-      String startingPose = autoStartingPoses.get(selectedAuto);
-      // if there is a stating pose, reset to it
-      if (startingPose != null) {
-        autoFactory.resetOdometry(startingPose)
-            .ignoringDisable(true) // Run even when disabled
-            .schedule();
-      }
-    });
 
-    // Example: Add autonomous routines to the chooser
-    autoChooser.setDefaultOption("Do Nothing", Commands.none());
-    autoChooser.addOption("Example Path", runPath("ExamplePath"));
+    Command TrenchPreloadOutpostClimb = Commands.sequence(
+        new PrepTrench().withTimeout(.5),
+        new Shooting().withTimeout(.5),
+        runPath("Trench_Outpost").asProxy());
+
+  }
+
+  // enter which we want to do based on name
+  autoChooser.onChange(selectedAuto->
+
+  {
+    String startingPose = autoStartingPoses.get(selectedAuto);
+    // if there is a stating pose, reset to it
+    if (startingPose != null) {
+      autoFactory.resetOdometry(startingPose)
+          .ignoringDisable(true) // Run even when disabled
+          .schedule();
+    }
+  });
+
+  // Example: Add autonomous routines to the chooser
+  autoChooser.setDefaultOption("Do Nothing",Commands.none());autoChooser.addOption("Example Path",
+
+  runPath("ExamplePath"));
     // Add more autonomous routines as needed, e.g.:
     // autoChooser.addOption("Score and Leave", runPath("ScoreAndLeave"));
 
