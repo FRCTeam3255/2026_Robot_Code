@@ -18,7 +18,7 @@ public class ClimbingL1 extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.motionInstance.setClimbSpeed(ConstMotion.EXTEND_CLIMBER_SPEED);
+    RobotContainer.motionInstance.setClimberPosition(ConstMotion.EXTEND_CLIMBER_SPEED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -29,7 +29,7 @@ public class ClimbingL1 extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.motionInstance.setClimbSpeed(ConstMotion.STOP);
+    RobotContainer.motionInstance.setClimberPosition(ConstMotion.STOP);
   }
 
   // Returns true when the command should end.

@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
+import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.epilogue.Logged;
@@ -41,7 +42,7 @@ public class Motion extends SubsystemBase {
     intakePivot.set(speed);
   }
 
-  public void setClimbSpeed(double speed) {
+  public void setClimberPosition(double speed) {
     climber.set(speed);
   }
 
@@ -49,4 +50,9 @@ public class Motion extends SubsystemBase {
     hood.setControl(hoodMotionRequest.withPosition(setPoint));
 
   }
+
+  public void setClimberPosition(double setpoint) {
+    climber.setControl(climberMotionRequest.withPosition(setpoint));
+  }
+
 }
