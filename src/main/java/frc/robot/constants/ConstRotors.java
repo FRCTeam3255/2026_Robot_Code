@@ -4,9 +4,13 @@
 
 package frc.robot.constants;
 
+import static edu.wpi.first.units.Units.RPM;
+
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+
+import edu.wpi.first.units.measure.AngularVelocity;
 
 /** Add your docs here. */
 public class ConstRotors {
@@ -23,15 +27,15 @@ public class ConstRotors {
   public static final double SHOOTER_TRANSFER_SPEED = 1;
 
   // different shooting locations shooting speeds
-  public static final double FLYWHEEL_TRENCH_SPEED = 0.6;
-  public static final double FLYWHEEL_OUTPOST_SPEED = 0.5;
-  public static final double FLYWHEEL_NON_OUTPOST_SPEED = 0.5;
-  public static final double FLYWHEEL_DEPOT_SPEED = 0.5;
-  public static final double FLYWHEEL_ANYWHERE_SPEED = 0.5;
-  public static final double FLYWHEEL_NUETRAL_TO_ALLIANCE_SPEED = 0.5;
-  public static final double FLYWHEEL_OPPONENT_TO_ALLIANCE_SPEED = 0.5;
+  public static final AngularVelocity FLYWHEEL_TRENCH_SPEED = RPM.of(3000);
+  public static final AngularVelocity FLYWHEEL_OUTPOST_SPEED = RPM.of(3000);
+  public static final AngularVelocity FLYWHEEL_NON_OUTPOST_SPEED = RPM.of(3000);
+  public static final AngularVelocity FLYWHEEL_DEPOT_SPEED = RPM.of(3000);
+  public static final AngularVelocity FLYWHEEL_ANYWHERE_SPEED = RPM.of(3000);
+  public static final AngularVelocity FLYWHEEL_NUETRAL_TO_ALLIANCE_SPEED = RPM.of(3000);
+  public static final AngularVelocity FLYWHEEL_OPPONENT_TO_ALLIANCE_SPEED = RPM.of(3000);
 
-  public static final double FLYWHEEL_SPEED = 1;
+  public static final AngularVelocity FLYWHEEL_SPEED = RPM.of(3000);
   public static final double REVERSE_INTAKE_ROLLER_SPEED = -1;
   public static final double REVERSE_SERIALIZER_V_FUNNEL_SPEED = -1;
   public static final double REVERSE_SERIALIZER_ROLLERS_SPEED = -1;
