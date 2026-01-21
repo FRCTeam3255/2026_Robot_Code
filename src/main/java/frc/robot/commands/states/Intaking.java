@@ -32,7 +32,6 @@ public class Intaking extends Command {
   @Override
   public void end(boolean interrupted) {
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.STOP);
-    RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
   }
 
   // Returns true when the command should end.

@@ -37,7 +37,6 @@ public class PrepClimb extends Command {
   @Override
   public void end(boolean interrupted) {
     RobotContainer.motionInstance.setClimbSpeed(ConstMotion.STOP);
-    RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.RETRACT_INTAKE_PIVOT_ANGLE);
   }
 
   // Returns true when the command should end.
