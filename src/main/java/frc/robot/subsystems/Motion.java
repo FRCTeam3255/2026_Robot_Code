@@ -8,7 +8,6 @@ import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.epilogue.Logged;
-import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DeviceIDs;
@@ -37,8 +36,8 @@ public class Motion extends SubsystemBase {
 
   }
 
-  public void setIntakePivotSpeed(double speed) {
-    intakePivot.set(speed);
+  public void setIntakePivotAngle(Angle setPoint) {
+    intakePivot.setControl(intakePivotMotionRequest.withPosition(setPoint));
   }
 
   public void setClimbSpeed(double speed) {
