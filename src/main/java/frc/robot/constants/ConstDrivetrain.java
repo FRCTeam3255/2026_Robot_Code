@@ -252,7 +252,7 @@ public class ConstDrivetrain {
     public static final Voltage kDriveFrictionVoltage = Volts.of(0.2);
   }
 
-  public static class DRIVE_MANUAL_PID {
+  public static class ROTATION_PID {
     public static final double kP = 4.0;
     public static final double kI = 0.0;
     public static final double kD = 0.0;

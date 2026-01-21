@@ -60,9 +60,9 @@ public class DriveManual extends Command {
     subDrivetrain.drive(
         velocities,
         subDrivetrain.getDriveRotation(targetHeading),
-        ConstDrivetrain.DRIVE_MANUAL_PID.kP,
-        ConstDrivetrain.DRIVE_MANUAL_PID.kI,
-        ConstDrivetrain.DRIVE_MANUAL_PID.kD);
+        ConstDrivetrain.ROTATION_PID.kP,
+        ConstDrivetrain.ROTATION_PID.kI,
+        ConstDrivetrain.ROTATION_PID.kD);
   }
 
   @Override
