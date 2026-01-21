@@ -24,7 +24,7 @@ public class PrepClimb extends Command {
     // TOdo: replace nulls with proper values
     // globalDrivetrain.rotationalAlign(ConstField.TOWER_POSE,
     // ConstDrivetrain.TURN_SPEED);
-    RobotContainer.motionInstance.setIntakePivotSpeed(ConstMotion.RETRACT_INTAKE_PIVOT_SPEED);
+    RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.RETRACT_INTAKE_PIVOT_ANGLE);
     RobotContainer.motionInstance.setClimbSpeed(ConstMotion.EXTEND_CLIMBER_SPEED);
   }
 
@@ -37,7 +37,6 @@ public class PrepClimb extends Command {
   @Override
   public void end(boolean interrupted) {
     RobotContainer.motionInstance.setClimbSpeed(ConstMotion.STOP);
-    RobotContainer.motionInstance.setIntakePivotSpeed(ConstMotion.STOP);
   }
 
   // Returns true when the command should end.
