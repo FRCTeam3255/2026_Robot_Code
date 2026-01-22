@@ -23,6 +23,10 @@ import edu.wpi.first.wpilibj2.command.DeferredCommand;
 import frc.robot.DeviceIDs.controllerIDs;
 import frc.robot.commands.AddVisionMeasurement;
 import frc.robot.commands.Shooting;
+import frc.robot.commands.states.Intaking;
+import frc.robot.commands.states.PrepShoots.PrepAnywhere;
+import frc.robot.commands.states.PrepShoots.PrepDepot;
+import frc.robot.commands.states.PrepShoots.PrepOutpost;
 import frc.robot.commands.states.PrepShoots.PrepTrench;
 import frc.robot.constants.ConstSystem.constControllers;
 import frc.robot.subsystems.DriverStateMachine;
@@ -122,10 +126,27 @@ public class RobotContainer {
     // Map.entry(autoCommand, "choreoStartingPath"),
     );
 
-    Command TrenchPreloadOutpostClimb = Commands.sequence(
-        new PrepTrench().withTimeout(.5),
-        new Shooting().withTimeout(.5),
-        runPath("Trench_Outpost").asProxy());
+    Command TrenchPreloadOutpost = Commands.sequence(
+        new PrepTrench().withTimeout(.5).asProxy(),
+        new Shooting().withTimeout(.5).asProxy(),
+        runPath("Trench_Outpost").asProxy(),
+        new PrepOutpost().withTimeout(.5).asProxy(),
+        new Shooting().withTimeout(.5).asProxy());
+
+   Command PreloadOnly = Commands.sequence(
+        runPath("Reverse_From_Hub").asProxy(),
+        new PrepAnywhere().withTimeout(.5).asProxy(),
+        new Shooting().withTimeout(.5).asProxy());
+
+   Command PreloadDepot = Commands.sequence(
+        new PrepAnywhere().withTimeout(.5).asProxy(),
+        new Shooting().withTimeout(.5).asProxy(),
+        runPath("Bump_Depot").asProxy(),
+        new Intaking().withTimeout(.5).asProxy(),
+        new PrepDepot().withTimeout(.5).asProxy(),
+        new Shooting().withTimeout(.5).asProxy());
+
+   Command
 
   }
 

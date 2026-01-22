@@ -5,46 +5,32 @@
  "variables":{
   "expressions":{},
   "poses":{
-   "Outpost":{
+   "Against_Hub":{
     "x":{
-     "exp":"0.6 m",
-     "val":0.6
+     "exp":"3.6 m",
+     "val":3.6
     },
     "y":{
-     "exp":"0.7 m",
-     "val":0.7
+     "exp":"4 m",
+     "val":4.0
     },
     "heading":{
      "exp":"0 deg",
      "val":0.0
     }
    },
-   "Trench":{
+   "Away_From_Hub":{
     "x":{
-     "exp":"3.6 m",
-     "val":3.6
+     "exp":"2 m",
+     "val":2.0
     },
     "y":{
-     "exp":"0.7 m",
-     "val":0.7
+     "exp":"4 m",
+     "val":4.0
     },
     "heading":{
-     "exp":"90 deg",
-     "val":1.5707963267948966
-    }
-   },
-   "climb":{
-    "x":{
-     "exp":"1.5 m",
-     "val":1.5
-    },
-    "y":{
-     "exp":"3.5 m",
-     "val":3.5
-    },
-    "heading":{
-     "exp":"180 deg",
-     "val":3.141592653589793
+     "exp":"0 deg",
+     "val":0.0
     }
    }
   }
