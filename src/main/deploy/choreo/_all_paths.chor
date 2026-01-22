@@ -5,32 +5,46 @@
  "variables":{
   "expressions":{},
   "poses":{
-   "Against_Hub":{
+   "bump":{
     "x":{
      "exp":"3.6 m",
      "val":3.6
     },
     "y":{
-     "exp":"4 m",
-     "val":4.0
+     "exp":"5.7 m",
+     "val":5.7
     },
     "heading":{
-     "exp":"0 deg",
-     "val":0.0
+     "exp":"270 deg",
+     "val":4.71238898038469
     }
    },
-   "Away_From_Hub":{
+   "depot":{
     "x":{
-     "exp":"2 m",
-     "val":2.0
+     "exp":"0.7 m",
+     "val":0.7
     },
     "y":{
-     "exp":"4 m",
-     "val":4.0
+     "exp":"5.7 m",
+     "val":5.7
     },
     "heading":{
-     "exp":"0 deg",
-     "val":0.0
+     "exp":"330 deg",
+     "val":5.759586531581287
+    }
+   },
+   "outpost":{
+    "x":{
+     "exp":"0.6 m",
+     "val":0.6
+    },
+    "y":{
+     "exp":"0.7 m",
+     "val":0.7
+    },
+    "heading":{
+     "exp":"40 deg",
+     "val":0.6981317007977318
     }
    }
   }

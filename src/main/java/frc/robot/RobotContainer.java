@@ -126,19 +126,19 @@ public class RobotContainer {
     // Map.entry(autoCommand, "choreoStartingPath"),
     );
 
-    Command TrenchPreloadOutpost = Commands.sequence(
+    Command PreloadOutpost = Commands.sequence(
         new PrepTrench().withTimeout(.5).asProxy(),
         new Shooting().withTimeout(.5).asProxy(),
         runPath("Trench_Outpost").asProxy(),
         new PrepOutpost().withTimeout(.5).asProxy(),
         new Shooting().withTimeout(.5).asProxy());
 
-   Command PreloadOnly = Commands.sequence(
+    Command PreloadOnly = Commands.sequence(
         runPath("Reverse_From_Hub").asProxy(),
         new PrepAnywhere().withTimeout(.5).asProxy(),
         new Shooting().withTimeout(.5).asProxy());
 
-   Command PreloadDepot = Commands.sequence(
+    Command PreloadDepot = Commands.sequence(
         new PrepAnywhere().withTimeout(.5).asProxy(),
         new Shooting().withTimeout(.5).asProxy(),
         runPath("Bump_Depot").asProxy(),
@@ -146,7 +146,16 @@ public class RobotContainer {
         new PrepDepot().withTimeout(.5).asProxy(),
         new Shooting().withTimeout(.5).asProxy());
 
-   Command
+    Command PreloadDepotOutpost = Commands.sequence(
+        new PrepAnywhere().withTimeout(.5).asProxy(),
+        new Shooting().withTimeout(.5).asProxy(),
+        runPath("Bump_Depot").asProxy(),
+        new Intaking().withTimeout(.5).asProxy(),
+        new PrepDepot().withTimeout(.5).asProxy(),
+        new Shooting().withTimeout(.5).asProxy(),
+        runPath("Depot_Outpost").asProxy(),
+        new PrepOutpost().withTimeout(.5),
+        new Shooting().withTimeout(.5));
 
   }
 
