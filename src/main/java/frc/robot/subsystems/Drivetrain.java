@@ -175,7 +175,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     double hypotenuse = Math.hypot(rightStickX, rightStickY);
 
     if (hypotenuse < 1.15 && hypotenuse > 0.85) {
-      manualDriveRotation = Math.atan2(rightStickY, rightStickX) - Math.PI / 2;
+      manualDriveRotation = Math.atan2(rightStickY, rightStickX) + Math.PI / 2;
     }
     return manualDriveRotation;
 
