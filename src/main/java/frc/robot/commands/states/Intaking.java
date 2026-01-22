@@ -20,7 +20,7 @@ public class Intaking extends Command {
   @Override
   public void initialize() {
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.INTAKE_ROLLER_SPEED);
-    RobotContainer.motionInstance.setClimberPosition(ConstMotion.INTAKE_PIVOT_SPEED);
+    RobotContainer.motionInstance.setClimberPosition(ConstMotion.STOP_CLIMBER);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -32,7 +32,7 @@ public class Intaking extends Command {
   @Override
   public void end(boolean interrupted) {
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.STOP);
-    RobotContainer.motionInstance.setClimberPosition(ConstMotion.STOP);
+    RobotContainer.motionInstance.setClimberPosition(ConstMotion.STOP_CLIMBER);
   }
 
   // Returns true when the command should end.

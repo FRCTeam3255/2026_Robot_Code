@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.controls.MotionMagicExpoVoltage;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -11,6 +12,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
+import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DeviceIDs;
 import frc.robot.constants.ConstMotion;
@@ -24,6 +26,7 @@ public class Motion extends SubsystemBase {
 
   MotionMagicVoltage climberMotionRequest = new MotionMagicVoltage(0);
   MotionMagicVoltage hoodMotionRequest = new MotionMagicVoltage(0);
+  MotionMagicExpoVoltage positionRequest = new MotionMagicExpoVoltage(0);
   MotionMagicVoltage intakePivotMotionRequest = new MotionMagicVoltage(0);
 
   public Motion() {
@@ -42,17 +45,13 @@ public class Motion extends SubsystemBase {
     intakePivot.set(speed);
   }
 
-  public void setClimberPosition(double speed) {
-    climber.set(speed);
-  }
-
   public void setHoodAngle(Angle setPoint) {
     hood.setControl(hoodMotionRequest.withPosition(setPoint));
 
   }
 
-  public void setClimberPosition(double setpoint) {
-    climber.setControl(climberMotionRequest.withPosition(setpoint));
+  public void setClimberPosition(Distance setpoint) {
+    climber.setControl(positionRequest.withPosition(setpoint.in(Units.Inches)));
   }
 
 }
