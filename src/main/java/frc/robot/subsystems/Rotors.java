@@ -60,7 +60,7 @@ public class Rotors extends SubsystemBase {
     flywheelTopRight.set(speed);
     flywheelTopLeft.setControl(new Follower(flywheelTopRight.getDeviceID(), true));
     flywheelBottomRight.setControl(new Follower(flywheelTopRight.getDeviceID(), false));
-    flywheelBottomLeft.setControl(new Follower(flywheelBottomRight.getDeviceID(), true));
+    flywheelBottomLeft.setControl(new Follower(flywheelTopRight.getDeviceID(), true));
   }
 
   @Override
