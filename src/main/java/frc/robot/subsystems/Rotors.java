@@ -57,6 +57,11 @@ public class Rotors extends SubsystemBase {
     flywheelLeft.setControl(new Follower(flywheelRight.getDeviceID(), true));
   }
 
+  public void setFlywheelPercentOutput(double percent) {
+    flywheelRight.set(percent);
+    flywheelLeft.set(percent);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
