@@ -6,9 +6,8 @@ package frc.robot.commands;
 
 import java.util.Optional;
 
-import com.frcteam3255.utils.LimelightHelpers;
-import com.frcteam3255.utils.LimelightHelpers.PoseEstimate;
-
+import frc.robot.LimelightHelpers;
+import frc.robot.LimelightHelpers.PoseEstimate;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.constants.ConstVision;
@@ -30,6 +29,8 @@ public class AddVisionMeasurement extends Command {
 
   @Override
   public void initialize() {
+    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, 0);
+    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, 0);
   }
 
   @Override
