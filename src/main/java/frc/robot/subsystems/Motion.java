@@ -24,10 +24,9 @@ public class Motion extends SubsystemBase {
   final TalonFX climber = new TalonFX(DeviceIDs.motionIDs.CLIMBER_CAN);
   final TalonFX hood = new TalonFX(DeviceIDs.motionIDs.HOOD_CAN);
 
-  MotionMagicVoltage climberMotionRequest = new MotionMagicVoltage(0);
-  MotionMagicVoltage hoodMotionRequest = new MotionMagicVoltage(0);
-  MotionMagicExpoVoltage positionRequest = new MotionMagicExpoVoltage(0);
-  MotionMagicVoltage intakePivotMotionRequest = new MotionMagicVoltage(0);
+  MotionMagicExpoVoltage climberMotionRequest = new MotionMagicExpoVoltage(0);
+  MotionMagicExpoVoltage hoodMotionRequest = new MotionMagicExpoVoltage(0);
+  MotionMagicExpoVoltage intakePivotMotionRequest = new MotionMagicExpoVoltage(0);
 
   public Motion() {
     intakePivot.getConfigurator().apply(ConstMotion.INTAKE_PIVOT_CONFIGURATION);
@@ -51,7 +50,7 @@ public class Motion extends SubsystemBase {
   }
 
   public void setClimberPosition(Distance setpoint) {
-    climber.setControl(positionRequest.withPosition(setpoint.in(Units.Inches)));
+    climber.setControl(climberMotionRequest.withPosition(setpoint.in(Units.Inches)));
   }
 
 }

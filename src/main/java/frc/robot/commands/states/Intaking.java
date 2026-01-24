@@ -20,7 +20,7 @@ public class Intaking extends Command {
   @Override
   public void initialize() {
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.INTAKE_ROLLER_SPEED);
-    RobotContainer.motionInstance.setClimberPosition(ConstMotion.STOP_CLIMBER);
+    RobotContainer.motionInstance.setClimberPosition(ConstMotion.RETRACT_CLIMBER);
     RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
   }
 
@@ -33,7 +33,6 @@ public class Intaking extends Command {
   @Override
   public void end(boolean interrupted) {
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.STOP);
-    RobotContainer.motionInstance.setClimberPosition(ConstMotion.STOP_CLIMBER);
   }
 
   // Returns true when the command should end.
