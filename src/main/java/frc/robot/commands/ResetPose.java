@@ -15,7 +15,7 @@ public class ResetPose extends Command {
 
   @Override
   public void initialize() {
-    RobotContainer.subDrivetrain.resetPose(ConstField.FieldElements.RESET_POSE);
+    RobotContainer.drivetrainInstance.resetPose(ConstField.FieldElements.RESET_POSE);
   }
 
   @Override
