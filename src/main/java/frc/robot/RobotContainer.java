@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-import java.util.IntSummaryStatistics;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,18 +22,10 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.DeferredCommand;
 import frc.robot.DeviceIDs.controllerIDs;
 import frc.robot.commands.AddVisionMeasurement;
-import frc.robot.commands.ClimbingL1;
-import frc.robot.commands.ClimbingL2_3;
 import frc.robot.commands.Shooting;
-import frc.robot.commands.states.EjectingHopper;
 import frc.robot.commands.states.Intaking;
-import frc.robot.commands.states.ReverseShooter;
-import frc.robot.commands.states.Unclimb;
 import frc.robot.commands.states.PrepShoots.PrepAnywhere;
 import frc.robot.commands.states.PrepShoots.PrepDepot;
-import frc.robot.commands.states.PrepShoots.PrepNeutralToAlliance;
-import frc.robot.commands.states.PrepShoots.PrepNonOutpost;
-import frc.robot.commands.states.PrepShoots.PrepOpponentToAlliance;
 import frc.robot.commands.states.PrepShoots.PrepOutpost;
 import frc.robot.commands.states.PrepShoots.PrepTrench;
 import frc.robot.constants.ConstSystem.constControllers;
@@ -83,7 +74,7 @@ public class RobotContainer {
           conDriver.axis_LeftY,
           conDriver.axis_LeftX,
           conDriver.axis_RightX,
-          conDriver.btn_LeftBumper),
+          conDriver.btn_RightBumper),
       Set.of(subDriverStateMachine));
 
   Command EXAMPLE_POSE_DRIVE = new DeferredCommand(
@@ -109,23 +100,9 @@ public class RobotContainer {
   }
 
   private void configDriverBindings() {
-    conDriver.btn_South.whileTrue(new EjectingHopper());
-    conDriver.btn_RightTrigger.whileTrue(new Shooting());
-    conDriver.btn_East.whileTrue(new ReverseShooter());
-    conDriver.btn_Start.whileTrue(new ClimbingL1());
-    conDriver.btn_Start.whileTrue(new ClimbingL2_3());
-    conDriver.btn_LeftTrigger.whileTrue(new Intaking());
-    conDriver.btn_Back.whileTrue(new Unclimb());
-    conDriver.btn_RightBumper.whileTrue(new PrepAnywhere());
-    conDriver.btn_A.whileTrue(new PrepDepot());
-    conDriver.btn_West.whileTrue(new PrepNeutralToAlliance());
-    conDriver.btn_B.whileTrue(new PrepOutpost());
-    conDriver.btn_Y.whileTrue(new PrepTrench());
-    conDriver.btn_West.whileTrue(new PrepOpponentToAlliance());
-    conDriver.btn_X.whileTrue(new PrepNonOutpost());
     // conDriver.btn_B.onTrue(Commands.runOnce(() ->
     // subDrivetrain.resetModulesToAbsolute()));
-    conDriver.btn_North
+    conDriver.btn_Back
         .onTrue(Commands.runOnce(() -> subDrivetrain.resetPose(new Pose2d(0, 0, new Rotation2d()))));
 
     // Example Pose Drive
@@ -148,8 +125,43 @@ public class RobotContainer {
     // Example
     // Map.entry(autoCommand, "choreoStartingPath"),
     );
+
+    Command PreloadOutpost = Commands.sequence(
+        runPath("bump_to_hub"),
+        new PrepAnywhere().alongWith(new Shooting().withTimeout(.5)).asProxy(),
+        runPath("hub_to_outpost"),
+        new PrepOutpost().withTimeout(4).asProxy(),
+        runPath("outpost_hub"),
+        new PrepAnywhere().alongWith(new Shooting().withTimeout(.5)).asProxy());
+
+    Command PreloadOnly = Commands.sequence(
+        runPath("Reverse_From_Hub").asProxy(),
+        new PrepAnywhere().withTimeout(.5).asProxy(),
+        new Shooting().withTimeout(.5).asProxy());
+
+    Command PreloadDepot = Commands.sequence(
+        new PrepAnywhere().withTimeout(.5).asProxy(),
+        new Shooting().withTimeout(.5).asProxy(),
+        runPath("Bump_Depot").asProxy(),
+        new Intaking().withTimeout(.5).asProxy(),
+        new PrepDepot().withTimeout(.5).asProxy(),
+        new Shooting().withTimeout(.5).asProxy());
+
+    Command PreloadDepotOutpost = Commands.sequence(
+        new PrepAnywhere().withTimeout(.5).asProxy(),
+        new Shooting().withTimeout(.5).asProxy(),
+        runPath("Bump_Depot").asProxy(),
+        new Intaking().withTimeout(.5).asProxy(),
+        new PrepDepot().withTimeout(.5).asProxy(),
+        new Shooting().withTimeout(.5).asProxy(),
+        runPath("Depot_Outpost").asProxy(),
+        new PrepOutpost().withTimeout(.5),
+        new Shooting().withTimeout(.5));
+
     // enter which we want to do based on name
-    autoChooser.onChange(selectedAuto -> {
+    autoChooser.onChange(selectedAuto ->
+
+    {
       String startingPose = autoStartingPoses.get(selectedAuto);
       // if there is a stating pose, reset to it
       if (startingPose != null) {
@@ -161,7 +173,9 @@ public class RobotContainer {
 
     // Example: Add autonomous routines to the chooser
     autoChooser.setDefaultOption("Do Nothing", Commands.none());
-    autoChooser.addOption("Example Path", runPath("ExamplePath"));
+    autoChooser.addOption("Example Path",
+
+        runPath("ExamplePath"));
     // Add more autonomous routines as needed, e.g.:
     // autoChooser.addOption("Score and Leave", runPath("ScoreAndLeave"));
 
