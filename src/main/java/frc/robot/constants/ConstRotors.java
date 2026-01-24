@@ -7,7 +7,6 @@ package frc.robot.constants;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import com.frcteam3255.preferences.SN_DoublePreference;
 
 /** Add your docs here. */
 public class ConstRotors {
