@@ -171,7 +171,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     drive(automatedDTVelocity);
   }
 
-  public boolean getIsDriverRotationManualInput(DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis) {
+  public boolean isRotationStickHit(DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis) {
     double rightStickX = rotationXAxis.getAsDouble();
     double rightStickY = rotationYAxis.getAsDouble();
     double hypotenuse = Math.hypot(rightStickX, rightStickY);

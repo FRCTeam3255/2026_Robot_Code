@@ -45,7 +45,7 @@ public class DriveManual extends Command {
 
   @Override
   public void execute() {
-    if (subDrivetrain.getIsDriverRotationManualInput(rotationXAxis, rotationYAxis)) {
+    if (subDrivetrain.isRotationStickHit(rotationXAxis, rotationYAxis)) {
       targetHeading = Rotation2d.fromRadians(subDrivetrain.getStickRadians(rotationXAxis, rotationYAxis));
       subDrivetrain.setDriveRotation(targetHeading.getMeasure());
     }
