@@ -7,6 +7,7 @@ package frc.robot.constants;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import com.frcteam3255.preferences.SN_DoublePreference;
 
 /** Add your docs here. */
 public class ConstRotors {
@@ -21,6 +22,12 @@ public class ConstRotors {
   public static final double SERIALIZER_V_FUNNEL_SPEED = 0;
   public static final double SERIALIZER_ROLLERS_SPEED = 1;
   public static final double SHOOTER_TRANSFER_SPEED = 1;
+
+  static {
+    //TODO: tune current limits
+    SERIALIZER_ROLLERS_CONFIGURATION.CurrentLimits.StatorCurrentLimitEnable = true;
+    SERIALIZER_ROLLERS_CONFIGURATION.CurrentLimits.StatorCurrentLimit = 60; // This is just the current limit from the 2025 hopper
+  }
 
   // different shooting locations shooting speeds
   public static final double FLYWHEEL_TRENCH_SPEED = 1;
