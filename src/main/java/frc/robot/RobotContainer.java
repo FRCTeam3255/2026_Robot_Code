@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-import java.util.IntSummaryStatistics;
 import java.util.Map;
 import java.util.Set;
 
@@ -95,6 +94,8 @@ public class RobotContainer {
           conDriver.btn_RightBumper),
       Set.of(subDriverStateMachine));
 
+  Command RESET_POSE = Commands.runOnce(() -> subDrivetrain.resetPose(new Pose2d(0, 0, new Rotation2d())));
+
   public RobotContainer() {
     conDriver.setLeftDeadband(constControllers.DRIVER_LEFT_STICK_DEADBAND);
 
@@ -123,10 +124,8 @@ public class RobotContainer {
     conDriver.btn_Y.whileTrue(new PrepTrench());
     conDriver.btn_West.whileTrue(new PrepOpponentToAlliance());
     conDriver.btn_X.whileTrue(new PrepNonOutpost());
-    // conDriver.btn_B.onTrue(Commands.runOnce(() ->
-    // subDrivetrain.resetModulesToAbsolute()));
     conDriver.btn_North
-        .onTrue(Commands.runOnce(() -> subDrivetrain.resetPose(new Pose2d(0, 0, new Rotation2d()))));
+        .onTrue(RESET_POSE);
 
     // Example Pose Drive
     conDriver.btn_X
