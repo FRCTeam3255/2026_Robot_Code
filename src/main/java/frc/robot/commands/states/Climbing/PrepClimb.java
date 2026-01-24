@@ -11,7 +11,7 @@ import frc.robot.subsystems.Drivetrain;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class PrepClimb extends Command {
-  Drivetrain globalDrivetrain = RobotContainer.subDrivetrain;
+  Drivetrain globalDrivetrain = RobotContainer.drivetrainInstance;
 
   /** Creates a new PrepClimb. */
   public PrepClimb() {
@@ -24,8 +24,8 @@ public class PrepClimb extends Command {
     // TOdo: replace nulls with proper values
     // globalDrivetrain.rotationalAlign(ConstField.TOWER_POSE,
     // ConstDrivetrain.TURN_SPEED);
+    RobotContainer.motionInstance.setClimberPosition(ConstMotion.EXTEND_CLIMBER);
     RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.RETRACT_INTAKE_PIVOT_ANGLE);
-    RobotContainer.motionInstance.setClimbSpeed(ConstMotion.EXTEND_CLIMBER_SPEED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -36,7 +36,6 @@ public class PrepClimb extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.motionInstance.setClimbSpeed(ConstMotion.STOP);
   }
 
   // Returns true when the command should end.

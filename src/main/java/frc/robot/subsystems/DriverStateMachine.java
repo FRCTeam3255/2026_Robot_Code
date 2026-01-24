@@ -50,7 +50,8 @@ public class DriverStateMachine extends SubsystemBase {
       DriverState desiredState,
       DoubleSupplier xAxis,
       DoubleSupplier yAxis,
-      DoubleSupplier rotationAxis,
+      DoubleSupplier rotationXAxis,
+      DoubleSupplier rotationYAxis,
       BooleanSupplier slowMode) {
     switch (desiredState) {
       case MANUAL:
@@ -62,7 +63,8 @@ public class DriverStateMachine extends SubsystemBase {
                 subDrivetrain,
                 xAxis,
                 yAxis,
-                rotationAxis,
+                rotationXAxis,
+                rotationYAxis,
                 subDriverStateMachine,
                 slowMode);
         }
@@ -77,7 +79,7 @@ public class DriverStateMachine extends SubsystemBase {
                 subDriverStateMachine,
                 xAxis,
                 yAxis,
-                rotationAxis,
+                rotationXAxis,
                 slowMode,
                 ConstPoseDrive.EXAMPLE_POSE_DRIVE_GROUP);
         }
@@ -93,7 +95,7 @@ public class DriverStateMachine extends SubsystemBase {
                 subDriverStateMachine,
                 xAxis,
                 yAxis,
-                rotationAxis,
+                rotationXAxis,
                 slowMode,
                 ConstPoseDrive.EXAMPLE_POSE_DRIVE_GROUP);
         }
