@@ -62,6 +62,6 @@ public class ConstRotors {
     FLYWHEEL_RIGHT_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
 
     SHOOTER_TRANSFER_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-    SHOOTER_TRANSFER_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+    SHOOTER_TRANSFER_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
   }
 }
