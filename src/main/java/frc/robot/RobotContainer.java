@@ -120,12 +120,6 @@ public class RobotContainer {
         subDriverStateMachine // The drive subsystem
     );
 
-    // make our entries name
-    final Map<Command, String> autoStartingPoses = Map.ofEntries(
-    // Example
-    // Map.entry(autoCommand, "choreoStartingPath"),
-    );
-
     Command PreloadOutpost = Commands.sequence(
         new PrepTrench().withTimeout(.5).asProxy(),
         new Shooting().withTimeout(.5).asProxy(),
@@ -135,8 +129,7 @@ public class RobotContainer {
 
     Command PreloadOnly = Commands.sequence(
         runPath("Reverse_From_Hub").asProxy(),
-        new PrepAnywhere().withTimeout(.5).asProxy(),
-        new Shooting().withTimeout(.5).asProxy());
+        new PrepAnywhere().alongWith(new Shooting().withTimeout(.5)).asProxy());
 
     Command PreloadDepot = Commands.sequence(
         runPath("Bumb_HubLeft").asProxy(),
@@ -155,6 +148,13 @@ public class RobotContainer {
         runPath("Depot_HubFront2"),
         new PrepAnywhere().alongWith(new Shooting().withTimeout(.5)).asProxy());
 
+    // make our entries name
+    final Map<Command, String> autoStartingPoses = Map.ofEntries(
+        // Example
+        Map.entry(PreloadOutpost, "Trench_Outpost"),
+        Map.entry(PreloadDepotOutpost, "Reverse_From_Hub"),
+        Map.entry(PreloadOnly, "Reverse_From_Hub"));
+
     // enter which we want to do based on name
     autoChooser.onChange(selectedAuto ->
 
@@ -171,7 +171,7 @@ public class RobotContainer {
     // Example: Add autonomous routines to the chooser
     autoChooser.setDefaultOption("Do Nothing", Commands.none());
     autoChooser.addOption("Example Path", runPath("ExamplePath"));
-    autoChooser.addOption("PreloadDepot", runPath("PreloadDepot"));
+    autoChooser.addOption("PreloadDepot", PreloadDepot);
     // Add more autonomous routines as needed, e.g.:
     // autoChooser.addOption("Score and Leave", runPath("ScoreAndLeave"));
 
