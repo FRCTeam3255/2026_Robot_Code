@@ -22,6 +22,12 @@ public class ConstRotors {
   public static final double SERIALIZER_ROLLERS_SPEED = 1;
   public static final double SHOOTER_TRANSFER_SPEED = 1;
 
+  static {
+    //TODO: tune current limits
+    SERIALIZER_ROLLERS_CONFIGURATION.CurrentLimits.StatorCurrentLimitEnable = true;
+    SERIALIZER_ROLLERS_CONFIGURATION.CurrentLimits.StatorCurrentLimit = 60; // This is just the current limit from the 2025 hopper
+  }
+
   // different shooting locations shooting speeds
   public static final double FLYWHEEL_TRENCH_SPEED = 1;
   public static final double FLYWHEEL_OUTPOST_SPEED = 1;
