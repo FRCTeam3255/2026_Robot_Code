@@ -148,12 +148,28 @@ public class RobotContainer {
         runPath("Depot_HubFront2"),
         new PrepAnywhere().alongWith(new Shooting().withTimeout(.5)).asProxy());
 
+    Command PreloadNeutralRight = Commands.sequence(
+        runPath("OppBump_OppHub").asProxy(),
+        new PrepAnywhere().alongWith(new Shooting().withTimeout(.5)).asProxy(),
+        runPath("OppHub_OppNeutral").alongWith(new Intaking().withTimeout(5)).asProxy(),
+        runPath("OppNeutral_OppHub").alongWith(new Intaking().withTimeout(.5)).asProxy(),
+        new PrepAnywhere().alongWith(new Shooting().withTimeout(.5)).asProxy());
+
+    Command PreloadNeutralLeft = Commands.sequence(
+        runPath("Bump_HubLeft").asProxy(),
+        new PrepAnywhere().alongWith(new Shooting().withTimeout(.5)).asProxy(),
+        runPath("HubLeft_Neutral").alongWith(new Intaking().withTimeout(5)).asProxy(),
+        runPath("Neutral_HubLeft").asProxy(),
+        new PrepAnywhere().alongWith(new Shooting().withTimeout(.5)).asProxy());
+
     // make our entries name
     final Map<Command, String> autoStartingPoses = Map.ofEntries(
         // Example
         Map.entry(PreloadOutpost, "Trench_Outpost"),
         Map.entry(PreloadDepotOutpost, "Reverse_From_Hub"),
-        Map.entry(PreloadOnly, "Reverse_From_Hub"));
+        Map.entry(PreloadOnly, "Reverse_From_Hub"),
+        Map.entry(PreloadNeutralLeft, "Bump_HubLeft"),
+        Map.entry(PreloadNeutralRight, "OppBump_OppHub"));
 
     // enter which we want to do based on name
     autoChooser.onChange(selectedAuto ->
