@@ -29,6 +29,7 @@ public class ClimbingL2_3 extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    RobotContainer.motionInstance.setClimberPosition(ConstMotion.RETRACT_CLIMBER);
   }
 
   // Returns true when the command should end.
