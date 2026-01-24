@@ -21,6 +21,7 @@ public class Intaking extends Command {
   public void initialize() {
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.INTAKE_ROLLER_SPEED);
     RobotContainer.motionInstance.setClimberPosition(ConstMotion.STOP_CLIMBER);
+    RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

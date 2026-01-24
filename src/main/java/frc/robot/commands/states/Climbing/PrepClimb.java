@@ -24,8 +24,8 @@ public class PrepClimb extends Command {
     // TOdo: replace nulls with proper values
     // globalDrivetrain.rotationalAlign(ConstField.TOWER_POSE,
     // ConstDrivetrain.TURN_SPEED);
-    RobotContainer.motionInstance.setIntakePivotSpeed(ConstMotion.RETRACT_INTAKE_PIVOT_SPEED);
     RobotContainer.motionInstance.setClimberPosition(ConstMotion.EXTEND_CLIMBER);
+    RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.RETRACT_INTAKE_PIVOT_ANGLE);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -37,7 +37,6 @@ public class PrepClimb extends Command {
   @Override
   public void end(boolean interrupted) {
     RobotContainer.motionInstance.setClimberPosition(ConstMotion.STOP_CLIMBER);
-    RobotContainer.motionInstance.setIntakePivotSpeed(ConstMotion.STOP);
   }
 
   // Returns true when the command should end.
