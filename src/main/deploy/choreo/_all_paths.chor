@@ -5,6 +5,20 @@
  "variables":{
   "expressions":{},
   "poses":{
+   "Hub_front":{
+    "x":{
+     "exp":"2.3 m",
+     "val":2.3
+    },
+    "y":{
+     "exp":"4 m",
+     "val":4.0
+    },
+    "heading":{
+     "exp":"0 deg",
+     "val":0.0
+    }
+   },
    "bump":{
     "x":{
      "exp":"3.6 m",
@@ -21,12 +35,26 @@
    },
    "depot":{
     "x":{
-     "exp":"0.7 m",
-     "val":0.7
+     "exp":"0.45 m",
+     "val":0.45
     },
     "y":{
-     "exp":"5.7 m",
-     "val":5.7
+     "exp":"5.9 m",
+     "val":5.9
+    },
+    "heading":{
+     "exp":"0 deg",
+     "val":0.0
+    }
+   },
+   "hub_left":{
+    "x":{
+     "exp":"2.6 m",
+     "val":2.6
+    },
+    "y":{
+     "exp":"5.1 m",
+     "val":5.1
     },
     "heading":{
      "exp":"330 deg",
