@@ -27,9 +27,10 @@ public class ConstRotors {
   public static final double SHOOTER_TRANSFER_SPEED = 1;
 
   static {
-    //TODO: tune current limits
+    // TODO: tune current limits
     SERIALIZER_ROLLERS_CONFIGURATION.CurrentLimits.StatorCurrentLimitEnable = true;
-    SERIALIZER_ROLLERS_CONFIGURATION.CurrentLimits.StatorCurrentLimit = 60; // This is just the current limit from the 2025 hopper
+    SERIALIZER_ROLLERS_CONFIGURATION.CurrentLimits.StatorCurrentLimit = 60; // This is just the current limit from the
+                                                                            // 2025 hopper
   }
 
   // different shooting locations shooting speeds
@@ -38,7 +39,7 @@ public class ConstRotors {
   public static final AngularVelocity FLYWHEEL_NON_OUTPOST_SPEED = RPM.of(3000);
   public static final AngularVelocity FLYWHEEL_DEPOT_SPEED = RPM.of(3000);
   public static final AngularVelocity FLYWHEEL_ANYWHERE_SPEED = RPM.of(3000);
-  public static final AngularVelocity FLYWHEEL_NUETRAL_TO_ALLIANCE_SPEED = RPM.of(3000);
+  public static final AngularVelocity FLYWHEEL_NEUTRAL_TO_ALLIANCE_SPEED = RPM.of(3000);
   public static final AngularVelocity FLYWHEEL_OPPONENT_TO_ALLIANCE_SPEED = RPM.of(3000);
 
   public static final AngularVelocity FLYWHEEL_SPEED = RPM.of(3000);
