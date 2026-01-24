@@ -146,16 +146,14 @@ public class RobotContainer {
         new PrepAnywhere().alongWith(new Shooting().withTimeout(.5)).asProxy());
 
     Command PreloadDepotOutpost = Commands.sequence(
-        runPath("Reverse_From_Hub"),
-        new PrepAnywhere().withTimeout(.5).asProxy(),
-        new Shooting().withTimeout(.5).asProxy(),
-        runPath("Bump_Depot").asProxy(),
-        new Intaking().withTimeout(.5).asProxy(),
-        new PrepDepot().withTimeout(.5).asProxy(),
-        new Shooting().withTimeout(.5).asProxy(),
-        runPath("Depot_Outpost").asProxy(),
-        new PrepOutpost().withTimeout(.5),
-        new Shooting().withTimeout(.5));
+        runPath("Reverse_From_Hub").asProxy(),
+        new PrepAnywhere().alongWith(new Shooting().withTimeout(.5)).asProxy(),
+        runPath("HubFront_Outpost").withTimeout(5).asProxy(),
+        runPath("Outpost_HubFront").asProxy(),
+        new PrepAnywhere().alongWith(new Shooting().withTimeout(.5)).asProxy(),
+        runPath("HubFront_Depot").alongWith(new Intaking().withTimeout(.5)).asProxy(),
+        runPath("Depot_HubFront2"),
+        new PrepAnywhere().alongWith(new Shooting().withTimeout(.5)).asProxy());
 
     // enter which we want to do based on name
     autoChooser.onChange(selectedAuto ->
