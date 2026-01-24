@@ -44,7 +44,7 @@ public class ConstRotors {
     INTAKE_ROLLER_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
 
     SERIALIZER_ROLLERS_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
-    SERIALIZER_ROLLERS_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+    SERIALIZER_ROLLERS_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
 
     SERIALIZER_V_FUNNEL_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     SERIALIZER_V_FUNNEL_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
@@ -56,6 +56,6 @@ public class ConstRotors {
     FLYWHEEL_RIGHT_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
 
     SHOOTER_TRANSFER_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-    SHOOTER_TRANSFER_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+    SHOOTER_TRANSFER_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
   }
 }
