@@ -31,6 +31,7 @@ public class BasePrepShooter extends Command {
     RobotContainer.rotorsInstance.setFlywheelSpeed(globalFlyWheelSpeed);
     RobotContainer.motionInstance.setHoodAngle(globalHoodAngle);
     RobotContainer.drivetrainInstance.setDriveRotation(globalDrivetrainAngle);
+    RobotContainer.drivetrainInstance.setIsManualRotationEnabled(false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

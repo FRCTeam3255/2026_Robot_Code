@@ -22,6 +22,7 @@ public class DriveManual extends Command {
   DriverStateMachine subDriverStateMachine;
   BooleanSupplier slowMode;
   public Rotation2d targetHeading;
+  public boolean isDriverRotationManualInput;
 
   public DriveManual(Drivetrain subDrivetrain, DoubleSupplier xAxis, DoubleSupplier yAxis,
       DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis, DriverStateMachine subDriverStateMachine,
@@ -44,7 +45,11 @@ public class DriveManual extends Command {
 
   @Override
   public void execute() {
-    targetHeading = Rotation2d.fromRadians(subDrivetrain.getStickRadians(rotationXAxis, rotationYAxis));
+    isDriverRotationManualInput = subDrivetrain.getIsDriverRotationManualInput(rotationXAxis, rotationYAxis);
+    if (subDrivetrain.manualRotationEnabled && isDriverRotationManualInput) {
+      targetHeading = Rotation2d.fromRadians(subDrivetrain.getStickRadians(rotationXAxis, rotationYAxis));
+      subDrivetrain.setDriveRotation(targetHeading.getDegrees());
+    }
     ChassisSpeeds velocities = subDrivetrain.calculateVelocitiesFromInput(
         xAxis,
         yAxis,
@@ -59,7 +64,7 @@ public class DriveManual extends Command {
 
     subDrivetrain.drive(
         velocities,
-        subDrivetrain.getDriveRotation(targetHeading),
+        subDrivetrain.getDriveRotation(),
         ConstDrivetrain.ROTATION_PID.kP,
         ConstDrivetrain.ROTATION_PID.kI,
         ConstDrivetrain.ROTATION_PID.kD);

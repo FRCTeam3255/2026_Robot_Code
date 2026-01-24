@@ -23,7 +23,7 @@ public class EjectingHopper extends Command {
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.REVERSE_SERIALIZER_ROLLERS_SPEED);
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.REVERSE_INTAKE_ROLLER_SPEED);
     RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(ConstRotors.REVERSE_SERIALIZER_V_FUNNEL_SPEED);
-    RobotContainer.drivetrainInstance.resetDriveRotationBool();
+    RobotContainer.drivetrainInstance.setIsManualRotationEnabled(true);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

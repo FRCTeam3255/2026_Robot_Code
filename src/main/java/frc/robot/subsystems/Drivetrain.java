@@ -34,7 +34,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
   public Pose2d lastDesiredTarget;
   private Rotation2d driveRotation = new Rotation2d();
   double manualDriveRotation = 0.0;
-  private boolean isDriveRotationSet = false;
+  public boolean manualRotationEnabled = true;
 
   /** Creates a new Drivetrain. */
   public static final SwerveModuleConstantsFactory<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> constantCreator = new SwerveModuleConstantsFactory<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>()
@@ -169,6 +169,14 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     drive(automatedDTVelocity);
   }
 
+  public boolean getIsDriverRotationManualInput(DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis) {
+    double rightStickX = rotationXAxis.getAsDouble();
+    double rightStickY = rotationYAxis.getAsDouble();
+    double hypotenuse = Math.hypot(rightStickX, rightStickY);
+
+    return (hypotenuse < 1.15 && hypotenuse > 0.85);
+  }
+
   public double getStickRadians(DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis) {
     double rightStickX = rotationXAxis.getAsDouble();
     double rightStickY = rotationYAxis.getAsDouble();
@@ -183,18 +191,14 @@ public class Drivetrain extends SN_SuperSwerveV2 {
 
   public void setDriveRotation(double rotation) {
     this.driveRotation = Rotation2d.fromDegrees(rotation);
-    this.isDriveRotationSet = true;
   }
 
-  public Rotation2d getDriveRotation(Rotation2d manualDefault) {
-    if (!isDriveRotationSet) {
-      return manualDefault;
-    }
+  public Rotation2d getDriveRotation() {
     return this.driveRotation;
   }
 
-  public void resetDriveRotationBool() {
-    this.isDriveRotationSet = false;
+  public void setIsManualRotationEnabled(boolean set) {
+    manualRotationEnabled = set;
   }
 
 }
