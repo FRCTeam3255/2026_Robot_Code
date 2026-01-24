@@ -15,13 +15,13 @@ public class BasePrepShooter extends Command {
   /** Creates a new BasePrepShooter. */
   double globalFlyWheelSpeed;
   Angle globalHoodAngle;
-  double globalDrivetrainAngle;
+  Angle globalDrivetrainAngle;
 
-  // TODO: add drivetrain angle
-  public BasePrepShooter(double flyWheelSpeed, Angle hoodAngle) {
+  public BasePrepShooter(double flyWheelSpeed, Angle hoodAngle, Angle drivetrainAngle) {
     // Use addRequirements() here to declare subsystem dependencies.
     globalFlyWheelSpeed = flyWheelSpeed;
     globalHoodAngle = hoodAngle;
+    globalDrivetrainAngle = drivetrainAngle;
   }
 
   // Called when the command is initially scheduled.
@@ -29,6 +29,8 @@ public class BasePrepShooter extends Command {
   public void initialize() {
     RobotContainer.rotorsInstance.setFlywheelSpeed(globalFlyWheelSpeed);
     RobotContainer.motionInstance.setHoodAngle(globalHoodAngle);
+    RobotContainer.drivetrainInstance.setDriveRotation(globalDrivetrainAngle);
+    RobotContainer.drivetrainInstance.setIsManualRotationEnabled(false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
