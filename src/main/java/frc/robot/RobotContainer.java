@@ -139,14 +139,14 @@ public class RobotContainer {
         new Shooting().withTimeout(.5).asProxy());
 
     Command PreloadDepot = Commands.sequence(
-        new PrepAnywhere().withTimeout(.5).asProxy(),
-        new Shooting().withTimeout(.5).asProxy(),
-        runPath("Bump_Depot").asProxy(),
-        new Intaking().withTimeout(.5).asProxy(),
-        new PrepDepot().withTimeout(.5).asProxy(),
-        new Shooting().withTimeout(.5).asProxy());
+        runPath("Bumb_HubLeft").asProxy(),
+        new PrepAnywhere().alongWith(new Shooting().withTimeout(.5)).asProxy(),
+        runPath("HubLeft_Depot").alongWith(new Intaking().withTimeout(.5)).asProxy(),
+        runPath("Depot_HubFront").asProxy(),
+        new PrepAnywhere().alongWith(new Shooting().withTimeout(.5)).asProxy());
 
     Command PreloadDepotOutpost = Commands.sequence(
+        runPath("Reverse_From_Hub"),
         new PrepAnywhere().withTimeout(.5).asProxy(),
         new Shooting().withTimeout(.5).asProxy(),
         runPath("Bump_Depot").asProxy(),
@@ -157,25 +157,23 @@ public class RobotContainer {
         new PrepOutpost().withTimeout(.5),
         new Shooting().withTimeout(.5));
 
-  }
+    // enter which we want to do based on name
+    autoChooser.onChange(selectedAuto ->
 
-  // enter which we want to do based on name
-  autoChooser.onChange(selectedAuto->
+    {
+      String startingPose = autoStartingPoses.get(selectedAuto);
+      // if there is a stating pose, reset to it
+      if (startingPose != null) {
+        autoFactory.resetOdometry(startingPose)
+            .ignoringDisable(true) // Run even when disabled
+            .schedule();
+      }
+    });
 
-  {
-    String startingPose = autoStartingPoses.get(selectedAuto);
-    // if there is a stating pose, reset to it
-    if (startingPose != null) {
-      autoFactory.resetOdometry(startingPose)
-          .ignoringDisable(true) // Run even when disabled
-          .schedule();
-    }
-  });
-
-  // Example: Add autonomous routines to the chooser
-  autoChooser.setDefaultOption("Do Nothing",Commands.none());autoChooser.addOption("Example Path",
-
-  runPath("ExamplePath"));
+    // Example: Add autonomous routines to the chooser
+    autoChooser.setDefaultOption("Do Nothing", Commands.none());
+    autoChooser.addOption("Example Path", runPath("ExamplePath"));
+    autoChooser.addOption("PreloadDepot", runPath("PreloadDepot"));
     // Add more autonomous routines as needed, e.g.:
     // autoChooser.addOption("Score and Leave", runPath("ScoreAndLeave"));
 
