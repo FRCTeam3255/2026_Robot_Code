@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import static edu.wpi.first.units.Units.Degrees;
 import static edu.wpi.first.units.Units.Radians;
 
 import java.util.function.DoubleSupplier;
@@ -23,6 +24,7 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.units.measure.Angle;
 import frc.robot.DeviceIDs;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstDrivetrain;
@@ -189,8 +191,8 @@ public class Drivetrain extends SN_SuperSwerveV2 {
 
   }
 
-  public void setDriveRotation(double rotation) {
-    this.driveRotation = Rotation2d.fromDegrees(rotation);
+  public void setDriveRotation(Angle rotation) {
+    this.driveRotation = Rotation2d.fromDegrees(rotation.in(Degrees));
   }
 
   public Rotation2d getDriveRotation() {

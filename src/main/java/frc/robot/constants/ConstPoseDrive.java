@@ -47,13 +47,13 @@ public class ConstPoseDrive {
    */
 
   public static class PrepShootRotations {
-    public static final double TRENCH_PREP_SHOOT_ROTATION = 85.3;
-    public static final double OUTPOST_PREP_SHOOT_ROTATION = Math.toDegrees(0.6998928579776303);
-    public static final double NON_OUTPOST_PREP_SHOOT_ROTATION = Math.toDegrees(-0.6435014565328497);
-    public static final double DEPOT_PREP_SHOOT_ROTATION = Math.toDegrees(-0.36254401134211506);
-    public static final double NEUTRAL_TO_ALLIANCE_PREP_SHOOT_ROTATION = Math.toDegrees(-Math.PI);
-    public static final double OPPONENT_TO_ALLIANCE_PREP_SHOOT_ROTATION = Math.toDegrees(-Math.PI);
-    public static final double ANYWHERE_PREP_SHOOT_ROTATION = 0.0;
+    public static final Angle TRENCH_PREP_SHOOT_ROTATION = Units.Degrees.of(85.3);
+    public static final Angle OUTPOST_PREP_SHOOT_ROTATION = Units.Degrees.of(40.11);
+    public static final Angle NON_OUTPOST_PREP_SHOOT_ROTATION = Units.Degrees.of(-36.87);
+    public static final Angle DEPOT_PREP_SHOOT_ROTATION = Units.Degrees.of(-20.78);
+    public static final Angle NEUTRAL_TO_ALLIANCE_PREP_SHOOT_ROTATION = Units.Degrees.of(-180.0);
+    public static final Angle OPPONENT_TO_ALLIANCE_PREP_SHOOT_ROTATION = Units.Degrees.of(-180.0);
+    public static final Angle ANYWHERE_PREP_SHOOT_ROTATION = Units.Degrees.of(0.0);
   }
 
   public static class PoseDriveGroup {

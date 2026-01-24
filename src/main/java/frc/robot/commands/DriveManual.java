@@ -48,7 +48,7 @@ public class DriveManual extends Command {
     isDriverRotationManualInput = subDrivetrain.getIsDriverRotationManualInput(rotationXAxis, rotationYAxis);
     if (isDriverRotationManualInput) {
       targetHeading = Rotation2d.fromRadians(subDrivetrain.getStickRadians(rotationXAxis, rotationYAxis));
-      subDrivetrain.setDriveRotation(targetHeading.getDegrees());
+      subDrivetrain.setDriveRotation(targetHeading.getMeasure());
     }
     ChassisSpeeds velocities = subDrivetrain.calculateVelocitiesFromInput(
         xAxis,
