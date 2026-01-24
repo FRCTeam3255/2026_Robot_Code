@@ -122,7 +122,7 @@ public class RobotContainer {
     conDriver.btn_West.whileTrue(new PrepOpponentToAlliance());
     conDriver.btn_X.whileTrue(new PrepNonOutpost());
     conDriver.btn_North
-        .onTrue(new ResetPose(subDrivetrain));
+        .onTrue(new ResetPose());
 
     // Example Pose Drive
     conDriver.btn_X
