@@ -122,7 +122,7 @@ public class RobotContainer {
     conDriver.btn_West.whileTrue(new PrepOpponentToAlliance());
     conDriver.btn_X.whileTrue(new PrepNonOutpost());
     conDriver.btn_North
-        .onTrue(resetPose());
+        .onTrue(new ResetPose(subDrivetrain));
 
     // Example Pose Drive
     conDriver.btn_X
@@ -183,10 +183,6 @@ public class RobotContainer {
 
   public RobotState getRobotState() {
     return subStateMachine.getRobotState();
-  }
-
-  public Command resetPose() {
-    return new ResetPose(subDrivetrain);
   }
 
   public Command addVisionMeasurement() {

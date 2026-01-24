@@ -7,23 +7,20 @@ package frc.robot.commands;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.RobotContainer;
 
 public class ResetPose extends Command {
-  Drivetrain subDrivetrain;
 
-  public ResetPose(Drivetrain subDrivetrain) {
-    this.subDrivetrain = subDrivetrain;
- 
-    addRequirements(this.subDrivetrain);
+  public ResetPose() {
   }
 
   @Override
-  public void initialize() {}
+  public void initialize() {
+    RobotContainer.subDrivetrain.resetPose(new Pose2d(0, 0, new Rotation2d()));
+  }
 
   @Override
   public void execute() {
-    subDrivetrain.resetPose(new Pose2d(0, 0, new Rotation2d()));
   }
 
   @Override
@@ -32,6 +29,6 @@ public class ResetPose extends Command {
 
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
