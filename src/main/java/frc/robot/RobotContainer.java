@@ -12,8 +12,6 @@ import com.frcteam3255.joystick.SN_XboxController;
 import choreo.auto.AutoFactory;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,6 +22,7 @@ import frc.robot.DeviceIDs.controllerIDs;
 import frc.robot.commands.AddVisionMeasurement;
 import frc.robot.commands.ClimbingL1;
 import frc.robot.commands.ClimbingL2_3;
+import frc.robot.commands.ResetPose;
 import frc.robot.commands.Shooting;
 import frc.robot.commands.states.EjectingHopper;
 import frc.robot.commands.states.Intaking;
@@ -94,8 +93,6 @@ public class RobotContainer {
           conDriver.btn_RightBumper),
       Set.of(subDriverStateMachine));
 
-  Command RESET_POSE = Commands.runOnce(() -> subDrivetrain.resetPose(new Pose2d(0, 0, new Rotation2d())));
-
   public RobotContainer() {
     conDriver.setLeftDeadband(constControllers.DRIVER_LEFT_STICK_DEADBAND);
 
@@ -125,7 +122,7 @@ public class RobotContainer {
     conDriver.btn_West.whileTrue(new PrepOpponentToAlliance());
     conDriver.btn_X.whileTrue(new PrepNonOutpost());
     conDriver.btn_North
-        .onTrue(RESET_POSE);
+        .onTrue(resetPose());
 
     // Example Pose Drive
     conDriver.btn_X
@@ -186,6 +183,10 @@ public class RobotContainer {
 
   public RobotState getRobotState() {
     return subStateMachine.getRobotState();
+  }
+
+  public Command resetPose() {
+    return new ResetPose(subDrivetrain);
   }
 
   public Command addVisionMeasurement() {
