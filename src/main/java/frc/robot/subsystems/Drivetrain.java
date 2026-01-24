@@ -5,8 +5,6 @@
 package frc.robot.subsystems;
 
 import static edu.wpi.first.units.Units.Degrees;
-import static edu.wpi.first.units.Units.Radians;
-
 import java.util.function.DoubleSupplier;
 
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
@@ -35,7 +33,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
   public PoseDriveGroup lastDesiredPoseGroup;
   public Pose2d lastDesiredTarget;
   private Rotation2d driveRotation = new Rotation2d();
-  double manualDriveRotation = 0.0;
+  private double manualDriveRotation = 0.0;
   public boolean manualRotationEnabled = true;
 
   /** Creates a new Drivetrain. */

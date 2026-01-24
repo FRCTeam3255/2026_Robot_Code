@@ -21,7 +21,7 @@ public class DriveManual extends Command {
   boolean isOpenLoop;
   DriverStateMachine subDriverStateMachine;
   BooleanSupplier slowMode;
-  public Rotation2d targetHeading;
+  Rotation2d targetHeading;
   public boolean isDriverRotationManualInput;
 
   public DriveManual(Drivetrain subDrivetrain, DoubleSupplier xAxis, DoubleSupplier yAxis,
