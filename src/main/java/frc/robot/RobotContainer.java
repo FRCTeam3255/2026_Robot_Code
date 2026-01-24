@@ -131,9 +131,10 @@ public class RobotContainer {
         .onTrue(Commands.runOnce(() -> drivetrainInstance.resetPose(new Pose2d(0, 0, new Rotation2d()))));
 
     // Example Pose Drive
-    conDriver.btn_X
-        .whileTrue(EXAMPLE_POSE_DRIVE)
-        .onFalse(Commands.runOnce(() -> subDriverStateMachine.setDriverState(DriverState.MANUAL)));
+    // conDriver.btn_X
+    // .whileTrue(EXAMPLE_POSE_DRIVE)
+    // .onFalse(Commands.runOnce(() ->
+    // subDriverStateMachine.setDriverState(DriverState.MANUAL)));
   }
 
   public void configAutonomous() {
