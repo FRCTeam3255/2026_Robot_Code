@@ -26,6 +26,13 @@ public class ConstRotors {
   public static final double SERIALIZER_ROLLERS_SPEED = 1;
   public static final double SHOOTER_TRANSFER_SPEED = 1;
 
+  static {
+    // TODO: tune current limits
+    SERIALIZER_ROLLERS_CONFIGURATION.CurrentLimits.StatorCurrentLimitEnable = true;
+    SERIALIZER_ROLLERS_CONFIGURATION.CurrentLimits.StatorCurrentLimit = 60; // This is just the current limit from the
+                                                                            // 2025 hopper
+  }
+
   // different shooting locations shooting speeds
   public static final AngularVelocity FLYWHEEL_TRENCH_SPEED = RPM.of(3000);
   public static final AngularVelocity FLYWHEEL_OUTPOST_SPEED = RPM.of(3000);
@@ -54,7 +61,7 @@ public class ConstRotors {
     SERIALIZER_V_FUNNEL_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
 
     FLYWHEEL_LEFT_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
-    FLYWHEEL_LEFT_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+    FLYWHEEL_LEFT_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
 
     FLYWHEEL_RIGHT_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     FLYWHEEL_RIGHT_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;

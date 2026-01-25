@@ -58,16 +58,16 @@ public class Rotors extends SubsystemBase {
 
   public void setFlywheelSpeed(AngularVelocity speed) {
     flywheelTopRight.setControl(flywheelVelocityRequest.withVelocity(speed));
-    flywheelTopLeft.setControl(new Follower(flywheelTopRight.getDeviceID(), true));
+    flywheelTopLeft.setControl(flywheelVelocityRequest.withVelocity(speed));
     flywheelBottomRight.setControl(new Follower(flywheelTopRight.getDeviceID(), false));
-    flywheelBottomLeft.setControl(new Follower(flywheelTopRight.getDeviceID(), true));
+    flywheelBottomLeft.setControl(new Follower(flywheelTopLeft.getDeviceID(), false));
   }
 
   public void setFlywheelPercentOutput(double percent) {
     flywheelTopRight.set(percent);
-    flywheelTopLeft.setControl(new Follower(flywheelTopRight.getDeviceID(), true));
-    flywheelBottomRight.setControl(new Follower(flywheelTopRight.getDeviceID(), false));
-    flywheelBottomLeft.setControl(new Follower(flywheelTopRight.getDeviceID(), true));
+    flywheelTopLeft.set(percent);
+    flywheelBottomRight.set(percent);
+    flywheelBottomLeft.set(percent);
   }
 
   @Override
