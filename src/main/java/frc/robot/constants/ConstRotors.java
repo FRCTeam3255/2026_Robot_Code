@@ -42,7 +42,6 @@ public class ConstRotors {
   public static final AngularVelocity FLYWHEEL_NEUTRAL_TO_ALLIANCE_SPEED = RPM.of(5200);
   public static final AngularVelocity FLYWHEEL_OPPONENT_TO_ALLIANCE_SPEED = RPM.of(5200);
 
-  public static final AngularVelocity FLYWHEEL_SPEED = RPM.of(5200);
   public static final double REVERSE_INTAKE_ROLLER_SPEED = -1;
   public static final double REVERSE_SERIALIZER_V_FUNNEL_SPEED = 0;
   public static final double REVERSE_SERIALIZER_ROLLERS_SPEED = -1;
@@ -60,29 +59,25 @@ public class ConstRotors {
     SERIALIZER_V_FUNNEL_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     SERIALIZER_V_FUNNEL_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
 
-    FLYWHEEL_LEFT_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
-    FLYWHEEL_LEFT_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
-
-    FLYWHEEL_RIGHT_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
-    FLYWHEEL_RIGHT_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
-
     SHOOTER_TRANSFER_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     SHOOTER_TRANSFER_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
 
+    FLYWHEEL_LEFT_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+    FLYWHEEL_LEFT_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
     FLYWHEEL_LEFT_CONFIGURATION.Slot0.kS = 0.14;
     FLYWHEEL_LEFT_CONFIGURATION.Slot0.kV = 0.11167;
     FLYWHEEL_LEFT_CONFIGURATION.Slot0.kA = 0;
     FLYWHEEL_LEFT_CONFIGURATION.Slot0.kP = 0.5;
-
     FLYWHEEL_LEFT_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity = 60;
     FLYWHEEL_LEFT_CONFIGURATION.MotionMagic.MotionMagicAcceleration = 600;
     FLYWHEEL_LEFT_CONFIGURATION.MotionMagic.MotionMagicJerk = 6000;
 
+    FLYWHEEL_RIGHT_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+    FLYWHEEL_RIGHT_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
     FLYWHEEL_RIGHT_CONFIGURATION.Slot0.kS = 0.14;
     FLYWHEEL_RIGHT_CONFIGURATION.Slot0.kV = 0.11167;
     FLYWHEEL_RIGHT_CONFIGURATION.Slot0.kA = 0;
     FLYWHEEL_RIGHT_CONFIGURATION.Slot0.kP = 0.5;
-
     FLYWHEEL_RIGHT_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity = 60;
     FLYWHEEL_RIGHT_CONFIGURATION.MotionMagic.MotionMagicAcceleration = 600;
     FLYWHEEL_RIGHT_CONFIGURATION.MotionMagic.MotionMagicJerk = 6000;
