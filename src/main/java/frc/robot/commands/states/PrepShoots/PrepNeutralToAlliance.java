@@ -13,7 +13,7 @@ import frc.robot.constants.ConstRotors;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PrepNeutralToAlliance extends BasePrepShooter {
   public PrepNeutralToAlliance() {
-    super(ConstRotors.FLYWHEEL_NUETRAL_TO_ALLIANCE_SPEED, ConstMotion.HOOD_NUETRAL_TO_ALLIANCE_ANGLE,
+    super(ConstRotors.FLYWHEEL_NEUTRAL_TO_ALLIANCE_SPEED, ConstMotion.HOOD_NUETRAL_TO_ALLIANCE_ANGLE,
         ConstPoseDrive.PrepShootRotations.NEUTRAL_TO_ALLIANCE_PREP_SHOOT_ROTATION);
     // Use addRequirements() here to declare subsystem dependencies.
   }

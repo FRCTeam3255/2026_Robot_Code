@@ -4,9 +4,13 @@
 
 package frc.robot.constants;
 
+import static edu.wpi.first.units.Units.RPM;
+
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+
+import edu.wpi.first.units.measure.AngularVelocity;
 
 /** Add your docs here. */
 public class ConstRotors {
@@ -23,21 +27,21 @@ public class ConstRotors {
   public static final double SHOOTER_TRANSFER_SPEED = 1;
 
   static {
-    //TODO: tune current limits
+    // TODO: tune current limits
     SERIALIZER_ROLLERS_CONFIGURATION.CurrentLimits.StatorCurrentLimitEnable = true;
-    SERIALIZER_ROLLERS_CONFIGURATION.CurrentLimits.StatorCurrentLimit = 60; // This is just the current limit from the 2025 hopper
+    SERIALIZER_ROLLERS_CONFIGURATION.CurrentLimits.StatorCurrentLimit = 40; // This is just the current limit from the
+                                                                            // 2025 hopper
   }
 
   // different shooting locations shooting speeds
-  public static final double FLYWHEEL_TRENCH_SPEED = 1;
-  public static final double FLYWHEEL_OUTPOST_SPEED = 1;
-  public static final double FLYWHEEL_NON_OUTPOST_SPEED = 1;
-  public static final double FLYWHEEL_DEPOT_SPEED = 1;
-  public static final double FLYWHEEL_ANYWHERE_SPEED = 1;
-  public static final double FLYWHEEL_NUETRAL_TO_ALLIANCE_SPEED = 1;
-  public static final double FLYWHEEL_OPPONENT_TO_ALLIANCE_SPEED = 1;
+  public static final AngularVelocity FLYWHEEL_TRENCH_SPEED = RPM.of(5200);
+  public static final AngularVelocity FLYWHEEL_OUTPOST_SPEED = RPM.of(5200);
+  public static final AngularVelocity FLYWHEEL_NON_OUTPOST_SPEED = RPM.of(5200);
+  public static final AngularVelocity FLYWHEEL_DEPOT_SPEED = RPM.of(5200);
+  public static final AngularVelocity FLYWHEEL_ANYWHERE_SPEED = RPM.of(5200);
+  public static final AngularVelocity FLYWHEEL_NEUTRAL_TO_ALLIANCE_SPEED = RPM.of(5200);
+  public static final AngularVelocity FLYWHEEL_OPPONENT_TO_ALLIANCE_SPEED = RPM.of(5200);
 
-  public static final double FLYWHEEL_SPEED = 1;
   public static final double REVERSE_INTAKE_ROLLER_SPEED = -1;
   public static final double REVERSE_SERIALIZER_V_FUNNEL_SPEED = 0;
   public static final double REVERSE_SERIALIZER_ROLLERS_SPEED = -1;
@@ -55,13 +59,27 @@ public class ConstRotors {
     SERIALIZER_V_FUNNEL_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     SERIALIZER_V_FUNNEL_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
 
+    SHOOTER_TRANSFER_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+    SHOOTER_TRANSFER_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+
     FLYWHEEL_LEFT_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
-    FLYWHEEL_LEFT_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+    FLYWHEEL_LEFT_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+    FLYWHEEL_LEFT_CONFIGURATION.Slot0.kS = 0.14;
+    FLYWHEEL_LEFT_CONFIGURATION.Slot0.kV = 0.11167;
+    FLYWHEEL_LEFT_CONFIGURATION.Slot0.kA = 0;
+    FLYWHEEL_LEFT_CONFIGURATION.Slot0.kP = 0.5;
+    FLYWHEEL_LEFT_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity = 60;
+    FLYWHEEL_LEFT_CONFIGURATION.MotionMagic.MotionMagicAcceleration = 600;
+    FLYWHEEL_LEFT_CONFIGURATION.MotionMagic.MotionMagicJerk = 6000;
 
     FLYWHEEL_RIGHT_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     FLYWHEEL_RIGHT_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
-
-    SHOOTER_TRANSFER_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-    SHOOTER_TRANSFER_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+    FLYWHEEL_RIGHT_CONFIGURATION.Slot0.kS = 0.14;
+    FLYWHEEL_RIGHT_CONFIGURATION.Slot0.kV = 0.11167;
+    FLYWHEEL_RIGHT_CONFIGURATION.Slot0.kA = 0;
+    FLYWHEEL_RIGHT_CONFIGURATION.Slot0.kP = 0.5;
+    FLYWHEEL_RIGHT_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity = 60;
+    FLYWHEEL_RIGHT_CONFIGURATION.MotionMagic.MotionMagicAcceleration = 600;
+    FLYWHEEL_RIGHT_CONFIGURATION.MotionMagic.MotionMagicJerk = 6000;
   }
 }
