@@ -24,7 +24,6 @@ public class ReverseShooter extends Command {
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.REVERSE_SHOOTER_TRANSFER_SPEED);
     RobotContainer.rotorsInstance.setFlywheelPercentOutput(ConstRotors.REVERSE_FLYWHEEL_SPEED);
     RobotContainer.drivetrainInstance.setIsManualRotationEnabled(true);
-    RobotContainer.rotorsInstance.setFlywheelPercentOutput(ConstRotors.REVERSE_FLYWHEEL_SPEED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

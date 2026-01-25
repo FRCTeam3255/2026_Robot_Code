@@ -44,7 +44,7 @@ public class BasePrepShooter extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.rotorsInstance.setFlywheelSpeed(RPM.of(ConstRotors.STOP));
+    RobotContainer.rotorsInstance.setFlywheelPercentOutput(ConstRotors.STOP);
     RobotContainer.motionInstance.setHoodAngle(ConstMotion.HOOD_NONE_ANGLE);
   }
 
