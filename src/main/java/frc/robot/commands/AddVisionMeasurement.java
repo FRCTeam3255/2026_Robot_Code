@@ -29,12 +29,12 @@ public class AddVisionMeasurement extends Command {
 
   @Override
   public void initialize() {
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, 0);
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, 0);
   }
 
   @Override
   public void execute() {
+    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, 2);
+    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, 2);
     // Tells the limelight where we are on the field
     LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_RIGHT_NAME,
         subDrivetrain.getPose().getRotation().getDegrees(), 0, 0, 0, 0, 0);
