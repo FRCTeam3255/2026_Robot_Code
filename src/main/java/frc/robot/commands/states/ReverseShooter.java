@@ -20,7 +20,7 @@ public class ReverseShooter extends Command {
   @Override
   public void initialize() {
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.REVERSE_SHOOTER_TRANSFER_SPEED);
-    RobotContainer.rotorsInstance.setFlywheelSpeed(ConstRotors.REVERSE_FLYWHEEL_SPEED);
+    RobotContainer.rotorsInstance.setFlywheelPercentOutput(ConstRotors.REVERSE_FLYWHEEL_SPEED);
     RobotContainer.drivetrainInstance.setIsManualRotationEnabled(true);
   }
 
@@ -33,7 +33,7 @@ public class ReverseShooter extends Command {
   @Override
   public void end(boolean interrupted) {
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.STOP);
-    RobotContainer.rotorsInstance.setFlywheelSpeed(ConstRotors.STOP);
+    RobotContainer.rotorsInstance.setFlywheelPercentOutput(ConstRotors.STOP);
   }
 
   // Returns true when the command should end.

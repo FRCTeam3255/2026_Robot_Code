@@ -9,6 +9,7 @@ import com.ctre.phoenix6.controls.MotionMagicVelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.epilogue.Logged;
+import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DeviceIDs.rotorIDs;
 import frc.robot.constants.ConstRotors;
@@ -55,11 +56,18 @@ public class Rotors extends SubsystemBase {
     serializerVFunnel.set(speed);
   }
 
-  public void setFlywheelSpeed(double speed) {
-    flywheelTopRight.set(speed);
-    flywheelTopLeft.setControl(new Follower(flywheelTopRight.getDeviceID(), true));
+  public void setFlywheelSpeed(AngularVelocity speed) {
+    flywheelTopRight.setControl(flywheelVelocityRequest.withVelocity(speed));
+    flywheelTopLeft.setControl(flywheelVelocityRequest.withVelocity(speed));
     flywheelBottomRight.setControl(new Follower(flywheelTopRight.getDeviceID(), false));
-    flywheelBottomLeft.setControl(new Follower(flywheelTopRight.getDeviceID(), true));
+    flywheelBottomLeft.setControl(new Follower(flywheelTopLeft.getDeviceID(), false));
+  }
+
+  public void setFlywheelPercentOutput(double percent) {
+    flywheelTopRight.set(percent);
+    flywheelTopLeft.set(percent);
+    flywheelBottomRight.set(percent);
+    flywheelBottomLeft.set(percent);
   }
 
   @Override
