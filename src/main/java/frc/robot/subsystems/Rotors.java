@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicVelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.MotorAlignmentValue;
 
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.units.measure.AngularVelocity;
@@ -57,10 +58,16 @@ public class Rotors extends SubsystemBase {
   }
 
   public void setFlywheelSpeed(double speed) {
-    flywheelTopRight.set(speed);
-    flywheelTopLeft.setControl(new Follower(flywheelTopRight.getDeviceID(), true));
-    flywheelBottomRight.setControl(new Follower(flywheelTopRight.getDeviceID(), false));
-    flywheelBottomLeft.setControl(new Follower(flywheelTopRight.getDeviceID(), true));
+    // flywheelTopRight.set(speed);
+    // flywheelTopLeft.setControl(new Follower(flywheelTopRight.getDeviceID(),
+    // true));
+    // flywheelBottomRight.setControl(new Follower(flywheelTopRight.getDeviceID(),
+    // false));
+    // flywheelBottomLeft.setControl(new Follower(flywheelTopRight.getDeviceID(),
+    // true));
+    // flywheelRight.set(speed);
+    // flywheelLeft.setControl(new Follower(flywheelRight.getDeviceID(),
+    // MotorAlignmentValue.Opposed));
   }
 
   @Override
