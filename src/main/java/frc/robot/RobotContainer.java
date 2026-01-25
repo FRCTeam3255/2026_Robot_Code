@@ -162,6 +162,9 @@ public class RobotContainer {
         runPath("Neutral_HubLeft").asProxy(),
         new PrepAnywhere().alongWith(new Shooting().withTimeout(.5)).asProxy());
 
+    autoChooser.setDefaultOption("Do Nothing", Commands.none());
+    autoChooser.addOption("Example Path", runPath("ExamplePath"));
+    autoChooser.addOption("PreloadDepot", PreloadDepot);
     // make our entries name
     final Map<Command, String> autoStartingPoses = Map.ofEntries(
         // Example
@@ -169,6 +172,7 @@ public class RobotContainer {
         Map.entry(PreloadDepotOutpost, "Reverse_From_Hub"),
         Map.entry(PreloadOnly, "Reverse_From_Hub"),
         Map.entry(PreloadNeutralLeft, "Bump_HubLeft"),
+        Map.entry(PreloadDepot, "Bump_HubLeft"),
         Map.entry(PreloadNeutralRight, "OppBump_OppHub"));
 
     // enter which we want to do based on name
@@ -185,9 +189,7 @@ public class RobotContainer {
     });
 
     // Example: Add autonomous routines to the chooser
-    autoChooser.setDefaultOption("Do Nothing", Commands.none());
-    autoChooser.addOption("Example Path", runPath("ExamplePath"));
-    autoChooser.addOption("PreloadDepot", PreloadDepot);
+
     // Add more autonomous routines as needed, e.g.:
     // autoChooser.addOption("Score and Leave", runPath("ScoreAndLeave"));
 
