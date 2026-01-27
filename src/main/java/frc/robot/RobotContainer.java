@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-import java.util.IntSummaryStatistics;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,8 +12,6 @@ import com.frcteam3255.joystick.SN_XboxController;
 import choreo.auto.AutoFactory;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -25,6 +22,7 @@ import frc.robot.DeviceIDs.controllerIDs;
 import frc.robot.commands.AddVisionMeasurement;
 import frc.robot.commands.ClimbingL1;
 import frc.robot.commands.ClimbingL2_3;
+import frc.robot.commands.ResetPose;
 import frc.robot.commands.Shooting;
 import frc.robot.commands.states.EjectingHopper;
 import frc.robot.commands.states.Intaking;
@@ -125,10 +123,7 @@ public class RobotContainer {
     conDriver.btn_Y.whileTrue(new PrepTrench());
     conDriver.btn_West.whileTrue(new PrepOpponentToAlliance());
     conDriver.btn_X.whileTrue(new PrepNonOutpost());
-    // conDriver.btn_B.onTrue(Commands.runOnce(() ->
-    // subDrivetrain.resetModulesToAbsolute()));
-    conDriver.btn_North
-        .onTrue(Commands.runOnce(() -> drivetrainInstance.resetPose(new Pose2d(0, 0, new Rotation2d()))));
+    conDriver.btn_North.onTrue(new ResetPose());
   }
 
   public void configAutonomous() {
