@@ -4,6 +4,9 @@
 
 package frc.robot.subsystems;
 
+import static edu.wpi.first.units.Units.Degrees;
+import java.util.function.DoubleSupplier;
+
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.swerve.SwerveDrivetrainConstants;
@@ -17,7 +20,9 @@ import com.frcteam3255.components.swerve.SN_SuperSwerveV2;
 import choreo.trajectory.SwerveSample;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.units.measure.Angle;
 import frc.robot.DeviceIDs;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstDrivetrain;
@@ -27,6 +32,9 @@ public class Drivetrain extends SN_SuperSwerveV2 {
 
   public PoseDriveGroup lastDesiredPoseGroup;
   public Pose2d lastDesiredTarget;
+  private Rotation2d driveRotation = new Rotation2d();
+  private double manualDriveRotation = 0.0;
+  public boolean manualRotationEnabled = true;
 
   /** Creates a new Drivetrain. */
   public static final SwerveModuleConstantsFactory<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> constantCreator = new SwerveModuleConstantsFactory<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>()
@@ -159,6 +167,38 @@ public class Drivetrain extends SN_SuperSwerveV2 {
       automatedDTVelocity.vyMetersPerSecond = manualVelocities.vyMetersPerSecond;
     }
     drive(automatedDTVelocity);
+  }
+
+  public boolean isRotationStickHit(DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis) {
+    double rightStickX = rotationXAxis.getAsDouble();
+    double rightStickY = rotationYAxis.getAsDouble();
+    double hypotenuse = Math.hypot(rightStickX, rightStickY);
+
+    return (hypotenuse < 1.15 && hypotenuse > 0.85);
+  }
+
+  public double getStickRadians(DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis) {
+    double rightStickX = rotationXAxis.getAsDouble();
+    double rightStickY = rotationYAxis.getAsDouble();
+    double hypotenuse = Math.hypot(rightStickX, rightStickY);
+
+    if (hypotenuse < 1.15 && hypotenuse > 0.85) {
+      manualDriveRotation = Math.atan2(rightStickY, rightStickX) + Math.PI / 2;
+    }
+    return manualDriveRotation;
+
+  }
+
+  public void setDriveRotation(Angle rotation) {
+    this.driveRotation = Rotation2d.fromDegrees(rotation.in(Degrees));
+  }
+
+  public Rotation2d getDriveRotation() {
+    return this.driveRotation;
+  }
+
+  public void setIsManualRotationEnabled(boolean set) {
+    manualRotationEnabled = set;
   }
 
 }

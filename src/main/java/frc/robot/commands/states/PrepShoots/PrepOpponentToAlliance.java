@@ -5,6 +5,7 @@
 package frc.robot.commands.states.PrepShoots;
 
 import frc.robot.constants.ConstMotion;
+import frc.robot.constants.ConstPoseDrive;
 import frc.robot.constants.ConstRotors;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -12,7 +13,8 @@ import frc.robot.constants.ConstRotors;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PrepOpponentToAlliance extends BasePrepShooter {
   public PrepOpponentToAlliance() {
-    super(ConstRotors.FLYWHEEL_OPPONENT_TO_ALLIANCE_SPEED, ConstMotion.HOOD_OPPENENT_TO_ALLIANCE_ANGLE);
+    super(ConstRotors.FLYWHEEL_OPPONENT_TO_ALLIANCE_SPEED, ConstMotion.HOOD_OPPENENT_TO_ALLIANCE_ANGLE,
+        ConstPoseDrive.PrepShootRotations.OPPONENT_TO_ALLIANCE_PREP_SHOOT_ROTATION);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 }

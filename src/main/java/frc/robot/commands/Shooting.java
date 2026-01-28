@@ -35,6 +35,7 @@ public class Shooting extends Command {
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.STOP);
     RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(ConstRotors.STOP);
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.STOP);
+    RobotContainer.drivetrainInstance.setIsManualRotationEnabled(true);
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.STOP);
   }
 

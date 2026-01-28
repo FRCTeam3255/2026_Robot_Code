@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-import java.util.IntSummaryStatistics;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,8 +12,6 @@ import com.frcteam3255.joystick.SN_XboxController;
 import choreo.auto.AutoFactory;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -25,6 +22,7 @@ import frc.robot.DeviceIDs.controllerIDs;
 import frc.robot.commands.AddVisionMeasurement;
 import frc.robot.commands.ClimbingL1;
 import frc.robot.commands.ClimbingL2_3;
+import frc.robot.commands.ResetPose;
 import frc.robot.commands.Shooting;
 import frc.robot.commands.states.EjectingHopper;
 import frc.robot.commands.states.Intaking;
@@ -63,13 +61,13 @@ public class RobotContainer {
   private final Rotors loggedRotorsInstance = rotorsInstance;
   public static Motion motionInstance = new Motion();
   private final Motion loggedMotorsInstance = motionInstance;
-  public static Drivetrain subDrivetrain = new Drivetrain();
-  private final Drivetrain loggedSubDrivetrain = subDrivetrain;
-  public static DriverStateMachine subDriverStateMachine = new DriverStateMachine(subDrivetrain);
+  public static Drivetrain drivetrainInstance = new Drivetrain();
+  private final Drivetrain loggedSubDrivetrain = drivetrainInstance;
+  public static DriverStateMachine subDriverStateMachine = new DriverStateMachine(drivetrainInstance);
   private final DriverStateMachine loggedSubDriverStateMachine = subDriverStateMachine;
-  public static StateMachine subStateMachine = new StateMachine(subDrivetrain);
+  public static StateMachine subStateMachine = new StateMachine(drivetrainInstance);
   private final StateMachine loggedSubStateMachine = subStateMachine;
-  public static RobotPoses robotPose = new RobotPoses(subDrivetrain);
+  public static RobotPoses robotPose = new RobotPoses(drivetrainInstance);
   private final RobotPoses loggedRobotPose = robotPose;
   public static Vision subVision = new Vision();
   private final Vision loggedSubVision = subVision;
@@ -83,6 +81,7 @@ public class RobotContainer {
           conDriver.axis_LeftY,
           conDriver.axis_LeftX,
           conDriver.axis_RightX,
+          conDriver.axis_RightY,
           conDriver.btn_LeftBumper),
       Set.of(subDriverStateMachine));
 
@@ -92,6 +91,7 @@ public class RobotContainer {
           conDriver.axis_LeftY,
           conDriver.axis_LeftX,
           conDriver.axis_RightX,
+          conDriver.axis_RightY,
           conDriver.btn_RightBumper),
       Set.of(subDriverStateMachine));
 
@@ -123,22 +123,14 @@ public class RobotContainer {
     conDriver.btn_Y.whileTrue(new PrepTrench());
     conDriver.btn_West.whileTrue(new PrepOpponentToAlliance());
     conDriver.btn_X.whileTrue(new PrepNonOutpost());
-    // conDriver.btn_B.onTrue(Commands.runOnce(() ->
-    // subDrivetrain.resetModulesToAbsolute()));
-    conDriver.btn_North
-        .onTrue(Commands.runOnce(() -> subDrivetrain.resetPose(new Pose2d(0, 0, new Rotation2d()))));
-
-    // Example Pose Drive
-    conDriver.btn_X
-        .whileTrue(EXAMPLE_POSE_DRIVE)
-        .onFalse(Commands.runOnce(() -> subDriverStateMachine.setDriverState(DriverState.MANUAL)));
+    conDriver.btn_North.onTrue(new ResetPose());
   }
 
   public void configAutonomous() {
     autoFactory = new AutoFactory(
-        subDrivetrain::getPose, // A function that returns the current robot pose
-        subDrivetrain::resetPose, // A function that resets the current robot pose to the provided Pose2d
-        subDrivetrain::followTrajectory, // The drive subsystem trajectory follower
+        drivetrainInstance::getPose, // A function that returns the current robot pose
+        drivetrainInstance::resetPose, // A function that resets the current robot pose to the provided Pose2d
+        drivetrainInstance::followTrajectory, // The drive subsystem trajectory follower
         true, // If alliance flipping should be enabled
         subDriverStateMachine // The drive subsystem
     );
@@ -190,7 +182,7 @@ public class RobotContainer {
   }
 
   public Command addVisionMeasurement() {
-    return new AddVisionMeasurement(subDrivetrain, subVision)
+    return new AddVisionMeasurement(drivetrainInstance, subVision)
         .withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming).ignoringDisable(true);
   }
 }
