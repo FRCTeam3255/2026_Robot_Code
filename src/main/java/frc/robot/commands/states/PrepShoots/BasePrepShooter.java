@@ -5,6 +5,7 @@
 package frc.robot.commands.states.PrepShoots;
 
 import edu.wpi.first.units.measure.Angle;
+import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
@@ -13,11 +14,11 @@ import frc.robot.constants.ConstRotors;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class BasePrepShooter extends Command {
   /** Creates a new BasePrepShooter. */
-  double globalFlyWheelSpeed;
+  AngularVelocity globalFlyWheelSpeed;
   Angle globalHoodAngle;
   Angle globalDrivetrainAngle;
 
-  public BasePrepShooter(double flyWheelSpeed, Angle hoodAngle, Angle drivetrainAngle) {
+  public BasePrepShooter(AngularVelocity flyWheelSpeed, Angle hoodAngle, Angle drivetrainAngle) {
     // Use addRequirements() here to declare subsystem dependencies.
     globalFlyWheelSpeed = flyWheelSpeed;
     globalHoodAngle = hoodAngle;
@@ -41,7 +42,7 @@ public class BasePrepShooter extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.rotorsInstance.setFlywheelSpeed(ConstRotors.STOP);
+    RobotContainer.rotorsInstance.setFlywheelPercentOutput(ConstRotors.STOP);
     RobotContainer.motionInstance.setHoodAngle(ConstMotion.HOOD_NONE_ANGLE);
   }
 
