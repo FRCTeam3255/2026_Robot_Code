@@ -51,7 +51,8 @@ public class ConstMotion {
 
   public class ShooterHoodTable {
 
-    private final InterpolatingTreeMap<Distance, Angle> hoodAngleMap = new InterpolatingTreeMap<Distance, Angle>();
+    private final InterpolatingTreeMap<Distance, Angle> hoodAngleMap = new InterpolatingTreeMap<Distance, Angle>(null,
+        null);
 
     public ShooterHoodTable() {
       hoodAngleMap.put(Inches.of(1.5), Degrees.of(28.0));
