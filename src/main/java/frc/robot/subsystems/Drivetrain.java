@@ -201,4 +201,11 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     manualRotationEnabled = set;
   }
 
+  public Pose2d getToTarget(Pose2d currentPose, Pose2d targetPose) {
+    return new Pose2d(
+        targetPose.getTranslation(),
+        new Rotation2d(
+            targetPose.getRotation().getCos(),
+            targetPose.getRotation().getSin()));
+  }
 }
