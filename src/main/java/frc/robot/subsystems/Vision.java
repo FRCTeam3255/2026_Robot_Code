@@ -6,9 +6,8 @@ package frc.robot.subsystems;
 
 import java.util.Optional;
 
-import com.frcteam3255.utils.LimelightHelpers;
-import com.frcteam3255.utils.LimelightHelpers.PoseEstimate;
-
+import frc.robot.LimelightHelpers;
+import frc.robot.LimelightHelpers.PoseEstimate;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -34,7 +33,7 @@ public class Vision extends SubsystemBase {
   Pose2d leftPose = new Pose2d();
   Pose2d backPose = new Pose2d();
 
-  private boolean useMegaTag2 = true;
+  private boolean useMegaTag2 = false;
 
   public Vision() {
   }
