@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicVelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.MotorAlignmentValue;
 
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.units.measure.AngularVelocity;
@@ -59,8 +60,8 @@ public class Rotors extends SubsystemBase {
   public void setFlywheelSpeed(AngularVelocity speed) {
     flywheelTopRight.setControl(flywheelVelocityRequest.withVelocity(speed));
     flywheelTopLeft.setControl(flywheelVelocityRequest.withVelocity(speed));
-    flywheelBottomRight.setControl(new Follower(flywheelTopRight.getDeviceID(), false));
-    flywheelBottomLeft.setControl(new Follower(flywheelTopLeft.getDeviceID(), false));
+    flywheelBottomRight.setControl(new Follower(flywheelTopRight.getDeviceID(), MotorAlignmentValue.Aligned));
+    flywheelBottomLeft.setControl(new Follower(flywheelTopLeft.getDeviceID(), MotorAlignmentValue.Aligned));
   }
 
   public void setFlywheelPercentOutput(double percent) {
