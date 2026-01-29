@@ -6,8 +6,9 @@ package frc.robot.commands;
 
 import java.util.Optional;
 
-import frc.robot.LimelightHelpers;
-import frc.robot.LimelightHelpers.PoseEstimate;
+import com.frcteam3255.utils.LimelightHelpers;
+import com.frcteam3255.utils.LimelightHelpers.PoseEstimate;
+
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.constants.ConstVision;
@@ -33,8 +34,6 @@ public class AddVisionMeasurement extends Command {
 
   @Override
   public void execute() {
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, 2);
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, 2);
     // Tells the limelight where we are on the field
     LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_RIGHT_NAME,
         subDrivetrain.getPose().getRotation().getDegrees(), 0, 0, 0, 0, 0);
