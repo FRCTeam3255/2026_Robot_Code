@@ -5,6 +5,8 @@
 package frc.robot.subsystems;
 
 import static edu.wpi.first.units.Units.Degrees;
+
+import java.lang.annotation.Target;
 import java.util.function.DoubleSupplier;
 
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
@@ -201,4 +203,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     manualRotationEnabled = set;
   }
 
+  public Angle getToTarget(Pose2d targetPose) {
+    return targetPose.relativeTo(getPose()).getRotation().getMeasure();
+  }
 }

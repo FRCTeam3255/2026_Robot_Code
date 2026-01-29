@@ -4,12 +4,16 @@
 
 package frc.robot.constants;
 
+import static edu.wpi.first.units.Units.Degrees;
 import static edu.wpi.first.units.Units.Inches;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
+import edu.wpi.first.math.interpolation.InterpolatingTreeMap;
+import edu.wpi.first.math.interpolation.Interpolator;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.Distance;
@@ -45,6 +49,24 @@ public class ConstMotion {
 
     HOOD_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     HOOD_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+  }
+
+  public class ShooterHoodTable {
+
+    public final static InterpolatingDoubleTreeMap hoodAngleMap = new InterpolatingDoubleTreeMap();
+
+    public ShooterHoodTable() {
+      hoodAngleMap.put(Inches.of(1.5).in(Inches), Degrees.of(28.0).in(Degrees));
+      hoodAngleMap.put(Inches.of(2.0).in(Inches), Degrees.of(31.0).in(Degrees));
+      hoodAngleMap.put(Inches.of(2.5).in(Inches), Degrees.of(35.0).in(Degrees));
+      hoodAngleMap.put(Inches.of(3.0).in(Inches), Degrees.of(39.0).in(Degrees));
+      hoodAngleMap.put(Inches.of(3.5).in(Inches), Degrees.of(43.0).in(Degrees));
+      hoodAngleMap.put(Inches.of(4.0).in(Inches), Degrees.of(47.0).in(Degrees));
+    }
+
+    public static Angle getHoodAngle(Distance distance) {
+      return Degrees.of(hoodAngleMap.get((Double) distance.in(Inches)));
+    }
   }
 
 }
