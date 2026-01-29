@@ -23,16 +23,18 @@ public class PrepAnywhere extends Command {
   @Override
   public void initialize() {
     RobotContainer.drivetrainInstance.setIsManualRotationEnabled(false);
+    System.out.println("enters prep anywhere");
   }
 
   @Override
   public void execute() {
-    Angle globalHoodAngle = ConstMotion.ShooterHoodTable
-        .getHoodAngle(Meters.of(ConstField.HUB_POSE.getTranslation().getNorm()));
+    // Angle globalHoodAngle = ConstMotion.ShooterHoodTable
+    // .getHoodAngle(Meters.of(ConstField.HUB_POSE.getTranslation().getNorm()));
     Angle globalDrivetrainRotation = RobotContainer.drivetrainInstance.getToTarget(ConstField.HUB_POSE);
 
+    System.out.print(globalDrivetrainRotation);
     RobotContainer.rotorsInstance.setFlywheelSpeed(ConstRotors.FLYWHEEL_ANYWHERE_SPEED);
-    RobotContainer.motionInstance.setHoodAngle(globalHoodAngle);
+    // RobotContainer.motionInstance.setHoodAngle(globalHoodAngle);
     RobotContainer.drivetrainInstance.setDriveRotation(globalDrivetrainRotation);
   }
 

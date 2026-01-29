@@ -65,7 +65,7 @@ public class ConstMotion {
     }
 
     public static Angle getHoodAngle(Distance distance) {
-      return Degrees.of(hoodAngleMap.get(distance.in(Inches)));
+      return Degrees.of(hoodAngleMap.get((Double) distance.in(Inches)));
     }
   }
 
