@@ -19,11 +19,9 @@
     {
       "name": "WPIlibUnitTests",
       "workingDirectory": "${workspaceFolder}/build/jni/release",
-      "vmargs": [
-        "-Djava.library.path=${workspaceFolder}/build/jni/release"
-      ],
+      "vmargs": [ "-Djava.library.path=${workspaceFolder}/build/jni/release" ],
       "env": {
-        "LD_LIBRARY_PATH": "${workspaceFolder}/build/jni/release",
+        "LD_LIBRARY_PATH": "${workspaceFolder}/build/jni/release" ,
         "DYLD_LIBRARY_PATH": "${workspaceFolder}/build/jni/release"
       }
     },
@@ -66,5 +64,7 @@
   ],
   "git.pullBeforeCheckout": true,
   "java.saveActions.organizeImports": true,
-  "workbench.iconTheme": "material-icon-theme"
+  "workbench.iconTheme": "material-icon-theme",
+    "java.dependency.enableDependencyCheckup": false
+
 }
