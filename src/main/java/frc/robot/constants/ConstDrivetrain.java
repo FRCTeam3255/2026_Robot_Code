@@ -22,6 +22,7 @@ import com.ctre.phoenix6.swerve.SwerveModuleConstants.ClosedLoopOutputType;
 import edu.wpi.first.math.controller.HolonomicDriveController;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
@@ -55,6 +56,7 @@ public class ConstDrivetrain {
     public static final Angle BACK_LEFT_ABS_ENCODER_OFFSET = Rotations.of(-0.459716796875);
     public static final Angle BACK_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(-0.31201171875);
   }
+
   // TODO: Swoffsets
   public static final Angle FRONT_LEFT_ABS_ENCODER_OFFSET = Rotations.of(-0.178466796875);
   public static final Angle FRONT_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(-0.498779296875);
@@ -248,6 +250,12 @@ public class ConstDrivetrain {
     // Simulated voltage necessary to overcome friction
     public static final Voltage kSteerFrictionVoltage = Volts.of(0.2);
     public static final Voltage kDriveFrictionVoltage = Volts.of(0.2);
+  }
+
+  public static class ROTATION_PID {
+    public static final double kP = 3.0;
+    public static final double kI = 0.0;
+    public static final double kD = 0.3;
   }
 
 }

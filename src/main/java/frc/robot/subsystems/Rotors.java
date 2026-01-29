@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicVelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.MotorAlignmentValue;
 
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.units.measure.AngularVelocity;
@@ -21,8 +22,10 @@ public class Rotors extends SubsystemBase {
   final TalonFX intakeRoller = new TalonFX(rotorIDs.INTAKE_ROLLERS_CAN);
   final TalonFX serializerVFunnel = new TalonFX(rotorIDs.SERIALIZER_V_FUNNEL_CAN);
   final TalonFX shooterTransfer = new TalonFX(rotorIDs.SHOOTER_TRANSFER_CAN);
-  final TalonFX flywheelLeft = new TalonFX(rotorIDs.FLYWHEEL_LEFT_CAN);
-  final TalonFX flywheelRight = new TalonFX(rotorIDs.FLYWHEEL_RIGHT_CAN);
+  final TalonFX flywheelTopLeft = new TalonFX(rotorIDs.FLYWHEEL_TOP_LEFT_CAN);
+  final TalonFX flywheelTopRight = new TalonFX(rotorIDs.FLYWHEEL_TOP_RIGHT_CAN);
+  final TalonFX flywheelBottomLeft = new TalonFX(rotorIDs.FLYWHEEL_BOTTOM_LEFT_CAN);
+  final TalonFX flywheelBottomRight = new TalonFX(rotorIDs.FLYWHEEL_BOTTOM_RIGHT_CAN);
 
   /** Creates a new Rotors. */
   public Rotors() {
@@ -30,8 +33,10 @@ public class Rotors extends SubsystemBase {
     intakeRoller.getConfigurator().apply(ConstRotors.INTAKE_ROLLER_CONFIGURATION);
     serializerVFunnel.getConfigurator().apply(ConstRotors.SERIALIZER_V_FUNNEL_CONFIGURATION);
     shooterTransfer.getConfigurator().apply(ConstRotors.SHOOTER_TRANSFER_CONFIGURATION);
-    flywheelLeft.getConfigurator().apply(ConstRotors.FLYWHEEL_LEFT_CONFIGURATION);
-    flywheelRight.getConfigurator().apply(ConstRotors.FLYWHEEL_RIGHT_CONFIGURATION);
+    flywheelTopLeft.getConfigurator().apply(ConstRotors.FLYWHEEL_LEFT_CONFIGURATION);
+    flywheelBottomLeft.getConfigurator().apply(ConstRotors.FLYWHEEL_LEFT_CONFIGURATION);
+    flywheelTopRight.getConfigurator().apply(ConstRotors.FLYWHEEL_RIGHT_CONFIGURATION);
+    flywheelBottomRight.getConfigurator().apply(ConstRotors.FLYWHEEL_RIGHT_CONFIGURATION);
   }
 
   final MotionMagicVelocityVoltage flywheelVelocityRequest = new MotionMagicVelocityVoltage(0);
@@ -52,9 +57,18 @@ public class Rotors extends SubsystemBase {
     serializerVFunnel.set(speed);
   }
 
-  public void setFlywheelSpeed(double speed) {
-    flywheelRight.set(speed);
-    flywheelLeft.setControl(new Follower(flywheelRight.getDeviceID(), true));
+  public void setFlywheelSpeed(AngularVelocity speed) {
+    flywheelTopRight.setControl(flywheelVelocityRequest.withVelocity(speed));
+    flywheelTopLeft.setControl(flywheelVelocityRequest.withVelocity(speed));
+    flywheelBottomRight.setControl(new Follower(flywheelTopRight.getDeviceID(), MotorAlignmentValue.Aligned));
+    flywheelBottomLeft.setControl(new Follower(flywheelTopLeft.getDeviceID(), MotorAlignmentValue.Aligned));
+  }
+
+  public void setFlywheelPercentOutput(double percent) {
+    flywheelTopRight.set(percent);
+    flywheelTopLeft.set(percent);
+    flywheelBottomRight.set(percent);
+    flywheelBottomLeft.set(percent);
   }
 
   @Override

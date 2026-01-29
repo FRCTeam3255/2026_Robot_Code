@@ -4,12 +4,15 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.controls.MotionMagicExpoVoltage;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
+import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
+import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DeviceIDs;
 import frc.robot.constants.ConstMotion;
@@ -21,9 +24,9 @@ public class Motion extends SubsystemBase {
   final TalonFX climber = new TalonFX(DeviceIDs.motionIDs.CLIMBER_CAN);
   final TalonFX hood = new TalonFX(DeviceIDs.motionIDs.HOOD_CAN);
 
-  MotionMagicVoltage climberMotionRequest = new MotionMagicVoltage(0);
-  MotionMagicVoltage hoodMotionRequest = new MotionMagicVoltage(0);
-  MotionMagicVoltage intakePivotMotionRequest = new MotionMagicVoltage(0);
+  MotionMagicExpoVoltage climberMotionRequest = new MotionMagicExpoVoltage(0);
+  MotionMagicExpoVoltage hoodMotionRequest = new MotionMagicExpoVoltage(0);
+  MotionMagicExpoVoltage intakePivotMotionRequest = new MotionMagicExpoVoltage(0);
 
   public Motion() {
     intakePivot.getConfigurator().apply(ConstMotion.INTAKE_PIVOT_CONFIGURATION);
@@ -37,16 +40,17 @@ public class Motion extends SubsystemBase {
 
   }
 
-  public void setIntakePivotSpeed(double speed) {
-    intakePivot.set(speed);
-  }
-
-  public void setClimbSpeed(double speed) {
-    climber.set(speed);
+  public void setIntakePivotAngle(Angle setPoint) {
+    intakePivot.setControl(intakePivotMotionRequest.withPosition(setPoint));
   }
 
   public void setHoodAngle(Angle setPoint) {
     hood.setControl(hoodMotionRequest.withPosition(setPoint));
 
   }
+
+  public void setClimberPosition(Distance setpoint) {
+    climber.setControl(climberMotionRequest.withPosition(setpoint.in(Units.Inches)));
+  }
+
 }

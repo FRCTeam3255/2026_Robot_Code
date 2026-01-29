@@ -21,12 +21,13 @@ public class Shooting extends Command {
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.SERIALIZER_ROLLERS_SPEED);
     RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(ConstRotors.SERIALIZER_V_FUNNEL_SPEED);
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.SHOOTER_TRANSFER_SPEED);
-
+    RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.INTAKE_ROLLER_SPEED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    RobotContainer.drivetrainInstance.xBrake();
   }
 
   // Called once the command ends or is interrupted.
@@ -35,6 +36,8 @@ public class Shooting extends Command {
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.STOP);
     RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(ConstRotors.STOP);
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.STOP);
+    RobotContainer.drivetrainInstance.setIsManualRotationEnabled(true);
+    RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.STOP);
   }
 
   // Returns true when the command should end.
