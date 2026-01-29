@@ -60,23 +60,23 @@ public class Drivetrain extends SN_SuperSwerveV2 {
       .withDriveFrictionVoltage(ConstDrivetrain.SIMULATION.kDriveFrictionVoltage);
   public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> FrontLeft = constantCreator
       .createModuleConstants(
-          DeviceIDs.drivetrainIDs.FRONT_LEFT_STEER_CAN,
-          DeviceIDs.drivetrainIDs.FRONT_LEFT_DRIVE_CAN,
-          DeviceIDs.drivetrainIDs.FRONT_LEFT_ABSOLUTE_ENCODER_CAN,
-          (RobotContainer.isPracticeBot()) ? ConstDrivetrain.PRACTICE_BOT.FRONT_LEFT_ABS_ENCODER_OFFSET
-              : ConstDrivetrain.FRONT_LEFT_ABS_ENCODER_OFFSET,
+          DeviceIDs.drivetrainIDs.FRONT_WEST_STEER_CAN,
+          DeviceIDs.drivetrainIDs.FRONT_WEST_DRIVE_CAN,
+          DeviceIDs.drivetrainIDs.FRONT_WEST_ABSOLUTE_ENCODER_CAN,
+          (RobotContainer.isPracticeBot()) ? ConstDrivetrain.PRACTICE_BOT.FRONT_WEST_ABS_ENCODER_OFFSET
+              : ConstDrivetrain.FRONT_WEST_ABS_ENCODER_OFFSET,
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS,
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS,
-          ConstDrivetrain.INVERT_LEFT_SIDE_DRIVE,
+          ConstDrivetrain.INVERT_WEST_SIDE_DRIVE,
           ConstDrivetrain.INVERT_STEER,
           ConstDrivetrain.INVERT_STEER_ENCODER);
   public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> FrontRight = constantCreator
       .createModuleConstants(
-          DeviceIDs.drivetrainIDs.FRONT_RIGHT_STEER_CAN,
-          DeviceIDs.drivetrainIDs.FRONT_RIGHT_DRIVE_CAN,
-          DeviceIDs.drivetrainIDs.FRONT_RIGHT_ABSOLUTE_ENCODER_CAN,
-          (RobotContainer.isPracticeBot()) ? ConstDrivetrain.PRACTICE_BOT.FRONT_RIGHT_ABS_ENCODER_OFFSET
-              : ConstDrivetrain.FRONT_RIGHT_ABS_ENCODER_OFFSET,
+          DeviceIDs.drivetrainIDs.FRONT_EAST_STEER_CAN,
+          DeviceIDs.drivetrainIDs.FRONT_EAST_DRIVE_CAN,
+          DeviceIDs.drivetrainIDs.FRONT_EAST_ABSOLUTE_ENCODER_CAN,
+          (RobotContainer.isPracticeBot()) ? ConstDrivetrain.PRACTICE_BOT.FRONT_EAST_ABS_ENCODER_OFFSET
+              : ConstDrivetrain.FRONT_EAST_ABS_ENCODER_OFFSET,
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS,
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS.unaryMinus(),
           ConstDrivetrain.INVERT_RIGHT_SIDE_DRIVE,
@@ -84,23 +84,23 @@ public class Drivetrain extends SN_SuperSwerveV2 {
           ConstDrivetrain.INVERT_STEER_ENCODER);
   public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> BackLeft = constantCreator
       .createModuleConstants(
-          DeviceIDs.drivetrainIDs.BACK_LEFT_STEER_CAN,
-          DeviceIDs.drivetrainIDs.BACK_LEFT_DRIVE_CAN,
-          DeviceIDs.drivetrainIDs.BACK_LEFT_ABSOLUTE_ENCODER_CAN,
-          (RobotContainer.isPracticeBot()) ? ConstDrivetrain.PRACTICE_BOT.BACK_LEFT_ABS_ENCODER_OFFSET
-              : ConstDrivetrain.BACK_LEFT_ABS_ENCODER_OFFSET,
+          DeviceIDs.drivetrainIDs.BACK_WEST_STEER_CAN,
+          DeviceIDs.drivetrainIDs.BACK_WEST_DRIVE_CAN,
+          DeviceIDs.drivetrainIDs.BACK_WEST_ABSOLUTE_ENCODER_CAN,
+          (RobotContainer.isPracticeBot()) ? ConstDrivetrain.PRACTICE_BOT.BACK_WEST_ABS_ENCODER_OFFSET
+              : ConstDrivetrain.BACK_WEST_ABS_ENCODER_OFFSET,
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS.unaryMinus(),
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS,
-          ConstDrivetrain.INVERT_LEFT_SIDE_DRIVE,
+          ConstDrivetrain.INVERT_WEST_SIDE_DRIVE,
           ConstDrivetrain.INVERT_STEER,
           ConstDrivetrain.INVERT_STEER_ENCODER);
   public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> BackRight = constantCreator
       .createModuleConstants(
-          DeviceIDs.drivetrainIDs.BACK_RIGHT_STEER_CAN,
-          DeviceIDs.drivetrainIDs.BACK_RIGHT_DRIVE_CAN,
-          DeviceIDs.drivetrainIDs.BACK_RIGHT_ABSOLUTE_ENCODER_CAN,
-          (RobotContainer.isPracticeBot()) ? ConstDrivetrain.PRACTICE_BOT.BACK_RIGHT_ABS_ENCODER_OFFSET
-              : ConstDrivetrain.BACK_RIGHT_ABS_ENCODER_OFFSET,
+          DeviceIDs.drivetrainIDs.BACK_EAST_STEER_CAN,
+          DeviceIDs.drivetrainIDs.BACK_EAST_DRIVE_CAN,
+          DeviceIDs.drivetrainIDs.BACK_EAST_ABSOLUTE_ENCODER_CAN,
+          (RobotContainer.isPracticeBot()) ? ConstDrivetrain.PRACTICE_BOT.BACK_EAST_ABS_ENCODER_OFFSET
+              : ConstDrivetrain.BACK_EAST_ABS_ENCODER_OFFSET,
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS.unaryMinus(),
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS.unaryMinus(),
           ConstDrivetrain.INVERT_RIGHT_SIDE_DRIVE,

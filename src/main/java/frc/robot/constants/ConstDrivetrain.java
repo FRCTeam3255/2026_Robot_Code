@@ -51,17 +51,17 @@ import edu.wpi.first.units.measure.Voltage;
 public class ConstDrivetrain {
   public static class PRACTICE_BOT {
     // TODO: Swoffsets
-    public static final Angle FRONT_LEFT_ABS_ENCODER_OFFSET = Rotations.of(-0.178466796875);
-    public static final Angle FRONT_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(-0.498779296875);
-    public static final Angle BACK_LEFT_ABS_ENCODER_OFFSET = Rotations.of(-0.459716796875);
-    public static final Angle BACK_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(-0.31201171875);
+    public static final Angle FRONT_WEST_ABS_ENCODER_OFFSET = Rotations.of(-0.178466796875);
+    public static final Angle FRONT_EAST_ABS_ENCODER_OFFSET = Rotations.of(-0.498779296875);
+    public static final Angle BACK_WEST_ABS_ENCODER_OFFSET = Rotations.of(-0.459716796875);
+    public static final Angle BACK_EAST_ABS_ENCODER_OFFSET = Rotations.of(-0.31201171875);
   }
 
   // TODO: Swoffsets
-  public static final Angle FRONT_LEFT_ABS_ENCODER_OFFSET = Rotations.of(-0.178466796875);
-  public static final Angle FRONT_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(-0.498779296875);
-  public static final Angle BACK_LEFT_ABS_ENCODER_OFFSET = Rotations.of(-0.459716796875);
-  public static final Angle BACK_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(-0.31201171875);
+  public static final Angle FRONT_WEST_ABS_ENCODER_OFFSET = Rotations.of(-0.178466796875);
+  public static final Angle FRONT_EAST_ABS_ENCODER_OFFSET = Rotations.of(-0.498779296875);
+  public static final Angle BACK_WEST_ABS_ENCODER_OFFSET = Rotations.of(-0.459716796875);
+  public static final Angle BACK_EAST_ABS_ENCODER_OFFSET = Rotations.of(-0.31201171875);
 
   // ====== TO MOVE TO SUPERCODE - START ======
   public static class ModuleLocations {
@@ -150,7 +150,7 @@ public class ConstDrivetrain {
   public static final double MEASUREMENT_STD_DEV_HEADING = Units.Radians.convertFrom(5, Units.Degrees);
 
   // Inverts
-  public static final boolean INVERT_LEFT_SIDE_DRIVE = false;
+  public static final boolean INVERT_WEST_SIDE_DRIVE = false;
   public static final boolean INVERT_RIGHT_SIDE_DRIVE = true;
   public static final boolean INVERT_STEER = true;
   public static final boolean INVERT_STEER_ENCODER = false;
