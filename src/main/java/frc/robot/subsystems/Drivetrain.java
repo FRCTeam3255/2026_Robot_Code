@@ -189,10 +189,6 @@ public class Drivetrain extends SN_SuperSwerveV2 {
 
   }
 
-  public void setXBrake() {
-    xBrake();
-  }
-
   public void setDriveRotation(Angle rotation) {
     this.driveRotation = Rotation2d.fromDegrees(rotation.in(Degrees));
   }
