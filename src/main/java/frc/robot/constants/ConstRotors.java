@@ -19,8 +19,8 @@ public class ConstRotors {
   public static final TalonFXConfiguration INTAKE_ROLLER_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration SERIALIZER_V_FUNNEL_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration SHOOTER_TRANSFER_CONFIGURATION = new TalonFXConfiguration();
-  public static final TalonFXConfiguration FLYWHEEL_LEFT_CONFIGURATION = new TalonFXConfiguration();
-  public static final TalonFXConfiguration FLYWHEEL_RIGHT_CONFIGURATION = new TalonFXConfiguration();
+  public static final TalonFXConfiguration FLYWHEEL_WEST_CONFIGURATION = new TalonFXConfiguration();
+  public static final TalonFXConfiguration FLYWHEEL_EAST_CONFIGURATION = new TalonFXConfiguration();
   public static final double INTAKE_ROLLER_SPEED = 1;
   public static final double SERIALIZER_V_FUNNEL_SPEED = 0;
   public static final double SERIALIZER_ROLLERS_SPEED = 1;
@@ -62,24 +62,24 @@ public class ConstRotors {
     SHOOTER_TRANSFER_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     SHOOTER_TRANSFER_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
 
-    FLYWHEEL_LEFT_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
-    FLYWHEEL_LEFT_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
-    FLYWHEEL_LEFT_CONFIGURATION.Slot0.kS = 0.14;
-    FLYWHEEL_LEFT_CONFIGURATION.Slot0.kV = 0.11167;
-    FLYWHEEL_LEFT_CONFIGURATION.Slot0.kA = 0;
-    FLYWHEEL_LEFT_CONFIGURATION.Slot0.kP = 0.5;
-    FLYWHEEL_LEFT_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity = 60;
-    FLYWHEEL_LEFT_CONFIGURATION.MotionMagic.MotionMagicAcceleration = 600;
-    FLYWHEEL_LEFT_CONFIGURATION.MotionMagic.MotionMagicJerk = 6000;
+    FLYWHEEL_WEST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+    FLYWHEEL_WEST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+    FLYWHEEL_WEST_CONFIGURATION.Slot0.kS = 0.14;
+    FLYWHEEL_WEST_CONFIGURATION.Slot0.kV = 0.11167;
+    FLYWHEEL_WEST_CONFIGURATION.Slot0.kA = 0;
+    FLYWHEEL_WEST_CONFIGURATION.Slot0.kP = 0.5;
+    FLYWHEEL_WEST_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity = 60;
+    FLYWHEEL_WEST_CONFIGURATION.MotionMagic.MotionMagicAcceleration = 600;
+    FLYWHEEL_WEST_CONFIGURATION.MotionMagic.MotionMagicJerk = 6000;
 
-    FLYWHEEL_RIGHT_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
-    FLYWHEEL_RIGHT_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
-    FLYWHEEL_RIGHT_CONFIGURATION.Slot0.kS = 0.14;
-    FLYWHEEL_RIGHT_CONFIGURATION.Slot0.kV = 0.11167;
-    FLYWHEEL_RIGHT_CONFIGURATION.Slot0.kA = 0;
-    FLYWHEEL_RIGHT_CONFIGURATION.Slot0.kP = 0.5;
-    FLYWHEEL_RIGHT_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity = 60;
-    FLYWHEEL_RIGHT_CONFIGURATION.MotionMagic.MotionMagicAcceleration = 600;
-    FLYWHEEL_RIGHT_CONFIGURATION.MotionMagic.MotionMagicJerk = 6000;
+    FLYWHEEL_EAST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+    FLYWHEEL_EAST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+    FLYWHEEL_EAST_CONFIGURATION.Slot0.kS = 0.14;
+    FLYWHEEL_EAST_CONFIGURATION.Slot0.kV = 0.11167;
+    FLYWHEEL_EAST_CONFIGURATION.Slot0.kA = 0;
+    FLYWHEEL_EAST_CONFIGURATION.Slot0.kP = 0.5;
+    FLYWHEEL_EAST_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity = 60;
+    FLYWHEEL_EAST_CONFIGURATION.MotionMagic.MotionMagicAcceleration = 600;
+    FLYWHEEL_EAST_CONFIGURATION.MotionMagic.MotionMagicJerk = 6000;
   }
 }
