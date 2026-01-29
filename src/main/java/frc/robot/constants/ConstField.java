@@ -131,5 +131,6 @@ public class ConstField {
   }
 
   public static final Pose2d TOWER_POSE = new Pose2d(1.02, 4.02, new Rotation2d(0));
+  public static final Pose2d HUB_POSE = new Pose2d(1.02, 4.02, new Rotation2d(0));
   public static final Pose2d WORKSHOP_STARTING_POSE = new Pose2d(5.98, 2.60, new Rotation2d(0));
 }

@@ -11,7 +11,9 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
 import edu.wpi.first.math.interpolation.InterpolatingTreeMap;
+import edu.wpi.first.math.interpolation.Interpolator;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.Distance;
@@ -51,20 +53,19 @@ public class ConstMotion {
 
   public class ShooterHoodTable {
 
-    private final InterpolatingTreeMap<Distance, Angle> hoodAngleMap = new InterpolatingTreeMap<Distance, Angle>(null,
-        null);
+    public final static InterpolatingDoubleTreeMap hoodAngleMap = new InterpolatingDoubleTreeMap();
 
     public ShooterHoodTable() {
-      hoodAngleMap.put(Inches.of(1.5), Degrees.of(28.0));
-      hoodAngleMap.put(Inches.of(2.0), Degrees.of(31.0));
-      hoodAngleMap.put(Inches.of(2.5), Degrees.of(35.0));
-      hoodAngleMap.put(Inches.of(3.0), Degrees.of(39.0));
-      hoodAngleMap.put(Inches.of(3.5), Degrees.of(43.0));
-      hoodAngleMap.put(Inches.of(4.0), Degrees.of(47.0));
+      hoodAngleMap.put(Inches.of(1.5).in(Inches), Degrees.of(28.0).in(Degrees));
+      hoodAngleMap.put(Inches.of(2.0).in(Inches), Degrees.of(31.0).in(Degrees));
+      hoodAngleMap.put(Inches.of(2.5).in(Inches), Degrees.of(35.0).in(Degrees));
+      hoodAngleMap.put(Inches.of(3.0).in(Inches), Degrees.of(39.0).in(Degrees));
+      hoodAngleMap.put(Inches.of(3.5).in(Inches), Degrees.of(43.0).in(Degrees));
+      hoodAngleMap.put(Inches.of(4.0).in(Inches), Degrees.of(47.0).in(Degrees));
     }
 
-    public Angle getHoodAngle(Distance distance) {
-      return hoodAngleMap.get(distance);
+    public static Angle getHoodAngle(Distance distance) {
+      return Degrees.of(hoodAngleMap.get(distance.in(Inches)));
     }
   }
 
