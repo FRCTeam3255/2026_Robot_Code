@@ -33,7 +33,7 @@ public class Vision extends SubsystemBase {
   Pose2d leftPose = new Pose2d();
   Pose2d backPose = new Pose2d();
 
-  private boolean useMegaTag2 = true;
+  private boolean useMegaTag2 = false;
 
   public Vision() {
   }
