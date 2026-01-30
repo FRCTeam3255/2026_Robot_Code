@@ -4,6 +4,7 @@
 
 package frc.robot.commands.states.PrepShoots;
 
+import static edu.wpi.first.units.Units.Degrees;
 import static edu.wpi.first.units.Units.Meters;
 
 import edu.wpi.first.units.measure.Angle;
@@ -28,13 +29,12 @@ public class PrepAnywhere extends Command {
 
   @Override
   public void execute() {
-    // Angle globalHoodAngle = ConstMotion.ShooterHoodTable
-    // .getHoodAngle(Meters.of(ConstField.HUB_POSE.getTranslation().getNorm()));
+    Angle globalHoodAngle = RobotContainer.drivetrainInstance.getGlobalHoodAngle();
     Angle globalDrivetrainRotation = RobotContainer.drivetrainInstance.getToTarget(ConstField.HUB_POSE);
 
     System.out.print(globalDrivetrainRotation);
     RobotContainer.rotorsInstance.setFlywheelSpeed(ConstRotors.FLYWHEEL_ANYWHERE_SPEED);
-    // RobotContainer.motionInstance.setHoodAngle(globalHoodAngle);
+    RobotContainer.motionInstance.setHoodAngle(globalHoodAngle);
     RobotContainer.drivetrainInstance.setDriveRotation(globalDrivetrainRotation);
   }
 

@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import static edu.wpi.first.units.Units.Degrees;
+import static edu.wpi.first.units.Units.Meters;
 
 import java.lang.annotation.Target;
 import java.util.function.DoubleSupplier;
@@ -28,6 +29,8 @@ import edu.wpi.first.units.measure.Angle;
 import frc.robot.DeviceIDs;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstDrivetrain;
+import frc.robot.constants.ConstField;
+import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstPoseDrive.PoseDriveGroup;
 
 public class Drivetrain extends SN_SuperSwerveV2 {
@@ -204,6 +207,14 @@ public class Drivetrain extends SN_SuperSwerveV2 {
   }
 
   public Angle getToTarget(Pose2d targetPose) {
-    return targetPose.relativeTo(getPose()).getRotation().getMeasure();
+    double dx = targetPose.getX() - getPose().getX();
+    double dy = targetPose.getY() - getPose().getY();
+    double angleRad = Math.atan2(dy, dx);
+    return Degrees.of(Math.toDegrees(angleRad));
+  }
+
+  public Angle getGlobalHoodAngle() {
+    return ConstMotion.ShooterHoodTable
+        .getHoodAngle(Meters.of(getPose().getTranslation().getDistance(ConstField.HUB_POSE.getTranslation())));
   }
 }
