@@ -4,12 +4,14 @@
 
 package frc.robot.commands.states.PrepShoots;
 
+import com.ctre.phoenix6.swerve.utility.LinearPath.State;
+
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.AngularVelocity;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
-import frc.robot.constants.ConstMotion;
-import frc.robot.constants.ConstRotors;
+import frc.robot.subsystems.StateMachine.RobotState;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class BasePrepShooter extends Command {
@@ -17,12 +19,15 @@ public class BasePrepShooter extends Command {
   AngularVelocity globalFlyWheelSpeed;
   Angle globalHoodAngle;
   Angle globalDrivetrainAngle;
+  RobotState globalRobotState;
 
-  public BasePrepShooter(AngularVelocity flyWheelSpeed, Angle hoodAngle, Angle drivetrainAngle) {
+  public BasePrepShooter(AngularVelocity flyWheelSpeed, Angle hoodAngle, Angle drivetrainAngle, RobotState robotState) {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.subStateMachine);
     globalFlyWheelSpeed = flyWheelSpeed;
     globalHoodAngle = hoodAngle;
     globalDrivetrainAngle = drivetrainAngle;
+    globalRobotState = robotState;
   }
 
   // Called when the command is initially scheduled.
@@ -32,6 +37,7 @@ public class BasePrepShooter extends Command {
     RobotContainer.motionInstance.setHoodAngle(globalHoodAngle);
     RobotContainer.drivetrainInstance.setDriveRotation(globalDrivetrainAngle);
     RobotContainer.drivetrainInstance.setIsManualRotationEnabled(false);
+    RobotContainer.subStateMachine.setRobotState(globalRobotState);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,13 +48,12 @@ public class BasePrepShooter extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.rotorsInstance.setFlywheelPercentOutput(ConstRotors.STOP);
-    RobotContainer.motionInstance.setHoodAngle(ConstMotion.HOOD_NONE_ANGLE);
+
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
