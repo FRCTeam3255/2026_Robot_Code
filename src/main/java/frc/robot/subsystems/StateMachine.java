@@ -69,7 +69,7 @@ public class StateMachine extends SubsystemBase {
           case PREP_TRENCH:
           case PREP_OUTPOST:
           case PREP_NON_OUTPOST:
-          case PREP_NEAUTRAL_TO_ALLIANCE:
+          case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
             return new PrepAnywhere();
         }
@@ -83,7 +83,7 @@ public class StateMachine extends SubsystemBase {
           case PREP_TRENCH:
           case PREP_OUTPOST:
           case PREP_NON_OUTPOST:
-          case PREP_NEAUTRAL_TO_ALLIANCE:
+          case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
             return new PrepDepot();
         }
@@ -97,7 +97,7 @@ public class StateMachine extends SubsystemBase {
           case PREP_TRENCH:
           case PREP_OUTPOST:
           case PREP_NON_OUTPOST:
-          case PREP_NEAUTRAL_TO_ALLIANCE:
+          case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
             return new PrepTrench();
         }
@@ -111,7 +111,7 @@ public class StateMachine extends SubsystemBase {
           case PREP_TRENCH:
           case PREP_OUTPOST:
           case PREP_NON_OUTPOST:
-          case PREP_NEAUTRAL_TO_ALLIANCE:
+          case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
             return new PrepOutpost();
         }
@@ -125,13 +125,13 @@ public class StateMachine extends SubsystemBase {
           case PREP_TRENCH:
           case PREP_OUTPOST:
           case PREP_NON_OUTPOST:
-          case PREP_NEAUTRAL_TO_ALLIANCE:
+          case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
             return new PrepNonOutpost();
         }
         break;
 
-      case PREP_NEAUTRAL_TO_ALLIANCE:
+      case PREP_NEUTRAL_TO_ALLIANCE:
         switch (currentRobotState) {
           case NONE:
           case PREP_DEPOT:
@@ -139,7 +139,7 @@ public class StateMachine extends SubsystemBase {
           case PREP_TRENCH:
           case PREP_OUTPOST:
           case PREP_NON_OUTPOST:
-          case PREP_NEAUTRAL_TO_ALLIANCE:
+          case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
             return new PrepNeutralToAlliance();
         }
@@ -153,7 +153,7 @@ public class StateMachine extends SubsystemBase {
           case PREP_TRENCH:
           case PREP_OUTPOST:
           case PREP_NON_OUTPOST:
-          case PREP_NEAUTRAL_TO_ALLIANCE:
+          case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
             return new PrepOpponentToAlliance();
         }
@@ -166,7 +166,7 @@ public class StateMachine extends SubsystemBase {
           case PREP_TRENCH:
           case PREP_OUTPOST:
           case PREP_NON_OUTPOST:
-          case PREP_NEAUTRAL_TO_ALLIANCE:
+          case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
             return new Shooting();
         }
@@ -180,8 +180,9 @@ public class StateMachine extends SubsystemBase {
           case PREP_TRENCH:
           case PREP_OUTPOST:
           case PREP_NON_OUTPOST:
-          case PREP_NEAUTRAL_TO_ALLIANCE:
+          case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
+            return new EjectingHopper();
         }
         break;
 
@@ -193,8 +194,9 @@ public class StateMachine extends SubsystemBase {
           case PREP_TRENCH:
           case PREP_OUTPOST:
           case PREP_NON_OUTPOST:
-          case PREP_NEAUTRAL_TO_ALLIANCE:
+          case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
+            return new ReverseShooter();
         }
         break;
 
@@ -242,7 +244,7 @@ public class StateMachine extends SubsystemBase {
     PREP_TRENCH,
     PREP_ANYWHERE,
     PREP_NON_OUTPOST,
-    PREP_NEAUTRAL_TO_ALLIANCE,
+    PREP_NEUTRAL_TO_ALLIANCE,
     PREP_OPPONENT_TO_ALLIANCE,
     SHOOTING,
     EJECTING_HOPPER,
