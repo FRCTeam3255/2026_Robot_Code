@@ -4,9 +4,11 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
+import frc.robot.subsystems.Motion;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ClimbingL2_3 extends Command {
@@ -35,6 +37,6 @@ public class ClimbingL2_3 extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return RobotContainer.motionInstance.isAtPosition(ConstMotion.EXTEND_CLIMBER, ConstMotion.TOLARANCE);
   }
 }
