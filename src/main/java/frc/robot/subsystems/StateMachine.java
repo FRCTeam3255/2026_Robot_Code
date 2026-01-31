@@ -57,7 +57,7 @@ public class StateMachine extends SubsystemBase {
         switch (currentRobotState) {
           case NONE:
           case PREP_CLIMB_L1:
-            return new None(subStateMachine);
+            return new Intaking();
         }
         break;
 
