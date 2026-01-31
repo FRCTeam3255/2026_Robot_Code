@@ -58,7 +58,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
       .withDriveInertia(ConstDrivetrain.SIMULATION.kDriveInertia)
       .withSteerFrictionVoltage(ConstDrivetrain.SIMULATION.kSteerFrictionVoltage)
       .withDriveFrictionVoltage(ConstDrivetrain.SIMULATION.kDriveFrictionVoltage);
-  public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> FrontLeft = constantCreator
+  public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> FrontWest = constantCreator
       .createModuleConstants(
           DeviceIDs.drivetrainIDs.FRONT_WEST_STEER_CAN,
           DeviceIDs.drivetrainIDs.FRONT_WEST_DRIVE_CAN,
@@ -70,7 +70,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
           ConstDrivetrain.INVERT_WEST_SIDE_DRIVE,
           ConstDrivetrain.INVERT_STEER,
           ConstDrivetrain.INVERT_STEER_ENCODER);
-  public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> FrontRight = constantCreator
+  public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> FrontEast = constantCreator
       .createModuleConstants(
           DeviceIDs.drivetrainIDs.FRONT_EAST_STEER_CAN,
           DeviceIDs.drivetrainIDs.FRONT_EAST_DRIVE_CAN,
@@ -82,7 +82,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
           ConstDrivetrain.INVERT_EAST_SIDE_DRIVE,
           ConstDrivetrain.INVERT_STEER,
           ConstDrivetrain.INVERT_STEER_ENCODER);
-  public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> BackLeft = constantCreator
+  public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> BackWest = constantCreator
       .createModuleConstants(
           DeviceIDs.drivetrainIDs.BACK_WEST_STEER_CAN,
           DeviceIDs.drivetrainIDs.BACK_WEST_DRIVE_CAN,
@@ -94,7 +94,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
           ConstDrivetrain.INVERT_WEST_SIDE_DRIVE,
           ConstDrivetrain.INVERT_STEER,
           ConstDrivetrain.INVERT_STEER_ENCODER);
-  public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> BackRight = constantCreator
+  public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> BackEast = constantCreator
       .createModuleConstants(
           DeviceIDs.drivetrainIDs.BACK_EAST_STEER_CAN,
           DeviceIDs.drivetrainIDs.BACK_EAST_DRIVE_CAN,
@@ -114,10 +114,10 @@ public class Drivetrain extends SN_SuperSwerveV2 {
   public Drivetrain() {
     super(
         DrivetrainConstants,
-        FrontLeft,
-        FrontRight,
-        BackLeft,
-        BackRight);
+        FrontWest,
+        FrontEast,
+        BackWest,
+        BackEast);
   }
 
   /**
