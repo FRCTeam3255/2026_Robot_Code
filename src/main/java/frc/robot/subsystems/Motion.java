@@ -4,6 +4,10 @@
 
 package frc.robot.subsystems;
 
+import static edu.wpi.first.units.Units.Degrees;
+import static edu.wpi.first.units.Units.Inches;
+import static edu.wpi.first.units.Units.Meters;
+
 import com.ctre.phoenix6.controls.MotionMagicExpoVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
@@ -13,6 +17,8 @@ import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DeviceIDs;
+import frc.robot.RobotContainer;
+import frc.robot.constants.ConstField;
 import frc.robot.constants.ConstMotion;
 
 @Logged
@@ -51,4 +57,14 @@ public class Motion extends SubsystemBase {
     climber.setControl(climberMotionRequest.withPosition(setpoint.in(Units.Inches)));
   }
 
+  public static Angle getHoodAngle(Distance distance) {
+    return Degrees.of(ConstMotion.hoodAngleMap.get(distance.in(Inches)));
+  }
+
+  public Angle getGlobalHoodAngle() {
+    Angle angle = getHoodAngle(Meters.of(RobotContainer.drivetrainInstance.getPose().getTranslation()
+        .getDistance(ConstField.HUB_POSE.getTranslation())));
+
+    return angle;
+  }
 }

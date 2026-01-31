@@ -29,7 +29,7 @@ public class PrepAnywhere extends Command {
 
   @Override
   public void execute() {
-    Angle globalHoodAngle = RobotContainer.drivetrainInstance.getGlobalHoodAngle();
+    Angle globalHoodAngle = RobotContainer.motionInstance.getGlobalHoodAngle();
     Angle globalDrivetrainRotation = RobotContainer.drivetrainInstance.getToTarget(ConstField.HUB_POSE);
 
     System.out.print(globalDrivetrainRotation);

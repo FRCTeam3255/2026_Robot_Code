@@ -39,6 +39,8 @@ public class ConstMotion {
   public static final Angle HOOD_NONE_ANGLE = Units.Degrees.of(0);
   public static final Distance RETRACT_CLIMBER = Inches.of(0);
   public static final Distance EXTEND_CLIMBER = Inches.of(0);
+  public final static InterpolatingDoubleTreeMap hoodAngleMap = new InterpolatingDoubleTreeMap();
+
   static {
 
     INTAKE_PIVOT_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
@@ -49,28 +51,12 @@ public class ConstMotion {
 
     HOOD_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     HOOD_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+
+    hoodAngleMap.put(Inches.of(1.5).in(Inches), Degrees.of(28.0).in(Degrees));
+    hoodAngleMap.put(Inches.of(2.0).in(Inches), Degrees.of(31.0).in(Degrees));
+    hoodAngleMap.put(Inches.of(2.5).in(Inches), Degrees.of(35.0).in(Degrees));
+    hoodAngleMap.put(Inches.of(3.0).in(Inches), Degrees.of(39.0).in(Degrees));
+    hoodAngleMap.put(Inches.of(3.5).in(Inches), Degrees.of(43.0).in(Degrees));
+    hoodAngleMap.put(Inches.of(4.0).in(Inches), Degrees.of(47.0).in(Degrees));
   }
-
-  public class ShooterHoodTable {
-
-    public final static InterpolatingDoubleTreeMap hoodAngleMap = new InterpolatingDoubleTreeMap();
-
-    public ShooterHoodTable() {
-      hoodAngleMap.put(Inches.of(1.5).in(Inches), Degrees.of(28.0).in(Degrees));
-      hoodAngleMap.put(Inches.of(2.0).in(Inches), Degrees.of(31.0).in(Degrees));
-      hoodAngleMap.put(Inches.of(2.5).in(Inches), Degrees.of(35.0).in(Degrees));
-      hoodAngleMap.put(Inches.of(3.0).in(Inches), Degrees.of(39.0).in(Degrees));
-      hoodAngleMap.put(Inches.of(3.5).in(Inches), Degrees.of(43.0).in(Degrees));
-      hoodAngleMap.put(Inches.of(4.0).in(Inches), Degrees.of(47.0).in(Degrees));
-    }
-
-    public static Angle getHoodAngle(double distance) {
-      Angle result = Degrees.of(hoodAngleMap.get(distance));
-      if (result == null) {
-        result = Degrees.of(45.0);
-      }
-      return result;
-    }
-  }
-
 }
