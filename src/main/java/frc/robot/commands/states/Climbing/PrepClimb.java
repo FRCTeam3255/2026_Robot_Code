@@ -16,6 +16,7 @@ public class PrepClimb extends Command {
   /** Creates a new PrepClimb. */
   public PrepClimb() {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.subStateMachine);
   }
 
   // Called when the command is initially scheduled.
@@ -41,6 +42,6 @@ public class PrepClimb extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
