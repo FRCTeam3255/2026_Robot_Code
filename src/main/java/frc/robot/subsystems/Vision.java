@@ -33,7 +33,7 @@ public class Vision extends SubsystemBase {
   Pose2d leftPose = new Pose2d();
   Pose2d backPose = new Pose2d();
 
-  private boolean useMegaTag2 = false;
+  private boolean useMegaTag2 = true;
 
   public Vision() {
   }
@@ -104,8 +104,7 @@ public class Vision extends SubsystemBase {
     PoseEstimate currentEstimateBack = new PoseEstimate();
 
     if (useMegaTag2) {
-      currentEstimateRight = LimelightHelpers
-          .getBotPoseEstimate_wpiBlue_MegaTag2(ConstVision.LIMELIGHT_RIGHT_NAME);
+      currentEstimateRight = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(ConstVision.LIMELIGHT_RIGHT_NAME);
       currentEstimateLeft = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(ConstVision.LIMELIGHT_LEFT_NAME);
       currentEstimateBack = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(ConstVision.LIMELIGHT_BACK_NAME);
     } else {
