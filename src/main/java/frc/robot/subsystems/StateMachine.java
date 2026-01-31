@@ -42,15 +42,23 @@ public class StateMachine extends SubsystemBase {
             return new None(subStateMachine);
         }
         break;
+
+      case NONE:
+        switch (currentRobotState) {
+          case NONE:
+            return new None(subStateMachine);
+        }
+        break;
     }
+
     return Commands
         .print("ITS SO OVER D: Invalid State Provided, Blame Eli. Attempted to go to: " + desiredState.toString()
             + " while at " + currentRobotState.toString());
   }
 
   public enum RobotState {
-    NONE
-    // TODO: Add other robot states as needed
+    NONE,
+
   }
 
   @Override
