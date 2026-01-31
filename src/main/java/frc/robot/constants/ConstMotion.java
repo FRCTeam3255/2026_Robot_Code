@@ -64,8 +64,8 @@ public class ConstMotion {
       hoodAngleMap.put(Inches.of(4.0).in(Inches), Degrees.of(47.0).in(Degrees));
     }
 
-    public static Angle getHoodAngle(Distance distance) {
-      Angle result = Degrees.of(hoodAngleMap.get(distance.in(Inches)));
+    public static Angle getHoodAngle(double distance) {
+      Angle result = Degrees.of(hoodAngleMap.get(distance));
       if (result == null) {
         result = Degrees.of(45.0);
       }

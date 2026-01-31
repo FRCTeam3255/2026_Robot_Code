@@ -214,7 +214,10 @@ public class Drivetrain extends SN_SuperSwerveV2 {
   }
 
   public Angle getGlobalHoodAngle() {
+    double dx = ConstField.HUB_POSE.getX() - getPose().getX();
+    double dy = ConstField.HUB_POSE.getY() - getPose().getY();
+    double hypotenuse = Math.hypot(dx, dy);
     return ConstMotion.ShooterHoodTable
-        .getHoodAngle(Meters.of(getPose().getTranslation().getDistance(ConstField.HUB_POSE.getTranslation())));
+        .getHoodAngle(hypotenuse);
   }
 }
