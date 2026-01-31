@@ -14,6 +14,7 @@ public class EjectingHopper extends Command {
 
   public EjectingHopper() {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.subStateMachine);
 
   }
 
@@ -34,14 +35,11 @@ public class EjectingHopper extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.rotorsInstance.setSerializerRollersSpeed(0);
-    RobotContainer.rotorsInstance.setIntakeRollersSpeed(0);
-    RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
