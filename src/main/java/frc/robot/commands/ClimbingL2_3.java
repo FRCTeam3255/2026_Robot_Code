@@ -13,6 +13,7 @@ public class ClimbingL2_3 extends Command {
   /** Creates a new ClimbingL2_3. */
   public ClimbingL2_3() {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.subStateMachine);
   }
 
   // Called when the command is initially scheduled.
@@ -29,12 +30,11 @@ public class ClimbingL2_3 extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.motionInstance.setClimberPosition(ConstMotion.RETRACT_CLIMBER);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
