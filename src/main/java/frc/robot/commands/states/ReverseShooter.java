@@ -14,6 +14,7 @@ public class ReverseShooter extends Command {
 
   public ReverseShooter() {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.subStateMachine);
   }
 
   // Called when the command is initially scheduled.
@@ -32,13 +33,11 @@ public class ReverseShooter extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.STOP);
-    RobotContainer.rotorsInstance.setFlywheelPercentOutput(ConstRotors.STOP);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
