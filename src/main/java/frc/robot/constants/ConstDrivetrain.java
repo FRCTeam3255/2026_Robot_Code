@@ -151,7 +151,7 @@ public class ConstDrivetrain {
 
   // Inverts
   public static final boolean INVERT_WEST_SIDE_DRIVE = false;
-  public static final boolean INVERT_RIGHT_SIDE_DRIVE = true;
+  public static final boolean INVERT_EAST_SIDE_DRIVE = true;
   public static final boolean INVERT_STEER = true;
   public static final boolean INVERT_STEER_ENCODER = false;
 

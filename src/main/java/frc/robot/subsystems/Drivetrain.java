@@ -79,7 +79,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
               : ConstDrivetrain.FRONT_EAST_ABS_ENCODER_OFFSET,
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS,
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS.unaryMinus(),
-          ConstDrivetrain.INVERT_RIGHT_SIDE_DRIVE,
+          ConstDrivetrain.INVERT_EAST_SIDE_DRIVE,
           ConstDrivetrain.INVERT_STEER,
           ConstDrivetrain.INVERT_STEER_ENCODER);
   public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> BackLeft = constantCreator
@@ -103,7 +103,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
               : ConstDrivetrain.BACK_EAST_ABS_ENCODER_OFFSET,
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS.unaryMinus(),
           ConstDrivetrain.MODULE_OFFSET_LOCATIONS.unaryMinus(),
-          ConstDrivetrain.INVERT_RIGHT_SIDE_DRIVE,
+          ConstDrivetrain.INVERT_EAST_SIDE_DRIVE,
           ConstDrivetrain.INVERT_STEER,
           ConstDrivetrain.INVERT_STEER_ENCODER);
   public static final SwerveDrivetrainConstants DrivetrainConstants = new SwerveDrivetrainConstants()
