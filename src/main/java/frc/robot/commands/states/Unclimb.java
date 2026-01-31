@@ -13,6 +13,7 @@ public class Unclimb extends Command {
   /** Creates a new Unclimb. */
   public Unclimb() {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.subStateMachine);
   }
 
   // Called when the command is initially scheduled.
@@ -34,6 +35,6 @@ public class Unclimb extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
