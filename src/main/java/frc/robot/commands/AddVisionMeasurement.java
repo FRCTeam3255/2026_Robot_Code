@@ -11,18 +11,18 @@ import com.frcteam3255.utils.LimelightHelpers.PoseEstimate;
 
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.RobotContainer;
 import frc.robot.constants.ConstVision;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Vision;
 
 public class AddVisionMeasurement extends Command {
-  Drivetrain subDrivetrain;
   Vision subVision;
 
   Optional<PoseEstimate> estimatedPose;
 
-  public AddVisionMeasurement(Drivetrain subDrivetrain, Vision subVision) {
-    this.subDrivetrain = subDrivetrain;
+  public AddVisionMeasurement(Vision subVision) {
+
     this.subVision = subVision;
 
     addRequirements(subVision);
@@ -36,16 +36,17 @@ public class AddVisionMeasurement extends Command {
   public void execute() {
     // Tells the limelight where we are on the field
     LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_RIGHT_NAME,
-        subDrivetrain.getPose().getRotation().getDegrees(), 0, 0, 0, 0, 0);
+        RobotContainer.drivetrainInstance.getPose().getRotation().getDegrees(), 0, 0, 0, 0, 0);
     LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_LEFT_NAME,
-        subDrivetrain.getPose().getRotation().getDegrees(), 0, 0, 0, 0, 0);
+        RobotContainer.drivetrainInstance.getPose().getRotation().getDegrees(), 0, 0, 0, 0, 0);
     LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_BACK_NAME,
-        subDrivetrain.getPose().getRotation().getDegrees(), 0, 0, 0, 0, 0);
-    AngularVelocity gyroRate = subDrivetrain.getGyroRate();
+        RobotContainer.drivetrainInstance.getPose().getRotation().getDegrees(), 0, 0, 0, 0, 0);
+    AngularVelocity gyroRate = RobotContainer.drivetrainInstance.getGyroRate();
 
     estimatedPose = subVision.determinePoseEstimate(gyroRate);
     if (estimatedPose.isPresent()) {
-      subDrivetrain.addVisionMeasurement(estimatedPose.get().pose, estimatedPose.get().timestampSeconds);
+      RobotContainer.drivetrainInstance.addVisionMeasurement(estimatedPose.get().pose,
+          estimatedPose.get().timestampSeconds);
     }
   }
 

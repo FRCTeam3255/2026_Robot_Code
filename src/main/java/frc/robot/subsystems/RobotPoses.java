@@ -8,6 +8,7 @@ import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
 import frc.robot.constants.ConstSystem;
 
 @Logged
@@ -15,13 +16,12 @@ public class RobotPoses extends SubsystemBase {
   /** Creates a new RobotPoses. */
 
   @NotLogged
-  Drivetrain subDrivetrain;
 
   Pose3d comp0Drivetrain = Pose3d.kZero;
   Pose3d comp1Bumpers = Pose3d.kZero.plus(ConstSystem.ROBOT_TO_BUMPERS);
 
-  public RobotPoses(Drivetrain subDrivetrain) {
-    this.subDrivetrain = subDrivetrain;
+  public RobotPoses() {
+
   }
 
   @Override
@@ -29,6 +29,6 @@ public class RobotPoses extends SubsystemBase {
     // This method will be called once per scheduler run
 
     // Robot Positions
-    comp0Drivetrain = new Pose3d(subDrivetrain.getPose());
+    comp0Drivetrain = new Pose3d(RobotContainer.drivetrainInstance.getPose());
   }
 }

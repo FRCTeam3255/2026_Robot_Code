@@ -63,11 +63,11 @@ public class RobotContainer {
   private final Motion loggedMotorsInstance = motionInstance;
   public static Drivetrain drivetrainInstance = new Drivetrain();
   private final Drivetrain loggedSubDrivetrain = drivetrainInstance;
-  public static DriverStateMachine subDriverStateMachine = new DriverStateMachine(drivetrainInstance);
+  public static DriverStateMachine subDriverStateMachine = new DriverStateMachine();
   private final DriverStateMachine loggedSubDriverStateMachine = subDriverStateMachine;
-  public static StateMachine subStateMachine = new StateMachine(drivetrainInstance);
+  public static StateMachine subStateMachine = new StateMachine();
   private final StateMachine loggedSubStateMachine = subStateMachine;
-  public static RobotPoses robotPose = new RobotPoses(drivetrainInstance);
+  public static RobotPoses robotPose = new RobotPoses();
   private final RobotPoses loggedRobotPose = robotPose;
   public static Vision subVision = new Vision();
   private final Vision loggedSubVision = subVision;
@@ -182,7 +182,7 @@ public class RobotContainer {
   }
 
   public Command addVisionMeasurement() {
-    return new AddVisionMeasurement(drivetrainInstance, subVision)
+    return new AddVisionMeasurement(subVision)
         .withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming).ignoringDisable(true);
   }
 }

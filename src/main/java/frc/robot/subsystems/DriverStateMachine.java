@@ -13,6 +13,8 @@ import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.commands.DriveManual;
 import frc.robot.commands.PoseDrive;
 import frc.robot.constants.ConstPoseDrive;
@@ -23,12 +25,11 @@ public class DriverStateMachine extends SubsystemBase {
   public static DriverState currentDriverState = DriverState.MANUAL;
 
   @NotLogged
-  Drivetrain subDrivetrain;
-  @NotLogged
+
   DriverStateMachine subDriverStateMachine = this;
 
-  public DriverStateMachine(Drivetrain subDrivetrain) {
-    this.subDrivetrain = subDrivetrain;
+  public DriverStateMachine() {
+
   }
 
   public DriverState getDriverState() {
@@ -60,7 +61,7 @@ public class DriverStateMachine extends SubsystemBase {
           case EXAMPLE_POSE_DRIVE:
           case CHOREO:
             return () -> new DriveManual(
-                subDrivetrain,
+                RobotContainer.drivetrainInstance,
                 xAxis,
                 yAxis,
                 rotationXAxis,
@@ -75,7 +76,7 @@ public class DriverStateMachine extends SubsystemBase {
           case MANUAL:
           case EXAMPLE_POSE_DRIVE:
             return () -> new PoseDrive(
-                subDrivetrain,
+                RobotContainer.drivetrainInstance,
                 subDriverStateMachine,
                 xAxis,
                 yAxis,
@@ -91,7 +92,7 @@ public class DriverStateMachine extends SubsystemBase {
           case EXAMPLE_ROTATION_SNAP:
           case MANUAL:
             return () -> new PoseDrive(
-                subDrivetrain,
+                RobotContainer.drivetrainInstance,
                 subDriverStateMachine,
                 xAxis,
                 yAxis,
