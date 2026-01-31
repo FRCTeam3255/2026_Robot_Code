@@ -27,6 +27,7 @@ public class PrepClimb extends Command {
     // ConstDrivetrain.TURN_SPEED);
     RobotContainer.motionInstance.setClimberPosition(ConstMotion.EXTEND_CLIMBER);
     RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.RETRACT_INTAKE_PIVOT_ANGLE);
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,6 +43,6 @@ public class PrepClimb extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return RobotContainer.motionInstance.isAtPosition(ConstMotion.EXTEND_CLIMBER, ConstMotion.CLIMBER_TOLERANCE);
   }
 }
