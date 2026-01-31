@@ -5,6 +5,9 @@
 package frc.robot.commands.states;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.RobotContainer;
+import frc.robot.constants.ConstMotion;
+import frc.robot.constants.ConstRotors;
 import frc.robot.subsystems.*;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
@@ -14,6 +17,7 @@ public class None extends Command {
   StateMachine globalStateMachine;
 
   public None(StateMachine globalStateMachine) {
+    addRequirements(RobotContainer.subStateMachine);
     // Use addRequirements() here to declare subsystem dependencies.
     this.globalStateMachine = globalStateMachine;
     addRequirements(globalStateMachine);
@@ -22,6 +26,12 @@ public class None extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    RobotContainer.motionInstance.setClimberPosition(ConstMotion.RETRACT_CLIMBER);
+    RobotContainer.motionInstance.setHoodAngle(ConstMotion.HOOD_NONE_ANGLE);
+    RobotContainer.rotorsInstance.setFlywheelPercentOutput(ConstRotors.STOP);
+    RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.STOP);
+    RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.STOP);
+    RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(ConstRotors.STOP);
     globalStateMachine.setRobotState(StateMachine.RobotState.NONE);
   }
 
@@ -38,6 +48,6 @@ public class None extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
