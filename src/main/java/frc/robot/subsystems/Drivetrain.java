@@ -5,9 +5,6 @@
 package frc.robot.subsystems;
 
 import static edu.wpi.first.units.Units.Degrees;
-import static edu.wpi.first.units.Units.Meters;
-
-import java.lang.annotation.Target;
 import java.util.function.DoubleSupplier;
 
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
@@ -29,8 +26,6 @@ import edu.wpi.first.units.measure.Angle;
 import frc.robot.DeviceIDs;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstDrivetrain;
-import frc.robot.constants.ConstField;
-import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstPoseDrive.PoseDriveGroup;
 
 public class Drivetrain extends SN_SuperSwerveV2 {
@@ -191,7 +186,6 @@ public class Drivetrain extends SN_SuperSwerveV2 {
       manualDriveRotation = Math.atan2(rightStickY, rightStickX) + Math.PI / 2;
     }
     return manualDriveRotation;
-
   }
 
   public void setDriveRotation(Angle rotation) {

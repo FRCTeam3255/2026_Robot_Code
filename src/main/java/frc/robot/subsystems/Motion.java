@@ -12,14 +12,12 @@ import com.ctre.phoenix6.controls.MotionMagicExpoVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.epilogue.Logged;
-import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DeviceIDs;
 import frc.robot.RobotContainer;
-import frc.robot.constants.ConstField;
 import frc.robot.constants.ConstMotion;
 
 @Logged
@@ -62,19 +60,9 @@ public class Motion extends SubsystemBase {
     return Degrees.of(ConstMotion.hoodAngleMap.get(distance.in(Inches)));
   }
 
-  public Pose2d getHub() {
-    Pose2d hubPose;
-    if (ConstField.isRedAlliance()) {
-      hubPose = ConstField.FieldElementGroups.HUB_POSE_SET.getRed().get(0);
-    } else {
-      hubPose = ConstField.FieldElementGroups.HUB_POSE_SET.getBlue().get(0);
-    }
-    return hubPose;
-  }
-
   public Angle getGlobalHoodAngle() {
     Angle angle = getHoodAngle(Meters.of(RobotContainer.drivetrainInstance.getPose().getTranslation()
-        .getDistance(getHub().getTranslation())));
+        .getDistance(RobotContainer.robotPose.getHub().getTranslation())));
 
     return angle;
   }

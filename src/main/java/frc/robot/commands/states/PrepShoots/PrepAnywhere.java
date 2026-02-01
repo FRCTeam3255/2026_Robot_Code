@@ -4,15 +4,10 @@
 
 package frc.robot.commands.states.PrepShoots;
 
-import static edu.wpi.first.units.Units.Degrees;
-import static edu.wpi.first.units.Units.Meters;
-
-import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
-import frc.robot.constants.ConstField;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
 
@@ -22,27 +17,26 @@ import frc.robot.constants.ConstRotors;
 public class PrepAnywhere extends Command {
 
   public PrepAnywhere() {
+    addRequirements(RobotContainer.subStateMachine);
   }
 
   @Override
   public void initialize() {
     RobotContainer.drivetrainInstance.setIsManualRotationEnabled(false);
-    System.out.println("enters prep anywhere");
   }
 
   @Override
   public void execute() {
-    Angle globalHoodAngle = RobotContainer.motionInstance.getGlobalHoodAngle();
+    Angle getToTargetHoodAngle = RobotContainer.motionInstance.getGlobalHoodAngle();
 
     Angle globalDrivetrainRotation = RobotContainer.drivetrainInstance
-        .snapToTarget(RobotContainer.motionInstance.getHub());
+        .snapToTarget(RobotContainer.robotPose.getHub());
 
-    AngularVelocity globalFlyWheelSpeed = RobotContainer.rotorsInstance
-        .getGlobalFlywheelSpeed();
+    AngularVelocity targetFlyWheelSpeed = RobotContainer.rotorsInstance
+        .getToTargetFlywheelSpeed();
 
-    System.out.print(globalDrivetrainRotation);
-    RobotContainer.rotorsInstance.setFlywheelSpeed(globalFlyWheelSpeed);
-    RobotContainer.motionInstance.setHoodAngle(globalHoodAngle);
+    RobotContainer.rotorsInstance.setFlywheelSpeed(targetFlyWheelSpeed);
+    RobotContainer.motionInstance.setHoodAngle(getToTargetHoodAngle);
     RobotContainer.drivetrainInstance.setDriveRotation(globalDrivetrainRotation);
   }
 

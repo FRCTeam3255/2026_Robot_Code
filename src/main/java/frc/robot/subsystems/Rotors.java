@@ -18,7 +18,6 @@ import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DeviceIDs.rotorIDs;
 import frc.robot.RobotContainer;
-import frc.robot.constants.ConstField;
 import frc.robot.constants.ConstRotors;
 
 @Logged
@@ -82,8 +81,8 @@ public class Rotors extends SubsystemBase {
     return RPM.of(rpm);
   }
 
-  public AngularVelocity getGlobalFlywheelSpeed() {
-    Pose2d hubPose = RobotContainer.motionInstance.getHub();
+  public AngularVelocity getToTargetFlywheelSpeed() {
+    Pose2d hubPose = RobotContainer.robotPose.getHub();
     Distance d = Units.Meters.of(RobotContainer.drivetrainInstance.getPose().getTranslation()
         .getDistance(hubPose.getTranslation()));
     return getFlywheelSpeed(d);
