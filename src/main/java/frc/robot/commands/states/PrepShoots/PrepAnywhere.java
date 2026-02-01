@@ -27,17 +27,17 @@ public class PrepAnywhere extends Command {
 
   @Override
   public void execute() {
-    Angle getToTargetHoodAngle = RobotContainer.motionInstance.getGlobalHoodAngle();
+    Angle targetHoodAngle = RobotContainer.motionInstance.getToTargetHoodAngle();
 
-    Angle globalDrivetrainRotation = RobotContainer.drivetrainInstance
+    Angle targetDrivetrainRotation = RobotContainer.drivetrainInstance
         .snapToTarget(RobotContainer.robotPose.getHub());
 
     AngularVelocity targetFlyWheelSpeed = RobotContainer.rotorsInstance
         .getToTargetFlywheelSpeed();
 
     RobotContainer.rotorsInstance.setFlywheelSpeed(targetFlyWheelSpeed);
-    RobotContainer.motionInstance.setHoodAngle(getToTargetHoodAngle);
-    RobotContainer.drivetrainInstance.setDriveRotation(globalDrivetrainRotation);
+    RobotContainer.motionInstance.setHoodAngle(targetHoodAngle);
+    RobotContainer.drivetrainInstance.setDriveRotation(targetDrivetrainRotation);
   }
 
   // Called once the command ends or is interrupted.
