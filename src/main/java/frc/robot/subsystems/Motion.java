@@ -62,7 +62,7 @@ public class Motion extends SubsystemBase {
     Distance lowerLim = desiredPos.minus(tolerance);
     Distance upperLim = desiredPos.plus(tolerance);
 
-    return lowerLim.lte(getClimberDistance())
-        && upperLim.gte(getClimberDistance());
+    return getClimberDistance().gte(lowerLim)
+        && getClimberDistance().lte(upperLim);
   }
 }
