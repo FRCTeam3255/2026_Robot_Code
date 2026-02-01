@@ -62,6 +62,7 @@ public class ConstVision {
   public static final double AREA_THRESHOLD_BACK = 0.05;
   public static final int DisabledThrottle = 100;
   public static final int TeleopThrottle = 0;
+  public static final Boolean USE_MEGA_TAG_2 = true;
 
   // The below values are accounted for in the limelight interface, NOT in code
   public static class LimelightRight {
