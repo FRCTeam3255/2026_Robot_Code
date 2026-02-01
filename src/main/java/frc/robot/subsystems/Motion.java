@@ -5,8 +5,6 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.controls.MotionMagicExpoVoltage;
-import com.ctre.phoenix6.controls.MotionMagicVoltage;
-import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.epilogue.Logged;
@@ -58,8 +56,8 @@ public class Motion extends SubsystemBase {
   }
 
   public boolean isAtPosition(Distance desiredDistance, Distance distanceTolerance) {
-    Distance lowerLim = DesiredDistance.minus(DistanceTolerance);
-    Distance upperLim = DesiredDistance.plus(DistanceTolerance);
+    Distance lowerLim = desiredDistance.minus(distanceTolerance);
+    Distance upperLim = desiredDistance.plus(distanceTolerance);
 
     return getClimberPosition().gte(lowerLim) &&
         getClimberPosition().lte(upperLim);
