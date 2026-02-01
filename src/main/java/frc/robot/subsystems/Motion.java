@@ -65,4 +65,17 @@ public class Motion extends SubsystemBase {
         && getHoodAngle().lte(upperLim);
 
   }
+
+  public Distance getClimberDistance() {
+    return Units.Inches.of(climber.getPosition().getValueAsDouble());
+
+  }
+
+  public boolean isAtPosition(Distance desiredPos, Distance tolerance) {
+    Distance lowerLim = desiredPos.minus(tolerance);
+    Distance upperLim = desiredPos.plus(tolerance);
+
+    return getClimberDistance().gte(lowerLim)
+        && getClimberDistance().lte(upperLim);
+  }
 }
