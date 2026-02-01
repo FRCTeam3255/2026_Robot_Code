@@ -35,7 +35,7 @@ public class ConstMotion {
   public static final Angle HOOD_NONE_ANGLE = Units.Degrees.of(0);
   public static final Distance RETRACT_CLIMBER = Inches.of(0);
   public static final Distance EXTEND_CLIMBER = Inches.of(0);
-  public static final Distance CLIMBER_TOLERANCE = Inches.of(0);
+  public static final Distance CLIMBER_TOLERANCE = Inches.of(0.2);
   static {
 
     INTAKE_PIVOT_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
