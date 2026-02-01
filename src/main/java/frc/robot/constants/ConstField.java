@@ -100,8 +100,8 @@ public class ConstField {
     }
   }
 
-  public static final Distance FIELD_LENGTH = Units.Inches.of(317.7);
-  public static final Distance FIELD_WIDTH = Units.Inches.of(651.2);
+  public static final Distance FIELD_LENGTH = Units.Inches.of(651.2);
+  public static final Distance FIELD_WIDTH = Units.Inches.of(317.7);
 
   /**
    * Boolean that controls when the path will be mirrored for the red
