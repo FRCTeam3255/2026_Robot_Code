@@ -60,6 +60,8 @@ public class ConstVision {
    */
   public static final double AREA_THRESHOLD_FRONT = 0.1;
   public static final double AREA_THRESHOLD_BACK = 0.05;
+  public static final int DisabledThrottle = 100;
+  public static final int TeleopThrottle = 0;
 
   // The below values are accounted for in the limelight interface, NOT in code
   public static class LimelightRight {
