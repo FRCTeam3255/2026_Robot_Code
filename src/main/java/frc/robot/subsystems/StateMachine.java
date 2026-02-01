@@ -49,7 +49,7 @@ public class StateMachine extends SubsystemBase {
           case EJECTING_HOPPER:
           case REVERSING_SHOOTER:
           case SHOOTING:
-            return new None(subStateMachine);
+            return new None();
         }
         break;
 
@@ -57,7 +57,7 @@ public class StateMachine extends SubsystemBase {
         switch (currentRobotState) {
           case NONE:
           case PREP_CLIMB_L1:
-            return new Intaking(subStateMachine);
+            return new Intaking();
         }
         break;
 
@@ -168,7 +168,7 @@ public class StateMachine extends SubsystemBase {
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
-            return new Shooting(subStateMachine);
+            return new Shooting();
         }
         break;
 
@@ -182,7 +182,7 @@ public class StateMachine extends SubsystemBase {
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
-            return new EjectingHopper(subStateMachine);
+            return new EjectingHopper();
         }
         break;
 
@@ -196,28 +196,28 @@ public class StateMachine extends SubsystemBase {
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
-            return new ReverseShooter(subStateMachine);
+            return new ReverseShooter();
         }
         break;
 
       case PREP_CLIMB_L1:
         switch (currentRobotState) {
           case NONE:
-            return new PrepClimb(subStateMachine);
+            return new PrepClimb();
         }
         break;
 
       case CLIMBING_L1:
         switch (currentRobotState) {
           case PREP_CLIMB_L1:
-            return new ClimbingL1(subStateMachine);
+            return new ClimbingL1();
         }
         break;
 
       case UNCLIMB_L1:
         switch (currentRobotState) {
           case CLIMBING_L1:
-            return new Unclimb(subStateMachine);
+            return new Unclimb();
         }
         break;
 
@@ -225,7 +225,7 @@ public class StateMachine extends SubsystemBase {
         switch (currentRobotState) {
           case CLIMBING_L1:
           case CLIMBING_L2_3:
-            return new ClimbingL2_3(subStateMachine);
+            return new ClimbingL2_3();
         }
         break;
 
