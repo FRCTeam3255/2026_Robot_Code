@@ -8,18 +8,22 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
+import frc.robot.subsystems.StateMachine;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class Intaking extends Command {
+
   /** Creates a new Intaking. */
   public Intaking() {
     // Use addRequirements() here to declare subsystem dependencies.
+
     addRequirements(RobotContainer.subStateMachine);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    RobotContainer.subStateMachine.setRobotState(StateMachine.RobotState.INTAKING);
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.INTAKE_ROLLER_SPEED);
     RobotContainer.motionInstance.setClimberPosition(ConstMotion.RETRACT_CLIMBER);
     RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
