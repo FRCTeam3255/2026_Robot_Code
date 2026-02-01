@@ -57,7 +57,7 @@ public class StateMachine extends SubsystemBase {
         switch (currentRobotState) {
           case NONE:
           case PREP_CLIMB_L1:
-            return new Intaking();
+            return new Intaking(subStateMachine);
         }
         break;
 
@@ -168,7 +168,7 @@ public class StateMachine extends SubsystemBase {
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
-            return new Shooting();
+            return new Shooting(subStateMachine);
         }
         break;
 
@@ -182,7 +182,7 @@ public class StateMachine extends SubsystemBase {
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
-            return new EjectingHopper();
+            return new EjectingHopper(subStateMachine);
         }
         break;
 
@@ -196,28 +196,28 @@ public class StateMachine extends SubsystemBase {
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
-            return new ReverseShooter();
+            return new ReverseShooter(subStateMachine);
         }
         break;
 
       case PREP_CLIMB_L1:
         switch (currentRobotState) {
           case NONE:
-            return new PrepClimb();
+            return new PrepClimb(subStateMachine);
         }
         break;
 
       case CLIMBING_L1:
         switch (currentRobotState) {
           case PREP_CLIMB_L1:
-            return new ClimbingL1();
+            return new ClimbingL1(subStateMachine);
         }
         break;
 
       case UNCLIMB_L1:
         switch (currentRobotState) {
           case CLIMBING_L1:
-            return new Unclimb();
+            return new Unclimb(subStateMachine);
         }
         break;
 
@@ -225,7 +225,7 @@ public class StateMachine extends SubsystemBase {
         switch (currentRobotState) {
           case CLIMBING_L1:
           case CLIMBING_L2_3:
-            return new ClimbingL2_3();
+            return new ClimbingL2_3(subStateMachine);
         }
         break;
 
