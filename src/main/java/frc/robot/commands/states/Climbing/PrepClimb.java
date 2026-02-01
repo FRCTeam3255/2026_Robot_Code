@@ -16,6 +16,7 @@ public class PrepClimb extends Command {
   /** Creates a new PrepClimb. */
   public PrepClimb() {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.subStateMachine);
   }
 
   // Called when the command is initially scheduled.
@@ -26,6 +27,7 @@ public class PrepClimb extends Command {
     // ConstDrivetrain.TURN_SPEED);
     RobotContainer.motionInstance.setClimberPosition(ConstMotion.EXTEND_CLIMBER);
     RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.RETRACT_INTAKE_PIVOT_ANGLE);
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -41,6 +43,6 @@ public class PrepClimb extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return RobotContainer.motionInstance.isAtPosition(ConstMotion.EXTEND_CLIMBER, ConstMotion.CLIMBER_TOLERANCE);
   }
 }

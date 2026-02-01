@@ -63,7 +63,18 @@ public class Motion extends SubsystemBase {
   public Angle getGlobalHoodAngle() {
     Angle angle = getHoodAngle(Meters.of(RobotContainer.drivetrainInstance.getPose().getTranslation()
         .getDistance(RobotContainer.robotPose.getHub().getTranslation())));
-
     return angle;
+  }
+
+  public Distance getClimberPosition() {
+    return Units.Inches.of(climber.getPosition().getValueAsDouble());
+  }
+
+  public boolean isAtPosition(Distance desiredDistance, Distance distanceTolerance) {
+    Distance lowerLim = desiredDistance.minus(distanceTolerance);
+    Distance upperLim = desiredDistance.plus(distanceTolerance);
+
+    return getClimberPosition().gte(lowerLim) &&
+        getClimberPosition().lte(upperLim);
   }
 }
