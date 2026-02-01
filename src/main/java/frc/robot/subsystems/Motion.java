@@ -4,9 +4,6 @@
 
 package frc.robot.subsystems;
 
-import static edu.wpi.first.units.Units.Inch;
-import static edu.wpi.first.units.Units.Inches;
-
 import com.ctre.phoenix6.controls.MotionMagicExpoVoltage;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.PositionVoltage;
@@ -60,9 +57,9 @@ public class Motion extends SubsystemBase {
     return Units.Inches.of(climber.getPosition().getValueAsDouble());
   }
 
-  public boolean isAtPosition(Distance DistanceDesired, Distance DistanceTolarance) {
-    Distance lowerLim = DistanceDesired.minus(DistanceTolarance);
-    Distance upperLim = DistanceDesired.plus(DistanceTolarance);
+  public boolean isAtPosition(Distance DistanceDesired, Distance DistanceTolerance) {
+    Distance lowerLim = DistanceDesired.minus(DistanceTolerance);
+    Distance upperLim = DistanceDesired.plus(DistanceTolerance);
 
     return getClimberPosition().gte(lowerLim) &&
         getClimberPosition().lte(upperLim);
