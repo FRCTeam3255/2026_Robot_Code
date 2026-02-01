@@ -12,7 +12,9 @@ import frc.robot.constants.ConstMotion;
 public class ClimbingL1 extends Command {
   /** Creates a new ClimbingL1. */
   public ClimbingL1() {
+
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.subStateMachine);
   }
 
   // Called when the command is initially scheduled.
@@ -34,6 +36,6 @@ public class ClimbingL1 extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return RobotContainer.motionInstance.isAtPosition(ConstMotion.RETRACT_CLIMBER, ConstMotion.CLIMBER_TOLERANCE);
   }
 }
