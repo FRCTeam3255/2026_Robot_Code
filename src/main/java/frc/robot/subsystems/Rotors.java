@@ -71,6 +71,18 @@ public class Rotors extends SubsystemBase {
     flywheelBottomLeft.set(percent);
   }
 
+  public AngularVelocity getFlywheelSpeeds() {
+    return flywheelBottomLeft.getVelocity().getValue();
+  }
+
+  public boolean areFlywheelsAtSpeed(AngularVelocity desiredSpeed, AngularVelocity tolerance) {
+    AngularVelocity lowerLim = desiredSpeed.minus(tolerance);
+    AngularVelocity upperLim = desiredSpeed.plus(tolerance);
+
+    return getFlywheelSpeeds().gte(lowerLim)
+        && getFlywheelSpeeds().lte(upperLim);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

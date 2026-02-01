@@ -7,6 +7,7 @@ package frc.robot.commands.states.PrepShoots;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstPoseDrive;
 import frc.robot.constants.ConstRotors;
+import frc.robot.subsystems.StateMachine;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -14,7 +15,7 @@ import frc.robot.constants.ConstRotors;
 public class PrepAnywhere extends BasePrepShooter {
   public PrepAnywhere() {
     super(ConstRotors.FLYWHEEL_ANYWHERE_SPEED, ConstMotion.HOOD_ANYWHERE_ANGLE,
-        ConstPoseDrive.PrepShootRotations.ANYWHERE_PREP_SHOOT_ROTATION);
+        ConstPoseDrive.PrepShootRotations.ANYWHERE_PREP_SHOOT_ROTATION, StateMachine.RobotState.PREP_ANYWHERE);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 }
