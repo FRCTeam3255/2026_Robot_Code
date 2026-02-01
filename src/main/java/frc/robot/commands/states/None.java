@@ -32,6 +32,7 @@ public class None extends Command {
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.STOP);
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.STOP);
     RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(ConstRotors.STOP);
+    RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.STOP);
     globalStateMachine.setRobotState(StateMachine.RobotState.NONE);
   }
 
