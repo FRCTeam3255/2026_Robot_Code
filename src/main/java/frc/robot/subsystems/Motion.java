@@ -59,8 +59,10 @@ public class Motion extends SubsystemBase {
     Angle lowerLim = desiredPos.minus(tolerance);
     Angle upperLim = desiredPos.plus(tolerance);
 
-    return getHoodAngle().gte(lowerLim)
-        && getHoodAngle().lte(upperLim);
+    Angle hoodAngle = getHoodAngle();
+
+    return hoodAngle.gte(lowerLim)
+        && hoodAngle.lte(upperLim);
 
   }
 
@@ -72,7 +74,9 @@ public class Motion extends SubsystemBase {
     Distance lowerLim = desiredDistance.minus(distanceTolerance);
     Distance upperLim = desiredDistance.plus(distanceTolerance);
 
-    return getClimberPosition().gte(lowerLim) &&
-        getClimberPosition().lte(upperLim);
+    Distance climberPosition = getClimberPosition();
+
+    return climberPosition.gte(lowerLim)
+        && climberPosition.lte(upperLim);
   }
 }
