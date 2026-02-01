@@ -57,7 +57,7 @@ public class Motion extends SubsystemBase {
     return Units.Inches.of(climber.getPosition().getValueAsDouble());
   }
 
-  public boolean isAtPosition(Distance DesiredDistance, Distance DistanceTolerance) {
+  public boolean isAtPosition(Distance desiredDistance, Distance distanceTolerance) {
     Distance lowerLim = DesiredDistance.minus(DistanceTolerance);
     Distance upperLim = DesiredDistance.plus(DistanceTolerance);
 
