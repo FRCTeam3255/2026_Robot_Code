@@ -10,9 +10,15 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.MotorAlignmentValue;
 
 import edu.wpi.first.epilogue.Logged;
+import static edu.wpi.first.units.Units.RPM;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.AngularVelocity;
+import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DeviceIDs.rotorIDs;
+import frc.robot.RobotContainer;
+import frc.robot.constants.ConstField;
 import frc.robot.constants.ConstRotors;
 
 @Logged
@@ -69,6 +75,18 @@ public class Rotors extends SubsystemBase {
     flywheelTopLeft.set(percent);
     flywheelBottomRight.set(percent);
     flywheelBottomLeft.set(percent);
+  }
+
+  public static AngularVelocity getFlywheelSpeed(Distance distance) {
+    double rpm = ConstRotors.flywheelSpeedMap.get(distance.in(Units.Inches));
+    return RPM.of(rpm);
+  }
+
+  public AngularVelocity getGlobalFlywheelSpeed() {
+    Pose2d hubPose = RobotContainer.motionInstance.getHub();
+    Distance d = Units.Meters.of(RobotContainer.drivetrainInstance.getPose().getTranslation()
+        .getDistance(hubPose.getTranslation()));
+    return getFlywheelSpeed(d);
   }
 
   @Override

@@ -206,7 +206,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     manualRotationEnabled = set;
   }
 
-  public Angle getToTarget(Pose2d targetPose) {
+  public Angle snapToTarget(Pose2d targetPose) {
     double dx = targetPose.getX() - getPose().getX();
     double dy = targetPose.getY() - getPose().getY();
     double angleRad = Math.atan2(dy, dx);

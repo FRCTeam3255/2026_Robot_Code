@@ -9,6 +9,7 @@ import static edu.wpi.first.units.Units.Meters;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.units.measure.Angle;
+import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstField;
@@ -34,10 +35,13 @@ public class PrepAnywhere extends Command {
     Angle globalHoodAngle = RobotContainer.motionInstance.getGlobalHoodAngle();
 
     Angle globalDrivetrainRotation = RobotContainer.drivetrainInstance
-        .getToTarget(RobotContainer.motionInstance.getHub());
+        .snapToTarget(RobotContainer.motionInstance.getHub());
+
+    AngularVelocity globalFlyWheelSpeed = RobotContainer.rotorsInstance
+        .getGlobalFlywheelSpeed();
 
     System.out.print(globalDrivetrainRotation);
-    RobotContainer.rotorsInstance.setFlywheelSpeed(ConstRotors.FLYWHEEL_ANYWHERE_SPEED);
+    RobotContainer.rotorsInstance.setFlywheelSpeed(globalFlyWheelSpeed);
     RobotContainer.motionInstance.setHoodAngle(globalHoodAngle);
     RobotContainer.drivetrainInstance.setDriveRotation(globalDrivetrainRotation);
   }

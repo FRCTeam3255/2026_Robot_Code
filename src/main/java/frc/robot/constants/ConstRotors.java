@@ -5,12 +5,15 @@
 package frc.robot.constants;
 
 import static edu.wpi.first.units.Units.RPM;
+import static edu.wpi.first.units.Units.Inches;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
 import edu.wpi.first.units.measure.AngularVelocity;
+import edu.wpi.first.units.Units;
 
 /** Add your docs here. */
 public class ConstRotors {
@@ -25,6 +28,7 @@ public class ConstRotors {
   public static final double SERIALIZER_V_FUNNEL_SPEED = 0;
   public static final double SERIALIZER_ROLLERS_SPEED = 1;
   public static final double SHOOTER_TRANSFER_SPEED = 1;
+  public final static InterpolatingDoubleTreeMap flywheelSpeedMap = new InterpolatingDoubleTreeMap();
 
   static {
     // TODO: tune current limits
@@ -81,5 +85,12 @@ public class ConstRotors {
     FLYWHEEL_RIGHT_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity = 60;
     FLYWHEEL_RIGHT_CONFIGURATION.MotionMagic.MotionMagicAcceleration = 600;
     FLYWHEEL_RIGHT_CONFIGURATION.MotionMagic.MotionMagicJerk = 6000;
+
+    flywheelSpeedMap.put(Inches.of(0.0).in(Inches), RPM.of(0.0).in(RPM));
+    flywheelSpeedMap.put(Inches.of(0.0).in(Inches), RPM.of(0.0).in(RPM));
+    flywheelSpeedMap.put(Inches.of(0.0).in(Inches), RPM.of(0.0).in(RPM));
+    flywheelSpeedMap.put(Inches.of(0.0).in(Inches), RPM.of(0.0).in(RPM));
+    flywheelSpeedMap.put(Inches.of(0.0).in(Inches), RPM.of(0.0).in(RPM));
+    flywheelSpeedMap.put(Inches.of(0.0).in(Inches), RPM.of(0.0).in(RPM));
   }
 }
