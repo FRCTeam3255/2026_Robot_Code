@@ -76,6 +76,18 @@ public class Rotors extends SubsystemBase {
     flywheelBottomLeft.set(percent);
   }
 
+  public AngularVelocity getFlywheelSpeeds() {
+    return flywheelBottomLeft.getVelocity().getValue();
+  }
+
+  public boolean areFlywheelsAtSpeed(AngularVelocity desiredSpeed, AngularVelocity tolerance) {
+    AngularVelocity lowerLim = desiredSpeed.minus(tolerance);
+    AngularVelocity upperLim = desiredSpeed.plus(tolerance);
+
+    return getFlywheelSpeeds().gte(lowerLim)
+        && getFlywheelSpeeds().lte(upperLim);
+  }
+
   public static AngularVelocity getFlywheelSpeed(Distance distance) {
     double rpm = ConstRotors.flywheelSpeedMap.get(distance.in(Units.Inches));
     return RPM.of(rpm);

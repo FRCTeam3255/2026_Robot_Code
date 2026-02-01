@@ -56,6 +56,19 @@ public class Motion extends SubsystemBase {
     climber.setControl(climberMotionRequest.withPosition(setpoint.in(Units.Inches)));
   }
 
+  public Angle getHoodAngle() {
+    return hood.getPosition().getValue();
+  }
+
+  public boolean isHoodAtPosition(Angle desiredPos, Angle tolerance) {
+    Angle lowerLim = desiredPos.minus(tolerance);
+    Angle upperLim = desiredPos.plus(tolerance);
+
+    return getHoodAngle().gte(lowerLim)
+        && getHoodAngle().lte(upperLim);
+
+  }
+
   public static Angle getHoodAngle(Distance distance) {
     return Degrees.of(ConstMotion.hoodAngleMap.get(distance.in(Inches)));
   }
