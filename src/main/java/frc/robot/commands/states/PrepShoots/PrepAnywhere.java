@@ -7,6 +7,7 @@ package frc.robot.commands.states.PrepShoots;
 import static edu.wpi.first.units.Units.Degrees;
 import static edu.wpi.first.units.Units.Meters;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
@@ -18,6 +19,7 @@ import frc.robot.constants.ConstRotors;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PrepAnywhere extends Command {
+
   public PrepAnywhere() {
   }
 
@@ -30,7 +32,9 @@ public class PrepAnywhere extends Command {
   @Override
   public void execute() {
     Angle globalHoodAngle = RobotContainer.motionInstance.getGlobalHoodAngle();
-    Angle globalDrivetrainRotation = RobotContainer.drivetrainInstance.getToTarget(ConstField.HUB_POSE);
+
+    Angle globalDrivetrainRotation = RobotContainer.drivetrainInstance
+        .getToTarget(RobotContainer.motionInstance.getHub());
 
     System.out.print(globalDrivetrainRotation);
     RobotContainer.rotorsInstance.setFlywheelSpeed(ConstRotors.FLYWHEEL_ANYWHERE_SPEED);
