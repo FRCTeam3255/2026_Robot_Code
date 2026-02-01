@@ -93,13 +93,6 @@ public class Rotors extends SubsystemBase {
     return RPM.of(rpm);
   }
 
-  public AngularVelocity getToTargetFlywheelSpeed() {
-    Pose2d hubPose = RobotContainer.robotPose.getHub();
-    Distance d = Units.Meters.of(RobotContainer.drivetrainInstance.getPose().getTranslation()
-        .getDistance(hubPose.getTranslation()));
-    return getMappedFlywheelSpeed(d);
-  }
-
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

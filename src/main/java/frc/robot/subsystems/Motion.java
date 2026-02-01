@@ -73,12 +73,6 @@ public class Motion extends SubsystemBase {
     return Degrees.of(ConstMotion.hoodAngleMap.get(distance.in(Inches)));
   }
 
-  public Angle getToTargetHoodAngle() {
-    Angle angle = getMappedHoodAngle(Meters.of(RobotContainer.drivetrainInstance.getPose().getTranslation()
-        .getDistance(RobotContainer.robotPose.getHub().getTranslation())));
-    return angle;
-  }
-
   public Distance getClimberPosition() {
     return Units.Inches.of(climber.getPosition().getValueAsDouble());
   }
