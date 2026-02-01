@@ -7,12 +7,12 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
+import frc.robot.subsystems.StateMachine;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ClimbingL1 extends Command {
   /** Creates a new ClimbingL1. */
   public ClimbingL1() {
-
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.subStateMachine);
   }
@@ -20,6 +20,7 @@ public class ClimbingL1 extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    RobotContainer.subStateMachine.setRobotState(StateMachine.RobotState.CLIMBING_L1);
     RobotContainer.motionInstance.setClimberPosition(ConstMotion.RETRACT_CLIMBER);
   }
 
