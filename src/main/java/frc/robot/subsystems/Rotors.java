@@ -88,7 +88,7 @@ public class Rotors extends SubsystemBase {
         && getFlywheelSpeeds().lte(upperLim);
   }
 
-  public static AngularVelocity getFlywheelSpeed(Distance distance) {
+  public static AngularVelocity getMappedFlywheelSpeed(Distance distance) {
     double rpm = ConstRotors.flywheelSpeedMap.get(distance.in(Units.Inches));
     return RPM.of(rpm);
   }
@@ -97,7 +97,7 @@ public class Rotors extends SubsystemBase {
     Pose2d hubPose = RobotContainer.robotPose.getHub();
     Distance d = Units.Meters.of(RobotContainer.drivetrainInstance.getPose().getTranslation()
         .getDistance(hubPose.getTranslation()));
-    return getFlywheelSpeed(d);
+    return getMappedFlywheelSpeed(d);
   }
 
   @Override
