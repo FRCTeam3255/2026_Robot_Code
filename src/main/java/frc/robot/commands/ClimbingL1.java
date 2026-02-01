@@ -17,6 +17,7 @@ public class ClimbingL1 extends Command {
   public ClimbingL1(StateMachine globalStateMachine) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.globalStateMachine = globalStateMachine;
+    addRequirements(RobotContainer.subStateMachine);
   }
 
   // Called when the command is initially scheduled.
@@ -39,6 +40,6 @@ public class ClimbingL1 extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return RobotContainer.motionInstance.isAtPosition(ConstMotion.RETRACT_CLIMBER, ConstMotion.CLIMBER_TOLERANCE);
   }
 }
