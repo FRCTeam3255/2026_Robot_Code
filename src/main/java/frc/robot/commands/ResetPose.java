@@ -16,6 +16,8 @@ public class ResetPose extends Command {
   @Override
   public void initialize() {
     RobotContainer.drivetrainInstance.resetPose(ConstField.FieldElements.RESET_POSE);
+    RobotContainer.drivetrainInstance.getPigeon2()
+        .setYaw(ConstField.FieldElements.RESET_POSE.getRotation().getMeasure());
   }
 
   @Override

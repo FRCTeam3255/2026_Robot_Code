@@ -4,9 +4,11 @@
 
 package frc.robot.subsystems;
 
+import static edu.wpi.first.units.Units.Degrees;
+import static edu.wpi.first.units.Units.Inches;
+import static edu.wpi.first.units.Units.Meters;
+
 import com.ctre.phoenix6.controls.MotionMagicExpoVoltage;
-import com.ctre.phoenix6.controls.MotionMagicVoltage;
-import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.epilogue.Logged;
@@ -15,6 +17,7 @@ import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DeviceIDs;
+import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
 
 @Logged
@@ -53,4 +56,36 @@ public class Motion extends SubsystemBase {
     climber.setControl(climberMotionRequest.withPosition(setpoint.in(Units.Inches)));
   }
 
+  public Angle getHoodAngle() {
+    return hood.getPosition().getValue();
+  }
+
+  public boolean isHoodAtPosition(Angle desiredPos, Angle tolerance) {
+    Angle lowerLim = desiredPos.minus(tolerance);
+    Angle upperLim = desiredPos.plus(tolerance);
+
+    Angle hoodAngle = getHoodAngle();
+
+    return hoodAngle.gte(lowerLim)
+        && hoodAngle.lte(upperLim);
+
+  }
+
+  public static Angle getMappedHoodAngle(Distance distance) {
+    return Degrees.of(ConstMotion.hoodAngleMap.get(distance.in(Inches)));
+  }
+
+  public Distance getClimberPosition() {
+    return Units.Inches.of(climber.getPosition().getValueAsDouble());
+  }
+
+  public boolean isAtPosition(Distance desiredDistance, Distance distanceTolerance) {
+    Distance lowerLim = desiredDistance.minus(distanceTolerance);
+    Distance upperLim = desiredDistance.plus(distanceTolerance);
+
+    Distance climberPosition = getClimberPosition();
+
+    return climberPosition.gte(lowerLim)
+        && climberPosition.lte(upperLim);
+  }
 }

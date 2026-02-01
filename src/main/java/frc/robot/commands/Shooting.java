@@ -7,17 +7,22 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstRotors;
+import frc.robot.subsystems.StateMachine;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class Shooting extends Command {
+
   /** Creates a new Shooting. */
   public Shooting() {
     // Use addRequirements() here to declare subsystem dependencies.
+
+    addRequirements(RobotContainer.subStateMachine);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    RobotContainer.subStateMachine.setRobotState(StateMachine.RobotState.SHOOTING);
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.SERIALIZER_ROLLERS_SPEED);
     RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(ConstRotors.SERIALIZER_V_FUNNEL_SPEED);
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.SHOOTER_TRANSFER_SPEED);
@@ -33,16 +38,11 @@ public class Shooting extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.STOP);
-    RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(ConstRotors.STOP);
-    RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.STOP);
-    RobotContainer.drivetrainInstance.setIsManualRotationEnabled(true);
-    RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.STOP);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

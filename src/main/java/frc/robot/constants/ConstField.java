@@ -100,8 +100,8 @@ public class ConstField {
     }
   }
 
-  public static final Distance FIELD_LENGTH = Units.Feet.of(57).plus(Units.Inches.of(6.875));
-  public static final Distance FIELD_WIDTH = Units.Feet.of(26).plus(Units.Inches.of(5));
+  public static final Distance FIELD_LENGTH = Units.Inches.of(651.2);
+  public static final Distance FIELD_WIDTH = Units.Inches.of(317.7);
 
   /**
    * Boolean that controls when the path will be mirrored for the red
@@ -122,14 +122,19 @@ public class ConstField {
 
   public static class FieldElements {
     public static final Pose2d RESET_POSE = new Pose2d(0, 0, new Rotation2d());
-
+    private static final Pose2d UPRIGHT_OUTPOST_SIDE_POSE = new Pose2d(1.0615900754928589, 3.3209617137908936,
+        new Rotation2d());
+    private static final Pose2d UPRIGHT_DEPOT_SIDE_POSE = new Pose2d(1.0615900754928589, 2.3092187862091064,
+        new Rotation2d());
+    private static final Pose2d HUB_POSE = new Pose2d(4.629215, 4.0317845, new Rotation2d());
   }
 
   public static class FieldElementGroups {
     public static final Pose2dAllianceSet RESET_POSE_SET = new Pose2dAllianceSet(
         FieldElements.RESET_POSE);
+    public static final Pose2dAllianceSet HUB_POSE_SET = new Pose2dAllianceSet(FieldElements.HUB_POSE);
+    public static final Pose2dAllianceSet UPRIGHT_OUTPOST_SIDE_POSE_SET = new Pose2dAllianceSet(
+        FieldElements.UPRIGHT_OUTPOST_SIDE_POSE, FieldElements.UPRIGHT_DEPOT_SIDE_POSE);
   }
 
-  public static final Pose2d TOWER_POSE = new Pose2d(1.02, 4.02, new Rotation2d(0));
-  public static final Pose2d WORKSHOP_STARTING_POSE = new Pose2d(5.98, 2.60, new Rotation2d(0));
 }

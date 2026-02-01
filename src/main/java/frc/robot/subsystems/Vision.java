@@ -6,9 +6,8 @@ package frc.robot.subsystems;
 
 import java.util.Optional;
 
-import com.frcteam3255.utils.LimelightHelpers;
-import com.frcteam3255.utils.LimelightHelpers.PoseEstimate;
-
+import frc.robot.LimelightHelpers;
+import frc.robot.LimelightHelpers.PoseEstimate;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -34,7 +33,7 @@ public class Vision extends SubsystemBase {
   Pose2d leftPose = new Pose2d();
   Pose2d backPose = new Pose2d();
 
-  private boolean useMegaTag2 = true;
+  private boolean useMegaTag2 = ConstVision.USE_MEGA_TAG_2;
 
   public Vision() {
   }
@@ -105,8 +104,7 @@ public class Vision extends SubsystemBase {
     PoseEstimate currentEstimateBack = new PoseEstimate();
 
     if (useMegaTag2) {
-      currentEstimateRight = LimelightHelpers
-          .getBotPoseEstimate_wpiBlue_MegaTag2(ConstVision.LIMELIGHT_RIGHT_NAME);
+      currentEstimateRight = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(ConstVision.LIMELIGHT_RIGHT_NAME);
       currentEstimateLeft = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(ConstVision.LIMELIGHT_LEFT_NAME);
       currentEstimateBack = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(ConstVision.LIMELIGHT_BACK_NAME);
     } else {

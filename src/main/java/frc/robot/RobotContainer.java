@@ -51,6 +51,40 @@ public class RobotContainer {
   @NotLogged
   SendableChooser<Command> autoChooser = new SendableChooser<>();
 
+  // STATES
+  Command TRY_EJECTING_HOPPER = Commands.deferredProxy(
+      () -> subStateMachine.tryState(RobotState.EJECTING_HOPPER));
+  Command TRY_UNCLIMB_L1 = Commands.deferredProxy(
+      () -> subStateMachine.tryState(RobotState.UNCLIMB_L1));
+  Command TRY_PREP_CLIMB_L1 = Commands.deferredProxy(
+      () -> subStateMachine.tryState(RobotState.PREP_CLIMB_L1));
+  Command TRY_CLIMBING_L1 = Commands.deferredProxy(
+      () -> subStateMachine.tryState(RobotState.CLIMBING_L1));
+  Command TRY_CLIMBING_L2_3 = Commands.deferredProxy(
+      () -> subStateMachine.tryState(RobotState.CLIMBING_L2_3));
+  Command TRY_INTAKING = Commands.deferredProxy(
+      () -> subStateMachine.tryState(RobotState.INTAKING));
+  Command TRY_SHOOTING = Commands.deferredProxy(
+      () -> subStateMachine.tryState(RobotState.SHOOTING));
+  Command TRY_PREP_ANYWHERE = Commands.deferredProxy(
+      () -> subStateMachine.tryState(RobotState.PREP_ANYWHERE));
+  Command TRY_PREP_TRENCH = Commands.deferredProxy(
+      () -> subStateMachine.tryState(RobotState.PREP_TRENCH));
+  Command TRY_PREP_OUPOST = Commands.deferredProxy(
+      () -> subStateMachine.tryState(RobotState.PREP_OUTPOST));
+  Command TRY_PREP_DEPOT = Commands.deferredProxy(
+      () -> subStateMachine.tryState(RobotState.PREP_DEPOT));
+  Command TRY_PREP_NON_OUTPOST = Commands.deferredProxy(
+      () -> subStateMachine.tryState(RobotState.PREP_NON_OUTPOST));
+  Command TRY_REVERSING_SHOOTER = Commands.deferredProxy(
+      () -> subStateMachine.tryState(RobotState.REVERSING_SHOOTER));
+  Command TRY_PREP_OPPONENT_TO_ALLIANCE = Commands.deferredProxy(
+      () -> subStateMachine.tryState(RobotState.PREP_OPPONENT_TO_ALLIANCE));
+  Command TRY_PREP_NEAUTRAL_TO_ALLIANCE = Commands.deferredProxy(
+      () -> subStateMachine.tryState(RobotState.PREP_NEUTRAL_TO_ALLIANCE));
+  Command TRY_NONE = Commands.deferredProxy(
+      () -> subStateMachine.tryState(RobotState.NONE));
+
   private AutoFactory autoFactory;
 
   private final SN_XboxController conDriver = new SN_XboxController(controllerIDs.DRIVER_USB);
@@ -71,9 +105,6 @@ public class RobotContainer {
   private final RobotPoses loggedRobotPose = robotPose;
   public static Vision subVision = new Vision();
   private final Vision loggedSubVision = subVision;
-
-  Command TRY_NONE = Commands.deferredProxy(
-      () -> subStateMachine.tryState(RobotState.NONE));
 
   Command MANUAL = new DeferredCommand(
       subDriverStateMachine.tryState(
@@ -109,20 +140,38 @@ public class RobotContainer {
   }
 
   private void configDriverBindings() {
-    conDriver.btn_South.whileTrue(new EjectingHopper());
-    conDriver.btn_RightTrigger.whileTrue(new Shooting());
-    conDriver.btn_East.whileTrue(new ReverseShooter());
-    conDriver.btn_Start.whileTrue(new ClimbingL1());
-    conDriver.btn_Start.whileTrue(new ClimbingL2_3());
-    conDriver.btn_LeftTrigger.whileTrue(new Intaking());
-    conDriver.btn_Back.whileTrue(new Unclimb());
-    conDriver.btn_RightBumper.whileTrue(new PrepAnywhere());
-    conDriver.btn_A.whileTrue(new PrepDepot());
-    conDriver.btn_West.whileTrue(new PrepNeutralToAlliance());
-    conDriver.btn_B.whileTrue(new PrepOutpost());
-    conDriver.btn_Y.whileTrue(new PrepTrench());
-    conDriver.btn_West.whileTrue(new PrepOpponentToAlliance());
-    conDriver.btn_X.whileTrue(new PrepNonOutpost());
+    conDriver.btn_South
+        .whileTrue(TRY_EJECTING_HOPPER)
+        .onFalse(TRY_NONE);
+    conDriver.btn_RightTrigger
+        .whileTrue(TRY_SHOOTING)
+        .onFalse(TRY_NONE);
+    conDriver.btn_East
+        .whileTrue(TRY_REVERSING_SHOOTER)
+        .onFalse(TRY_NONE);
+    conDriver.btn_Start
+        .onTrue(TRY_PREP_CLIMB_L1)
+        .onTrue(TRY_CLIMBING_L1)
+        .onTrue(TRY_CLIMBING_L2_3);
+    conDriver.btn_LeftTrigger
+        .whileTrue(TRY_INTAKING)
+        .onFalse(TRY_NONE);
+    conDriver.btn_Back
+        .onTrue(TRY_UNCLIMB_L1)
+        .onFalse(TRY_NONE);
+    conDriver.btn_RightBumper
+        .onTrue(TRY_PREP_ANYWHERE);
+    conDriver.btn_A
+        .onTrue(TRY_PREP_DEPOT);
+    conDriver.btn_West
+        .onTrue(TRY_PREP_NEAUTRAL_TO_ALLIANCE)
+        .onTrue(TRY_PREP_OPPONENT_TO_ALLIANCE);
+    conDriver.btn_B
+        .onTrue(TRY_PREP_OUPOST);
+    conDriver.btn_Y
+        .onTrue(TRY_PREP_TRENCH);
+    conDriver.btn_X
+        .onTrue(TRY_PREP_NON_OUTPOST);
     conDriver.btn_North.onTrue(new ResetPose());
   }
 
