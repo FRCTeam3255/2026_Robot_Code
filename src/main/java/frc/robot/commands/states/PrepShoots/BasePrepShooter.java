@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
+import frc.robot.subsystems.StateMachine.RobotState;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class BasePrepShooter extends Command {
@@ -17,13 +18,15 @@ public class BasePrepShooter extends Command {
   AngularVelocity globalFlyWheelSpeed;
   Angle globalHoodAngle;
   Angle globalDrivetrainAngle;
+  RobotState globalState;
 
-  public BasePrepShooter(AngularVelocity flyWheelSpeed, Angle hoodAngle, Angle drivetrainAngle) {
+  public BasePrepShooter(AngularVelocity flyWheelSpeed, Angle hoodAngle, Angle drivetrainAngle, RobotState state) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.subStateMachine);
     globalFlyWheelSpeed = flyWheelSpeed;
     globalHoodAngle = hoodAngle;
     globalDrivetrainAngle = drivetrainAngle;
+    globalState = state;
   }
 
   // Called when the command is initially scheduled.
@@ -33,6 +36,7 @@ public class BasePrepShooter extends Command {
     RobotContainer.motionInstance.setHoodAngle(globalHoodAngle);
     RobotContainer.drivetrainInstance.setDriveRotation(globalDrivetrainAngle);
     RobotContainer.drivetrainInstance.setIsManualRotationEnabled(false);
+    RobotContainer.subStateMachine.setRobotState(globalState);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
