@@ -11,19 +11,17 @@ import frc.robot.subsystems.StateMachine;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ClimbingL2_3 extends Command {
-  StateMachine globalStateMachine;
 
   /** Creates a new ClimbingL2_3. */
-  public ClimbingL2_3(StateMachine globalStateMachine) {
+  public ClimbingL2_3() {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.globalStateMachine = globalStateMachine;
     addRequirements(RobotContainer.subStateMachine);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    globalStateMachine.setRobotState(StateMachine.RobotState.CLIMBING_L2_3);
+    RobotContainer.subStateMachine.setRobotState(StateMachine.RobotState.CLIMBING_L2_3);
     RobotContainer.motionInstance.setClimberPosition(ConstMotion.EXTEND_CLIMBER);
   }
 

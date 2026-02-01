@@ -11,19 +11,18 @@ import frc.robot.subsystems.StateMachine;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class Shooting extends Command {
-  StateMachine globalStateMachine;
 
   /** Creates a new Shooting. */
-  public Shooting(StateMachine globalStateMachine) {
+  public Shooting() {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.globalStateMachine = globalStateMachine;
+
     addRequirements(RobotContainer.subStateMachine);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    globalStateMachine.setRobotState(StateMachine.RobotState.SHOOTING);
+    RobotContainer.subStateMachine.setRobotState(StateMachine.RobotState.SHOOTING);
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.SERIALIZER_ROLLERS_SPEED);
     RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(ConstRotors.SERIALIZER_V_FUNNEL_SPEED);
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.SHOOTER_TRANSFER_SPEED);

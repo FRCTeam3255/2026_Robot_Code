@@ -12,10 +12,9 @@ import frc.robot.subsystems.StateMachine;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ReverseShooter extends Command {
   /** Creates a new None. */
-  StateMachine globalStateMachine;
 
-  public ReverseShooter(StateMachine globalStateMachine) {
-    this.globalStateMachine = globalStateMachine;
+  public ReverseShooter() {
+
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.subStateMachine);
   }
@@ -23,7 +22,7 @@ public class ReverseShooter extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    globalStateMachine.setRobotState(StateMachine.RobotState.REVERSING_SHOOTER);
+    RobotContainer.subStateMachine.setRobotState(StateMachine.RobotState.REVERSING_SHOOTER);
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.REVERSE_SHOOTER_TRANSFER_SPEED);
     RobotContainer.rotorsInstance.setFlywheelPercentOutput(ConstRotors.REVERSE_FLYWHEEL_SPEED);
     RobotContainer.drivetrainInstance.setIsManualRotationEnabled(true);
