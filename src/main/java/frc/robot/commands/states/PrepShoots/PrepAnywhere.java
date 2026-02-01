@@ -14,6 +14,7 @@ import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
 import frc.robot.subsystems.Rotors;
+import frc.robot.subsystems.StateMachine.RobotState;
 import frc.robot.subsystems.Motion;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -28,6 +29,7 @@ public class PrepAnywhere extends Command {
   @Override
   public void initialize() {
     RobotContainer.drivetrainInstance.setIsManualRotationEnabled(false);
+    RobotContainer.subStateMachine.setRobotState(RobotState.PREP_ANYWHERE);
   }
 
   @Override
@@ -50,8 +52,6 @@ public class PrepAnywhere extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.rotorsInstance.setFlywheelPercentOutput(ConstRotors.STOP);
-    RobotContainer.motionInstance.setHoodAngle(ConstMotion.HOOD_NONE_ANGLE);
   }
 
   // Returns true when the command should end.
