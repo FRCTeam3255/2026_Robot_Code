@@ -188,7 +188,6 @@ public class Drivetrain extends SN_SuperSwerveV2 {
       manualDriveRotation = Math.atan2(rightStickY, rightStickX) - Math.PI / 2;
     }
     return manualDriveRotation;
-
   }
 
   public void setDriveRotation(Angle rotation) {
@@ -203,4 +202,10 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     manualRotationEnabled = set;
   }
 
+  public Angle snapToTarget(Pose2d targetPose) {
+    double dx = targetPose.getX() - getPose().getX();
+    double dy = targetPose.getY() - getPose().getY();
+    double angleRad = Math.atan2(dy, dx);
+    return Degrees.of(Math.toDegrees(angleRad));
+  }
 }

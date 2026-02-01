@@ -4,18 +4,59 @@
 
 package frc.robot.commands.states.PrepShoots;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.units.Units;
+import edu.wpi.first.units.measure.Angle;
+import edu.wpi.first.units.measure.AngularVelocity;
+import edu.wpi.first.units.measure.Distance;
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
-import frc.robot.constants.ConstPoseDrive;
 import frc.robot.constants.ConstRotors;
-import frc.robot.subsystems.StateMachine;
+import frc.robot.subsystems.Rotors;
+import frc.robot.subsystems.StateMachine.RobotState;
+import frc.robot.subsystems.Motion;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class PrepAnywhere extends BasePrepShooter {
+public class PrepAnywhere extends Command {
+
   public PrepAnywhere() {
-    super(ConstRotors.FLYWHEEL_ANYWHERE_SPEED, ConstMotion.HOOD_ANYWHERE_ANGLE,
-        ConstPoseDrive.PrepShootRotations.ANYWHERE_PREP_SHOOT_ROTATION, StateMachine.RobotState.PREP_ANYWHERE);
-    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.subStateMachine);
+  }
+
+  @Override
+  public void initialize() {
+    RobotContainer.drivetrainInstance.setIsManualRotationEnabled(false);
+    RobotContainer.subStateMachine.setRobotState(RobotState.PREP_ANYWHERE);
+  }
+
+  @Override
+  public void execute() {
+    Pose2d hubPose = RobotContainer.robotPose.getHub();
+    Distance d = Units.Meters.of(RobotContainer.drivetrainInstance.getPose().getTranslation()
+        .getDistance(hubPose.getTranslation()));
+
+    AngularVelocity targetFlyWheelSpeed = Rotors.getMappedFlywheelSpeed(d);
+    Angle targetHoodAngle = Motion.getMappedHoodAngle(d);
+
+    Angle targetDrivetrainRotation = RobotContainer.drivetrainInstance
+        .snapToTarget(hubPose);
+
+    RobotContainer.rotorsInstance.setFlywheelSpeed(targetFlyWheelSpeed);
+    RobotContainer.motionInstance.setHoodAngle(targetHoodAngle);
+    RobotContainer.drivetrainInstance.setDriveRotation(targetDrivetrainRotation);
+  }
+
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {
+  }
+
+  // Returns true when the command should end.
+  @Override
+  public boolean isFinished() {
+    return false;
   }
 }
