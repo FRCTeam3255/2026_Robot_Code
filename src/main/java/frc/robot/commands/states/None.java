@@ -14,13 +14,9 @@ import frc.robot.subsystems.*;
 public class None extends Command {
   /** Creates a new None. */
 
-  StateMachine globalStateMachine;
-
-  public None(StateMachine globalStateMachine) {
+  public None() {
     addRequirements(RobotContainer.subStateMachine);
     // Use addRequirements() here to declare subsystem dependencies.
-    this.globalStateMachine = globalStateMachine;
-    addRequirements(globalStateMachine);
   }
 
   // Called when the command is initially scheduled.
@@ -33,7 +29,7 @@ public class None extends Command {
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.STOP);
     RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(ConstRotors.STOP);
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.STOP);
-    globalStateMachine.setRobotState(StateMachine.RobotState.NONE);
+    RobotContainer.subStateMachine.setRobotState(StateMachine.RobotState.NONE);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

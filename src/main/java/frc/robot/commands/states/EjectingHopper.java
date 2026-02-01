@@ -13,11 +13,8 @@ import frc.robot.RobotContainer;
 public class EjectingHopper extends Command {
   /** Creates a new None. */
 
-  StateMachine globalStateMachine;
-
-  public EjectingHopper(StateMachine globalStateMachine) {
+  public EjectingHopper() {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.globalStateMachine = globalStateMachine;
     addRequirements(RobotContainer.subStateMachine);
 
   }
@@ -25,7 +22,7 @@ public class EjectingHopper extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    globalStateMachine.setRobotState(StateMachine.RobotState.EJECTING_HOPPER);
+    RobotContainer.subStateMachine.setRobotState(StateMachine.RobotState.EJECTING_HOPPER);
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.REVERSE_SERIALIZER_ROLLERS_SPEED);
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.REVERSE_INTAKE_ROLLER_SPEED);
     RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(ConstRotors.REVERSE_SERIALIZER_V_FUNNEL_SPEED);

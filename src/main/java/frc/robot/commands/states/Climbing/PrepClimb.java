@@ -13,12 +13,11 @@ import frc.robot.subsystems.StateMachine;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class PrepClimb extends Command {
   Drivetrain globalDrivetrain = RobotContainer.drivetrainInstance;
-  StateMachine globalStateMachine;
 
   /** Creates a new PrepClimb. */
-  public PrepClimb(StateMachine globalStateMachine) {
+  public PrepClimb() {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.globalStateMachine = globalStateMachine;
+
     addRequirements(RobotContainer.subStateMachine);
   }
 
@@ -28,7 +27,7 @@ public class PrepClimb extends Command {
     // TOdo: replace nulls with proper values
     // globalDrivetrain.rotationalAlign(ConstField.TOWER_POSE,
     // ConstDrivetrain.TURN_SPEED);
-    globalStateMachine.setRobotState(StateMachine.RobotState.PREP_CLIMB_L1);
+    RobotContainer.subStateMachine.setRobotState(StateMachine.RobotState.PREP_CLIMB_L1);
     RobotContainer.motionInstance.setClimberPosition(ConstMotion.EXTEND_CLIMBER);
     RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.RETRACT_INTAKE_PIVOT_ANGLE);
 
