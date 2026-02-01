@@ -35,6 +35,6 @@ public class Unclimb extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return RobotContainer.motionInstance.isAtPosition(ConstMotion.EXTEND_CLIMBER, ConstMotion.CLIMBER_TOLERANCE);
   }
 }
