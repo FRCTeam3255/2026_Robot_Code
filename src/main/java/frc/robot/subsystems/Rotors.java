@@ -79,8 +79,10 @@ public class Rotors extends SubsystemBase {
     AngularVelocity lowerLim = desiredSpeed.minus(tolerance);
     AngularVelocity upperLim = desiredSpeed.plus(tolerance);
 
-    return getFlywheelSpeeds().gte(lowerLim)
-        && getFlywheelSpeeds().lte(upperLim);
+    AngularVelocity flywheelSpeeds = getFlywheelSpeeds();
+
+    return flywheelSpeeds.gte(lowerLim)
+        && flywheelSpeeds.lte(upperLim);
   }
 
   @Override
