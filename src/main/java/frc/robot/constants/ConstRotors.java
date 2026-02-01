@@ -85,11 +85,11 @@ public class ConstRotors {
     FLYWHEEL_RIGHT_CONFIGURATION.MotionMagic.MotionMagicAcceleration = 600;
     FLYWHEEL_RIGHT_CONFIGURATION.MotionMagic.MotionMagicJerk = 6000;
 
-    flywheelSpeedMap.put(Inches.of(0.0).in(Inches), RPM.of(0.0).in(RPM));
-    flywheelSpeedMap.put(Inches.of(0.0).in(Inches), RPM.of(0.0).in(RPM));
-    flywheelSpeedMap.put(Inches.of(0.0).in(Inches), RPM.of(0.0).in(RPM));
-    flywheelSpeedMap.put(Inches.of(0.0).in(Inches), RPM.of(0.0).in(RPM));
-    flywheelSpeedMap.put(Inches.of(0.0).in(Inches), RPM.of(0.0).in(RPM));
-    flywheelSpeedMap.put(Inches.of(0.0).in(Inches), RPM.of(0.0).in(RPM));
+    flywheelSpeedMap.put(Inches.of(0.0).in(Inches), RPM.of(5200).in(RPM));
+    flywheelSpeedMap.put(Inches.of(0.0).in(Inches), RPM.of(5200).in(RPM));
+    flywheelSpeedMap.put(Inches.of(0.0).in(Inches), RPM.of(5200).in(RPM));
+    flywheelSpeedMap.put(Inches.of(0.0).in(Inches), RPM.of(5200).in(RPM));
+    flywheelSpeedMap.put(Inches.of(0.0).in(Inches), RPM.of(5200).in(RPM));
+    flywheelSpeedMap.put(Inches.of(0.0).in(Inches), RPM.of(5200).in(RPM));
   }
 }

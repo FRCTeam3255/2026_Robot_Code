@@ -32,7 +32,6 @@ public class BasePrepShooter extends Command {
     RobotContainer.motionInstance.setHoodAngle(globalHoodAngle);
     RobotContainer.drivetrainInstance.setDriveRotation(globalDrivetrainAngle);
     RobotContainer.drivetrainInstance.setIsManualRotationEnabled(false);
-    System.out.println("enters base prep shoot");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
