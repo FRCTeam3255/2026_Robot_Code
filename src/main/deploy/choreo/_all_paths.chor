@@ -5,6 +5,20 @@
  "variables":{
   "expressions":{},
   "poses":{
+   "Hub":{
+    "x":{
+     "exp":"4.629215717315674 m",
+     "val":4.629215717315674
+    },
+    "y":{
+     "exp":"4.031784534454346 m",
+     "val":4.031784534454346
+    },
+    "heading":{
+     "exp":"0 deg",
+     "val":0.0
+    }
+   },
    "Hub_front":{
     "x":{
      "exp":"2.3 m",
@@ -45,20 +59,6 @@
     "heading":{
      "exp":"30 deg",
      "val":0.5235987755982988
-    }
-   },
-   "Hub":{
-    "x":{
-     "exp":"4.629215717315674 m",
-     "val":4.629215717315674
-    },
-    "y":{
-     "exp":"4.031784534454346 m",
-     "val":4.031784534454346
-    },
-    "heading":{
-     "exp":"0 deg",
-     "val":0.0
     }
    },
    "OppNeutral":{
@@ -217,7 +217,7 @@
  },
  "generationFeatures":[],
  "codegen":{
-  "root":null,
+  "root":"..\\..\\java\\frc\\robot\\constants",
   "genVars":true,
   "genTrajData":true,
   "useChoreoLib":true

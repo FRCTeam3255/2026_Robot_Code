@@ -10,6 +10,7 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.RobotContainer;
 import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstField;
 import frc.robot.subsystems.DriverStateMachine;
@@ -36,7 +37,7 @@ public class DriveManual extends Command {
     this.slowMode = slowMode;
     isOpenLoop = true;
 
-    addRequirements(this.subDrivetrain);
+    addRequirements(RobotContainer.subDriverStateMachine);
   }
 
   @Override
