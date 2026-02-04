@@ -275,6 +275,34 @@ public class RobotContainer {
     SmartDashboard.putData("Auto Chooser", autoChooser);
   }
 
+  Command ScoreAndCollect(String startPath, String endPath, Command try_prep_shoot, int shootingTime,
+      int intakingTime) {
+    return Commands.sequence(
+        Commands.runOnce(() -> subStateMachine.setRobotState(RobotState.NONE)).asProxy(),
+        runPath(startPath).asProxy(),
+        try_prep_shoot.asProxy().withTimeout(0.6),
+        TRY_SHOOTING.asProxy().withTimeout(shootingTime),
+        TRY_NONE.asProxy().withTimeout(0.05),
+        runPath(endPath).asProxy(),
+        TRY_INTAKING.asProxy().withTimeout(intakingTime));
+  }
+
+  Command ScoreOnly(String startPath, Command try_prep_shoot, int shootingTime) {
+    return Commands.sequence(
+        Commands.runOnce(() -> subStateMachine.setRobotState(RobotState.NONE)).asProxy(),
+        runPath(startPath).asProxy(),
+        try_prep_shoot.asProxy().withTimeout(0.6),
+        TRY_SHOOTING.asProxy().withTimeout(shootingTime));
+  }
+
+  Command Climb(String startPath) {
+    return Commands.sequence(
+        Commands.runOnce(() -> subStateMachine.setRobotState(RobotState.NONE)).asProxy(),
+        runPath(startPath).asProxy(),
+        TRY_PREP_CLIMB_L1.asProxy().withTimeout(0.5),
+        TRY_CLIMBING_L1.asProxy().withTimeout(4));
+  }
+
   public static boolean isPracticeBot() {
     return !isPracticeBot.get();
   }
