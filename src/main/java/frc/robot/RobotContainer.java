@@ -209,7 +209,7 @@ public class RobotContainer {
 
     Command PreloadOnly = Commands.sequence(
         ScoreOnly(ChoreoTraj.Reverse_From_Hub,
-            TRY_PREP_TRENCH,
+            TRY_PREP_ANYWHERE,
             shootingTime));
 
     Command PreloadDepot = Commands.sequence(
