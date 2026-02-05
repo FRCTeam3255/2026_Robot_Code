@@ -56,6 +56,10 @@ public class Motion extends SubsystemBase {
     climber.setControl(climberMotionRequest.withPosition(setpoint.in(Units.Inches)));
   }
 
+  public Angle getPivotAngle() {
+    return intakePivot.getPosition().getValue();
+  }
+
   public Angle getHoodAngle() {
     return hood.getPosition().getValue();
   }
