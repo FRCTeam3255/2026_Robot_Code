@@ -26,7 +26,8 @@ public class RobotPoses extends SubsystemBase {
   Pose3d model0IntakePivot = Pose3d.kZero;
   Pose3d model1Hopper = Pose3d.kZero;
   Pose3d model2Shooter = Pose3d.kZero;
-  Pose3d model3ClimberBaseStage = Pose3d.kZero;
+  Pose3d model3Hood = Pose3d.kZero;
+  Pose3d model4ClimberBaseStage = Pose3d.kZero;
 
   Transform3d climberTransform3d;
   Rotation3d intakePivotRotation3d;
