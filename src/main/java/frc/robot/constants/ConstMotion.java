@@ -41,6 +41,7 @@ public class ConstMotion {
   public final static InterpolatingDoubleTreeMap hoodAngleMap = new InterpolatingDoubleTreeMap();
 
   public static final Distance CLIMBER_TOLERANCE = Inches.of(0.2);
+  public static final Distance HOPPER_ELEVATION = Inches.of(0);
   static {
 
     INTAKE_PIVOT_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;

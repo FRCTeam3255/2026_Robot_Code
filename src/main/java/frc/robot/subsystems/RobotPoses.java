@@ -4,10 +4,7 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix6.mechanisms.swerve.LegacySwerveRequest.RobotCentric;
-
 import edu.wpi.first.epilogue.Logged;
-import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation3d;
@@ -16,7 +13,7 @@ import edu.wpi.first.units.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstField;
-import frc.robot.constants.ConstSystem;
+import frc.robot.constants.ConstMotion;
 
 @Logged
 public class RobotPoses extends SubsystemBase {
@@ -52,33 +49,41 @@ public class RobotPoses extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    if (RobotContainer.motionInstance.getPivotAngle() == ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE) {
+      hopperTransform3d = new Transform3d(
+          Units.Inches.zero(),
+          Units.Inches.zero(),
+          ConstMotion.HOPPER_ELEVATION,
+          Rotation3d.kZero);
+    } else {
+      hopperTransform3d = new Transform3d(
+          Units.Inches.zero(),
+          Units.Inches.zero(),
+          Units.Inches.zero(),
+          Rotation3d.kZero);
+    }
     climberTransform3d = new Transform3d(
         Units.Inches.zero(),
         RobotContainer.motionInstance.getClimberPosition().div(2),
         Units.Inches.zero(),
         Rotation3d.kZero);
     intakePivotRotation3d = new Rotation3d(
-        RobotContainer.motionInstance.getPivotAngle(),
         Units.Degrees.zero(),
+        RobotContainer.motionInstance.getPivotAngle(),
         Units.Degrees.zero());
-    hopperTransform3d = new Transform3d(
-        Units.Inches.zero(),
-        Units.Inches.zero(),
-        Units.Inches.zero(),
-        Rotation3d.kZero);
     hoodPivotRotation3d = new Rotation3d(
         Units.Degrees.zero(),
         RobotContainer.motionInstance.getHoodAngle(),
         Units.Degrees.zero());
 
-    // Robot Positions
+    // Component Positions
     modelDrivetrain = new Pose3d(RobotContainer.drivetrainInstance.getPose());
     model0IntakePivot = Pose3d.kZero.rotateAround(
         Pose3d.kZero.plus(intakePivotPoint).getTranslation(), intakePivotRotation3d);
-
-    model1Hopper = model0IntakePivot.transformBy(hopperTransform3d);
-
+    model1Hopper = Pose3d.kZero.transformBy(hopperTransform3d);
     model2Shooter = Pose3d.kZero;
+    model3Hood = Pose3d.kZero.transformBy(hoodPivotPoint)
+        .rotateAround(Pose3d.kZero.plus(hoodPivotPoint).getTranslation(), hoodPivotRotation3d);
 
   }
 
