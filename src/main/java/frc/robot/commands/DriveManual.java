@@ -24,7 +24,7 @@ public class DriveManual extends Command {
   Rotation2d targetHeading;
   public boolean isDriverRotationManualInput;
 
-  public DriveManual(Drivetrain subDrivetrain, DoubleSupplier xAxis, DoubleSupplier yAxis,
+  public DriveManual(DoubleSupplier xAxis, DoubleSupplier yAxis,
       DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis,
       BooleanSupplier slowMode) {
     this.subDrivetrain = subDrivetrain;

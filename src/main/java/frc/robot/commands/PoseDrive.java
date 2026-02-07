@@ -10,6 +10,7 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.RobotContainer;
 import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstField;
 import frc.robot.constants.ConstPoseDrive.PoseDriveGroup;
@@ -19,25 +20,22 @@ import frc.robot.subsystems.Drivetrain;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class PoseDrive extends Command {
   /** Creates a new PoseDrive. */
-  Drivetrain subDrivetrain;
-  DriverStateMachine subDriverStateMachine;
+
   DoubleSupplier xAxis, yAxis, rotationAxis;
   BooleanSupplier slowMode;
   PoseDriveGroup poseGroup;
   Pose2d closestPose;
   public boolean isPoseAligned = false;
 
-  public PoseDrive(Drivetrain subDrivetrain,
+  public PoseDrive(
       DoubleSupplier xAxis, DoubleSupplier yAxis, DoubleSupplier rotationAxis, BooleanSupplier slowMode,
       PoseDriveGroup poseGroup) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.subDrivetrain = subDrivetrain;
     this.xAxis = xAxis;
     this.yAxis = yAxis;
     this.rotationAxis = rotationAxis;
     this.poseGroup = poseGroup;
     this.slowMode = slowMode;
-    addRequirements(this.subDriverStateMachine);
   }
 
   // Called when the command is initially scheduled.
@@ -48,11 +46,11 @@ public class PoseDrive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    closestPose = subDrivetrain.getPose().nearest(poseGroup.targetPoseGroup);
-    subDrivetrain.lastDesiredPoseGroup = poseGroup;
-    subDrivetrain.lastDesiredTarget = closestPose;
+    closestPose = RobotContainer.drivetrainInstance.getPose().nearest(poseGroup.targetPoseGroup);
+    RobotContainer.drivetrainInstance.lastDesiredPoseGroup = poseGroup;
+    RobotContainer.drivetrainInstance.lastDesiredTarget = closestPose;
 
-    ChassisSpeeds velocities = subDrivetrain.calculateVelocitiesFromInput(
+    ChassisSpeeds velocities = RobotContainer.drivetrainInstance.calculateVelocitiesFromInput(
         xAxis,
         yAxis,
         rotationAxis,
@@ -62,22 +60,22 @@ public class PoseDrive extends Command {
         ConstDrivetrain.REAL_DRIVE_SPEED,
         ConstDrivetrain.TURN_SPEED);
 
-    boolean isInAutoDriveZone = subDrivetrain.isInAutoDriveZone(
+    boolean isInAutoDriveZone = RobotContainer.drivetrainInstance.isInAutoDriveZone(
         poseGroup.minDistanceBeforeDrive,
         closestPose);
 
     if (isInAutoDriveZone) {
-      subDrivetrain.autoAlign(
+      RobotContainer.drivetrainInstance.autoAlign(
           closestPose,
           velocities,
           poseGroup.lockX,
           poseGroup.lockY);
-      subDriverStateMachine.setDriverState(poseGroup.driveState);
+      RobotContainer.subDriverStateMachine.setDriverState(poseGroup.driveState);
     } else {
-      subDrivetrain.rotationalAlign(
+      RobotContainer.drivetrainInstance.rotationalAlign(
           closestPose,
           velocities);
-      subDriverStateMachine.setDriverState(poseGroup.snapState);
+      RobotContainer.subDriverStateMachine.setDriverState(poseGroup.snapState);
     }
   }
 
@@ -92,8 +90,8 @@ public class PoseDrive extends Command {
     if (closestPose == null) {
       return false;
     }
-    isPoseAligned = subDrivetrain.isAtPosition(closestPose, poseGroup.distanceTolerance) &&
-        subDrivetrain.isAtRotation(closestPose.getRotation(), poseGroup.rotationTolerance);
+    isPoseAligned = RobotContainer.drivetrainInstance.isAtPosition(closestPose, poseGroup.distanceTolerance) &&
+        RobotContainer.drivetrainInstance.isAtRotation(closestPose.getRotation(), poseGroup.rotationTolerance);
     return isPoseAligned;
   }
 }

@@ -57,7 +57,6 @@ public class DriverStateMachine extends SubsystemBase {
           case EXAMPLE_POSE_DRIVE:
           case CHOREO:
             return () -> new DriveManual(
-                RobotContainer.drivetrainInstance,
                 xAxis,
                 yAxis,
                 rotationXAxis,
@@ -72,7 +71,7 @@ public class DriverStateMachine extends SubsystemBase {
           case MANUAL:
           case EXAMPLE_POSE_DRIVE:
             return () -> new PoseDrive(
-                RobotContainer.drivetrainInstance,
+
                 xAxis,
                 yAxis,
                 rotationXAxis,
@@ -87,7 +86,6 @@ public class DriverStateMachine extends SubsystemBase {
           case EXAMPLE_ROTATION_SNAP:
           case MANUAL:
             return () -> new PoseDrive(
-                RobotContainer.drivetrainInstance,
                 xAxis,
                 yAxis,
                 rotationXAxis,
@@ -102,6 +100,7 @@ public class DriverStateMachine extends SubsystemBase {
         + desiredState.toString() + " while at " + currentDriverState.toString());
   }
 
+  // i agree
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
