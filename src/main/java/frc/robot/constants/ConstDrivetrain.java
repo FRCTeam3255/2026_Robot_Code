@@ -252,7 +252,7 @@ public class ConstDrivetrain {
   }
 
   public static class ROTATION_PID {
-    public static final double kP = 3.0;
+    public static final double kP = 10.0;
     public static final double kI = 0.0;
     public static final double kD = 0.3;
   }

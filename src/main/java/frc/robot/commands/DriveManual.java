@@ -8,7 +8,6 @@ import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -25,7 +24,8 @@ public class DriveManual extends Command {
   BooleanSupplier slowMode;
   Rotation2d targetHeading;
   public boolean isDriverRotationManualInput;
-  private double lastTime;
+  // Assume scheduler runs ~50Hz; use a fixed loop period instead of Timer.
+  private static final double LOOP_PERIOD = 0.02;
 
   public DriveManual(Drivetrain subDrivetrain, DoubleSupplier xAxis, DoubleSupplier yAxis,
       DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis, DriverStateMachine subDriverStateMachine,
@@ -44,32 +44,29 @@ public class DriveManual extends Command {
 
   @Override
   public void initialize() {
-    lastTime = Timer.getFPGATimestamp();
+    // initialize accumulated heading from current robot heading
+    targetHeading = subDrivetrain.getDriveRotation();
   }
 
   @Override
   public void execute() {
-    double now = Timer.getFPGATimestamp();
-    double dt = now - lastTime;
-    lastTime = now;
-
     double rotInput = rotationXAxis.getAsDouble();
     double deadband = 0.05;
+
     if (Math.abs(rotInput) > deadband) {
       double radPerSec = ConstDrivetrain.TURN_SPEED.in(Units.RadiansPerSecond);
-      double deltaRad = rotInput * radPerSec * dt;
-      Rotation2d current = subDrivetrain.getDriveRotation();
-      targetHeading = new Rotation2d(current.getRadians() + deltaRad);
+      double deltaRad = rotInput * radPerSec * LOOP_PERIOD;
+      targetHeading = new Rotation2d(targetHeading.getRadians() + deltaRad);
       subDrivetrain.setDriveRotation(targetHeading.getMeasure());
       isDriverRotationManualInput = true;
     } else {
       isDriverRotationManualInput = false;
-      targetHeading = subDrivetrain.getDriveRotation();
+      subDrivetrain.setDriveRotation(targetHeading.getMeasure());
     }
     ChassisSpeeds velocities = subDrivetrain.calculateVelocitiesFromInput(
         xAxis,
         yAxis,
-        rotationXAxis,
+        () -> 0.0,
         slowMode,
         ConstField.isRedAlliance(),
         ConstDrivetrain.SLOW_MODE_MULTIPLIER,
@@ -84,6 +81,10 @@ public class DriveManual extends Command {
         ConstDrivetrain.ROTATION_PID.kP,
         ConstDrivetrain.ROTATION_PID.kI,
         ConstDrivetrain.ROTATION_PID.kD);
+
+    System.out.printf("reqDeg=%.2f reqRad=%.3f actualYawDeg=%.2f actualYawRad=%.3f%n",
+        targetHeading.getDegrees(), targetHeading.getRadians(),
+        subDrivetrain.getPose().getRotation().getDegrees(), subDrivetrain.getPose().getRotation().getRadians());
   }
 
   @Override
