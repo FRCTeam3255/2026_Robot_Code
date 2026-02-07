@@ -77,7 +77,7 @@ public class Rotors extends SubsystemBase {
   }
 
   public AngularVelocity getFlywheelSpeeds() {
-    return flywheelBottomLeft.getVelocity().getValue();
+    return flywheelBottomWest.getVelocity().getValue();
   }
 
   public boolean areFlywheelsAtSpeed(AngularVelocity desiredSpeed, AngularVelocity tolerance) {
