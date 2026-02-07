@@ -1,6 +1,6 @@
 {
   "version": 1.0,
-  "grid_size": 34,
+  "grid_size": 128,
   "tabs": [
     {
       "name": "Teleoperated",
@@ -9,10 +9,10 @@
         "containers": [
           {
             "title": "Driving State",
-            "x": 0.0,
-            "y": 102.0,
-            "width": 408.0,
-            "height": 102.0,
+            "x": 1152.0,
+            "y": 128.0,
+            "width": 384.0,
+            "height": 128.0,
             "type": "Large Text Display",
             "properties": {
               "topic": "Robot/m_robotContainer/subStateMachine/getDriverState",
@@ -22,10 +22,10 @@
           },
           {
             "title": "Robot State",
-            "x": 986.0,
-            "y": 102.0,
-            "width": 374.0,
-            "height": 102.0,
+            "x": 1152.0,
+            "y": 0.0,
+            "width": 384.0,
+            "height": 128.0,
             "type": "Large Text Display",
             "properties": {
               "topic": "Robot/m_robotContainer/subStateMachine/getRobotState",
@@ -34,11 +34,31 @@
             }
           },
           {
+            "title": "Field",
+            "x": 256.0,
+            "y": 256.0,
+            "width": 896.0,
+            "height": 512.0,
+            "type": "Field",
+            "properties": {
+              "topic": "/SmartDashboard/Field",
+              "period": 0.06,
+              "field_game": "Reefscape",
+              "robot_width": 0.85,
+              "robot_length": 0.85,
+              "show_other_objects": true,
+              "show_trajectories": true,
+              "field_rotation": 0.0,
+              "robot_color": 4294198070,
+              "trajectory_color": 4294967295
+            }
+          },
+          {
             "title": "Is our shift?",
-            "x": 136.0,
-            "y": 204.0,
-            "width": 272.0,
-            "height": 238.0,
+            "x": 1152.0,
+            "y": 256.0,
+            "width": 384.0,
+            "height": 512.0,
             "type": "Boolean Box",
             "properties": {
               "topic": "Robot/m_robotContainer/hasCoralTrigger",
@@ -52,10 +72,10 @@
           },
           {
             "title": "Ready to shoot",
-            "x": 400,
-            "y": 400,
-            "width": 272.0,
-            "height": 238.0,
+            "x": 896.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 256.0,
             "type": "Boolean Box",
             "properties": {
               "topic": "Robot/m_robotContainer/hasCoralTrigger",
@@ -69,10 +89,10 @@
           },
           {
             "title": "Climbed L1",
-            "x": 0,
-            "y": 400,
-            "width": 272.0,
-            "height": 75,
+            "x": 0.0,
+            "y": 384.0,
+            "width": 256.0,
+            "height": 128.0,
             "type": "Boolean Box",
             "properties": {
               "topic": "Robot/m_robotContainer/hasCoralTrigger",
@@ -86,10 +106,10 @@
           },
           {
             "title": "Climbed L2",
-            "x": 136.0,
-            "y": 204.0,
-            "width": 272.0,
-            "height": 75,
+            "x": 0.0,
+            "y": 512.0,
+            "width": 256.0,
+            "height": 128.0,
             "type": "Boolean Box",
             "properties": {
               "topic": "Robot/m_robotContainer/hasCoralTrigger",
@@ -103,10 +123,10 @@
           },
           {
             "title": "Climbed L3",
-            "x": 100.0,
-            "y": 204.0,
-            "width": 272.0,
-            "height": 75,
+            "x": 0.0,
+            "y": 640.0,
+            "width": 256.0,
+            "height": 128.0,
             "type": "Boolean Box",
             "properties": {
               "topic": "Robot/m_robotContainer/hasCoralTrigger",
@@ -120,10 +140,10 @@
           },
           {
             "title": "Match Time",
-            "x": 408.0,
+            "x": 256.0,
             "y": 0.0,
-            "width": 578.0,
-            "height": 102.0,
+            "width": 640.0,
+            "height": 256.0,
             "type": "Match Time",
             "properties": {
               "topic": "Robot/getMatchTime",
@@ -136,10 +156,10 @@
           },
           {
             "title": "Climber Camera",
-            "x": 0,
-            "y": 0,
-            "width": 306.0,
-            "height": 340.0,
+            "x": 0.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 384.0,
             "type": "Camera Stream",
             "properties": {
               "topic": "/CameraPublisher/USB Camera 0",
@@ -147,6 +167,93 @@
               "rotation_turns": 0,
               "compression": 40,
               "fps": 30
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Autonomous",
+      "grid_layout": {
+        "layouts": [],
+        "containers": [
+          {
+            "title": "Field",
+            "x": 544.0,
+            "y": 0.0,
+            "width": 816.0,
+            "height": 442.0,
+            "type": "Field",
+            "properties": {
+              "topic": "/SmartDashboard/Field",
+              "period": 0.06,
+              "field_game": "Reefscape",
+              "robot_width": 0.85,
+              "robot_length": 0.85,
+              "show_other_objects": true,
+              "show_trajectories": true,
+              "field_rotation": 0.0,
+              "robot_color": 4294198070,
+              "trajectory_color": 4294967295
+            }
+          },
+          {
+            "title": "Robot State",
+            "x": 0.0,
+            "y": 102.0,
+            "width": 544.0,
+            "height": 102.0,
+            "type": "Large Text Display",
+            "properties": {
+              "topic": "Robot/m_robotContainer/subStateMachine/getRobotState",
+              "period": 0.06,
+              "data_type": "string"
+            }
+          },
+          {
+            "title": "Driving State",
+            "x": 0.0,
+            "y": 204.0,
+            "width": 544.0,
+            "height": 102.0,
+            "type": "Large Text Display",
+            "properties": {
+              "topic": "Robot/m_robotContainer/subStateMachine/getDriverState",
+              "period": 0.06,
+              "data_type": "string"
+            }
+          },
+          {
+            "title": "All Zeroed",
+            "x": 0.0,
+            "y": 306.0,
+            "width": 544.0,
+            "height": 136.0,
+            "type": "Boolean Box",
+            "properties": {
+              "topic": "Robot/bothSubsystemsZeroed",
+              "period": 0.06,
+              "data_type": "boolean",
+              "true_color": 4283215696,
+              "false_color": 4294198070,
+              "true_icon": "None",
+              "false_icon": "None"
+            }
+          },
+          {
+            "title": "Match Time",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 544.0,
+            "height": 102.0,
+            "type": "Match Time",
+            "properties": {
+              "topic": "Robot/getMatchTime",
+              "period": 0.06,
+              "data_type": "double",
+              "time_display_mode": "Minutes and Seconds",
+              "red_start_time": 15,
+              "yellow_start_time": 30
             }
           }
         ]
@@ -273,93 +380,6 @@
               "topic": "/SmartDashboard/SendableChooser[1]/active",
               "period": 0.06,
               "data_type": "string"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "name": "Autonomous",
-      "grid_layout": {
-        "layouts": [],
-        "containers": [
-          {
-            "title": "Field",
-            "x": 544.0,
-            "y": 0.0,
-            "width": 816.0,
-            "height": 442.0,
-            "type": "Field",
-            "properties": {
-              "topic": "/SmartDashboard/Field",
-              "period": 0.06,
-              "field_game": "Reefscape",
-              "robot_width": 0.85,
-              "robot_length": 0.85,
-              "show_other_objects": true,
-              "show_trajectories": true,
-              "field_rotation": 0.0,
-              "robot_color": 4294198070,
-              "trajectory_color": 4294967295
-            }
-          },
-          {
-            "title": "Robot State",
-            "x": 0.0,
-            "y": 102.0,
-            "width": 544.0,
-            "height": 102.0,
-            "type": "Large Text Display",
-            "properties": {
-              "topic": "Robot/m_robotContainer/subStateMachine/getRobotState",
-              "period": 0.06,
-              "data_type": "string"
-            }
-          },
-          {
-            "title": "Driving State",
-            "x": 0.0,
-            "y": 204.0,
-            "width": 544.0,
-            "height": 102.0,
-            "type": "Large Text Display",
-            "properties": {
-              "topic": "Robot/m_robotContainer/subStateMachine/getDriverState",
-              "period": 0.06,
-              "data_type": "string"
-            }
-          },
-          {
-            "title": "All Zeroed",
-            "x": 0.0,
-            "y": 306.0,
-            "width": 544.0,
-            "height": 136.0,
-            "type": "Boolean Box",
-            "properties": {
-              "topic": "Robot/bothSubsystemsZeroed",
-              "period": 0.06,
-              "data_type": "boolean",
-              "true_color": 4283215696,
-              "false_color": 4294198070,
-              "true_icon": "None",
-              "false_icon": "None"
-            }
-          },
-          {
-            "title": "Match Time",
-            "x": 0.0,
-            "y": 0.0,
-            "width": 544.0,
-            "height": 102.0,
-            "type": "Match Time",
-            "properties": {
-              "topic": "Robot/getMatchTime",
-              "period": 0.06,
-              "data_type": "double",
-              "time_display_mode": "Minutes and Seconds",
-              "red_start_time": 15,
-              "yellow_start_time": 30
             }
           }
         ]
