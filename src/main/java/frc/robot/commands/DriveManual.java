@@ -4,9 +4,12 @@
 
 package frc.robot.commands;
 
+import static edu.wpi.first.units.Units.Radians;
+
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -24,8 +27,7 @@ public class DriveManual extends Command {
   BooleanSupplier slowMode;
   Rotation2d targetHeading;
   public boolean isDriverRotationManualInput;
-  // Assume scheduler runs ~50Hz; use a fixed loop period instead of Timer.
-  private static final double LOOP_PERIOD = 0.02;
+  private Rotation2d currentHeading;
 
   public DriveManual(Drivetrain subDrivetrain, DoubleSupplier xAxis, DoubleSupplier yAxis,
       DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis, DriverStateMachine subDriverStateMachine,
@@ -46,6 +48,7 @@ public class DriveManual extends Command {
   public void initialize() {
     // initialize accumulated heading from current robot heading
     targetHeading = subDrivetrain.getDriveRotation();
+    currentHeading = subDrivetrain.getDriveRotation();
   }
 
   @Override
@@ -54,14 +57,14 @@ public class DriveManual extends Command {
     double deadband = 0.05;
 
     if (Math.abs(rotInput) > deadband) {
-      double radPerSec = ConstDrivetrain.TURN_SPEED.in(Units.RadiansPerSecond);
-      double deltaRad = rotInput * radPerSec * LOOP_PERIOD;
+      double deltaRad = rotInput * ConstDrivetrain.STEERING_MULTIPLIER;
       targetHeading = new Rotation2d(targetHeading.getRadians() + deltaRad);
-      subDrivetrain.setDriveRotation(targetHeading.getMeasure());
+      subDrivetrain.setDriveRotation(targetHeading.getMeasure().plus(Radians.of(Math.PI)));
       isDriverRotationManualInput = true;
+      currentHeading = subDrivetrain.getDriveRotation();
     } else {
       isDriverRotationManualInput = false;
-      subDrivetrain.setDriveRotation(targetHeading.getMeasure());
+      subDrivetrain.setDriveRotation(currentHeading.getMeasure());
     }
     ChassisSpeeds velocities = subDrivetrain.calculateVelocitiesFromInput(
         xAxis,

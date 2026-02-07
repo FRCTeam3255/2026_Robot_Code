@@ -178,8 +178,7 @@ public class ConstDrivetrain {
 
   // Rotational speed (degrees per second) while manually driving
   public static final AngularVelocity TURN_SPEED = Units.DegreesPerSecond.of(360);
-
-  // -- Motor Configurations --
+  public static final double STEERING_MULTIPLIER = 0.12;
   static {
     // This PID is implemented on each module, not the Drivetrain subsystem.
     // TODO: PID
@@ -252,7 +251,7 @@ public class ConstDrivetrain {
   }
 
   public static class ROTATION_PID {
-    public static final double kP = 10.0;
+    public static final double kP = 6.0;
     public static final double kI = 0.0;
     public static final double kD = 0.3;
   }
