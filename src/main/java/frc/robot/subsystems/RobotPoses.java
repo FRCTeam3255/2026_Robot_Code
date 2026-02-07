@@ -31,16 +31,16 @@ public class RobotPoses extends SubsystemBase {
   Transform3d hopperTransform3d;
   Rotation3d hoodPivotRotation3d;
 
-  Transform3d intakePivotPoint = new Transform3d(
-      Units.Inches.zero(),
-      Units.Inches.zero(),
-      Units.Inches.zero(),
-      Rotation3d.kZero);
-
   Transform3d hoodPivotPoint = new Transform3d(
       Units.Inches.zero(),
+      Units.Inches.of(18.516),
+      Units.Inches.of(10.963),
+      Rotation3d.kZero);
+
+  Transform3d intakePivotPoint = new Transform3d(
       Units.Inches.zero(),
-      Units.Inches.zero(),
+      Units.Inches.of(8.193),
+      Units.Inches.of(7.731),
       Rotation3d.kZero);
 
   public RobotPoses() {
@@ -73,7 +73,7 @@ public class RobotPoses extends SubsystemBase {
         Units.Degrees.zero());
     hoodPivotRotation3d = new Rotation3d(
         Units.Degrees.zero(),
-        RobotContainer.motionInstance.getHoodAngle(),
+        RobotContainer.motionInstance.getHoodAngle().unaryMinus(),
         Units.Degrees.zero());
 
     // Component Positions
@@ -82,9 +82,8 @@ public class RobotPoses extends SubsystemBase {
         Pose3d.kZero.plus(intakePivotPoint).getTranslation(), intakePivotRotation3d);
     model1Hopper = Pose3d.kZero.transformBy(hopperTransform3d);
     model2Shooter = Pose3d.kZero;
-    model3Hood = Pose3d.kZero.transformBy(hoodPivotPoint)
+    model3Hood = Pose3d.kZero
         .rotateAround(Pose3d.kZero.plus(hoodPivotPoint).getTranslation(), hoodPivotRotation3d);
-
   }
 
   public Pose2d getHub() {
