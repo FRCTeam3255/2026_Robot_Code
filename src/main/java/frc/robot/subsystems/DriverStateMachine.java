@@ -24,10 +24,6 @@ public class DriverStateMachine extends SubsystemBase {
   /** Creates a new DriverStateMachine. */
   public static DriverState currentDriverState = DriverState.MANUAL;
 
-  @NotLogged
-
-  DriverStateMachine subDriverStateMachine = this;
-
   public DriverStateMachine() {
 
   }
@@ -66,7 +62,7 @@ public class DriverStateMachine extends SubsystemBase {
                 yAxis,
                 rotationXAxis,
                 rotationYAxis,
-                subDriverStateMachine,
+
                 slowMode);
         }
         break;
@@ -77,7 +73,6 @@ public class DriverStateMachine extends SubsystemBase {
           case EXAMPLE_POSE_DRIVE:
             return () -> new PoseDrive(
                 RobotContainer.drivetrainInstance,
-                subDriverStateMachine,
                 xAxis,
                 yAxis,
                 rotationXAxis,
@@ -93,7 +88,6 @@ public class DriverStateMachine extends SubsystemBase {
           case MANUAL:
             return () -> new PoseDrive(
                 RobotContainer.drivetrainInstance,
-                subDriverStateMachine,
                 xAxis,
                 yAxis,
                 rotationXAxis,

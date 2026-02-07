@@ -27,12 +27,11 @@ public class PoseDrive extends Command {
   Pose2d closestPose;
   public boolean isPoseAligned = false;
 
-  public PoseDrive(Drivetrain subDrivetrain, DriverStateMachine subDriverStateMachine,
+  public PoseDrive(Drivetrain subDrivetrain,
       DoubleSupplier xAxis, DoubleSupplier yAxis, DoubleSupplier rotationAxis, BooleanSupplier slowMode,
       PoseDriveGroup poseGroup) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.subDrivetrain = subDrivetrain;
-    this.subDriverStateMachine = subDriverStateMachine;
     this.xAxis = xAxis;
     this.yAxis = yAxis;
     this.rotationAxis = rotationAxis;

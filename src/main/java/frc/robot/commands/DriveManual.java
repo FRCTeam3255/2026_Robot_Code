@@ -25,10 +25,9 @@ public class DriveManual extends Command {
   public boolean isDriverRotationManualInput;
 
   public DriveManual(Drivetrain subDrivetrain, DoubleSupplier xAxis, DoubleSupplier yAxis,
-      DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis, DriverStateMachine subDriverStateMachine,
+      DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis,
       BooleanSupplier slowMode) {
     this.subDrivetrain = subDrivetrain;
-    this.subDriverStateMachine = subDriverStateMachine;
     this.xAxis = xAxis;
     this.yAxis = yAxis;
     this.rotationXAxis = rotationXAxis;
