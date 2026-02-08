@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.units.Units;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstField;
@@ -11,6 +12,7 @@ import frc.robot.constants.ConstField;
 public class ResetPose extends Command {
 
   public ResetPose() {
+    addRequirements(RobotContainer.subDriverStateMachine);
   }
 
   @Override
@@ -18,6 +20,8 @@ public class ResetPose extends Command {
     RobotContainer.drivetrainInstance.resetPose(ConstField.FieldElements.RESET_POSE);
     RobotContainer.drivetrainInstance.getPigeon2()
         .setYaw(ConstField.FieldElements.RESET_POSE.getRotation().getMeasure());
+    RobotContainer.drivetrainInstance.setDriveRotation(ConstField.FieldElements.RESET_POSE.getRotation().getMeasure());
+    System.out.println(ConstField.FieldElements.RESET_POSE.getRotation().getMeasure().in(Units.Degrees));
   }
 
   @Override
