@@ -29,12 +29,13 @@ public class PoseDrive extends Command {
       DoubleSupplier xAxis, DoubleSupplier yAxis, DoubleSupplier rotationAxis, BooleanSupplier slowMode,
       PoseDriveGroup poseGroup) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.subStateMachine);
     this.xAxis = xAxis;
     this.yAxis = yAxis;
     this.rotationAxis = rotationAxis;
     this.poseGroup = poseGroup;
     this.slowMode = slowMode;
+    addRequirements(RobotContainer.subDriverStateMachineInstance);
+
   }
 
   // Called when the command is initially scheduled.
