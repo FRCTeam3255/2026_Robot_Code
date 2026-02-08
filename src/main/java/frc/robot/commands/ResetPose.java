@@ -16,9 +16,9 @@ public class ResetPose extends Command {
 
   @Override
   public void initialize() {
-    RobotContainer.drivetrainInstance.resetPose(resetPose());
+    RobotContainer.drivetrainInstance.resetPose(getAlliancePose());
     RobotContainer.drivetrainInstance.getPigeon2()
-        .setYaw(resetPose().getRotation().getMeasure());
+        .setYaw(getAlliancePose().getRotation().getMeasure());
   }
 
   @Override
@@ -29,7 +29,12 @@ public class ResetPose extends Command {
   public void end(boolean interrupted) {
   }
 
-  public Pose2d resetPose() {
+  @Override
+  public boolean isFinished() {
+    return true;
+  }
+
+  public Pose2d getAlliancePose() {
     Pose2d resetPose;
     if (ConstField.isRedAlliance()) {
       resetPose = ConstField.FieldElementGroups.RESET_POSE_SET.getRed().get(0);
