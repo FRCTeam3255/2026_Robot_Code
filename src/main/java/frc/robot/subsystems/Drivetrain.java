@@ -18,6 +18,7 @@ import com.ctre.phoenix6.swerve.SwerveModuleConstantsFactory;
 import com.frcteam3255.components.swerve.SN_SuperSwerveV2;
 
 import choreo.trajectory.SwerveSample;
+import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -28,6 +29,7 @@ import frc.robot.RobotContainer;
 import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstPoseDrive.PoseDriveGroup;
 
+@Logged
 public class Drivetrain extends SN_SuperSwerveV2 {
 
   public PoseDriveGroup lastDesiredPoseGroup;
@@ -183,10 +185,9 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     double hypotenuse = Math.hypot(rightStickX, rightStickY);
 
     if (hypotenuse < 1.15 && hypotenuse > 0.85) {
-      manualDriveRotation = Math.atan2(rightStickY, rightStickX) + Math.PI / 2;
+      manualDriveRotation = Math.atan2(rightStickY, rightStickX) - Math.PI / 2;
     }
     return manualDriveRotation;
-
   }
 
   public void setDriveRotation(Angle rotation) {
@@ -201,4 +202,10 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     manualRotationEnabled = set;
   }
 
+  public Angle snapToTarget(Pose2d targetPose) {
+    double dx = targetPose.getX() - getPose().getX();
+    double dy = targetPose.getY() - getPose().getY();
+    double angleRad = Math.atan2(dy, dx);
+    return Degrees.of(Math.toDegrees(angleRad));
+  }
 }

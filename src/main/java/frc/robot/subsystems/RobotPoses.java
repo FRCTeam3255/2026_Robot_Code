@@ -6,9 +6,11 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
+import frc.robot.constants.ConstField;
 import frc.robot.constants.ConstSystem;
 
 @Logged
@@ -30,5 +32,15 @@ public class RobotPoses extends SubsystemBase {
 
     // Robot Positions
     comp0Drivetrain = new Pose3d(RobotContainer.drivetrainInstance.getPose());
+  }
+
+  public Pose2d getHub() {
+    Pose2d hubPose;
+    if (ConstField.isRedAlliance()) {
+      hubPose = ConstField.FieldElementGroups.HUB_POSE_SET.getRed().get(0);
+    } else {
+      hubPose = ConstField.FieldElementGroups.HUB_POSE_SET.getBlue().get(0);
+    }
+    return hubPose;
   }
 }

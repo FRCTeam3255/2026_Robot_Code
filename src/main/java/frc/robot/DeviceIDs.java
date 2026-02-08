@@ -44,10 +44,10 @@ public class DeviceIDs {
     public static final int INTAKE_ROLLERS_CAN = 11;
     public static final int SHOOTER_TRANSFER_CAN = 12;
     public static final int SERIALIZER_V_FUNNEL_CAN = 13;
-    public static final int FLYWHEEL_TOP_RIGHT_CAN = 14;
-    public static final int FLYWHEEL_TOP_LEFT_CAN = 15;
-    public static final int FLYWHEEL_BOTTOM_RIGHT_CAN = 16;
-    public static final int FLYWHEEL_BOTTOM_LEFT_CAN = 17;
+    public static final int FLYWHEEL_TOP_EAST_CAN = 14;
+    public static final int FLYWHEEL_TOP_WEST_CAN = 15;
+    public static final int FLYWHEEL_BOTTOM_EAST_CAN = 16;
+    public static final int FLYWHEEL_BOTTOM_WEST_CAN = 17;
   }
 
   // Motion Profile IDs: 30~49

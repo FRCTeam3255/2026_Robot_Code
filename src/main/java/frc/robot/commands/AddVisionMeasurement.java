@@ -6,9 +6,9 @@ package frc.robot.commands;
 
 import java.util.Optional;
 
-import com.frcteam3255.utils.LimelightHelpers;
-import com.frcteam3255.utils.LimelightHelpers.PoseEstimate;
-
+import frc.robot.LimelightHelpers;
+import frc.robot.LimelightHelpers.PoseEstimate;
+import frc.robot.RobotContainer;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
@@ -31,11 +31,11 @@ public class AddVisionMeasurement extends Command {
   public void execute() {
     // Tells the limelight where we are on the field
     LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_RIGHT_NAME,
-        RobotContainer.drivetrainInstance.getPose().getRotation().getDegrees(), 0, 0, 0, 0, 0);
+        RobotContainer.drivetrainInstance.getPigeon2().getYaw().getValueAsDouble(), 0, 0, 0, 0, 0);
     LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_LEFT_NAME,
-        RobotContainer.drivetrainInstance.getPose().getRotation().getDegrees(), 0, 0, 0, 0, 0);
+        RobotContainer.drivetrainInstance.getPigeon2().getYaw().getValueAsDouble(), 0, 0, 0, 0, 0);
     LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_BACK_NAME,
-        RobotContainer.drivetrainInstance.getPose().getRotation().getDegrees(), 0, 0, 0, 0, 0);
+        RobotContainer.drivetrainInstance.getPigeon2().getYaw().getValueAsDouble(), 0, 0, 0, 0, 0);
     AngularVelocity gyroRate = RobotContainer.drivetrainInstance.getGyroRate();
 
     estimatedPose = RobotContainer.subVision.determinePoseEstimate(gyroRate);

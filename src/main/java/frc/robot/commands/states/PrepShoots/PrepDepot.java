@@ -7,6 +7,7 @@ package frc.robot.commands.states.PrepShoots;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstPoseDrive;
 import frc.robot.constants.ConstRotors;
+import frc.robot.subsystems.StateMachine;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -14,7 +15,7 @@ import frc.robot.constants.ConstRotors;
 public class PrepDepot extends BasePrepShooter {
   public PrepDepot() {
     super(ConstRotors.FLYWHEEL_DEPOT_SPEED, ConstMotion.HOOD_DEPOT_ANGLE,
-        ConstPoseDrive.PrepShootRotations.DEPOT_PREP_SHOOT_ROTATION);
+        ConstPoseDrive.PrepShootRotations.DEPOT_PREP_SHOOT_ROTATION, StateMachine.RobotState.PREP_DEPOT);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 }

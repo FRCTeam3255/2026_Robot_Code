@@ -7,26 +7,29 @@ package frc.robot.commands.states;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
+import frc.robot.constants.ConstRotors;
 import frc.robot.subsystems.*;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class None extends Command {
   /** Creates a new None. */
 
-  StateMachine globalStateMachine;
-
-  public None(StateMachine globalStateMachine) {
+  public None() {
     addRequirements(RobotContainer.subStateMachine);
     // Use addRequirements() here to declare subsystem dependencies.
-    this.globalStateMachine = globalStateMachine;
-    addRequirements(globalStateMachine);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     RobotContainer.motionInstance.setClimberPosition(ConstMotion.RETRACT_CLIMBER);
-    globalStateMachine.setRobotState(StateMachine.RobotState.NONE);
+    RobotContainer.motionInstance.setHoodAngle(ConstMotion.HOOD_NONE_ANGLE);
+    RobotContainer.rotorsInstance.setFlywheelPercentOutput(ConstRotors.STOP);
+    RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.STOP);
+    RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.STOP);
+    RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(ConstRotors.STOP);
+    RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.STOP);
+    RobotContainer.subStateMachine.setRobotState(StateMachine.RobotState.NONE);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
