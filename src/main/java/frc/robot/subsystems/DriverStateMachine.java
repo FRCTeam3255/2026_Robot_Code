@@ -9,18 +9,16 @@ import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
 import edu.wpi.first.epilogue.Logged;
-import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Robot;
-import frc.robot.RobotContainer;
 import frc.robot.commands.DriveManual;
 import frc.robot.commands.PoseDrive;
 import frc.robot.constants.ConstPoseDrive;
 
 @Logged
 public class DriverStateMachine extends SubsystemBase {
+  public static final String MANUAL = null;
   /** Creates a new DriverStateMachine. */
   public static DriverState currentDriverState = DriverState.MANUAL;
 

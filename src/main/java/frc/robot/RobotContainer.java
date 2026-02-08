@@ -178,4 +178,9 @@ public class RobotContainer {
     return new AddVisionMeasurement(subVision)
         .withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming).ignoringDisable(true);
   }
+
+  public static void setDriverState(String manual2) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'setDriverState'");
+  }
 }

@@ -14,8 +14,6 @@ import frc.robot.RobotContainer;
 import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstField;
 import frc.robot.constants.ConstPoseDrive.PoseDriveGroup;
-import frc.robot.subsystems.DriverStateMachine;
-import frc.robot.subsystems.Drivetrain;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class PoseDrive extends Command {
@@ -31,6 +29,7 @@ public class PoseDrive extends Command {
       DoubleSupplier xAxis, DoubleSupplier yAxis, DoubleSupplier rotationAxis, BooleanSupplier slowMode,
       PoseDriveGroup poseGroup) {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.drivetrainInstance);
     this.xAxis = xAxis;
     this.yAxis = yAxis;
     this.rotationAxis = rotationAxis;
