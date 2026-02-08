@@ -1,13 +1,14 @@
 {
  "name":"New Path",
- "version":1,
+ "version":3,
  "snapshot":{
   "waypoints":[],
   "constraints":[],
   "targetDt":0.05
  },
  "params":{
-  "waypoints":[],
+  "waypoints":[
+    {"x":{"exp":"something.x", "val":3.495450019836426}, "y":{"exp":"something.y", "val":4.034599781036377}, "heading":{"exp":"something.heading", "val":0.0}, "intervals":40, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false}],
   "constraints":[
     {"from":"first", "to":null, "data":{"type":"StopPoint", "props":{}}, "enabled":true},
     {"from":"last", "to":null, "data":{"type":"StopPoint", "props":{}}, "enabled":true},
@@ -18,6 +19,7 @@
   }
  },
  "trajectory":{
+  "config":null,
   "sampleType":null,
   "waypoints":[],
   "samples":[],

@@ -121,7 +121,7 @@ public class ConstField {
   };
 
   public static class FieldElements {
-    public static final Pose2d RESET_POSE = new Pose2d(0, 0, new Rotation2d());
+    public static final Pose2d RESET_POSE = new Pose2d(3.495450019836426, 4.034599781036377, new Rotation2d());
     private static final Pose2d UPRIGHT_OUTPOST_SIDE_POSE = new Pose2d(1.0615900754928589, 3.3209617137908936,
         new Rotation2d());
     private static final Pose2d UPRIGHT_DEPOT_SIDE_POSE = new Pose2d(1.0615900754928589, 2.3092187862091064,
