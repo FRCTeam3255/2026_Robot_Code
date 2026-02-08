@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstField;
+import frc.robot.subsystems.DriverStateMachine.DriverState;
 
 public class DriveManual extends Command {
   DoubleSupplier xAxis, yAxis, rotationXAxis, rotationYAxis;
@@ -55,7 +56,7 @@ public class DriveManual extends Command {
         ConstDrivetrain.REAL_DRIVE_SPEED,
         ConstDrivetrain.TURN_SPEED);
 
-    RobotContainer.setDriverState(RobotContainer.subDriverStateMachineInstance.MANUAL);
+    RobotContainer.subDriverStateMachineInstance.setDriverState(DriverState.MANUAL);
 
     RobotContainer.drivetrainInstance.drive(
         velocities,

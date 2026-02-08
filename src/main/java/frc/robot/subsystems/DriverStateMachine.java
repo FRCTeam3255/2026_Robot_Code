@@ -18,7 +18,6 @@ import frc.robot.constants.ConstPoseDrive;
 
 @Logged
 public class DriverStateMachine extends SubsystemBase {
-  public static final String MANUAL = null;
   /** Creates a new DriverStateMachine. */
   public static DriverState currentDriverState = DriverState.MANUAL;
 
@@ -98,7 +97,6 @@ public class DriverStateMachine extends SubsystemBase {
         + desiredState.toString() + " while at " + currentDriverState.toString());
   }
 
-  // i agree
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

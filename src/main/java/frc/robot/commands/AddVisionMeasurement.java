@@ -13,19 +13,14 @@ import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstVision;
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Vision;
 
 public class AddVisionMeasurement extends Command {
-  Vision subVision;
 
   Optional<PoseEstimate> estimatedPose;
 
-  public AddVisionMeasurement(Vision subVision) {
+  public AddVisionMeasurement() {
 
-    this.subVision = subVision;
-
-    addRequirements(subVision);
+    addRequirements(RobotContainer.subVision);
   }
 
   @Override
@@ -43,7 +38,7 @@ public class AddVisionMeasurement extends Command {
         RobotContainer.drivetrainInstance.getPose().getRotation().getDegrees(), 0, 0, 0, 0, 0);
     AngularVelocity gyroRate = RobotContainer.drivetrainInstance.getGyroRate();
 
-    estimatedPose = subVision.determinePoseEstimate(gyroRate);
+    estimatedPose = RobotContainer.subVision.determinePoseEstimate(gyroRate);
     if (estimatedPose.isPresent()) {
       RobotContainer.drivetrainInstance.addVisionMeasurement(estimatedPose.get().pose,
           estimatedPose.get().timestampSeconds);

@@ -64,7 +64,7 @@ public class RobotContainer {
   public static StateMachine subStateMachine = new StateMachine();
   public static RobotPoses robotPose = new RobotPoses();
   public static Vision subVision = new Vision();
-
+  private final Vision loggedSubVision = subVision;
   Command TRY_NONE = Commands.deferredProxy(
       () -> subStateMachine.tryState(RobotState.NONE));
 
@@ -175,7 +175,7 @@ public class RobotContainer {
   }
 
   public Command addVisionMeasurement() {
-    return new AddVisionMeasurement(subVision)
+    return new AddVisionMeasurement()
         .withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming).ignoringDisable(true);
   }
 
