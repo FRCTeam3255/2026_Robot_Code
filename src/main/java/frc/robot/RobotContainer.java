@@ -60,7 +60,7 @@ public class RobotContainer {
   public static Rotors rotorsInstance = new Rotors();
   public static Motion motionInstance = new Motion();
   public static Drivetrain drivetrainInstance = new Drivetrain();
-  public static DriverStateMachine subDriverStateMachine = new DriverStateMachine();
+  public static DriverStateMachine subDriverStateMachineInstance = new DriverStateMachine();
   public static StateMachine subStateMachine = new StateMachine();
   public static RobotPoses robotPose = new RobotPoses();
   public static Vision subVision = new Vision();
@@ -69,29 +69,29 @@ public class RobotContainer {
       () -> subStateMachine.tryState(RobotState.NONE));
 
   Command MANUAL = new DeferredCommand(
-      subDriverStateMachine.tryState(
+      subDriverStateMachineInstance.tryState(
           DriverStateMachine.DriverState.MANUAL,
           conDriver.axis_LeftY,
           conDriver.axis_LeftX,
           conDriver.axis_RightX,
           conDriver.axis_RightY,
           conDriver.btn_LeftBumper),
-      Set.of(subDriverStateMachine));
+      Set.of(subDriverStateMachineInstance));
 
   Command EXAMPLE_POSE_DRIVE = new DeferredCommand(
-      subDriverStateMachine.tryState(
+      subDriverStateMachineInstance.tryState(
           DriverStateMachine.DriverState.EXAMPLE_POSE_DRIVE,
           conDriver.axis_LeftY,
           conDriver.axis_LeftX,
           conDriver.axis_RightX,
           conDriver.axis_RightY,
           conDriver.btn_RightBumper),
-      Set.of(subDriverStateMachine));
+      Set.of(subDriverStateMachineInstance));
 
   public RobotContainer() {
     conDriver.setLeftDeadband(constControllers.DRIVER_LEFT_STICK_DEADBAND);
 
-    subDriverStateMachine
+    subDriverStateMachineInstance
         .setDefaultCommand(MANUAL);
 
     configDriverBindings();
@@ -125,7 +125,7 @@ public class RobotContainer {
         drivetrainInstance::resetPose, // A function that resets the current robot pose to the provided Pose2d
         drivetrainInstance::followTrajectory, // The drive subsystem trajectory follower
         true, // If alliance flipping should be enabled
-        subDriverStateMachine // The drive subsystem
+        subDriverStateMachineInstance // The drive subsystem
     );
 
     // make our entries name
@@ -159,7 +159,7 @@ public class RobotContainer {
 
   public Command runPath(String pathName) {
     return autoFactory.trajectoryCmd(pathName).asProxy()
-        .alongWith(Commands.runOnce(() -> subDriverStateMachine.setDriverState(DriverState.CHOREO)));
+        .alongWith(Commands.runOnce(() -> subDriverStateMachineInstance.setDriverState(DriverState.CHOREO)));
   }
 
   public Command getAutonomousCommand() {

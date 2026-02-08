@@ -55,7 +55,7 @@ public class DriveManual extends Command {
         ConstDrivetrain.REAL_DRIVE_SPEED,
         ConstDrivetrain.TURN_SPEED);
 
-    RobotContainer.setDriverState(RobotContainer.subDriverStateMachine.MANUAL);
+    RobotContainer.setDriverState(RobotContainer.subDriverStateMachineInstance.MANUAL);
 
     RobotContainer.drivetrainInstance.drive(
         velocities,

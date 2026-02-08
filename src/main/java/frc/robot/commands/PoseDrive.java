@@ -69,12 +69,12 @@ public class PoseDrive extends Command {
           velocities,
           poseGroup.lockX,
           poseGroup.lockY);
-      RobotContainer.subDriverStateMachine.setDriverState(poseGroup.driveState);
+      RobotContainer.subDriverStateMachineInstance.setDriverState(poseGroup.driveState);
     } else {
       RobotContainer.drivetrainInstance.rotationalAlign(
           closestPose,
           velocities);
-      RobotContainer.subDriverStateMachine.setDriverState(poseGroup.snapState);
+      RobotContainer.subDriverStateMachineInstance.setDriverState(poseGroup.snapState);
     }
   }
 
