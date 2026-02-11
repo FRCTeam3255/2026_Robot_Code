@@ -4,10 +4,14 @@
 
 package frc.robot.subsystems;
 
+import static edu.wpi.first.units.Units.Inches;
+
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.units.Units;
+import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.ConstField;
 import frc.robot.constants.ConstSystem;
@@ -16,6 +20,7 @@ import frc.robot.constants.ConstSystem;
 public class RobotPoses extends SubsystemBase {
   /** Creates a new RobotPoses. */
 
+  public Distance distanceToHub = Units.Inches.of(0);
   @NotLogged
   Drivetrain subDrivetrain;
 
@@ -43,4 +48,12 @@ public class RobotPoses extends SubsystemBase {
     }
     return hubPose;
   }
+
+  public Distance getToHubDistance() {
+    Distance dx = subDrivetrain.getPose().getMeasureX().minus(getHub().getMeasureX());
+    Distance dy = subDrivetrain.getPose().getMeasureY().minus(getHub().getMeasureY());
+    distanceToHub = Units.Inches.of(Math.hypot(dx.in(Units.Inches), dy.in(Units.Inches)));
+    return distanceToHub;
+  }
+
 }
