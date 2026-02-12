@@ -32,9 +32,9 @@ public class RobotPoses extends SubsystemBase {
   Rotation3d hoodPivotRotation3d;
 
   Transform3d hoodPivotPoint = new Transform3d(
+      Units.Inches.of(10.963),
       Units.Inches.zero(),
       Units.Inches.of(18.516),
-      Units.Inches.of(10.963),
       Rotation3d.kZero);
 
   Transform3d intakePivotPoint = new Transform3d(
@@ -73,7 +73,7 @@ public class RobotPoses extends SubsystemBase {
         Units.Degrees.zero());
     hoodPivotRotation3d = new Rotation3d(
         Units.Degrees.zero(),
-        RobotContainer.motionInstance.getHoodAngle().unaryMinus(),
+        RobotContainer.motionInstance.getHoodAngle(),
         Units.Degrees.zero());
 
     // Component Positions
