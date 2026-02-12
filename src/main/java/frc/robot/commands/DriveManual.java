@@ -12,6 +12,7 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.units.Units;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
@@ -29,6 +30,7 @@ public class DriveManual extends Command {
   Rotation2d targetHeading;
   public boolean isDriverRotationManualInput;
   private Rotation2d currentHeading;
+  Timer delayTimer = new Timer();
 
   public DriveManual(Drivetrain subDrivetrain, DoubleSupplier xAxis, DoubleSupplier yAxis,
       DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis, DriverStateMachine subDriverStateMachine,
@@ -54,23 +56,11 @@ public class DriveManual extends Command {
 
   @Override
   public void execute() {
-    double rotInput = -rotationXAxis.getAsDouble();
-    double deadband = 0.05;
-
-    if (Math.abs(rotInput) > deadband) {
-      double deltaRad = rotInput * ConstDrivetrain.STEERING_MULTIPLIER;
-      targetHeading = new Rotation2d(targetHeading.getRadians() + deltaRad);
-      subDrivetrain.setDriveRotation(targetHeading.getMeasure().plus(Radians.of(Math.PI)));
-      isDriverRotationManualInput = true;
-      currentHeading = subDrivetrain.getDriveRotation();
-    } else {
-      isDriverRotationManualInput = false;
-      subDrivetrain.setDriveRotation(currentHeading.getMeasure());
-    }
     ChassisSpeeds velocities = subDrivetrain.calculateVelocitiesFromInput(
         xAxis,
         yAxis,
-        () -> 0.0,
+        // () -> 0.0,
+        rotationXAxis,
         slowMode,
         ConstField.isRedAlliance(),
         ConstDrivetrain.SLOW_MODE_MULTIPLIER,
@@ -79,16 +69,34 @@ public class DriveManual extends Command {
 
     subDriverStateMachine.setDriverState(DriverStateMachine.DriverState.MANUAL);
 
-    subDrivetrain.drive(
-        velocities,
-        subDrivetrain.getDriveRotation(),
-        ConstDrivetrain.ROTATION_PID.kP,
-        ConstDrivetrain.ROTATION_PID.kI,
-        ConstDrivetrain.ROTATION_PID.kD);
+    double rotInput = -rotationXAxis.getAsDouble();
+    double deadband = 0.05;
 
-    System.out.printf("reqDeg=%.2f reqRad=%.3f actualYawDeg=%.2f actualYawRad=%.3f%n",
-        targetHeading.getDegrees(), targetHeading.getRadians(),
-        subDrivetrain.getPose().getRotation().getDegrees(), subDrivetrain.getPose().getRotation().getRadians());
+    if (Math.abs(rotInput) > deadband) {
+      subDrivetrain.drive(velocities);
+      subDrivetrain.setDriveRotation(subDrivetrain.getPose().getRotation().getMeasure());
+      delayTimer.reset();
+    } else {
+      // TEST START
+      // subDrivetrain.drive(velocities);
+      // TEST END
+
+      delayTimer.start();
+      if (delayTimer.hasElapsed(0.5)) {
+      subDrivetrain.drive(
+      velocities,
+      subDrivetrain.getDriveRotation(),
+      ConstDrivetrain.ROTATION_PID.kP,
+      ConstDrivetrain.ROTATION_PID.kI,
+      ConstDrivetrain.ROTATION_PID.kD);
+      System.out.println("Auto Rotating to " +
+      subDrivetrain.getDriveRotation().getDegrees() + " degrees");
+      } else {
+      subDrivetrain.drive(velocities);
+      subDrivetrain.setDriveRotation(subDrivetrain.getPose().getRotation().getMeasure());
+
+      }
+    }
   }
 
   @Override
