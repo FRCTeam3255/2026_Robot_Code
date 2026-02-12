@@ -4,8 +4,6 @@
 
 package frc.robot.subsystems;
 
-import static edu.wpi.first.units.Units.Inches;
-
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -48,12 +46,4 @@ public class RobotPoses extends SubsystemBase {
     }
     return hubPose;
   }
-
-  public Distance getToHubDistance() {
-    Distance dx = subDrivetrain.getPose().getMeasureX().minus(getHub().getMeasureX());
-    Distance dy = subDrivetrain.getPose().getMeasureY().minus(getHub().getMeasureY());
-    distanceToHub = Units.Inches.of(Math.hypot(dx.in(Units.Inches), dy.in(Units.Inches)));
-    return distanceToHub;
-  }
-
 }
