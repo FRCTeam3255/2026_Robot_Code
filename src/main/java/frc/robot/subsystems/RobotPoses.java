@@ -11,6 +11,7 @@ import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
 import frc.robot.constants.ConstField;
 import frc.robot.constants.ConstSystem;
 
@@ -45,5 +46,13 @@ public class RobotPoses extends SubsystemBase {
       hubPose = ConstField.FieldElementGroups.HUB_POSE_SET.getBlue().get(0);
     }
     return hubPose;
+  }
+
+  public Distance getDistanceToHub() {
+    Pose2d hubPose = getHub();
+    distanceToHub = Units.Meters
+        .of(RobotContainer.drivetrainInstance.getPose().getTranslation()
+            .getDistance(hubPose.getTranslation()));
+    return distanceToHub;
   }
 }
