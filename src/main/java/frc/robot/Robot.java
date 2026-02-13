@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.constants.ConstField;
 import frc.robot.constants.ConstSystem;
 import frc.robot.constants.ConstVision;
-import edu.wpi.first.cameraserver.CameraServer;
 
 @Logged
 public class Robot extends TimedRobot {
