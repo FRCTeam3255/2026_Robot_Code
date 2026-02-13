@@ -21,4 +21,6 @@ public final class ConstSystem {
     public static final boolean SILENCE_JOYSTICK_WARNINGS = true;
   }
 
+  public static String PRACTICE_BOT_RIO = "000000000000";
+
 }
