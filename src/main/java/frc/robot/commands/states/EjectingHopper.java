@@ -15,14 +15,14 @@ public class EjectingHopper extends Command {
 
   public EjectingHopper() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.subStateMachine);
+    addRequirements(RobotContainer.StateMachineInstance);
 
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.subStateMachine.setRobotState(StateMachine.RobotState.EJECTING_HOPPER);
+    RobotContainer.StateMachineInstance.setRobotState(StateMachine.RobotState.EJECTING_HOPPER);
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.REVERSE_SERIALIZER_ROLLERS_SPEED);
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.REVERSE_INTAKE_ROLLER_SPEED);
     RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(ConstRotors.REVERSE_SERIALIZER_V_FUNNEL_SPEED);

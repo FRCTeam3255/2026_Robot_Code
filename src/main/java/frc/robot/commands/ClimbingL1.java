@@ -14,13 +14,13 @@ public class ClimbingL1 extends Command {
   /** Creates a new ClimbingL1. */
   public ClimbingL1() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.subStateMachine);
+    addRequirements(RobotContainer.StateMachineInstance);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.subStateMachine.setRobotState(StateMachine.RobotState.CLIMBING_L1);
+    RobotContainer.StateMachineInstance.setRobotState(StateMachine.RobotState.CLIMBING_L1);
     RobotContainer.motionInstance.setClimberPosition(ConstMotion.RETRACT_CLIMBER);
   }
 

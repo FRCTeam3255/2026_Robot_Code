@@ -16,13 +16,13 @@ public class Shooting extends Command {
   public Shooting() {
     // Use addRequirements() here to declare subsystem dependencies.
 
-    addRequirements(RobotContainer.subStateMachine);
+    addRequirements(RobotContainer.StateMachineInstance);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.subStateMachine.setRobotState(StateMachine.RobotState.SHOOTING);
+    RobotContainer.StateMachineInstance.setRobotState(StateMachine.RobotState.SHOOTING);
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.SERIALIZER_ROLLERS_SPEED);
     RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(ConstRotors.SERIALIZER_V_FUNNEL_SPEED);
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.SHOOTER_TRANSFER_SPEED);

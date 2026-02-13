@@ -22,7 +22,7 @@ public class BasePrepShooter extends Command {
 
   public BasePrepShooter(AngularVelocity flyWheelSpeed, Angle hoodAngle, Angle drivetrainAngle, RobotState state) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.subStateMachine);
+    addRequirements(RobotContainer.StateMachineInstance);
     globalFlyWheelSpeed = flyWheelSpeed;
     globalHoodAngle = hoodAngle;
     globalDrivetrainAngle = drivetrainAngle;
@@ -36,7 +36,7 @@ public class BasePrepShooter extends Command {
     RobotContainer.motionInstance.setHoodAngle(globalHoodAngle);
     RobotContainer.drivetrainInstance.setDriveRotation(globalDrivetrainAngle);
     RobotContainer.drivetrainInstance.setIsManualRotationEnabled(false);
-    RobotContainer.subStateMachine.setRobotState(globalState);
+    RobotContainer.StateMachineInstance.setRobotState(globalState);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
