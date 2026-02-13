@@ -12,6 +12,7 @@ import frc.robot.constants.ConstField;
 public class ResetPose extends Command {
 
   public ResetPose() {
+    addRequirements(RobotContainer.subDriverStateMachine);
   }
 
   @Override
@@ -19,6 +20,7 @@ public class ResetPose extends Command {
     RobotContainer.drivetrainInstance.resetPose(getAlliancePose());
     RobotContainer.drivetrainInstance.getPigeon2()
         .setYaw(getAlliancePose().getRotation().getMeasure());
+    RobotContainer.drivetrainInstance.setDriveRotation(getAlliancePose().getRotation().getMeasure());
   }
 
   @Override
