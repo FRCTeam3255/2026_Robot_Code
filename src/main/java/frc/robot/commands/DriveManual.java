@@ -32,7 +32,7 @@ public class DriveManual extends Command {
     this.slowMode = slowMode;
     isOpenLoop = true;
 
-    addRequirements(RobotContainer.subDriverStateMachineInstance);
+    addRequirements(RobotContainer.DriverStateMachineInstance);
   }
 
   @Override
@@ -51,7 +51,7 @@ public class DriveManual extends Command {
         ConstDrivetrain.REAL_DRIVE_SPEED,
         ConstDrivetrain.TURN_SPEED);
 
-    RobotContainer.subDriverStateMachineInstance.setDriverState(DriverState.MANUAL);
+    RobotContainer.DriverStateMachineInstance.setDriverState(DriverState.MANUAL);
 
     double rotInput = -rotationXAxis.getAsDouble();
 

@@ -34,7 +34,7 @@ public class PoseDrive extends Command {
     this.rotationAxis = rotationAxis;
     this.poseGroup = poseGroup;
     this.slowMode = slowMode;
-    addRequirements(RobotContainer.subDriverStateMachineInstance);
+    addRequirements(RobotContainer.DriverStateMachineInstance);
 
   }
 
@@ -70,12 +70,12 @@ public class PoseDrive extends Command {
           velocities,
           poseGroup.lockX,
           poseGroup.lockY);
-      RobotContainer.subDriverStateMachineInstance.setDriverState(poseGroup.driveState);
+      RobotContainer.DriverStateMachineInstance.setDriverState(poseGroup.driveState);
     } else {
       RobotContainer.drivetrainInstance.rotationalAlign(
           closestPose,
           velocities);
-      RobotContainer.subDriverStateMachineInstance.setDriverState(poseGroup.snapState);
+      RobotContainer.DriverStateMachineInstance.setDriverState(poseGroup.snapState);
     }
   }
 
