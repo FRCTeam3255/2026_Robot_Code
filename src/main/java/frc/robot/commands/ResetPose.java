@@ -4,7 +4,6 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.units.Units;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
@@ -20,8 +19,8 @@ public class ResetPose extends Command {
   public void initialize() {
     RobotContainer.drivetrainInstance.resetPose(getAlliancePose());
     RobotContainer.drivetrainInstance.getPigeon2()
-        .setYaw(ConstField.FieldElements.RESET_POSE.getRotation().getMeasure());
-    RobotContainer.drivetrainInstance.setDriveRotation(ConstField.FieldElements.RESET_POSE.getRotation().getMeasure());
+        .setYaw(getAlliancePose().getRotation().getMeasure());
+    RobotContainer.drivetrainInstance.setDriveRotation(getAlliancePose().getRotation().getMeasure());
   }
 
   @Override

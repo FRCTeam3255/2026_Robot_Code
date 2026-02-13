@@ -7,7 +7,6 @@ package frc.robot.commands;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -23,7 +22,6 @@ public class DriveManual extends Command {
   boolean isOpenLoop;
   DriverStateMachine subDriverStateMachine;
   BooleanSupplier slowMode;
-  Rotation2d targetHeading;
   public boolean isDriverRotationManualInput;
   Timer delayTimer = new Timer();
 

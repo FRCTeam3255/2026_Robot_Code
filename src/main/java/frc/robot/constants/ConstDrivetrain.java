@@ -12,8 +12,6 @@ import static edu.wpi.first.units.Units.Rotations;
 import static edu.wpi.first.units.Units.Seconds;
 import static edu.wpi.first.units.Units.Volts;
 
-import java.util.concurrent.TimeUnit;
-
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.Pigeon2Configuration;
@@ -185,7 +183,7 @@ public class ConstDrivetrain {
 
   // Rotational speed (degrees per second) while manually driving
   public static final AngularVelocity TURN_SPEED = Units.DegreesPerSecond.of(360);
-  public static final double STEERING_MULTIPLIER = 0.12;
+  // -- Motor Configurations --
   static {
     // This PID is implemented on each module, not the Drivetrain subsystem.
     // TODO: PID
