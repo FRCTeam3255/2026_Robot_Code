@@ -101,7 +101,7 @@ public class RobotContainer {
   private final DriverStateMachine loggedSubDriverStateMachine = subDriverStateMachine;
   public static StateMachine subStateMachine = new StateMachine(drivetrainInstance);
   private final StateMachine loggedSubStateMachine = subStateMachine;
-  public static RobotPoses robotPose = new RobotPoses(drivetrainInstance);
+  public static RobotPoses robotPose = new RobotPoses();
   private final RobotPoses loggedRobotPose = robotPose;
   public static Vision subVision = new Vision();
   private final Vision loggedSubVision = subVision;

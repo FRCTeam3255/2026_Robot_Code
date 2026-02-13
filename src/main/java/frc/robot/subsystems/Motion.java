@@ -17,6 +17,7 @@ import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DeviceIDs;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
 
@@ -30,6 +31,10 @@ public class Motion extends SubsystemBase {
   MotionMagicExpoVoltage climberMotionRequest = new MotionMagicExpoVoltage(0);
   MotionMagicExpoVoltage hoodMotionRequest = new MotionMagicExpoVoltage(0);
   MotionMagicExpoVoltage intakePivotMotionRequest = new MotionMagicExpoVoltage(0);
+
+  Angle lastDesiredHoodAngle = Degrees.zero();
+  Angle lastDesiredIntakePivotAngle = Degrees.zero();
+  Distance lastDesiredClimberPosition = Inches.zero();
 
   public Motion() {
     intakePivot.getConfigurator().apply(ConstMotion.INTAKE_PIVOT_CONFIGURATION);
@@ -45,30 +50,51 @@ public class Motion extends SubsystemBase {
 
   public void setIntakePivotAngle(Angle setPoint) {
     intakePivot.setControl(intakePivotMotionRequest.withPosition(setPoint));
+    lastDesiredIntakePivotAngle = setPoint;
   }
 
   public void setHoodAngle(Angle setPoint) {
     hood.setControl(hoodMotionRequest.withPosition(setPoint));
-
+    lastDesiredHoodAngle = setPoint;
   }
 
   public void setClimberPosition(Distance setpoint) {
     climber.setControl(climberMotionRequest.withPosition(setpoint.in(Units.Inches)));
+    lastDesiredClimberPosition = setpoint;
+  }
+
+  public Angle getPivotAngle() {
+    if (Robot.isSimulation()) {
+      return lastDesiredIntakePivotAngle;
+    }
+    return intakePivot.getPosition().getValue();
   }
 
   public Angle getHoodAngle() {
+    if (Robot.isSimulation()) {
+      return lastDesiredHoodAngle;
+    }
     return hood.getPosition().getValue();
   }
 
-  public boolean isHoodAtPosition(Angle desiredPos, Angle tolerance) {
-    Angle lowerLim = desiredPos.minus(tolerance);
-    Angle upperLim = desiredPos.plus(tolerance);
+  public boolean isHoodAtPosition(Angle tolerance) {
+    Angle lowerLim = lastDesiredHoodAngle.minus(tolerance);
+    Angle upperLim = lastDesiredHoodAngle.plus(tolerance);
 
     Angle hoodAngle = getHoodAngle();
 
     return hoodAngle.gte(lowerLim)
         && hoodAngle.lte(upperLim);
+  }
 
+  public boolean isIntakePivotAtPosition(Angle tolerance) {
+    Angle lowerLim = lastDesiredIntakePivotAngle.minus(tolerance);
+    Angle upperLim = lastDesiredIntakePivotAngle.plus(tolerance);
+
+    Angle pivotAngle = getPivotAngle();
+
+    return pivotAngle.gte(lowerLim)
+        && pivotAngle.lte(upperLim);
   }
 
   public static Angle getMappedHoodAngle(Distance distance) {
@@ -76,12 +102,15 @@ public class Motion extends SubsystemBase {
   }
 
   public Distance getClimberPosition() {
+    if (Robot.isSimulation()) {
+      return lastDesiredClimberPosition;
+    }
     return Units.Inches.of(climber.getPosition().getValueAsDouble());
   }
 
-  public boolean isAtPosition(Distance desiredDistance, Distance distanceTolerance) {
-    Distance lowerLim = desiredDistance.minus(distanceTolerance);
-    Distance upperLim = desiredDistance.plus(distanceTolerance);
+  public boolean isClimberAtPosition(Distance distanceTolerance) {
+    Distance lowerLim = lastDesiredClimberPosition.minus(distanceTolerance);
+    Distance upperLim = lastDesiredClimberPosition.plus(distanceTolerance);
 
     Distance climberPosition = getClimberPosition();
 
