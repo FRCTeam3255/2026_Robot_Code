@@ -12,7 +12,7 @@ import frc.robot.constants.ConstField;
 public class ResetPose extends Command {
 
   public ResetPose() {
-    addRequirements(RobotContainer.DriverStateMachineInstance);
+    addRequirements(RobotContainer.driverStateMachineInstance);
   }
 
   @Override

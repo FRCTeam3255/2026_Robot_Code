@@ -19,7 +19,7 @@ public class AddVisionMeasurement extends Command {
 
   public AddVisionMeasurement() {
 
-    addRequirements(RobotContainer.VisionInstance);
+    addRequirements(RobotContainer.visionInstance);
   }
 
   @Override
@@ -37,7 +37,7 @@ public class AddVisionMeasurement extends Command {
         RobotContainer.drivetrainInstance.getPigeon2().getYaw().getValueAsDouble(), 0, 0, 0, 0, 0);
     AngularVelocity gyroRate = RobotContainer.drivetrainInstance.getGyroRate();
 
-    estimatedPose = RobotContainer.VisionInstance.determinePoseEstimate(gyroRate);
+    estimatedPose = RobotContainer.visionInstance.determinePoseEstimate(gyroRate);
     if (estimatedPose.isPresent()) {
       RobotContainer.drivetrainInstance.addVisionMeasurement(estimatedPose.get().pose,
           estimatedPose.get().timestampSeconds);

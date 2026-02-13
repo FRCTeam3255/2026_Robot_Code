@@ -22,7 +22,6 @@ public class DriverStateMachine extends SubsystemBase {
   public static DriverState currentDriverState = DriverState.MANUAL;
 
   public DriverStateMachine() {
-
   }
 
   public DriverState getDriverState() {
@@ -58,17 +57,14 @@ public class DriverStateMachine extends SubsystemBase {
                 yAxis,
                 rotationXAxis,
                 rotationYAxis,
-
                 slowMode);
         }
         break;
-
       case EXAMPLE_POSE_DRIVE:
         switch (currentDriverState) {
           case MANUAL:
           case EXAMPLE_POSE_DRIVE:
             return () -> new PoseDrive(
-
                 xAxis,
                 yAxis,
                 rotationXAxis,
@@ -76,7 +72,6 @@ public class DriverStateMachine extends SubsystemBase {
                 ConstPoseDrive.EXAMPLE_POSE_DRIVE_GROUP);
         }
         break;
-
       case EXAMPLE_ROTATION_SNAP:
         switch (currentDriverState) {
           case EXAMPLE_POSE_DRIVE:
@@ -89,10 +84,8 @@ public class DriverStateMachine extends SubsystemBase {
                 slowMode,
                 ConstPoseDrive.EXAMPLE_POSE_DRIVE_GROUP);
         }
-
         break;
     }
-
     return () -> Commands.print("ITS SO OVER D: Invalid Driver State Provided, Blame Eli. Attempted to go to: "
         + desiredState.toString() + " while at " + currentDriverState.toString());
   }

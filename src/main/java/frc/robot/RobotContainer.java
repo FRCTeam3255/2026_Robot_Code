@@ -53,37 +53,37 @@ public class RobotContainer {
 
   // STATES
   Command TRY_EJECTING_HOPPER = Commands.deferredProxy(
-      () -> StateMachineInstance.tryState(RobotState.EJECTING_HOPPER));
+      () -> stateMachineInstance.tryState(RobotState.EJECTING_HOPPER));
   Command TRY_UNCLIMB_L1 = Commands.deferredProxy(
-      () -> StateMachineInstance.tryState(RobotState.UNCLIMB_L1));
+      () -> stateMachineInstance.tryState(RobotState.UNCLIMB_L1));
   Command TRY_PREP_CLIMB_L1 = Commands.deferredProxy(
-      () -> StateMachineInstance.tryState(RobotState.PREP_CLIMB_L1));
+      () -> stateMachineInstance.tryState(RobotState.PREP_CLIMB_L1));
   Command TRY_CLIMBING_L1 = Commands.deferredProxy(
-      () -> StateMachineInstance.tryState(RobotState.CLIMBING_L1));
+      () -> stateMachineInstance.tryState(RobotState.CLIMBING_L1));
   Command TRY_CLIMBING_L2_3 = Commands.deferredProxy(
-      () -> StateMachineInstance.tryState(RobotState.CLIMBING_L2_3));
+      () -> stateMachineInstance.tryState(RobotState.CLIMBING_L2_3));
   Command TRY_INTAKING = Commands.deferredProxy(
-      () -> StateMachineInstance.tryState(RobotState.INTAKING));
+      () -> stateMachineInstance.tryState(RobotState.INTAKING));
   Command TRY_SHOOTING = Commands.deferredProxy(
-      () -> StateMachineInstance.tryState(RobotState.SHOOTING));
+      () -> stateMachineInstance.tryState(RobotState.SHOOTING));
   Command TRY_PREP_ANYWHERE = Commands.deferredProxy(
-      () -> StateMachineInstance.tryState(RobotState.PREP_ANYWHERE));
+      () -> stateMachineInstance.tryState(RobotState.PREP_ANYWHERE));
   Command TRY_PREP_TRENCH = Commands.deferredProxy(
-      () -> StateMachineInstance.tryState(RobotState.PREP_TRENCH));
+      () -> stateMachineInstance.tryState(RobotState.PREP_TRENCH));
   Command TRY_PREP_OUPOST = Commands.deferredProxy(
-      () -> StateMachineInstance.tryState(RobotState.PREP_OUTPOST));
+      () -> stateMachineInstance.tryState(RobotState.PREP_OUTPOST));
   Command TRY_PREP_DEPOT = Commands.deferredProxy(
-      () -> StateMachineInstance.tryState(RobotState.PREP_DEPOT));
+      () -> stateMachineInstance.tryState(RobotState.PREP_DEPOT));
   Command TRY_PREP_NON_OUTPOST = Commands.deferredProxy(
-      () -> StateMachineInstance.tryState(RobotState.PREP_NON_OUTPOST));
+      () -> stateMachineInstance.tryState(RobotState.PREP_NON_OUTPOST));
   Command TRY_REVERSING_SHOOTER = Commands.deferredProxy(
-      () -> StateMachineInstance.tryState(RobotState.REVERSING_SHOOTER));
+      () -> stateMachineInstance.tryState(RobotState.REVERSING_SHOOTER));
   Command TRY_PREP_OPPONENT_TO_ALLIANCE = Commands.deferredProxy(
-      () -> StateMachineInstance.tryState(RobotState.PREP_OPPONENT_TO_ALLIANCE));
+      () -> stateMachineInstance.tryState(RobotState.PREP_OPPONENT_TO_ALLIANCE));
   Command TRY_PREP_NEAUTRAL_TO_ALLIANCE = Commands.deferredProxy(
-      () -> StateMachineInstance.tryState(RobotState.PREP_NEUTRAL_TO_ALLIANCE));
+      () -> stateMachineInstance.tryState(RobotState.PREP_NEUTRAL_TO_ALLIANCE));
   Command TRY_NONE = Commands.deferredProxy(
-      () -> StateMachineInstance.tryState(RobotState.NONE));
+      () -> stateMachineInstance.tryState(RobotState.NONE));
 
   private AutoFactory autoFactory;
 
@@ -97,37 +97,37 @@ public class RobotContainer {
   private final Drivetrain loggedDrivetrainInstance = drivetrainInstance;
   public static RobotPoses robotPose = new RobotPoses();
   private final RobotPoses loggedRobotPose = robotPose;
-  public static DriverStateMachine DriverStateMachineInstance = new DriverStateMachine();
-  private final DriverStateMachine loggedDriverStateMachineInstance = DriverStateMachineInstance;
-  public static StateMachine StateMachineInstance = new StateMachine();
-  private final StateMachine loggedStateMachineInstance = StateMachineInstance;
-  public static Vision VisionInstance = new Vision();
-  private final Vision loggedVisionInstance = VisionInstance;
+  public static DriverStateMachine driverStateMachineInstance = new DriverStateMachine();
+  private final DriverStateMachine loggedDriverStateMachineInstance = driverStateMachineInstance;
+  public static StateMachine stateMachineInstance = new StateMachine();
+  private final StateMachine loggedStateMachineInstance = stateMachineInstance;
+  public static Vision visionInstance = new Vision();
+  private final Vision loggedVisionInstance = visionInstance;
 
   Command MANUAL = new DeferredCommand(
-      DriverStateMachineInstance.tryState(
+      driverStateMachineInstance.tryState(
           DriverStateMachine.DriverState.MANUAL,
           conDriver.axis_LeftY,
           conDriver.axis_LeftX,
           conDriver.axis_RightX,
           conDriver.axis_RightY,
           conDriver.btn_LeftBumper),
-      Set.of(DriverStateMachineInstance));
+      Set.of(driverStateMachineInstance));
 
   Command EXAMPLE_POSE_DRIVE = new DeferredCommand(
-      DriverStateMachineInstance.tryState(
+      driverStateMachineInstance.tryState(
           DriverStateMachine.DriverState.EXAMPLE_POSE_DRIVE,
           conDriver.axis_LeftY,
           conDriver.axis_LeftX,
           conDriver.axis_RightX,
           conDriver.axis_RightY,
           conDriver.btn_RightBumper),
-      Set.of(DriverStateMachineInstance));
+      Set.of(driverStateMachineInstance));
 
   public RobotContainer() {
     conDriver.setLeftDeadband(constControllers.DRIVER_LEFT_STICK_DEADBAND);
 
-    DriverStateMachineInstance
+    driverStateMachineInstance
         .setDefaultCommand(MANUAL);
 
     configDriverBindings();
@@ -179,7 +179,7 @@ public class RobotContainer {
         drivetrainInstance::resetPose, // A function that resets the current robot pose to the provided Pose2d
         drivetrainInstance::followTrajectory, // The drive subsystem trajectory follower
         true, // If alliance flipping should be enabled
-        DriverStateMachineInstance // The drive subsystem
+        driverStateMachineInstance // The drive subsystem
     );
 
     // make our entries name
@@ -213,7 +213,7 @@ public class RobotContainer {
 
   public Command runPath(String pathName) {
     return autoFactory.trajectoryCmd(pathName).asProxy()
-        .alongWith(Commands.runOnce(() -> DriverStateMachineInstance.setDriverState(DriverState.CHOREO)));
+        .alongWith(Commands.runOnce(() -> driverStateMachineInstance.setDriverState(DriverState.CHOREO)));
   }
 
   public Command getAutonomousCommand() {
@@ -225,7 +225,7 @@ public class RobotContainer {
   }
 
   public RobotState getRobotState() {
-    return StateMachineInstance.getRobotState();
+    return stateMachineInstance.getRobotState();
   }
 
   public Command addVisionMeasurement() {
