@@ -7,7 +7,7 @@ package frc.robot.commands;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
@@ -19,8 +19,8 @@ public class DriveManual extends Command {
   DoubleSupplier xAxis, yAxis, rotationXAxis, rotationYAxis;
   boolean isOpenLoop;
   BooleanSupplier slowMode;
-  Rotation2d targetHeading;
   public boolean isDriverRotationManualInput;
+  Timer delayTimer = new Timer();
 
   public DriveManual(DoubleSupplier xAxis, DoubleSupplier yAxis,
       DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis,
@@ -32,7 +32,7 @@ public class DriveManual extends Command {
     this.slowMode = slowMode;
     isOpenLoop = true;
 
-    addRequirements(RobotContainer.drivetrainInstance);
+    addRequirements(RobotContainer.subDriverStateMachineInstance);
   }
 
   @Override
@@ -41,11 +41,6 @@ public class DriveManual extends Command {
 
   @Override
   public void execute() {
-    if (RobotContainer.drivetrainInstance.isRotationStickHit(rotationXAxis, rotationYAxis)) {
-      targetHeading = Rotation2d
-          .fromRadians(RobotContainer.drivetrainInstance.getStickRadians(rotationXAxis, rotationYAxis));
-      RobotContainer.drivetrainInstance.setDriveRotation(targetHeading.getMeasure());
-    }
     ChassisSpeeds velocities = RobotContainer.drivetrainInstance.calculateVelocitiesFromInput(
         xAxis,
         yAxis,
@@ -58,16 +53,34 @@ public class DriveManual extends Command {
 
     RobotContainer.subDriverStateMachineInstance.setDriverState(DriverState.MANUAL);
 
-    RobotContainer.drivetrainInstance.drive(
-        velocities,
-        RobotContainer.drivetrainInstance.getDriveRotation(),
-        ConstDrivetrain.ROTATION_PID.kP,
-        ConstDrivetrain.ROTATION_PID.kI,
-        ConstDrivetrain.ROTATION_PID.kD);
+    double rotInput = -rotationXAxis.getAsDouble();
+
+    if (Math.abs(rotInput) > ConstDrivetrain.ROTATION_STICK_DEADBAND) {
+      RobotContainer.drivetrainInstance.drive(velocities);
+      RobotContainer.drivetrainInstance
+          .setDriveRotation(RobotContainer.drivetrainInstance.getPose().getRotation().getMeasure());
+      delayTimer.reset();
+    } else {
+      delayTimer.start();
+      if (delayTimer.hasElapsed(ConstDrivetrain.ROTATION_DELAY)) {
+        RobotContainer.drivetrainInstance.drive(
+            velocities,
+            RobotContainer.drivetrainInstance.getDriveRotation(),
+            ConstDrivetrain.ROTATION_PID.kP,
+            ConstDrivetrain.ROTATION_PID.kI,
+            ConstDrivetrain.ROTATION_PID.kD);
+      } else {
+        RobotContainer.drivetrainInstance.drive(velocities);
+        RobotContainer.drivetrainInstance
+            .setDriveRotation(RobotContainer.drivetrainInstance.getPose().getRotation().getMeasure());
+
+      }
+    }
   }
 
   @Override
   public void end(boolean interrupted) {
+    delayTimer.stop();
   }
 
   @Override

@@ -9,6 +9,7 @@ import static edu.wpi.first.units.Units.Inches;
 import static edu.wpi.first.units.Units.KilogramSquareMeters;
 import static edu.wpi.first.units.Units.MetersPerSecond;
 import static edu.wpi.first.units.Units.Rotations;
+import static edu.wpi.first.units.Units.Seconds;
 import static edu.wpi.first.units.Units.Volts;
 
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
@@ -30,6 +31,7 @@ import edu.wpi.first.units.measure.Current;
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.units.measure.LinearVelocity;
 import edu.wpi.first.units.measure.MomentOfInertia;
+import edu.wpi.first.units.measure.Time;
 import edu.wpi.first.units.measure.Voltage;
 
 /**
@@ -48,6 +50,9 @@ import edu.wpi.first.units.measure.Voltage;
  * easier to update configuration values in a single location.
  */
 public class ConstDrivetrain {
+  public static final double ROTATION_STICK_DEADBAND = 0.05;
+  public static final Time ROTATION_DELAY = Seconds.of(0.5);
+
   public static class PRACTICE_BOT {
     // TODO: Swoffsets
     public static final Angle FRONT_LEFT_ABS_ENCODER_OFFSET = Rotations.of(-0.178466796875);
@@ -178,7 +183,6 @@ public class ConstDrivetrain {
 
   // Rotational speed (degrees per second) while manually driving
   public static final AngularVelocity TURN_SPEED = Units.DegreesPerSecond.of(360);
-
   // -- Motor Configurations --
   static {
     // This PID is implemented on each module, not the Drivetrain subsystem.
@@ -252,9 +256,9 @@ public class ConstDrivetrain {
   }
 
   public static class ROTATION_PID {
-    public static final double kP = 3.0;
+    public static final double kP = 10.0;
     public static final double kI = 0.0;
-    public static final double kD = 0.3;
+    public static final double kD = 0;
   }
 
 }

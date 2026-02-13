@@ -94,9 +94,13 @@ public class RobotContainer {
   public static Rotors rotorsInstance = new Rotors();
   public static Motion motionInstance = new Motion();
   public static Drivetrain drivetrainInstance = new Drivetrain();
-  public static DriverStateMachine subDriverStateMachineInstance = new DriverStateMachine();
-  public static StateMachine subStateMachine = new StateMachine();
+  private final Drivetrain loggedSubDrivetrain = drivetrainInstance;
   public static RobotPoses robotPose = new RobotPoses();
+  private final RobotPoses loggedRobotPose = robotPose;
+  public static DriverStateMachine subDriverStateMachineInstance = new DriverStateMachine();
+  private final DriverStateMachine loggedSubDriverStateMachine = subDriverStateMachineInstance;
+  public static StateMachine subStateMachine = new StateMachine();
+  private final StateMachine loggedSubStateMachine = subStateMachine;
   public static Vision subVision = new Vision();
   private final Vision loggedSubVision = subVision;
 

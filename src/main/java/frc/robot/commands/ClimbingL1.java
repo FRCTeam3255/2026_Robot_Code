@@ -37,6 +37,6 @@ public class ClimbingL1 extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return RobotContainer.motionInstance.isAtPosition(ConstMotion.RETRACT_CLIMBER, ConstMotion.CLIMBER_TOLERANCE);
+    return RobotContainer.motionInstance.isClimberAtPosition(ConstMotion.CLIMBER_TOLERANCE);
   }
 }
