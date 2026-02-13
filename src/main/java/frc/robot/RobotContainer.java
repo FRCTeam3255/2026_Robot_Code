@@ -136,9 +136,13 @@ public class RobotContainer {
     configDriverBindings();
     configOperatorBindings();
     configAutonomous();
-
     // subDrivetrain.resetModulesToAbsolute();
   }
+
+  public final Trigger climbingL1Trigger = new Trigger(
+      () -> subStateMachine.getRobotState() == RobotState.CLIMBING_L1);
+  public final Trigger climbingL2_L3Trigger = new Trigger(
+      () -> subStateMachine.getRobotState() == RobotState.CLIMBING_L2_3);
 
   private void configDriverBindings() {
     conDriver.btn_South

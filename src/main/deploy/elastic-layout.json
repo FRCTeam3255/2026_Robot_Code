@@ -95,7 +95,7 @@
             "height": 128.0,
             "type": "Boolean Box",
             "properties": {
-              "topic": "Robot/m_robotContainer/hasCoralTrigger",
+              "topic": "Robot/m_robotContainer/climbingL1Trigger",
               "period": 0.06,
               "data_type": "boolean",
               "true_color": 4283215696,
@@ -112,7 +112,7 @@
             "height": 128.0,
             "type": "Boolean Box",
             "properties": {
-              "topic": "Robot/m_robotContainer/hasCoralTrigger",
+              "topic": "Robot/m_robotContainer/climbingL2_L3Trigger",
               "period": 0.06,
               "data_type": "boolean",
               "true_color": 4283215696,
