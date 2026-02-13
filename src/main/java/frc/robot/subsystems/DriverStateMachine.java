@@ -9,7 +9,6 @@ import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
 import edu.wpi.first.epilogue.Logged;
-import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,13 +21,7 @@ public class DriverStateMachine extends SubsystemBase {
   /** Creates a new DriverStateMachine. */
   public static DriverState currentDriverState = DriverState.MANUAL;
 
-  @NotLogged
-  Drivetrain subDrivetrain;
-  @NotLogged
-  DriverStateMachine subDriverStateMachine = this;
-
-  public DriverStateMachine(Drivetrain subDrivetrain) {
-    this.subDrivetrain = subDrivetrain;
+  public DriverStateMachine() {
   }
 
   public DriverState getDriverState() {
@@ -60,23 +53,18 @@ public class DriverStateMachine extends SubsystemBase {
           case EXAMPLE_POSE_DRIVE:
           case CHOREO:
             return () -> new DriveManual(
-                subDrivetrain,
                 xAxis,
                 yAxis,
                 rotationXAxis,
                 rotationYAxis,
-                subDriverStateMachine,
                 slowMode);
         }
         break;
-
       case EXAMPLE_POSE_DRIVE:
         switch (currentDriverState) {
           case MANUAL:
           case EXAMPLE_POSE_DRIVE:
             return () -> new PoseDrive(
-                subDrivetrain,
-                subDriverStateMachine,
                 xAxis,
                 yAxis,
                 rotationXAxis,
@@ -84,25 +72,20 @@ public class DriverStateMachine extends SubsystemBase {
                 ConstPoseDrive.EXAMPLE_POSE_DRIVE_GROUP);
         }
         break;
-
       case EXAMPLE_ROTATION_SNAP:
         switch (currentDriverState) {
           case EXAMPLE_POSE_DRIVE:
           case EXAMPLE_ROTATION_SNAP:
           case MANUAL:
             return () -> new PoseDrive(
-                subDrivetrain,
-                subDriverStateMachine,
                 xAxis,
                 yAxis,
                 rotationXAxis,
                 slowMode,
                 ConstPoseDrive.EXAMPLE_POSE_DRIVE_GROUP);
         }
-
         break;
     }
-
     return () -> Commands.print("ITS SO OVER D: Invalid Driver State Provided, Blame Eli. Attempted to go to: "
         + desiredState.toString() + " while at " + currentDriverState.toString());
   }

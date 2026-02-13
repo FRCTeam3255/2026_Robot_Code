@@ -15,13 +15,13 @@ public class Unclimb extends Command {
 
   public Unclimb() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.subStateMachine);
+    addRequirements(RobotContainer.stateMachineInstance);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.subStateMachine.setRobotState(StateMachine.RobotState.UNCLIMB_L1);
+    RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.UNCLIMB_L1);
     RobotContainer.motionInstance.setClimberPosition(ConstMotion.EXTEND_CLIMBER);
   }
 

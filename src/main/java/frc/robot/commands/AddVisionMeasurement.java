@@ -12,20 +12,14 @@ import frc.robot.RobotContainer;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.constants.ConstVision;
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Vision;
 
 public class AddVisionMeasurement extends Command {
-  Drivetrain subDrivetrain;
-  Vision subVision;
 
   Optional<PoseEstimate> estimatedPose;
 
-  public AddVisionMeasurement(Drivetrain subDrivetrain, Vision subVision) {
-    this.subDrivetrain = subDrivetrain;
-    this.subVision = subVision;
+  public AddVisionMeasurement() {
 
-    addRequirements(subVision);
+    addRequirements(RobotContainer.visionInstance);
   }
 
   @Override
@@ -41,11 +35,12 @@ public class AddVisionMeasurement extends Command {
         RobotContainer.drivetrainInstance.getPigeon2().getYaw().getValueAsDouble(), 0, 0, 0, 0, 0);
     LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_BACK_NAME,
         RobotContainer.drivetrainInstance.getPigeon2().getYaw().getValueAsDouble(), 0, 0, 0, 0, 0);
-    AngularVelocity gyroRate = subDrivetrain.getGyroRate();
+    AngularVelocity gyroRate = RobotContainer.drivetrainInstance.getGyroRate();
 
-    estimatedPose = subVision.determinePoseEstimate(gyroRate);
+    estimatedPose = RobotContainer.visionInstance.determinePoseEstimate(gyroRate);
     if (estimatedPose.isPresent()) {
-      subDrivetrain.addVisionMeasurement(estimatedPose.get().pose, estimatedPose.get().timestampSeconds);
+      RobotContainer.drivetrainInstance.addVisionMeasurement(estimatedPose.get().pose,
+          estimatedPose.get().timestampSeconds);
     }
   }
 
