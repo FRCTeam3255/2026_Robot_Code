@@ -137,4 +137,14 @@ public class ConstField {
         FieldElements.UPRIGHT_OUTPOST_SIDE_POSE, FieldElements.UPRIGHT_DEPOT_SIDE_POSE);
   }
 
+  public List<Pose2d> getAlliancePose(Pose2dAllianceSet poseSet) {
+    List<Pose2d> poses;
+    if (isRedAlliance()) {
+      poses = poseSet.getRed();
+    } else {
+      poses = poseSet.getBlue();
+    }
+    return poses;
+  }
+
 }
