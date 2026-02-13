@@ -4,12 +4,15 @@
 
 package frc.robot.subsystems;
 
+import static edu.wpi.first.units.Units.Inches;
+
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.units.Units;
+import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstField;
@@ -18,6 +21,7 @@ import frc.robot.constants.ConstMotion;
 @Logged
 public class RobotPoses extends SubsystemBase {
   /** Creates a new RobotPoses. */
+  public static final Distance HOPPER_ELEVATION = Inches.of(0);
 
   Pose3d modelDrivetrain = Pose3d.kZero;
   Pose3d model0IntakePivot = Pose3d.kZero;
@@ -49,11 +53,11 @@ public class RobotPoses extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    if (RobotContainer.motionInstance.getPivotAngle() == ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE) {
+    if (RobotContainer.motionInstance.getPivotAngle().equals(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE)) {
       hopperTransform3d = new Transform3d(
           Units.Inches.zero(),
           Units.Inches.zero(),
-          ConstMotion.HOPPER_ELEVATION,
+          HOPPER_ELEVATION,
           Rotation3d.kZero);
     } else {
       hopperTransform3d = new Transform3d(
