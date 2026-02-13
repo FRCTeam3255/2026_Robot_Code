@@ -1,6 +1,6 @@
 {
   "version": 1.0,
-  "grid_size": 128,
+  "grid_size": 34,
   "tabs": [
     {
       "name": "Teleoperated",
@@ -9,10 +9,10 @@
         "containers": [
           {
             "title": "Driving State",
-            "x": 896.0,
-            "y": 128.0,
-            "width": 384.0,
-            "height": 128.0,
+            "x": 782.0,
+            "y": 136.0,
+            "width": 476.0,
+            "height": 136.0,
             "type": "Large Text Display",
             "properties": {
               "topic": "Robot/m_robotContainer/subStateMachine/getDriverState",
@@ -22,10 +22,10 @@
           },
           {
             "title": "Robot State",
-            "x": 896.0,
+            "x": 782.0,
             "y": 0.0,
-            "width": 384.0,
-            "height": 128.0,
+            "width": 476.0,
+            "height": 136.0,
             "type": "Large Text Display",
             "properties": {
               "topic": "Robot/m_robotContainer/subStateMachine/getRobotState",
@@ -35,10 +35,10 @@
           },
           {
             "title": "Match Period",
-            "x": 896.0,
-            "y": 256.0,
-            "width": 384.0,
-            "height": 256.0,
+            "x": 918.0,
+            "y": 272.0,
+            "width": 306.0,
+            "height": 204.0,
             "type": "Large Text Display",
             "properties": {
               "topic": "Robot/getMatchPeriod",
@@ -48,10 +48,10 @@
           },
           {
             "title": "Field",
-            "x": 256.0,
-            "y": 256.0,
-            "width": 640.0,
-            "height": 512.0,
+            "x": 272.0,
+            "y": 272.0,
+            "width": 646.0,
+            "height": 442.0,
             "type": "Field",
             "properties": {
               "topic": "/SmartDashboard/Field",
@@ -68,10 +68,10 @@
           },
           {
             "title": "Is our shift?",
-            "x": 1280.0,
-            "y": 256.0,
-            "width": 256.0,
-            "height": 512.0,
+            "x": 1224.0,
+            "y": 272.0,
+            "width": 306.0,
+            "height": 442.0,
             "type": "Boolean Box",
             "properties": {
               "topic": "Robot/isHubActive",
@@ -85,10 +85,10 @@
           },
           {
             "title": "Ready to shoot",
-            "x": 1280.0,
+            "x": 1258.0,
             "y": 0.0,
-            "width": 256.0,
-            "height": 256.0,
+            "width": 272.0,
+            "height": 272.0,
             "type": "Boolean Box",
             "properties": {
               "topic": "Robot/m_robotContainer/readyToShootTrigger",
@@ -103,9 +103,9 @@
           {
             "title": "Climbed L1",
             "x": 0.0,
-            "y": 384.0,
-            "width": 128.0,
-            "height": 384.0,
+            "y": 272.0,
+            "width": 272.0,
+            "height": 204.0,
             "type": "Boolean Box",
             "properties": {
               "topic": "Robot/m_robotContainer/climbingL1Trigger",
@@ -119,10 +119,10 @@
           },
           {
             "title": "Climbed L2 or L3",
-            "x": 128.0,
-            "y": 384.0,
-            "width": 128.0,
-            "height": 384.0,
+            "x": 0.0,
+            "y": 476.0,
+            "width": 272.0,
+            "height": 238.0,
             "type": "Boolean Box",
             "properties": {
               "topic": "Robot/m_robotContainer/climbingL2_L3Trigger",
@@ -136,10 +136,10 @@
           },
           {
             "title": "Match Time",
-            "x": 256.0,
+            "x": 272.0,
             "y": 0.0,
-            "width": 640.0,
-            "height": 256.0,
+            "width": 510.0,
+            "height": 272.0,
             "type": "Match Time",
             "properties": {
               "topic": "Robot/getMatchTime",
@@ -152,16 +152,16 @@
           },
           {
             "title": "remaining period time",
-            "x": 896.0,
-            "y": 512.0,
-            "width": 384.0,
-            "height": 256.0,
+            "x": 918.0,
+            "y": 476.0,
+            "width": 306.0,
+            "height": 238.0,
             "type": "Match Time",
             "properties": {
               "topic": "Robot/getMatchPeriodTime",
               "period": 0.033,
               "data_type": "double",
-              "time_display_mode": "Minutes and Seconds",
+              "time_display_mode": "Seconds Only",
               "red_start_time": 15,
               "yellow_start_time": 30
             }
@@ -170,8 +170,8 @@
             "title": "Climber Camera",
             "x": 0.0,
             "y": 0.0,
-            "width": 256.0,
-            "height": 384.0,
+            "width": 272.0,
+            "height": 272.0,
             "type": "Camera Stream",
             "properties": {
               "topic": "/CameraPublisher/USB Camera 0",
@@ -191,10 +191,10 @@
         "containers": [
           {
             "title": "Field",
-            "x": 768.0,
+            "x": 748.0,
             "y": 0.0,
-            "width": 768.0,
-            "height": 512.0,
+            "width": 782.0,
+            "height": 476.0,
             "type": "Field",
             "properties": {
               "topic": "/SmartDashboard/Field",
@@ -211,10 +211,10 @@
           },
           {
             "title": "Robot State",
-            "x": 512.0,
+            "x": 510.0,
             "y": 0.0,
-            "width": 256.0,
-            "height": 256.0,
+            "width": 238.0,
+            "height": 272.0,
             "type": "Large Text Display",
             "properties": {
               "topic": "Robot/m_robotContainer/subStateMachine/getRobotState",
@@ -224,10 +224,10 @@
           },
           {
             "title": "Driving State",
-            "x": 512.0,
-            "y": 256.0,
-            "width": 256.0,
-            "height": 256.0,
+            "x": 510.0,
+            "y": 272.0,
+            "width": 238.0,
+            "height": 204.0,
             "type": "Large Text Display",
             "properties": {
               "topic": "Robot/m_robotContainer/subStateMachine/getDriverState",
@@ -238,9 +238,9 @@
           {
             "title": "All Zeroed",
             "x": 0.0,
-            "y": 256.0,
-            "width": 512.0,
-            "height": 256.0,
+            "y": 272.0,
+            "width": 510.0,
+            "height": 204.0,
             "type": "Boolean Box",
             "properties": {
               "topic": "Robot/bothSubsystemsZeroed",
@@ -256,8 +256,8 @@
             "title": "Match Time",
             "x": 0.0,
             "y": 0.0,
-            "width": 512.0,
-            "height": 256.0,
+            "width": 510.0,
+            "height": 272.0,
             "type": "Match Time",
             "properties": {
               "topic": "Robot/getMatchTime",
@@ -271,9 +271,9 @@
           {
             "title": "Ready to shoot",
             "x": 0.0,
-            "y": 512.0,
-            "width": 768.0,
-            "height": 256.0,
+            "y": 476.0,
+            "width": 748.0,
+            "height": 238.0,
             "type": "Boolean Box",
             "properties": {
               "topic": "Robot/m_robotContainer/readyToShootTrigger",
@@ -287,10 +287,10 @@
           },
           {
             "title": "climbed?",
-            "x": 768.0,
-            "y": 512.0,
-            "width": 768.0,
-            "height": 256.0,
+            "x": 748.0,
+            "y": 476.0,
+            "width": 782.0,
+            "height": 238.0,
             "type": "Boolean Box",
             "properties": {
               "topic": "Robot/m_robotContainer/climbingL1Trigger",
@@ -312,10 +312,10 @@
         "containers": [
           {
             "title": "FMSInfo",
-            "x": 1152.0,
+            "x": 1122.0,
             "y": 0.0,
-            "width": 384.0,
-            "height": 384.0,
+            "width": 408.0,
+            "height": 340.0,
             "type": "FMSInfo",
             "properties": {
               "topic": "/FMSInfo",
@@ -324,10 +324,10 @@
           },
           {
             "title": "Field",
-            "x": 384.0,
-            "y": 384.0,
-            "width": 768.0,
-            "height": 384.0,
+            "x": 374.0,
+            "y": 340.0,
+            "width": 748.0,
+            "height": 374.0,
             "type": "Field",
             "properties": {
               "topic": "/SmartDashboard/Field",
@@ -344,10 +344,10 @@
           },
           {
             "title": "Right Limelight",
-            "x": 1152.0,
-            "y": 384.0,
-            "width": 384.0,
-            "height": 384.0,
+            "x": 1122.0,
+            "y": 340.0,
+            "width": 408.0,
+            "height": 374.0,
             "type": "Camera Stream",
             "properties": {
               "topic": "/CameraPublisher/limelight-right",
@@ -358,9 +358,9 @@
           {
             "title": "Left Limelight",
             "x": 0.0,
-            "y": 384.0,
-            "width": 384.0,
-            "height": 384.0,
+            "y": 340.0,
+            "width": 374.0,
+            "height": 374.0,
             "type": "Camera Stream",
             "properties": {
               "topic": "/CameraPublisher/limelight-left",
@@ -372,8 +372,8 @@
             "title": "Auto Choser",
             "x": 0.0,
             "y": 0.0,
-            "width": 384.0,
-            "height": 384.0,
+            "width": 374.0,
+            "height": 340.0,
             "type": "ComboBox Chooser",
             "properties": {
               "topic": "/SmartDashboard/SendableChooser[1]",
@@ -383,10 +383,10 @@
           },
           {
             "title": "Active Auto",
-            "x": 384.0,
+            "x": 374.0,
             "y": 0.0,
-            "width": 768.0,
-            "height": 384.0,
+            "width": 748.0,
+            "height": 340.0,
             "type": "Large Text Display",
             "properties": {
               "topic": "/SmartDashboard/SendableChooser[1]/active",
