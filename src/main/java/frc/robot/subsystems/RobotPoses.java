@@ -40,6 +40,8 @@ public class RobotPoses extends SubsystemBase {
       Units.Inches.zero(),
       Units.Inches.of(18.516),
       Rotation3d.kZero);
+  // Keep a cached distance that the logger can read; updated each scheduler cycle
+  private Distance distanceToHub = Units.Meters.of(0);
 
   Transform3d intakePivotPoint = new Transform3d(
       Units.Inches.zero(),
@@ -88,6 +90,10 @@ public class RobotPoses extends SubsystemBase {
     model2Shooter = Pose3d.kZero;
     model3Hood = Pose3d.kZero
         .rotateAround(Pose3d.kZero.plus(hoodPivotPoint).getTranslation(), hoodPivotRotation3d);
+
+    Pose2d hubPose = getHub();
+    distanceToHub = Units.Meters.of(
+        subDrivetrain.getPose().getTranslation().getDistance(hubPose.getTranslation()));
   }
 
   public Pose2d getHub() {
@@ -98,5 +104,9 @@ public class RobotPoses extends SubsystemBase {
       hubPose = ConstField.FieldElementGroups.HUB_POSE_SET.getBlue().get(0);
     }
     return hubPose;
+  }
+
+  public Distance getDistanceToHub() {
+    return distanceToHub;
   }
 }
