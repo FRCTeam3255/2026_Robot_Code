@@ -33,8 +33,9 @@ public class PrepAnywhere extends Command {
   @Override
   public void execute() {
     Pose2d hubPose = RobotContainer.robotPose.getHub();
-    AngularVelocity targetFlyWheelSpeed = Rotors.getMappedFlywheelSpeed(RobotContainer.robotPose.getDistanceToHub());
-    Angle targetHoodAngle = Motion.getMappedHoodAngle(RobotContainer.robotPose.getDistanceToHub());
+    Distance distanceToHub = RobotContainer.robotPose.getDistanceToHub();
+    AngularVelocity targetFlyWheelSpeed = Rotors.getMappedFlywheelSpeed(distanceToHub);
+    Angle targetHoodAngle = Motion.getMappedHoodAngle(distanceToHub);
     Angle targetDrivetrainRotation = RobotContainer.drivetrainInstance
         .snapToTarget(hubPose);
 
