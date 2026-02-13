@@ -92,7 +92,9 @@ public class RobotContainer {
   private static DigitalInput isPracticeBot = new DigitalInput(DeviceIDs.PRAC_BOT_DIO);
 
   public static Rotors rotorsInstance = new Rotors();
+  private final Rotors loggedRotorsInstance = rotorsInstance;
   public static Motion motionInstance = new Motion();
+  private final Motion loggedMotionInstance = motionInstance;
   public static Drivetrain drivetrainInstance = new Drivetrain();
   private final Drivetrain loggedDrivetrainInstance = drivetrainInstance;
   public static RobotPoses robotPose = new RobotPoses();
@@ -231,10 +233,5 @@ public class RobotContainer {
   public Command addVisionMeasurement() {
     return new AddVisionMeasurement()
         .withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming).ignoringDisable(true);
-  }
-
-  public static void setDriverState(String manual2) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'setDriverState'");
   }
 }
