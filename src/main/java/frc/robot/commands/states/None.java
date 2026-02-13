@@ -15,7 +15,7 @@ public class None extends Command {
   /** Creates a new None. */
 
   public None() {
-    addRequirements(RobotContainer.subStateMachine);
+    addRequirements(RobotContainer.stateMachineInstance);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -29,7 +29,7 @@ public class None extends Command {
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.STOP);
     RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(ConstRotors.STOP);
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.STOP);
-    RobotContainer.subStateMachine.setRobotState(StateMachine.RobotState.NONE);
+    RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.NONE);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
