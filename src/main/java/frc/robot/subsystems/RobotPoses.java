@@ -30,10 +30,10 @@ public class RobotPoses extends SubsystemBase {
   Pose3d model3Hood = Pose3d.kZero;
   Pose3d model4ClimberBaseStage = Pose3d.kZero;
 
-  Transform3d climberTransform3d;
-  Rotation3d intakePivotRotation3d;
-  Transform3d hopperTransform3d;
-  Rotation3d hoodPivotRotation3d;
+  Transform3d climberTransform3d = new Transform3d();
+  Rotation3d intakePivotRotation3d = Rotation3d.kZero;
+  Transform3d hopperTransform3d = new Transform3d();
+  Rotation3d hoodPivotRotation3d = Rotation3d.kZero;
 
   Transform3d hoodPivotPoint = new Transform3d(
       Units.Inches.of(10.963),
