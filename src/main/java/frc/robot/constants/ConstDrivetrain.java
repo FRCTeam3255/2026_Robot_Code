@@ -66,6 +66,7 @@ public class ConstDrivetrain {
   public static final Angle FRONT_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(-0.498779296875);
   public static final Angle BACK_LEFT_ABS_ENCODER_OFFSET = Rotations.of(-0.459716796875);
   public static final Angle BACK_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(-0.31201171875);
+  public static final Angle DRIVETRAIN_ROTATION_TOLERANCE = Units.Degrees.of(1);
 
   // ====== TO MOVE TO SUPERCODE - START ======
   public static class ModuleLocations {

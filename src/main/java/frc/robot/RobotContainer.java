@@ -36,6 +36,9 @@ import frc.robot.commands.states.PrepShoots.PrepNonOutpost;
 import frc.robot.commands.states.PrepShoots.PrepOpponentToAlliance;
 import frc.robot.commands.states.PrepShoots.PrepOutpost;
 import frc.robot.commands.states.PrepShoots.PrepTrench;
+import frc.robot.constants.ConstDrivetrain;
+import frc.robot.constants.ConstMotion;
+import frc.robot.constants.ConstRotors;
 import frc.robot.constants.ConstSystem.constControllers;
 import frc.robot.subsystems.DriverStateMachine;
 import frc.robot.subsystems.DriverStateMachine.DriverState;
@@ -143,7 +146,11 @@ public class RobotContainer {
       () -> subStateMachine.getRobotState() == RobotState.CLIMBING_L1);
   public final Trigger climbingL2_L3Trigger = new Trigger(
       () -> subStateMachine.getRobotState() == RobotState.CLIMBING_L2_3);
-  
+  public final Trigger readyToShootTrigger = new Trigger(
+      () -> rotorsInstance.areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
+          && drivetrainInstance.isAtDesiredRotation(ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE)
+          && motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE));
+
   private void configDriverBindings() {
     conDriver.btn_South
         .whileTrue(TRY_EJECTING_HOPPER)

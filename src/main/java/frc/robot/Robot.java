@@ -115,4 +115,49 @@ public class Robot extends TimedRobot {
   @Override
   public void testExit() {
   }
+
+  public double getMatchTime() {
+    return DriverStation.getMatchTime();
+  }
+
+  public double getMatchPeriodTime() {
+    double matchTime = getMatchTime();
+    if (matchTime > 140) {
+      return matchTime - 140;
+    } else if (matchTime > 130) {
+      return matchTime - 130;
+    } else if (matchTime > 105) {
+      return matchTime - 105;
+    } else if (matchTime > 80) {
+      return matchTime - 80;
+    } else if (matchTime > 55) {
+      return matchTime - 55;
+    } else if (matchTime > 30) {
+      return matchTime - 30;
+    } else if (matchTime > 0) {
+      return matchTime;
+    } else {
+      return 0;
+    }
+  }
+
+  public String getMatchPeriod() {
+    if (getMatchTime() > 140) {
+      return "Auto";
+    } else if (getMatchTime() > 130) {
+      return "Transition Shift";
+    } else if (getMatchTime() > 105) {
+      return "Shift 1";
+    } else if (getMatchTime() > 80) {
+      return "Shift 2";
+    } else if (getMatchTime() > 55) {
+      return "Shift 3";
+    } else if (getMatchTime() > 30) {
+      return "Shift 4";
+    } else if (getMatchTime() > 0) {
+      return "Endgame";
+    } else {
+      return "Post-Match";
+    }
+  }
 }
