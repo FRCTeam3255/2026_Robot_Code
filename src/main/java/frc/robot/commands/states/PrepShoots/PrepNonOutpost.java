@@ -4,6 +4,8 @@
 
 package frc.robot.commands.states.PrepShoots;
 
+import frc.robot.RobotContainer;
+import frc.robot.constants.ConstLEDs;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstPoseDrive;
 import frc.robot.constants.ConstRotors;
@@ -16,6 +18,7 @@ public class PrepNonOutpost extends BasePrepShooter {
   public PrepNonOutpost() {
     super(ConstRotors.FLYWHEEL_NON_OUTPOST_SPEED, ConstMotion.HOOD_NON_OUTPOST_ANGLE,
         ConstPoseDrive.PrepShootRotations.NON_OUTPOST_PREP_SHOOT_ROTATION, StateMachine.RobotState.PREP_NON_OUTPOST);
+        RobotContainer.LEDInstance.setLEDAnimation(ConstLEDs.READY_TO_SHOOT_ANIMATION);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 }

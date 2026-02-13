@@ -11,6 +11,7 @@ import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
+import frc.robot.constants.ConstLEDs;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
 import frc.robot.subsystems.Rotors;
@@ -30,6 +31,7 @@ public class PrepAnywhere extends Command {
   public void initialize() {
     RobotContainer.drivetrainInstance.setIsManualRotationEnabled(false);
     RobotContainer.subStateMachine.setRobotState(RobotState.PREP_ANYWHERE);
+
   }
 
   @Override
@@ -47,6 +49,11 @@ public class PrepAnywhere extends Command {
     RobotContainer.rotorsInstance.setFlywheelSpeed(targetFlyWheelSpeed);
     RobotContainer.motionInstance.setHoodAngle(targetHoodAngle);
     RobotContainer.drivetrainInstance.setDriveRotation(targetDrivetrainRotation);
+    if (RobotContainer.rotorsInstance.areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
+        && RobotContainer.motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE)) {
+      RobotContainer.LEDInstance.setLEDAnimation(ConstLEDs.READY_TO_SHOOT_ANIMATION);
+    }
+    ;
   }
 
   // Called once the command ends or is interrupted.

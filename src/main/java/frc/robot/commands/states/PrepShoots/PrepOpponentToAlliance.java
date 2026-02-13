@@ -4,6 +4,8 @@
 
 package frc.robot.commands.states.PrepShoots;
 
+import frc.robot.RobotContainer;
+import frc.robot.constants.ConstLEDs;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstPoseDrive;
 import frc.robot.constants.ConstRotors;
@@ -17,6 +19,7 @@ public class PrepOpponentToAlliance extends BasePrepShooter {
     super(ConstRotors.FLYWHEEL_OPPONENT_TO_ALLIANCE_SPEED, ConstMotion.HOOD_OPPENENT_TO_ALLIANCE_ANGLE,
         ConstPoseDrive.PrepShootRotations.OPPONENT_TO_ALLIANCE_PREP_SHOOT_ROTATION,
         StateMachine.RobotState.PREP_OPPONENT_TO_ALLIANCE);
+        RobotContainer.LEDInstance.setLEDAnimation(ConstLEDs.READY_TO_SHOOT_ANIMATION);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 }

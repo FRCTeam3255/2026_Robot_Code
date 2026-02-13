@@ -39,6 +39,7 @@ import frc.robot.constants.ConstSystem.constControllers;
 import frc.robot.subsystems.DriverStateMachine;
 import frc.robot.subsystems.DriverStateMachine.DriverState;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.LED;
 import frc.robot.subsystems.Motion;
 import frc.robot.subsystems.RobotPoses;
 import frc.robot.subsystems.Rotors;
@@ -105,6 +106,8 @@ public class RobotContainer {
   private final RobotPoses loggedRobotPose = robotPose;
   public static Vision subVision = new Vision();
   private final Vision loggedSubVision = subVision;
+  public static LED LEDInstance = new LED();
+  private final LED loggedLEDInstance = LEDInstance;
 
   Command MANUAL = new DeferredCommand(
       subDriverStateMachine.tryState(

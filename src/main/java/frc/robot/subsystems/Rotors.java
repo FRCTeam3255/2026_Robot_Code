@@ -8,6 +8,7 @@ import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicVelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.MotorAlignmentValue;
+import com.ctre.phoenix6.hardware.CANdle;
 
 import edu.wpi.first.epilogue.Logged;
 import static edu.wpi.first.units.Units.RPM;
@@ -31,6 +32,7 @@ public class Rotors extends SubsystemBase {
   final TalonFX flywheelTopEast = new TalonFX(rotorIDs.FLYWHEEL_TOP_EAST_CAN);
   final TalonFX flywheelBottomWest = new TalonFX(rotorIDs.FLYWHEEL_BOTTOM_WEST_CAN);
   final TalonFX flywheelBottomEast = new TalonFX(rotorIDs.FLYWHEEL_BOTTOM_EAST_CAN);
+  AngularVelocity lastDesiredFlywheelSpeed = Units.RPM.of(0);
 
   /** Creates a new Rotors. */
   public Rotors() {
@@ -67,6 +69,7 @@ public class Rotors extends SubsystemBase {
     flywheelTopWest.setControl(flywheelVelocityRequest.withVelocity(speed));
     flywheelBottomEast.setControl(new Follower(flywheelTopEast.getDeviceID(), MotorAlignmentValue.Aligned));
     flywheelBottomWest.setControl(new Follower(flywheelTopWest.getDeviceID(), MotorAlignmentValue.Aligned));
+    lastDesiredFlywheelSpeed = speed;
   }
 
   public void setFlywheelPercentOutput(double percent) {
@@ -74,15 +77,16 @@ public class Rotors extends SubsystemBase {
     flywheelTopWest.set(percent);
     flywheelBottomEast.set(percent);
     flywheelBottomWest.set(percent);
+    lastDesiredFlywheelSpeed = Units.RPM.of(percent * 5400);
   }
 
   public AngularVelocity getFlywheelSpeeds() {
     return flywheelBottomWest.getVelocity().getValue();
   }
 
-  public boolean areFlywheelsAtSpeed(AngularVelocity desiredSpeed, AngularVelocity tolerance) {
-    AngularVelocity lowerLim = desiredSpeed.minus(tolerance);
-    AngularVelocity upperLim = desiredSpeed.plus(tolerance);
+  public boolean areFlywheelsAtSpeed(AngularVelocity tolerance) {
+    AngularVelocity lowerLim = lastDesiredFlywheelSpeed.minus(tolerance);
+    AngularVelocity upperLim = lastDesiredFlywheelSpeed.plus(tolerance);
 
     AngularVelocity flywheelSpeeds = getFlywheelSpeeds();
 

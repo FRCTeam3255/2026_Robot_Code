@@ -30,6 +30,7 @@ public class Motion extends SubsystemBase {
   MotionMagicExpoVoltage climberMotionRequest = new MotionMagicExpoVoltage(0);
   MotionMagicExpoVoltage hoodMotionRequest = new MotionMagicExpoVoltage(0);
   MotionMagicExpoVoltage intakePivotMotionRequest = new MotionMagicExpoVoltage(0);
+  Angle lastDesiredHoodAngle = Units.Degrees.of(0);
 
   public Motion() {
     intakePivot.getConfigurator().apply(ConstMotion.INTAKE_PIVOT_CONFIGURATION);
@@ -49,7 +50,7 @@ public class Motion extends SubsystemBase {
 
   public void setHoodAngle(Angle setPoint) {
     hood.setControl(hoodMotionRequest.withPosition(setPoint));
-
+    lastDesiredHoodAngle = setPoint;
   }
 
   public void setClimberPosition(Distance setpoint) {
@@ -60,9 +61,9 @@ public class Motion extends SubsystemBase {
     return hood.getPosition().getValue();
   }
 
-  public boolean isHoodAtPosition(Angle desiredPos, Angle tolerance) {
-    Angle lowerLim = desiredPos.minus(tolerance);
-    Angle upperLim = desiredPos.plus(tolerance);
+  public boolean isHoodAtPosition(Angle tolerance) {
+    Angle lowerLim = lastDesiredHoodAngle.minus(tolerance);
+    Angle upperLim = lastDesiredHoodAngle.plus(tolerance);
 
     Angle hoodAngle = getHoodAngle();
 
