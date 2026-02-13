@@ -7,9 +7,10 @@ package frc.robot.commands;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.RobotContainer;
 import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstField;
 import frc.robot.subsystems.DriverStateMachine;
@@ -21,8 +22,8 @@ public class DriveManual extends Command {
   boolean isOpenLoop;
   DriverStateMachine subDriverStateMachine;
   BooleanSupplier slowMode;
-  Rotation2d targetHeading;
   public boolean isDriverRotationManualInput;
+  Timer delayTimer = new Timer();
 
   public DriveManual(Drivetrain subDrivetrain, DoubleSupplier xAxis, DoubleSupplier yAxis,
       DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis, DriverStateMachine subDriverStateMachine,
@@ -36,7 +37,7 @@ public class DriveManual extends Command {
     this.slowMode = slowMode;
     isOpenLoop = true;
 
-    addRequirements(this.subDrivetrain);
+    addRequirements(RobotContainer.subDriverStateMachine);
   }
 
   @Override
@@ -45,10 +46,6 @@ public class DriveManual extends Command {
 
   @Override
   public void execute() {
-    if (subDrivetrain.isRotationStickHit(rotationXAxis, rotationYAxis)) {
-      targetHeading = Rotation2d.fromRadians(subDrivetrain.getStickRadians(rotationXAxis, rotationYAxis));
-      subDrivetrain.setDriveRotation(targetHeading.getMeasure());
-    }
     ChassisSpeeds velocities = subDrivetrain.calculateVelocitiesFromInput(
         xAxis,
         yAxis,
@@ -61,16 +58,32 @@ public class DriveManual extends Command {
 
     subDriverStateMachine.setDriverState(DriverStateMachine.DriverState.MANUAL);
 
-    subDrivetrain.drive(
-        velocities,
-        subDrivetrain.getDriveRotation(),
-        ConstDrivetrain.ROTATION_PID.kP,
-        ConstDrivetrain.ROTATION_PID.kI,
-        ConstDrivetrain.ROTATION_PID.kD);
+    double rotInput = -rotationXAxis.getAsDouble();
+
+    if (Math.abs(rotInput) > ConstDrivetrain.ROTATION_STICK_DEADBAND) {
+      subDrivetrain.drive(velocities);
+      subDrivetrain.setDriveRotation(subDrivetrain.getPose().getRotation().getMeasure());
+      delayTimer.reset();
+    } else {
+      delayTimer.start();
+      if (delayTimer.hasElapsed(ConstDrivetrain.ROTATION_DELAY)) {
+        subDrivetrain.drive(
+            velocities,
+            subDrivetrain.getDriveRotation(),
+            ConstDrivetrain.ROTATION_PID.kP,
+            ConstDrivetrain.ROTATION_PID.kI,
+            ConstDrivetrain.ROTATION_PID.kD);
+      } else {
+        subDrivetrain.drive(velocities);
+        subDrivetrain.setDriveRotation(subDrivetrain.getPose().getRotation().getMeasure());
+
+      }
+    }
   }
 
   @Override
   public void end(boolean interrupted) {
+    delayTimer.stop();
   }
 
   @Override
