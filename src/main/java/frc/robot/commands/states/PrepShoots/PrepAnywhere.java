@@ -5,7 +5,6 @@
 package frc.robot.commands.states.PrepShoots;
 
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Distance;
