@@ -93,7 +93,7 @@ public class RobotPoses extends SubsystemBase {
 
     Pose2d hubPose = getHub();
     distanceToHub = Units.Meters.of(
-        subDrivetrain.getPose().getTranslation().getDistance(hubPose.getTranslation()));
+        RobotContainer.drivetrainInstance.getPose().getTranslation().getDistance(hubPose.getTranslation()));
   }
 
   public Pose2d getHub() {
