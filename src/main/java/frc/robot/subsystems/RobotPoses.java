@@ -8,6 +8,8 @@ import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.units.Units;
+import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.ConstField;
 import frc.robot.constants.ConstSystem;
@@ -16,6 +18,8 @@ import frc.robot.constants.ConstSystem;
 public class RobotPoses extends SubsystemBase {
   /** Creates a new RobotPoses. */
 
+  // Keep a cached distance that the logger can read; updated each scheduler cycle
+  private Distance distanceToHub = Units.Meters.of(0);
   @NotLogged
   Drivetrain subDrivetrain;
 
@@ -32,6 +36,10 @@ public class RobotPoses extends SubsystemBase {
 
     // Robot Positions
     comp0Drivetrain = new Pose3d(subDrivetrain.getPose());
+
+    Pose2d hubPose = getHub();
+    distanceToHub = Units.Meters.of(
+        subDrivetrain.getPose().getTranslation().getDistance(hubPose.getTranslation()));
   }
 
   public Pose2d getHub() {
@@ -42,5 +50,9 @@ public class RobotPoses extends SubsystemBase {
       hubPose = ConstField.FieldElementGroups.HUB_POSE_SET.getBlue().get(0);
     }
     return hubPose;
+  }
+
+  public Distance getDistanceToHub() {
+    return distanceToHub;
   }
 }
