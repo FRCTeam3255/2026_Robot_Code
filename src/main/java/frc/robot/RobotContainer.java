@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.DeferredCommand;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.DeviceIDs.controllerIDs;
 import frc.robot.commands.AddVisionMeasurement;
 import frc.robot.commands.ClimbingL1;
@@ -35,6 +36,9 @@ import frc.robot.commands.states.PrepShoots.PrepNonOutpost;
 import frc.robot.commands.states.PrepShoots.PrepOpponentToAlliance;
 import frc.robot.commands.states.PrepShoots.PrepOutpost;
 import frc.robot.commands.states.PrepShoots.PrepTrench;
+import frc.robot.constants.ConstDrivetrain;
+import frc.robot.constants.ConstMotion;
+import frc.robot.constants.ConstRotors;
 import frc.robot.constants.ConstSystem;
 import frc.robot.constants.ConstSystem.constControllers;
 import frc.robot.subsystems.DriverStateMachine;
@@ -134,9 +138,17 @@ public class RobotContainer {
     configDriverBindings();
     configOperatorBindings();
     configAutonomous();
-
     // subDrivetrain.resetModulesToAbsolute();
   }
+
+  public final Trigger climbingL1Trigger = new Trigger(
+      () -> stateMachineInstance.getRobotState() == RobotState.CLIMBING_L1);
+  public final Trigger climbingL2_L3Trigger = new Trigger(
+      () -> stateMachineInstance.getRobotState() == RobotState.CLIMBING_L2_3);
+  public final Trigger readyToShootTrigger = new Trigger(
+      () -> rotorsInstance.areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
+          && drivetrainInstance.isAtDesiredRotation(ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE)
+          && motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE));
 
   private void configDriverBindings() {
     conDriver.btn_South
@@ -227,6 +239,14 @@ public class RobotContainer {
 
   public RobotState getRobotState() {
     return stateMachineInstance.getRobotState();
+  }
+
+  public String robotStateToString() {
+    return stateMachineInstance.getRobotState().toString();
+  }
+
+  public String driverStateToString() {
+    return driverStateMachineInstance.getDriverState().toString();
   }
 
   public Command addVisionMeasurement() {
