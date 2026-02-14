@@ -37,7 +37,7 @@
             "title": "Field",
             "x": 0.0,
             "y": 340.0,
-            "width": 1496.0,
+            "width": 1088.0,
             "height": 374.0,
             "type": "Field",
             "properties": {
@@ -59,7 +59,7 @@
             "x": 1088.0,
             "y": 170.0,
             "width": 408.0,
-            "height": 170.0,
+            "height": 544.0,
             "type": "Boolean Box",
             "properties": {
               "topic": "Robot/isHubActive",
