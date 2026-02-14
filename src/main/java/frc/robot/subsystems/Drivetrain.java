@@ -147,23 +147,17 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     BackRightSteer = getModule(3).getSteerMotor();
   }
 
-  /**
-   * Follows a trajectory by calculating the desired chassis speeds based on the
-   * current pose
-   * of the robot and the target pose provided in the trajectory sample.
-   *
-   * @param sample The trajectory sample containing the desired target pose and
-   *               other relevant data.
-   *               This is used to determine the robot's next movement.
-   */
   public void followTrajectory(SwerveSample sample) {
     // Get the current pose of the robot
-    Pose2d desiredTarget = sample.getPose();
-    ChassisSpeeds automatedDTVelocity = ConstDrivetrain.AUTO_ALIGN.PATH_AUTO_ALIGN_CONTROLLER.calculate(getPose(),
-        desiredTarget, 0,
-        desiredTarget.getRotation());
+    Pose2d pose = getPose();
 
-    drive(automatedDTVelocity);
+    // Generate the next speeds for the robot
+    ChassisSpeeds speeds = new ChassisSpeeds(
+        sample.vx + ConstDrivetrain.AUTO_ALIGN.POSE_TRANS_CONTROLLER.calculate(pose.getX(), sample.x),
+        sample.vy + ConstDrivetrain.AUTO_ALIGN.POSE_TRANS_CONTROLLER.calculate(pose.getY(), sample.y),
+        sample.omega + ConstDrivetrain.AUTO_ALIGN.POSE_ROTATION_CONTROLLER.calculate(pose.getRotation().getRadians(),
+            sample.heading));
+    drive(speeds);
   }
 
   public void rotationalAlign(Pose2d closestPose, ChassisSpeeds velocities) {

@@ -212,7 +212,7 @@ public class ConstDrivetrain {
         0);
 
     public static final PIDController PATH_TRANS_CONTROLLER = new PIDController(
-        3,
+        4,
         0,
         0);
 
@@ -244,7 +244,6 @@ public class ConstDrivetrain {
         PATH_TRANS_CONTROLLER,
         PATH_TRANS_CONTROLLER,
         PATH_ROTATION_CONTROLLER);
-
   }
 
   public static class SIMULATION {
