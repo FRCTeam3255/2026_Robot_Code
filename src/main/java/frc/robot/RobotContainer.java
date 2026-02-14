@@ -186,8 +186,8 @@ public class RobotContainer {
     );
 
     // make our entries name
-    int shootingTime = 3;
-    int intakingTime = 5;
+    int shootingTime = 5;
+    int intakingTime = 7;
 
     Command PreloadOnly = Commands.sequence(
         ScoreOnly(ChoreoTraj.Reverse_From_Hub,
@@ -278,7 +278,7 @@ public class RobotContainer {
     return Commands.sequence(
         Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
         runPath(startPath).asProxy(),
-        try_prep_shoot.asProxy().withTimeout(0.6),
+        try_prep_shoot.asProxy().withTimeout(1.5),
         TRY_SHOOTING.asProxy().withTimeout(shootingTime),
         TRY_NONE.asProxy().withTimeout(0.05),
         runPath(endPath).asProxy().alongWith(TRY_INTAKING.asProxy().withTimeout(intakingTime)));
