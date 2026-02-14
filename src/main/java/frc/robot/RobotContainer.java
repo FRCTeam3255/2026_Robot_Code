@@ -241,10 +241,6 @@ public class RobotContainer {
     return stateMachineInstance.getRobotState();
   }
 
-  public DriverState getDriverState() {
-    return driverStateMachineInstance.getDriverState();
-  }
-
   public String robotStateToString() {
     return stateMachineInstance.getRobotState().toString();
   }
