@@ -227,4 +227,11 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     double angleRad = Math.atan2(dy, dx);
     return Degrees.of(Math.toDegrees(angleRad));
   }
+
+  public boolean isAtDesiredRotation(Angle tolerance) {
+    Angle upperLim = getDriveRotation().getMeasure().plus(tolerance);
+    Angle lowerLim = getDriveRotation().getMeasure().plus(tolerance);
+    return getPose().getRotation().getMeasure().gte(lowerLim)
+        && getPose().getRotation().getMeasure().lte(upperLim);
+  }
 }
