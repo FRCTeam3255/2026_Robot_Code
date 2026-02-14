@@ -19,7 +19,9 @@ public class PrepOpponentToAlliance extends BasePrepShooter {
     super(ConstRotors.FLYWHEEL_OPPONENT_TO_ALLIANCE_SPEED, ConstMotion.HOOD_OPPENENT_TO_ALLIANCE_ANGLE,
         ConstPoseDrive.PrepShootRotations.OPPONENT_TO_ALLIANCE_PREP_SHOOT_ROTATION,
         StateMachine.RobotState.PREP_OPPONENT_TO_ALLIANCE);
-        RobotContainer.LEDInstance.setLEDAnimation(ConstLEDs.READY_TO_SHOOT_ANIMATION);
-    // Use addRequirements() here to declare subsystem dependencies.
+    if (RobotContainer.rotorsInstance.areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
+        && RobotContainer.motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE)) {
+      RobotContainer.LEDInstance.setLEDAnimation(ConstLEDs.READY_TO_SHOOT_ANIMATION);
+    }    // Use addRequirements() here to declare subsystem dependencies.
   }
 }

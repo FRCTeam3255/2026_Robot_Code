@@ -18,7 +18,9 @@ public class PrepOutpost extends BasePrepShooter {
   public PrepOutpost() {
     super(ConstRotors.FLYWHEEL_OUTPOST_SPEED, ConstMotion.HOOD_OUTPOST_ANGLE,
         ConstPoseDrive.PrepShootRotations.OUTPOST_PREP_SHOOT_ROTATION, StateMachine.RobotState.PREP_OUTPOST);
-        RobotContainer.LEDInstance.setLEDAnimation(ConstLEDs.READY_TO_SHOOT_ANIMATION);
-    // Use addRequirements() here to declare subsystem dependencies.
+    if (RobotContainer.rotorsInstance.areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
+        && RobotContainer.motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE)) {
+      RobotContainer.LEDInstance.setLEDAnimation(ConstLEDs.READY_TO_SHOOT_ANIMATION);
+    }    // Use addRequirements() here to declare subsystem dependencies.
   }
 }

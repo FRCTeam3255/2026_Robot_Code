@@ -18,7 +18,9 @@ public class PrepDepot extends BasePrepShooter {
   public PrepDepot() {
     super(ConstRotors.FLYWHEEL_DEPOT_SPEED, ConstMotion.HOOD_DEPOT_ANGLE,
         ConstPoseDrive.PrepShootRotations.DEPOT_PREP_SHOOT_ROTATION, StateMachine.RobotState.PREP_DEPOT);
-        RobotContainer.LEDInstance.setLEDAnimation(ConstLEDs.READY_TO_SHOOT_ANIMATION);
-    // Use addRequirements() here to declare subsystem dependencies.
+    if (RobotContainer.rotorsInstance.areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
+        && RobotContainer.motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE)) {
+      RobotContainer.LEDInstance.setLEDAnimation(ConstLEDs.READY_TO_SHOOT_ANIMATION);
+    }      // Use addRequirements() here to declare subsystem dependencies.
   }
 }
