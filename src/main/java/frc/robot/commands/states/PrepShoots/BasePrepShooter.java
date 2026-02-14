@@ -54,7 +54,7 @@ public class BasePrepShooter extends Command {
   @Override
   public boolean isFinished() {
     return RobotContainer.motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE)
-        && RobotContainer.rotorsInstance.areFlywheelsAtSpeed(globalFlyWheelSpeed, ConstRotors.FLYWHEEL_TOLERANCE);
+        && RobotContainer.rotorsInstance.areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE);
 
   }
 }
