@@ -99,12 +99,12 @@ public class ConstField {
       return new Pose2dAllianceSet(combined.toArray(new Pose2d[0]));
     }
 
-    public List<Pose2d> getAlliancePose(Pose2dAllianceSet poseSet) {
+    public List<Pose2d> getAlliancePoses() {
       List<Pose2d> poses;
       if (isRedAlliance()) {
-        poses = poseSet.getRed();
+        poses = getRed();
       } else {
-        poses = poseSet.getBlue();
+        poses = getBlue();
       }
       return poses;
     }
