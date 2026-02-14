@@ -242,6 +242,18 @@ public class RobotContainer {
     return stateMachineInstance.getRobotState();
   }
 
+  public DriverState getDriverState() {
+    return driverStateMachineInstance.getDriverState();
+  }
+
+  public String robotStateToString() {
+    return stateMachineInstance.getRobotState().toString();
+  }
+
+  public String driverStateToString() {
+    return driverStateMachineInstance.getDriverState().toString();
+  }
+
   public Command addVisionMeasurement() {
     return new AddVisionMeasurement()
         .withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming).ignoringDisable(true);

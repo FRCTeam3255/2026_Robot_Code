@@ -15,7 +15,7 @@
             "height": 136.0,
             "type": "Large Text Display",
             "properties": {
-              "topic": "Robot/m_robotContainer/subStateMachine/getDriverState",
+              "topic": "Robot/m_robotContainer/driverStateToString",
               "period": 0.06,
               "data_type": "string"
             }
@@ -28,7 +28,7 @@
             "height": 136.0,
             "type": "Large Text Display",
             "properties": {
-              "topic": "Robot/m_robotContainer/subStateMachine/getRobotState",
+              "topic": "Robot/m_robotContainer/robotStateToString",
               "period": 0.6,
               "data_type": "string"
             }
@@ -63,7 +63,8 @@
               "show_trajectories": true,
               "field_rotation": 0.0,
               "robot_color": 4294198070,
-              "trajectory_color": 4294967295
+              "trajectory_color": 4294967295,
+              "show_robot_outside_widget": true
             }
           },
           {
@@ -206,7 +207,8 @@
               "show_trajectories": false,
               "field_rotation": 0.0,
               "robot_color": 4294198070,
-              "trajectory_color": 4294967295
+              "trajectory_color": 4294967295,
+              "show_robot_outside_widget": true
             }
           },
           {
@@ -217,7 +219,7 @@
             "height": 272.0,
             "type": "Large Text Display",
             "properties": {
-              "topic": "Robot/m_robotContainer/subStateMachine/getRobotState",
+              "topic": "Robot/m_robotContainer/robotStateToString",
               "period": 0.06,
               "data_type": "string"
             }
@@ -230,7 +232,7 @@
             "height": 204.0,
             "type": "Large Text Display",
             "properties": {
-              "topic": "Robot/m_robotContainer/subStateMachine/getDriverState",
+              "topic": "Robot/m_robotContainer/driverStateToString",
               "period": 0.06,
               "data_type": "string"
             }
@@ -339,7 +341,8 @@
               "show_trajectories": true,
               "field_rotation": 0.0,
               "robot_color": 4294198070,
-              "trajectory_color": 4294967295
+              "trajectory_color": 4294967295,
+              "show_robot_outside_widget": true
             }
           },
           {
