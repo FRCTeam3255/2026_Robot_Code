@@ -6,6 +6,7 @@ package frc.robot.commands.states;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
+import frc.robot.constants.ConstLEDs;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
 import frc.robot.subsystems.*;
@@ -30,6 +31,7 @@ public class None extends Command {
     RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(ConstRotors.STOP);
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.STOP);
     RobotContainer.subStateMachine.setRobotState(StateMachine.RobotState.NONE);
+    RobotContainer.LEDInstance.setLEDAnimation(ConstLEDs.NONE_ANIMATION);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
