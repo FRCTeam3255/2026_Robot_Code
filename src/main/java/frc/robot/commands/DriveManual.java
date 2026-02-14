@@ -8,12 +8,17 @@ import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.units.measure.Angle;
+import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstField;
 import frc.robot.subsystems.DriverStateMachine.DriverState;
+import frc.robot.subsystems.Motion;
 
 public class DriveManual extends Command {
   DoubleSupplier xAxis, yAxis, rotationXAxis, rotationYAxis;
@@ -76,6 +81,11 @@ public class DriveManual extends Command {
 
       }
     }
+    Pose2d trenchPose = RobotContainer.robotPose.getTrench();
+    Distance distanceToTrench = RobotContainer.robotPose.getDistanceToHub();
+    Angle targetHoodAngle = Motion.getMappedHoodAngle(distanceToTrench);
+
+    RobotContainer.motionInstance.setHoodAngle(targetHoodAngle);
   }
 
   @Override

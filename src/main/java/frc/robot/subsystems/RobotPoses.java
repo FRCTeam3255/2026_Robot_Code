@@ -109,4 +109,14 @@ public class RobotPoses extends SubsystemBase {
   public Distance getDistanceToHub() {
     return distanceToHub;
   }
+
+  public Pose2d getTrench() {
+    Pose2d trenchPose;
+    if (ConstField.isRedAlliance()) {
+      trenchPose = ConstField.FieldElementGroups.TRENCH_POSE_SET.getBlue().get((0));
+    } else {
+      trenchPose = ConstField.FieldElementGroups.TRENCH_POSE_SET.getBlue().get((0));
+    }
+    return trenchPose;
+  }
 }

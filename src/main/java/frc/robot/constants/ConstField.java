@@ -127,12 +127,14 @@ public class ConstField {
     private static final Pose2d UPRIGHT_DEPOT_SIDE_POSE = new Pose2d(1.0615900754928589, 2.3092187862091064,
         new Rotation2d());
     private static final Pose2d HUB_POSE = new Pose2d(4.629215, 4.0317845, new Rotation2d());
+    private static final Pose2d TRENCH_POSE = new Pose2d(11.973600387573242, 7.374969482421875, new Rotation2d());
   }
 
   public static class FieldElementGroups {
     public static final Pose2dAllianceSet RESET_POSE_SET = new Pose2dAllianceSet(
         FieldElements.RESET_POSE);
     public static final Pose2dAllianceSet HUB_POSE_SET = new Pose2dAllianceSet(FieldElements.HUB_POSE);
+    public static final Pose2dAllianceSet TRENCH_POSE_SET = new Pose2dAllianceSet((FieldElements.TRENCH_POSE));
     public static final Pose2dAllianceSet UPRIGHT_OUTPOST_SIDE_POSE_SET = new Pose2dAllianceSet(
         FieldElements.UPRIGHT_OUTPOST_SIDE_POSE, FieldElements.UPRIGHT_DEPOT_SIDE_POSE);
   }
