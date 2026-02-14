@@ -25,10 +25,8 @@ public class RobotPoses extends SubsystemBase {
 
   Pose3d modelDrivetrain = Pose3d.kZero;
   Pose3d model0IntakePivot = Pose3d.kZero;
-  Pose3d model1Hopper = Pose3d.kZero;
-  Pose3d model2Shooter = Pose3d.kZero;
-  Pose3d model3Hood = Pose3d.kZero;
-  Pose3d model4ClimberBaseStage = Pose3d.kZero;
+  Pose3d model1Hood = Pose3d.kZero;
+  Pose3d model2ClimberBaseStage = Pose3d.kZero;
 
   Transform3d climberTransform3d = new Transform3d();
   Rotation3d intakePivotRotation3d = Rotation3d.kZero;
@@ -86,9 +84,7 @@ public class RobotPoses extends SubsystemBase {
     modelDrivetrain = new Pose3d(RobotContainer.drivetrainInstance.getPose());
     model0IntakePivot = Pose3d.kZero.rotateAround(
         Pose3d.kZero.plus(intakePivotPoint).getTranslation(), intakePivotRotation3d);
-    model1Hopper = Pose3d.kZero.transformBy(hopperTransform3d);
-    model2Shooter = Pose3d.kZero;
-    model3Hood = Pose3d.kZero
+    model1Hood = Pose3d.kZero
         .rotateAround(Pose3d.kZero.plus(hoodPivotPoint).getTranslation(), hoodPivotRotation3d);
 
     Pose2d hubPose = getHub();
