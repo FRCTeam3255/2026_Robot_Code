@@ -11,13 +11,11 @@ import com.ctre.phoenix6.signals.MotorAlignmentValue;
 
 import edu.wpi.first.epilogue.Logged;
 import static edu.wpi.first.units.Units.RPM;
-import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DeviceIDs.rotorIDs;
-import frc.robot.RobotContainer;
 import frc.robot.constants.ConstRotors;
 
 @Logged
@@ -27,10 +25,10 @@ public class Rotors extends SubsystemBase {
   final TalonFX intakeRoller = new TalonFX(rotorIDs.INTAKE_ROLLERS_CAN);
   final TalonFX serializerVFunnel = new TalonFX(rotorIDs.SERIALIZER_V_FUNNEL_CAN);
   final TalonFX shooterTransfer = new TalonFX(rotorIDs.SHOOTER_TRANSFER_CAN);
-  final TalonFX flywheelTopLeft = new TalonFX(rotorIDs.FLYWHEEL_TOP_LEFT_CAN);
-  final TalonFX flywheelTopRight = new TalonFX(rotorIDs.FLYWHEEL_TOP_RIGHT_CAN);
-  final TalonFX flywheelBottomLeft = new TalonFX(rotorIDs.FLYWHEEL_BOTTOM_LEFT_CAN);
-  final TalonFX flywheelBottomRight = new TalonFX(rotorIDs.FLYWHEEL_BOTTOM_RIGHT_CAN);
+  final TalonFX flywheelTopWest = new TalonFX(rotorIDs.FLYWHEEL_TOP_WEST_CAN);
+  final TalonFX flywheelTopEast = new TalonFX(rotorIDs.FLYWHEEL_TOP_EAST_CAN);
+  final TalonFX flywheelBottomWest = new TalonFX(rotorIDs.FLYWHEEL_BOTTOM_WEST_CAN);
+  final TalonFX flywheelBottomEast = new TalonFX(rotorIDs.FLYWHEEL_BOTTOM_EAST_CAN);
 
   /** Creates a new Rotors. */
   public Rotors() {
@@ -38,10 +36,10 @@ public class Rotors extends SubsystemBase {
     intakeRoller.getConfigurator().apply(ConstRotors.INTAKE_ROLLER_CONFIGURATION);
     serializerVFunnel.getConfigurator().apply(ConstRotors.SERIALIZER_V_FUNNEL_CONFIGURATION);
     shooterTransfer.getConfigurator().apply(ConstRotors.SHOOTER_TRANSFER_CONFIGURATION);
-    flywheelTopLeft.getConfigurator().apply(ConstRotors.FLYWHEEL_LEFT_CONFIGURATION);
-    flywheelBottomLeft.getConfigurator().apply(ConstRotors.FLYWHEEL_LEFT_CONFIGURATION);
-    flywheelTopRight.getConfigurator().apply(ConstRotors.FLYWHEEL_RIGHT_CONFIGURATION);
-    flywheelBottomRight.getConfigurator().apply(ConstRotors.FLYWHEEL_RIGHT_CONFIGURATION);
+    flywheelTopWest.getConfigurator().apply(ConstRotors.FLYWHEEL_WEST_CONFIGURATION);
+    flywheelBottomWest.getConfigurator().apply(ConstRotors.FLYWHEEL_WEST_CONFIGURATION);
+    flywheelTopEast.getConfigurator().apply(ConstRotors.FLYWHEEL_EAST_CONFIGURATION);
+    flywheelBottomEast.getConfigurator().apply(ConstRotors.FLYWHEEL_EAST_CONFIGURATION);
   }
 
   final MotionMagicVelocityVoltage flywheelVelocityRequest = new MotionMagicVelocityVoltage(0);
@@ -63,21 +61,21 @@ public class Rotors extends SubsystemBase {
   }
 
   public void setFlywheelSpeed(AngularVelocity speed) {
-    flywheelTopRight.setControl(flywheelVelocityRequest.withVelocity(speed));
-    flywheelTopLeft.setControl(flywheelVelocityRequest.withVelocity(speed));
-    flywheelBottomRight.setControl(new Follower(flywheelTopRight.getDeviceID(), MotorAlignmentValue.Aligned));
-    flywheelBottomLeft.setControl(new Follower(flywheelTopLeft.getDeviceID(), MotorAlignmentValue.Aligned));
+    flywheelTopEast.setControl(flywheelVelocityRequest.withVelocity(speed));
+    flywheelTopWest.setControl(flywheelVelocityRequest.withVelocity(speed));
+    flywheelBottomEast.setControl(new Follower(flywheelTopEast.getDeviceID(), MotorAlignmentValue.Aligned));
+    flywheelBottomWest.setControl(new Follower(flywheelTopWest.getDeviceID(), MotorAlignmentValue.Aligned));
   }
 
   public void setFlywheelPercentOutput(double percent) {
-    flywheelTopRight.set(percent);
-    flywheelTopLeft.set(percent);
-    flywheelBottomRight.set(percent);
-    flywheelBottomLeft.set(percent);
+    flywheelTopEast.set(percent);
+    flywheelTopWest.set(percent);
+    flywheelBottomEast.set(percent);
+    flywheelBottomWest.set(percent);
   }
 
   public AngularVelocity getFlywheelSpeeds() {
-    return flywheelBottomLeft.getVelocity().getValue();
+    return flywheelBottomWest.getVelocity().getValue();
   }
 
   public boolean areFlywheelsAtSpeed(AngularVelocity desiredSpeed, AngularVelocity tolerance) {

@@ -9,6 +9,7 @@ import java.util.function.DoubleSupplier;
 
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.swerve.SwerveDrivetrainConstants;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants.DriveMotorArrangement;
@@ -113,6 +114,16 @@ public class Drivetrain extends SN_SuperSwerveV2 {
       .withPigeon2Id(DeviceIDs.drivetrainIDs.PIGEON_CAN)
       .withPigeon2Configs(ConstDrivetrain.pigeonConfigs);
 
+  // Exposed motors for Epilogue logging
+  public final TalonFX FrontLeftDrive;
+  public final TalonFX FrontLeftSteer;
+  public final TalonFX FrontRightDrive;
+  public final TalonFX FrontRightSteer;
+  public final TalonFX BackLeftDrive;
+  public final TalonFX BackLeftSteer;
+  public final TalonFX BackRightDrive;
+  public final TalonFX BackRightSteer;
+
   public Drivetrain() {
     super(
         DrivetrainConstants,
@@ -120,6 +131,20 @@ public class Drivetrain extends SN_SuperSwerveV2 {
         FrontRight,
         BackLeft,
         BackRight);
+
+    // Initialize motor references for Epilogue logging
+    // Front Left (index 0)
+    FrontLeftDrive = getModule(0).getDriveMotor();
+    FrontLeftSteer = getModule(0).getSteerMotor();
+    // Front Right (index 1)
+    FrontRightDrive = getModule(1).getDriveMotor();
+    FrontRightSteer = getModule(1).getSteerMotor();
+    // Back Left (index 2)
+    BackLeftDrive = getModule(2).getDriveMotor();
+    BackLeftSteer = getModule(2).getSteerMotor();
+    // Back Right (index 3)
+    BackRightDrive = getModule(3).getDriveMotor();
+    BackRightSteer = getModule(3).getSteerMotor();
   }
 
   /**

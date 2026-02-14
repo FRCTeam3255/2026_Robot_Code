@@ -18,7 +18,7 @@ public class PrepClimb extends Command {
   public PrepClimb() {
     // Use addRequirements() here to declare subsystem dependencies.
 
-    addRequirements(RobotContainer.subStateMachine);
+    addRequirements(RobotContainer.stateMachineInstance);
   }
 
   // Called when the command is initially scheduled.
@@ -27,7 +27,7 @@ public class PrepClimb extends Command {
     // TOdo: replace nulls with proper values
     // globalDrivetrain.rotationalAlign(ConstField.TOWER_POSE,
     // ConstDrivetrain.TURN_SPEED);
-    RobotContainer.subStateMachine.setRobotState(StateMachine.RobotState.PREP_CLIMB_L1);
+    RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.PREP_CLIMB_L1);
     RobotContainer.motionInstance.setClimberPosition(ConstMotion.EXTEND_CLIMBER);
     RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.RETRACT_INTAKE_PIVOT_ANGLE);
 
@@ -46,6 +46,6 @@ public class PrepClimb extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return RobotContainer.motionInstance.isAtPosition(ConstMotion.EXTEND_CLIMBER, ConstMotion.CLIMBER_TOLERANCE);
+    return RobotContainer.motionInstance.isClimberAtPosition(ConstMotion.CLIMBER_TOLERANCE);
   }
 }

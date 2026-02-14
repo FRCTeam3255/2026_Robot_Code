@@ -16,13 +16,13 @@ public class ReverseShooter extends Command {
   public ReverseShooter() {
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.subStateMachine);
+    addRequirements(RobotContainer.stateMachineInstance);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.subStateMachine.setRobotState(StateMachine.RobotState.REVERSING_SHOOTER);
+    RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.REVERSING_SHOOTER);
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.REVERSE_SHOOTER_TRANSFER_SPEED);
     RobotContainer.rotorsInstance.setFlywheelPercentOutput(ConstRotors.REVERSE_FLYWHEEL_SPEED);
     RobotContainer.drivetrainInstance.setIsManualRotationEnabled(true);
