@@ -19,16 +19,10 @@ import frc.robot.commands.states.PrepShoots.*;
 @Logged
 public class StateMachine extends SubsystemBase {
   public static RobotState currentRobotState;
-  @NotLogged
-  Drivetrain subDrivetrain;
-  @NotLogged
-  StateMachine subStateMachine = this;
 
   /** Creates a new StateMachine. */
-  public StateMachine(Drivetrain subDrivetrain) {
+  public StateMachine() {
     currentRobotState = RobotState.NONE;
-
-    this.subDrivetrain = subDrivetrain;
   }
 
   public void setRobotState(RobotState robotState) {
