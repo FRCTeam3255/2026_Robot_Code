@@ -19,7 +19,7 @@ public class ConstLEDs {
         .withDirection(AnimationDirectionValue.Forward)
         .withFrameRate(Hertz.of(25));
         
-    public static final ColorFlowAnimation SHIFT_FINNA_END_ANIMATION = new ColorFlowAnimation(0, 0)
+    public static final ColorFlowAnimation SHIFT_GONNA_END_ANIMATION = new ColorFlowAnimation(0, 0)
         .withSlot(3)
         .withColor(new RGBWColor(255, 0, 0, 0))
         .withDirection(AnimationDirectionValue.Forward)
