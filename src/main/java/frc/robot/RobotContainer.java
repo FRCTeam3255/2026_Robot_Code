@@ -143,9 +143,9 @@ public class RobotContainer {
   }
 
   public final Trigger climbingL1Trigger = new Trigger(
-      () -> subStateMachine.getRobotState() == RobotState.CLIMBING_L1);
+      () -> stateMachineInstance.getRobotState() == RobotState.CLIMBING_L1);
   public final Trigger climbingL2_L3Trigger = new Trigger(
-      () -> subStateMachine.getRobotState() == RobotState.CLIMBING_L2_3);
+      () -> stateMachineInstance.getRobotState() == RobotState.CLIMBING_L2_3);
   public final Trigger readyToShootTrigger = new Trigger(
       () -> rotorsInstance.areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
           && drivetrainInstance.isAtDesiredRotation(ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE)
