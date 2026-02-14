@@ -222,11 +222,11 @@ public class RobotContainer {
     Command PreloadNeutralRight = Commands.sequence(
         ScoreAndCollect(ChoreoTraj.OppBump_OppHub,
             ChoreoTraj.OppHub_OppNeutral,
-            PreloadDepotOutpost,
+            TRY_PREP_ANYWHERE,
             shootingTime,
             intakingTime),
         ScoreOnly(ChoreoTraj.OppNeutral_OppHub,
-            PreloadDepotOutpost,
+            TRY_PREP_ANYWHERE,
             shootingTime));
 
     Command PreloadNeutralLeft = Commands.sequence(
