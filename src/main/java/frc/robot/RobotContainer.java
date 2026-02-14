@@ -12,7 +12,7 @@ import com.frcteam3255.joystick.SN_XboxController;
 import choreo.auto.AutoFactory;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
-import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -39,6 +39,7 @@ import frc.robot.commands.states.PrepShoots.PrepTrench;
 import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
+import frc.robot.constants.ConstSystem;
 import frc.robot.constants.ConstSystem.constControllers;
 import frc.robot.subsystems.DriverStateMachine;
 import frc.robot.subsystems.DriverStateMachine.DriverState;
@@ -92,8 +93,6 @@ public class RobotContainer {
   private AutoFactory autoFactory;
 
   private final SN_XboxController conDriver = new SN_XboxController(controllerIDs.DRIVER_USB);
-
-  private static DigitalInput isPracticeBot = new DigitalInput(DeviceIDs.PRAC_BOT_DIO);
 
   public static Rotors rotorsInstance = new Rotors();
   private final Rotors loggedRotorsInstance = rotorsInstance;
@@ -222,7 +221,7 @@ public class RobotContainer {
   }
 
   public static boolean isPracticeBot() {
-    return !isPracticeBot.get();
+    return RobotController.getSerialNumber().equals(ConstSystem.PRACTICE_BOT_RIO);
   }
 
   public Command runPath(String pathName) {
