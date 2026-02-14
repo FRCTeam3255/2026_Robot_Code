@@ -17,6 +17,7 @@ import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstField;
+import frc.robot.constants.ConstMotion;
 import frc.robot.subsystems.DriverStateMachine.DriverState;
 import frc.robot.subsystems.Motion;
 
@@ -82,10 +83,11 @@ public class DriveManual extends Command {
       }
     }
     Pose2d trenchPose = RobotContainer.robotPose.getTrench();
-    Distance distanceToTrench = RobotContainer.robotPose.getDistanceToHub();
+    Distance distanceToTrench = RobotContainer.robotPose.getDistanceToTrench();
     Angle targetHoodAngle = Motion.getMappedHoodAngle(distanceToTrench);
 
-    RobotContainer.motionInstance.setHoodAngle(targetHoodAngle);
+    RobotContainer.motionInstance.setHoodAngle(ConstMotion.HOOD_TRENCH_ANGLE);
+
   }
 
   @Override
