@@ -146,6 +146,8 @@ public class RobotContainer {
     // subDrivetrain.resetModulesToAbsolute();
   }
 
+  public final Trigger testFeedback = new Trigger(
+      () -> true);
   public final Trigger hubSwitchingTrigger = new Trigger(() -> robotInstance.hubsIsSwitching());
   public final Trigger climbingL1Trigger = new Trigger(
       () -> stateMachineInstance.getRobotState() == RobotState.CLIMBING_L1);
@@ -191,12 +193,18 @@ public class RobotContainer {
         .onTrue(TRY_PREP_NON_OUTPOST);
     conDriver.btn_North.onTrue(new ResetPose());
 
-    readyToShootTrigger
-        .onTrue(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble, ConstRumble.READY_TO_SHOOT_RUMBLE)))
-        .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble, ConstRumble.RUMBLE_OFF)));
-    hubSwitchingTrigger
-        .onTrue(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble, ConstRumble.SHIFT_CHANGE_RUMBLE)))
-        .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble, ConstRumble.RUMBLE_OFF)));
+    // readyToShootTrigger
+    // .whileTrue(
+    // Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble,
+    // ConstRumble.READY_TO_SHOOT_RUMBLE)))
+    // .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble,
+    // ConstRumble.RUMBLE_OFF)));
+    // hubSwitchingTrigger
+    // .whileTrue(
+    // Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble,
+    // ConstRumble.SHIFT_CHANGE_RUMBLE)))
+    // .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble,
+    // ConstRumble.RUMBLE_OFF)));
   }
 
   public void configAutonomous() {
@@ -347,6 +355,12 @@ public class RobotContainer {
 
   private void configOperatorBindings() {
     // Add operator bindings here if needed
+  }
+
+  public void configFeedback() {
+    testFeedback.whileTrue(
+        Commands.runOnce(() -> conDriver.setRumble(RumbleType.kBothRumble, ConstRumble.TEST_RUMBLE)))
+        .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble, ConstRumble.RUMBLE_OFF)));
   }
 
   public RobotState getRobotState() {
