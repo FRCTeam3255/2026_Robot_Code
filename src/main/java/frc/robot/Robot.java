@@ -190,6 +190,15 @@ public class Robot extends TimedRobot {
     }
   }
 
+  public boolean hubsIsSwitching() {
+    double matchTime = getMatchTime();
+    if (matchTime < 109 && matchTime > 105 || matchTime < 84 && matchTime > 80 || matchTime < 59 && matchTime > 55
+        || matchTime < 34 && matchTime > 30) {
+      return true;
+    }
+    return false;
+  }
+
   public boolean isHubActive() {
     Optional<Alliance> alliance = DriverStation.getAlliance();
     // If we have no alliance, we cannot be enabled, therefore no hub.

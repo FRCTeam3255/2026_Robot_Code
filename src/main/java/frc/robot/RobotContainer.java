@@ -12,6 +12,7 @@ import com.frcteam3255.joystick.SN_XboxController;
 import choreo.auto.AutoFactory;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -40,6 +41,7 @@ import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
 import frc.robot.constants.ConstSystem;
+import frc.robot.constants.ConstRumble;
 import frc.robot.constants.ConstSystem.constControllers;
 import frc.robot.subsystems.DriverStateMachine;
 import frc.robot.subsystems.DriverStateMachine.DriverState;
@@ -97,6 +99,7 @@ public class RobotContainer {
   public static Rotors rotorsInstance = new Rotors();
   private final Rotors loggedRotorsInstance = rotorsInstance;
   public static Motion motionInstance = new Motion();
+  public static Robot robotInstance = new Robot();
   private final Motion loggedMotionInstance = motionInstance;
   public static Drivetrain drivetrainInstance = new Drivetrain();
   private final Drivetrain loggedDrivetrainInstance = drivetrainInstance;
@@ -141,6 +144,7 @@ public class RobotContainer {
     // subDrivetrain.resetModulesToAbsolute();
   }
 
+  public final Trigger hubSwitchingTrigger = new Trigger(() -> robotInstance.hubsIsSwitching());
   public final Trigger climbingL1Trigger = new Trigger(
       () -> stateMachineInstance.getRobotState() == RobotState.CLIMBING_L1);
   public final Trigger climbingL2_L3Trigger = new Trigger(
@@ -184,6 +188,13 @@ public class RobotContainer {
     conDriver.btn_X
         .onTrue(TRY_PREP_NON_OUTPOST);
     conDriver.btn_North.onTrue(new ResetPose());
+
+    readyToShootTrigger
+        .onTrue(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble, ConstRumble.READY_TO_SHOOT_RUMBLE)))
+        .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble, ConstRumble.RUMBLE_OFF)));
+    hubSwitchingTrigger
+        .onTrue(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble, ConstRumble.SHIFT_CHANGE_RUMBLE)))
+        .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble, ConstRumble.RUMBLE_OFF)));
   }
 
   public void configAutonomous() {
