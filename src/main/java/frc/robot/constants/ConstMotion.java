@@ -65,11 +65,11 @@ public class ConstMotion {
     HOOD_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     HOOD_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
 
-    hoodAngleMap.put(Inches.of(1.5).in(Inches), Degrees.of(28.0).in(Degrees));
-    hoodAngleMap.put(Inches.of(2.0).in(Inches), Degrees.of(31.0).in(Degrees));
-    hoodAngleMap.put(Inches.of(2.5).in(Inches), Degrees.of(35.0).in(Degrees));
-    hoodAngleMap.put(Inches.of(3.0).in(Inches), Degrees.of(39.0).in(Degrees));
-    hoodAngleMap.put(Inches.of(3.5).in(Inches), Degrees.of(43.0).in(Degrees));
-    hoodAngleMap.put(Inches.of(4.0).in(Inches), Degrees.of(47.0).in(Degrees));
+    hoodAngleMap.put(Inches.of(180).in(Inches), Degrees.of(45).in(Degrees));
+    hoodAngleMap.put(Inches.of(120).in(Inches), Degrees.of(40).in(Degrees));
+    hoodAngleMap.put(Inches.of(100).in(Inches), Degrees.of(35).in(Degrees));
+    hoodAngleMap.put(Inches.of(80).in(Inches), Degrees.of(30).in(Degrees));
+    hoodAngleMap.put(Inches.of(90).in(Inches), Degrees.of(25).in(Degrees));
+    hoodAngleMap.put(Inches.of(50).in(Inches), Degrees.of(0).in(Degrees));
   }
 }

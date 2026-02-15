@@ -37,12 +37,6 @@ public class ResetPose extends Command {
   }
 
   public Pose2d getAlliancePose() {
-    Pose2d resetPose;
-    if (ConstField.isRedAlliance()) {
-      resetPose = ConstField.FieldElementGroups.RESET_POSE_SET.getRed().get(0);
-    } else {
-      resetPose = ConstField.FieldElementGroups.RESET_POSE_SET.getBlue().get(0);
-    }
-    return resetPose;
+    return ConstField.FieldElementGroups.RESET_POSE_SET.getAlliancePoses().get(0);
   }
 }
