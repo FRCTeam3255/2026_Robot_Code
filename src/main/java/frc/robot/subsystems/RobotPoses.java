@@ -97,13 +97,7 @@ public class RobotPoses extends SubsystemBase {
   }
 
   public Pose2d getHub() {
-    Pose2d hubPose;
-    if (ConstField.isRedAlliance()) {
-      hubPose = ConstField.FieldElementGroups.HUB_POSE_SET.getRed().get(0);
-    } else {
-      hubPose = ConstField.FieldElementGroups.HUB_POSE_SET.getBlue().get(0);
-    }
-    return hubPose;
+    return ConstField.FieldElementGroups.HUB_POSE_SET.getAlliancePoses().get(0);
   }
 
   public Distance getDistanceToHub() {
