@@ -48,8 +48,8 @@ public record ChoreoTraj(
 	public static final ChoreoTraj Depot_Outpost = new ChoreoTraj(
 	    "Depot_Outpost",
 	    OptionalInt.empty(),
-	    1.88878,
-	    new Pose2d(0.45, 5.9, Rotation2d.fromRadians(0)),
+	    1.70106,
+	    new Pose2d(2.528, 5.902, Rotation2d.fromRadians(0)),
 	    new Pose2d(0.4, 0.7, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj HubFront_Depot = new ChoreoTraj(
@@ -136,6 +136,34 @@ public record ChoreoTraj(
 	    new Pose2d(3.6, 0.7, Rotation2d.fromRadians(1.571)),
 	    new Pose2d(0.6, 0.7, Rotation2d.fromRadians(0))
 	);
+	public static final ChoreoTraj Bump_Depot = new ChoreoTraj(
+	    "Bump_Depot",
+	    OptionalInt.empty(),
+	    1.18666,
+	    new Pose2d(3.597, 5.935, Rotation2d.fromRadians(0)),
+	    new Pose2d(0.45, 5.9, Rotation2d.fromRadians(0))
+	);
+	public static final ChoreoTraj Move_Straight_Depot = new ChoreoTraj(
+	    "Move_Straight_Depot",
+	    OptionalInt.empty(),
+	    0.96032,
+	    new Pose2d(0.45, 5.9, Rotation2d.fromRadians(0)),
+	    new Pose2d(2.528, 5.902, Rotation2d.fromRadians(0))
+	);
+	public static final ChoreoTraj Move_Forward_Outpost = new ChoreoTraj(
+	    "Move_Forward_Outpost",
+	    OptionalInt.empty(),
+	    0.94495,
+	    new Pose2d(0.4, 0.7, Rotation2d.fromRadians(0)),
+	    new Pose2d(1.779, 2.156, Rotation2d.fromRadians(0.569))
+	);
+	public static final ChoreoTraj OutpostTrench_NeutralZone = new ChoreoTraj(
+	    "OutpostTrench_NeutralZone",
+	    OptionalInt.empty(),
+	    1.59282,
+	    new Pose2d(3.645, 0.64, Rotation2d.fromRadians(3.142)),
+	    new Pose2d(7.897, 2.579, Rotation2d.fromRadians(1.71))
+	);
 
     /**
      * A map between trajectory names and their corresponding data.
@@ -157,7 +185,11 @@ public record ChoreoTraj(
 		Map.entry("Outpost_HubFront", Outpost_HubFront),
 		Map.entry("Outpost_Tower", Outpost_Tower),
 		Map.entry("Reverse_From_Hub", Reverse_From_Hub),
-		Map.entry("Trench_Outpost", Trench_Outpost)
+		Map.entry("Trench_Outpost", Trench_Outpost),
+		Map.entry("Bump_Depot", Bump_Depot),
+		Map.entry("Move_Straight_Depot", Move_Straight_Depot),
+		Map.entry("Move_Forward_Outpost", Move_Forward_Outpost),
+		Map.entry("OutpostTrench_NeutralZone", OutpostTrench_NeutralZone)
     );
 
     /**
