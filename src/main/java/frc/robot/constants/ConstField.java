@@ -98,6 +98,17 @@ public class ConstField {
       }
       return new Pose2dAllianceSet(combined.toArray(new Pose2d[0]));
     }
+
+    public List<Pose2d> getAlliancePoses() {
+      List<Pose2d> poses;
+      if (isRedAlliance()) {
+        poses = getRed();
+      } else {
+        poses = getBlue();
+      }
+      return poses;
+    }
+
   }
 
   public static final Distance FIELD_LENGTH = Units.Inches.of(651.2);
@@ -136,5 +147,4 @@ public class ConstField {
     public static final Pose2dAllianceSet UPRIGHT_OUTPOST_SIDE_POSE_SET = new Pose2dAllianceSet(
         FieldElements.UPRIGHT_OUTPOST_SIDE_POSE, FieldElements.UPRIGHT_DEPOT_SIDE_POSE);
   }
-
 }
