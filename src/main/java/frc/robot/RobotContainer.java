@@ -137,8 +137,8 @@ public class RobotContainer {
 
     conDriver.setLeftDeadband(constControllers.DRIVER_LEFT_STICK_DEADBAND);
 
-    driverStateMachineInstance
-        .setDefaultCommand(MANUAL);
+    // driverStateMachineInstance
+    // .setDefaultCommand(MANUAL);
 
     configDriverBindings();
     configOperatorBindings();
