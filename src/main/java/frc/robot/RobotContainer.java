@@ -56,6 +56,7 @@ import frc.robot.subsystems.Vision;
 
 @Logged
 public class RobotContainer {
+
   @NotLogged
   SendableChooser<Command> autoChooser = new SendableChooser<>();
 
@@ -135,6 +136,8 @@ public class RobotContainer {
       Set.of(driverStateMachineInstance));
 
   public RobotContainer() {
+    RobotController.setBrownoutVoltage(5.5);
+
     conDriver.setLeftDeadband(constControllers.DRIVER_LEFT_STICK_DEADBAND);
 
     driverStateMachineInstance
