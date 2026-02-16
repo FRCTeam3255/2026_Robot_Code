@@ -33,7 +33,6 @@ public class Motion extends SubsystemBase {
   MotionMagicExpoVoltage intakePivotMotionRequest = new MotionMagicExpoVoltage(0);
   Angle lastDesiredHoodAngle = Units.Degrees.of(0);
 
-  Angle lastDesiredHoodAngle = Degrees.zero();
   Angle lastDesiredIntakePivotAngle = Degrees.zero();
   Distance lastDesiredClimberPosition = Inches.zero();
 

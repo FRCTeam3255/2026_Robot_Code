@@ -24,13 +24,13 @@ import frc.robot.subsystems.Motion;
 public class PrepAnywhere extends Command {
 
   public PrepAnywhere() {
-    addRequirements(RobotContainer.subStateMachine);
+    addRequirements(RobotContainer.stateMachineInstance);
   }
 
   @Override
   public void initialize() {
     RobotContainer.drivetrainInstance.setIsManualRotationEnabled(false);
-    RobotContainer.subStateMachine.setRobotState(RobotState.PREP_ANYWHERE);
+    RobotContainer.stateMachineInstance.setRobotState(RobotState.PREP_ANYWHERE);
 
   }
 
