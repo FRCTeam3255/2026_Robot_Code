@@ -205,14 +205,14 @@ public class RobotContainer {
 
     Command PreloadDepot = Commands.sequence(
         CollectAndScore(ChoreoTraj.Bump_Depot,
-            ChoreoTraj.Move_Straight_Depot,
+            ChoreoTraj.Move_Forward_Depot,
             TRY_PREP_ANYWHERE,
             ConstAuto.INTAKE_DEPOT_TIMEOUT,
             ConstAuto.SHOOT_FROM_DEPOT_TIMEOUT));
 
     Command PreloadDepotOutpost = Commands.sequence(
         CollectAndScore(ChoreoTraj.Bump_Depot,
-            ChoreoTraj.Move_Straight_Depot,
+            ChoreoTraj.Move_Forward_Depot,
             TRY_PREP_ANYWHERE,
             ConstAuto.INTAKE_DEPOT_TIMEOUT,
             ConstAuto.SHOOT_FROM_DEPOT_TIMEOUT),
