@@ -64,13 +64,13 @@ public class ConstMotion {
     HOOD_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     HOOD_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
     HOOD_CONFIGURATION.Feedback.SensorToMechanismRatio = 1.0 / ((10.0 / 44.0) * (10.0 / 190.0));
-    // HOOD_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitEnable = true;
-    // HOOD_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
+    HOOD_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitEnable = true;
+    HOOD_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
     HOOD_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitThreshold = Units.Degree.of(46).in(Rotations);
     HOOD_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitThreshold = Units.Degrees.of(1.7).in(Rotations);
     HOOD_CONFIGURATION.Slot0.GravityType = GravityTypeValue.Arm_Cosine;
     HOOD_CONFIGURATION.Slot0.kS = 0.2;
-    HOOD_CONFIGURATION.Slot0.kP = 100;
+    HOOD_CONFIGURATION.Slot0.kP = 300;
     HOOD_CONFIGURATION.Slot0.kG = 0.1;
     HOOD_CONFIGURATION.Slot0.StaticFeedforwardSign = StaticFeedforwardSignValue.UseClosedLoopSign;
 
