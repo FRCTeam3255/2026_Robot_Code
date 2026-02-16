@@ -66,7 +66,7 @@ public class ConstMotion {
     HOOD_CONFIGURATION.Feedback.SensorToMechanismRatio = 1.0 / ((10.0 / 44.0) * (10.0 / 190.0));
     HOOD_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitEnable = true;
     HOOD_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
-    HOOD_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitThreshold = Units.Degree.of(46).in(Rotations);
+    HOOD_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitThreshold = Units.Degrees.of(46).in(Rotations);
     HOOD_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitThreshold = Units.Degrees.of(1.6).in(Rotations);
     HOOD_CONFIGURATION.Slot0.GravityType = GravityTypeValue.Arm_Cosine;
     HOOD_CONFIGURATION.Slot0.kS = 0.2;
