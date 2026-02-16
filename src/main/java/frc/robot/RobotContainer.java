@@ -12,12 +12,14 @@ import com.frcteam3255.joystick.SN_XboxController;
 import choreo.auto.AutoFactory;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.DeferredCommand;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.DeviceIDs.controllerIDs;
 import frc.robot.commands.AddVisionMeasurement;
 import frc.robot.commands.ClimbingL1;
@@ -35,6 +37,10 @@ import frc.robot.commands.states.PrepShoots.PrepNonOutpost;
 import frc.robot.commands.states.PrepShoots.PrepOpponentToAlliance;
 import frc.robot.commands.states.PrepShoots.PrepOutpost;
 import frc.robot.commands.states.PrepShoots.PrepTrench;
+import frc.robot.constants.ChoreoTraj;
+import frc.robot.constants.ConstDrivetrain;
+import frc.robot.constants.ConstMotion;
+import frc.robot.constants.ConstRotors;
 import frc.robot.constants.ConstSystem;
 import frc.robot.constants.ConstSystem.constControllers;
 import frc.robot.subsystems.DriverStateMachine;
@@ -134,9 +140,17 @@ public class RobotContainer {
     configDriverBindings();
     configOperatorBindings();
     configAutonomous();
-
     // subDrivetrain.resetModulesToAbsolute();
   }
+
+  public final Trigger climbingL1Trigger = new Trigger(
+      () -> stateMachineInstance.getRobotState() == RobotState.CLIMBING_L1);
+  public final Trigger climbingL2_L3Trigger = new Trigger(
+      () -> stateMachineInstance.getRobotState() == RobotState.CLIMBING_L2_3);
+  public final Trigger readyToShootTrigger = new Trigger(
+      () -> rotorsInstance.areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
+          && drivetrainInstance.isAtDesiredRotation(ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE)
+          && motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE));
 
   private void configDriverBindings() {
     conDriver.btn_South
@@ -184,37 +198,136 @@ public class RobotContainer {
     );
 
     // make our entries name
-    final Map<Command, String> autoStartingPoses = Map.ofEntries(
-    // Example
-    // Map.entry(autoCommand, "choreoStartingPath"),
-    );
+    int shootingTime = 5;
+    int intakingTime = 7;
+
+    Command PreloadOnly = Commands.sequence(
+        ScoreOnly(ChoreoTraj.Reverse_From_Hub,
+            TRY_PREP_ANYWHERE,
+            shootingTime));
+
+    Command PreloadDepot = Commands.sequence(
+        ScoreAndCollect(ChoreoTraj.Bump_HubLeft,
+            ChoreoTraj.HubLeft_Depot,
+            TRY_PREP_ANYWHERE,
+            shootingTime,
+            intakingTime),
+        ScoreOnly(ChoreoTraj.Depot_HubFront,
+            TRY_PREP_ANYWHERE,
+            shootingTime));
+
+    Command PreloadDepotOutpost = Commands.sequence(
+        ScoreAndCollect(ChoreoTraj.Reverse_From_Hub,
+            ChoreoTraj.HubFront_Outpost,
+            TRY_PREP_ANYWHERE,
+            shootingTime,
+            intakingTime),
+        ScoreAndCollect(ChoreoTraj.Outpost_HubFront,
+            ChoreoTraj.HubFront_Depot,
+            TRY_PREP_ANYWHERE,
+            shootingTime,
+            intakingTime),
+        ScoreOnly(ChoreoTraj.Depot_HubFront2,
+            TRY_PREP_ANYWHERE,
+            shootingTime));
+
+    Command PreloadNeutralRight = Commands.sequence(
+        ScoreAndCollect(ChoreoTraj.OppBump_OppHub,
+            ChoreoTraj.OppHub_OppNeutral,
+            TRY_PREP_ANYWHERE,
+            shootingTime,
+            intakingTime),
+        ScoreOnly(ChoreoTraj.OppNeutral_OppHub,
+            TRY_PREP_ANYWHERE,
+            shootingTime));
+
+    Command PreloadNeutralLeft = Commands.sequence(
+        ScoreAndCollect(ChoreoTraj.Bump_HubLeft,
+            ChoreoTraj.HubLeft_Neutral,
+            TRY_PREP_ANYWHERE,
+            shootingTime,
+            intakingTime),
+        ScoreOnly(ChoreoTraj.Neutral_HubLeft,
+            TRY_PREP_ANYWHERE,
+            shootingTime));
+
+    autoChooser.setDefaultOption("Do Nothing", Commands.none());
+    autoChooser.addOption("PreloadDepot", PreloadDepot);
+    autoChooser.addOption("PreloadDepotOutpost", PreloadDepotOutpost);
+    // autoChooser.addOption("PreloadOutpost", PreloadOutpost);
+    autoChooser.addOption("PreloadOnly", PreloadOnly);
+    autoChooser.addOption("PreloadNeutralRight", PreloadNeutralRight);
+    autoChooser.addOption("PreloadNeutralLeft", PreloadNeutralLeft);
+
+    // make our entries name
+    final Map<Command, ChoreoTraj> autoStartingPoses = Map.ofEntries(
+        // Example
+        // Map.entry(PreloadOutpost, "Trench_Outpost"),
+        Map.entry(PreloadDepotOutpost, ChoreoTraj.Reverse_From_Hub),
+        Map.entry(PreloadOnly, ChoreoTraj.Reverse_From_Hub),
+        Map.entry(PreloadNeutralLeft, ChoreoTraj.Bump_HubLeft),
+        Map.entry(PreloadDepot, ChoreoTraj.Bump_HubLeft),
+        Map.entry(PreloadNeutralRight, ChoreoTraj.OppBump_OppHub));
+
     // enter which we want to do based on name
-    autoChooser.onChange(selectedAuto -> {
-      String startingPose = autoStartingPoses.get(selectedAuto);
-      // if there is a stating pose, reset to it
+    autoChooser.onChange(selectedAuto ->
+
+    {
+      ChoreoTraj startingPose = autoStartingPoses.get(selectedAuto);
+      // if there is a starting pose, reset to it
       if (startingPose != null) {
-        autoFactory.resetOdometry(startingPose)
+        autoFactory.resetOdometry(startingPose.name())
             .ignoringDisable(true) // Run even when disabled
             .schedule();
       }
     });
 
-    // Example: Add autonomous routines to the chooser
-    autoChooser.setDefaultOption("Do Nothing", Commands.none());
-    autoChooser.addOption("Example Path", runPath("ExamplePath"));
-    // Add more autonomous routines as needed, e.g.:
-    // autoChooser.addOption("Score and Leave", runPath("ScoreAndLeave"));
-
     SmartDashboard.putData("Auto Chooser", autoChooser);
+  }
+
+  Command ScoreAndCollect(ChoreoTraj startPath, ChoreoTraj endPath, Command try_prep_shoot, int shootingTime,
+      int intakingTime) {
+    return Commands.sequence(
+        Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
+        runPath(startPath).asProxy(),
+        try_prep_shoot.asProxy().withTimeout(1.5),
+        TRY_SHOOTING.asProxy().withTimeout(shootingTime),
+        TRY_NONE.asProxy().withTimeout(0.05),
+        runPath(endPath).asProxy().alongWith(TRY_INTAKING.asProxy().withTimeout(intakingTime)));
+  }
+
+  Command ScoreOnly(ChoreoTraj startPath, Command try_prep_shoot, int shootingTime) {
+    return Commands.sequence(
+        Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
+        runPath(startPath).asProxy(),
+        try_prep_shoot.asProxy().withTimeout(0.6),
+        TRY_SHOOTING.asProxy().withTimeout(shootingTime));
+  }
+
+  Command Climb(ChoreoTraj startPath) {
+    return Commands.sequence(
+        Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
+        runPath(startPath).asProxy(),
+        TRY_PREP_CLIMB_L1.asProxy().withTimeout(0.5),
+        TRY_CLIMBING_L1.asProxy().withTimeout(4));
   }
 
   public static boolean isPracticeBot() {
     return RobotController.getSerialNumber().equals(ConstSystem.PRACTICE_BOT_RIO);
   }
 
-  public Command runPath(String pathName) {
-    return autoFactory.trajectoryCmd(pathName).asProxy()
-        .alongWith(Commands.runOnce(() -> driverStateMachineInstance.setDriverState(DriverState.CHOREO)));
+  public String pathString = "";
+  public Pose2d pathStartPose = new Pose2d();
+  public Pose2d pathEndPose = new Pose2d();
+
+  public Command runPath(ChoreoTraj path) {
+    return autoFactory.trajectoryCmd(path.name()).asProxy()
+        .alongWith(Commands.runOnce(() -> {
+          pathString = path.name();
+          pathStartPose = path.initialPoseBlue();
+          pathEndPose = path.endPoseBlue();
+          driverStateMachineInstance.setDriverState(DriverState.CHOREO);
+        }));
   }
 
   public Command getAutonomousCommand() {
@@ -227,6 +340,14 @@ public class RobotContainer {
 
   public RobotState getRobotState() {
     return stateMachineInstance.getRobotState();
+  }
+
+  public String robotStateToString() {
+    return stateMachineInstance.getRobotState().toString();
+  }
+
+  public String driverStateToString() {
+    return driverStateMachineInstance.getDriverState().toString();
   }
 
   public Command addVisionMeasurement() {
