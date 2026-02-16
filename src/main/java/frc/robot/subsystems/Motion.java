@@ -9,12 +9,15 @@ import static edu.wpi.first.units.Units.Inches;
 import static edu.wpi.first.units.Units.Meters;
 
 import com.ctre.phoenix6.controls.MotionMagicExpoVoltage;
+import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
+import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Distance;
+import edu.wpi.first.units.measure.Voltage;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DeviceIDs;
 import frc.robot.Robot;
@@ -31,6 +34,13 @@ public class Motion extends SubsystemBase {
   MotionMagicExpoVoltage climberMotionRequest = new MotionMagicExpoVoltage(0);
   MotionMagicExpoVoltage hoodMotionRequest = new MotionMagicExpoVoltage(0);
   MotionMagicExpoVoltage intakePivotMotionRequest = new MotionMagicExpoVoltage(0);
+
+  VoltageOut voltageRequest = new VoltageOut(0);
+
+  public boolean hasIntakePivotZeroed = false;
+  public boolean hasHoodZeroed = false;
+  public boolean intakePivotAttemptingZeroing = false;
+  public boolean hoodAttemptingZeroing = false;
 
   Angle lastDesiredHoodAngle = Degrees.zero();
   Angle lastDesiredIntakePivotAngle = Degrees.zero();
@@ -61,6 +71,26 @@ public class Motion extends SubsystemBase {
   public void setClimberPosition(Distance setpoint) {
     climber.setControl(climberMotionRequest.withPosition(setpoint.in(Units.Inches)));
     lastDesiredClimberPosition = setpoint;
+  }
+
+  public void setIntakePivotSoftwareLimits(boolean reverseLimitEnable, boolean forwardLimitEnable) {
+    ConstMotion.INTAKE_PIVOT_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitEnable = reverseLimitEnable;
+    ConstMotion.INTAKE_PIVOT_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitEnable = forwardLimitEnable;
+    intakePivot.getConfigurator().apply(ConstMotion.INTAKE_PIVOT_CONFIGURATION);
+  }
+
+  public void setHoodSoftwareLimits(boolean reverseLimitEnable, boolean forwardLimitEnable) {
+    ConstMotion.HOOD_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitEnable = reverseLimitEnable;
+    ConstMotion.HOOD_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitEnable = forwardLimitEnable;
+    hood.getConfigurator().apply(ConstMotion.HOOD_CONFIGURATION);
+  }
+
+  public void setIntakePivotVoltage(Voltage voltage) {
+    intakePivot.setControl(voltageRequest.withOutput(voltage));
+  }
+
+  public void setHoodVoltage(Voltage voltage) {
+    hood.setControl(voltageRequest.withOutput(voltage));
   }
 
   public Angle getPivotAngle() {
@@ -97,6 +127,14 @@ public class Motion extends SubsystemBase {
         && pivotAngle.lte(upperLim);
   }
 
+  public AngularVelocity getIntakePivotRotorVelocity() {
+    return intakePivot.getRotorVelocity().getValue();
+  }
+
+  public AngularVelocity getHoodRotorVelocity() {
+    return hood.getRotorVelocity().getValue();
+  }
+
   public static Angle getMappedHoodAngle(Distance distance) {
     return Degrees.of(ConstMotion.hoodAngleMap.get(distance.in(Inches)));
   }
@@ -108,6 +146,14 @@ public class Motion extends SubsystemBase {
     return Units.Inches.of(climber.getPosition().getValueAsDouble());
   }
 
+  public void resetIntakePivotSensorPosition(Angle zeroedPos) {
+    intakePivot.setPosition(zeroedPos);
+  }
+
+  public void resetHoodSensorPosition(Angle zeroedPos) {
+    hood.setPosition(zeroedPos);
+  }
+
   public boolean isClimberAtPosition(Distance distanceTolerance) {
     Distance lowerLim = lastDesiredClimberPosition.minus(distanceTolerance);
     Distance upperLim = lastDesiredClimberPosition.plus(distanceTolerance);
@@ -116,5 +162,13 @@ public class Motion extends SubsystemBase {
 
     return climberPosition.gte(lowerLim)
         && climberPosition.lte(upperLim);
+  }
+
+  public boolean isIntakePivotRotorVelocityZero() {
+    return getIntakePivotRotorVelocity().isNear(Units.RotationsPerSecond.zero(), 0.01);
+  }
+
+  public boolean isHoodRotorVelocityZero() {
+    return getHoodRotorVelocity().isNear(Units.RotationsPerSecond.zero(), 0.01);
   }
 }

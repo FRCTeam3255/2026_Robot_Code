@@ -13,12 +13,14 @@ import choreo.auto.AutoFactory;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.units.Units;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.DeferredCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.DeviceIDs.controllerIDs;
 import frc.robot.commands.AddVisionMeasurement;
@@ -37,6 +39,7 @@ import frc.robot.commands.states.PrepShoots.PrepNonOutpost;
 import frc.robot.commands.states.PrepShoots.PrepOpponentToAlliance;
 import frc.robot.commands.states.PrepShoots.PrepOutpost;
 import frc.robot.commands.states.PrepShoots.PrepTrench;
+import frc.robot.commands.zeroing.*;
 import frc.robot.constants.ChoreoTraj;
 import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstMotion;
@@ -91,6 +94,16 @@ public class RobotContainer {
       () -> stateMachineInstance.tryState(RobotState.PREP_NEUTRAL_TO_ALLIANCE));
   Command TRY_NONE = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.NONE));
+
+  Command zeroSubsystems = new ParallelCommandGroup(
+      new ZeroHood().withTimeout(ConstMotion.ZEROING_TIMEOUT.in(Units.Seconds)),
+      new ZeroIntake().onlyIf(() -> !RobotContainer.motionInstance.hasIntakePivotZeroed)
+          .withTimeout(ConstMotion.ZEROING_TIMEOUT.in(Units.Seconds)))
+      .withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming).withName("ZeroSubsystems");
+
+  Command manualZeroSubsystems = new ManualZeroHood()
+      .alongWith(new ManualZeroIntake())
+      .ignoringDisable(true).withName("ManualZeroSubsystems");
 
   private AutoFactory autoFactory;
 
@@ -353,5 +366,9 @@ public class RobotContainer {
   public Command addVisionMeasurement() {
     return new AddVisionMeasurement()
         .withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming).ignoringDisable(true);
+  }
+
+  public boolean allZeroed() {
+    return RobotContainer.motionInstance.hasHoodZeroed && RobotContainer.motionInstance.hasIntakePivotZeroed;
   }
 }

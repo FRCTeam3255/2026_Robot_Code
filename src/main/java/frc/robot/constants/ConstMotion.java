@@ -16,7 +16,10 @@ import com.ctre.phoenix6.signals.StaticFeedforwardSignValue;
 import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
+import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Distance;
+import edu.wpi.first.units.measure.Time;
+import edu.wpi.first.units.measure.Voltage;
 
 /** Add your docs here. */
 public class ConstMotion {
@@ -43,6 +46,22 @@ public class ConstMotion {
   public final static InterpolatingDoubleTreeMap hoodAngleMap = new InterpolatingDoubleTreeMap();
 
   public static final Distance CLIMBER_TOLERANCE = Inches.of(0.2);
+
+  public static final Angle ZEROED_INTAKE_MANUAL_POS = Units.Degrees.of(0);// TODO: update with actual values
+  public static final Angle ZEROED_INTAKE_AUTO_POS = Units.Degrees.of(0);// TODO: update with actual values
+  public static final Angle ZEROED_HOOD_MANUAL_POS = Units.Degrees.of(0);// TODO: update with actual values
+  public static final Angle ZEROED_HOOD_AUTO_POS = Units.Degrees.of(0);// TODO: update with actual values
+
+  public static final Voltage ZEROING_INTAKE_VOLTAGE = Units.Volts.of(1);
+  public static final Voltage ZEROING_HOOD_VOLTAGE = Units.Volts.of(1);
+
+  public static final AngularVelocity MANUAL_ZEROING_START_VELOCITY = Units.RotationsPerSecond.of(5);
+  public static final AngularVelocity MANUAL_ZEROING_DELTA_VELOCITY = Units.RotationsPerSecond.of(5);
+  public static final AngularVelocity ZEROED_VELOCITY = Units.RotationsPerSecond.of(0.2);
+
+  public static final Time ZEROING_TIMEOUT = Units.Seconds.of(3);
+  public static final Time ZEROED_TIME = Units.Seconds.of(1);
+
   static {
 
     INTAKE_PIVOT_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
