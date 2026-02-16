@@ -143,6 +143,7 @@ public class RobotContainer {
     configDriverBindings();
     configOperatorBindings();
     configAutonomous();
+    configFeedback();
     // subDrivetrain.resetModulesToAbsolute();
   }
 
@@ -205,6 +206,7 @@ public class RobotContainer {
     // ConstRumble.SHIFT_CHANGE_RUMBLE)))
     // .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble,
     // ConstRumble.RUMBLE_OFF)));
+    conDriver.setRumble(RumbleType.kBothRumble, ConstRumble.TEST_RUMBLE);
   }
 
   public void configAutonomous() {
@@ -358,9 +360,12 @@ public class RobotContainer {
   }
 
   public void configFeedback() {
-    testFeedback.whileTrue(
-        Commands.runOnce(() -> conDriver.setRumble(RumbleType.kBothRumble, ConstRumble.TEST_RUMBLE)))
-        .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble, ConstRumble.RUMBLE_OFF)));
+    // testFeedback.whileTrue(
+    // Commands.runOnce(() -> conDriver.setRumble(RumbleType.kBothRumble,
+    // ConstRumble.TEST_RUMBLE)))
+    // .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble,
+    // ConstRumble.RUMBLE_OFF)));
+    // conDriver.setRumble(RumbleType.kBothRumble, ConstRumble.TEST_RUMBLE);
   }
 
   public RobotState getRobotState() {
