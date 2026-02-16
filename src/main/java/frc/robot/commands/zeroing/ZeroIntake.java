@@ -6,7 +6,6 @@ package frc.robot.commands.zeroing;
 
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Time;
-import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;

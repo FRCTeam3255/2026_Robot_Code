@@ -31,7 +31,7 @@ public class ManualZeroIntake extends Command {
   public void initialize() {
     zeroingSuccess = false;
     RobotContainer.motionInstance.hasIntakePivotZeroed = false;
-    RobotContainer.motionInstance.setIntakePivotSoftwareLimits(false, true);
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.

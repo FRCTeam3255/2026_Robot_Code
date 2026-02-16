@@ -52,11 +52,11 @@ public class ConstMotion {
   public static final Angle ZEROED_HOOD_MANUAL_POS = Units.Degrees.of(0);// TODO: update with actual values
   public static final Angle ZEROED_HOOD_AUTO_POS = Units.Degrees.of(0);// TODO: update with actual values
 
-  public static final Voltage ZEROING_INTAKE_VOLTAGE = Units.Volts.of(1);
-  public static final Voltage ZEROING_HOOD_VOLTAGE = Units.Volts.of(1);
+  public static final Voltage ZEROING_INTAKE_VOLTAGE = Units.Volts.of(2);
+  public static final Voltage ZEROING_HOOD_VOLTAGE = Units.Volts.of(2);
 
   public static final AngularVelocity MANUAL_ZEROING_START_VELOCITY = Units.RotationsPerSecond.of(5);
-  public static final AngularVelocity MANUAL_ZEROING_DELTA_VELOCITY = Units.RotationsPerSecond.of(5);
+  public static final AngularVelocity MANUAL_ZEROING_DELTA_VELOCITY = Units.RotationsPerSecond.of(.1);
   public static final AngularVelocity ZEROED_VELOCITY = Units.RotationsPerSecond.of(0.2);
 
   public static final Time ZEROING_TIMEOUT = Units.Seconds.of(3);

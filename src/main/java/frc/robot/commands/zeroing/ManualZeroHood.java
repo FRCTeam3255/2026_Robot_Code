@@ -31,7 +31,6 @@ public class ManualZeroHood extends Command {
   public void initialize() {
     zeroingSuccess = false;
     RobotContainer.motionInstance.hasHoodZeroed = false;
-    RobotContainer.motionInstance.setHoodSoftwareLimits(false, true);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
