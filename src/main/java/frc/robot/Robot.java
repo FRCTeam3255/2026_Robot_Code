@@ -104,10 +104,11 @@ public class Robot extends TimedRobot {
     if (bothSubsystemsZeroed && m_autonomousCommand != null) {
       Commands.deferredProxy(() -> m_autonomousCommand).schedule();
     } else if (m_autonomousCommand != null) {
-      m_robotContainer.zeroSubsystems.andThen(Commands.deferredProxy(() -> m_autonomousCommand)).schedule();
+      m_robotContainer.makeZeroSubsystemsCommand().andThen(Commands.deferredProxy(() -> m_autonomousCommand))
+          .schedule();
       m_autonomousCommand.schedule();
     } else {
-      m_robotContainer.zeroSubsystems.schedule();
+      m_robotContainer.makeZeroSubsystemsCommand().schedule();
     }
   }
 
@@ -131,7 +132,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     if (!hasAutonomousRun || !bothSubsystemsZeroed) {
-      m_robotContainer.zeroSubsystems.schedule();
+      m_robotContainer.makeZeroSubsystemsCommand().schedule();
     }
   }
 

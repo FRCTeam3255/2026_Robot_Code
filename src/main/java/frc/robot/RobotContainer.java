@@ -96,15 +96,34 @@ public class RobotContainer {
   Command TRY_NONE = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.NONE));
 
-  Command zeroSubsystems = new ParallelCommandGroup(
-      new ZeroHood().withTimeout(ConstMotion.ZEROING_TIMEOUT.in(Units.Seconds)),
-      new ZeroIntake().onlyIf(() -> !RobotContainer.motionInstance.hasIntakePivotZeroed)
-          .withTimeout(ConstMotion.ZEROING_TIMEOUT.in(Units.Seconds)))
-      .withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming).withName("ZeroSubsystems");
+  // Command zeroSubsystems = new ParallelCommandGroup(
+  // new ZeroHood().withTimeout(ConstMotion.ZEROING_TIMEOUT.in(Units.Seconds)),
+  // new ZeroIntake().onlyIf(() ->
+  // !RobotContainer.motionInstance.hasIntakePivotZeroed)
+  // .withTimeout(ConstMotion.ZEROING_TIMEOUT.in(Units.Seconds)))
+  // .withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming).withName("ZeroSubsystems");
 
-  Command manualZeroSubsystems = new ManualZeroHood()
-      .alongWith(new ManualZeroIntake())
-      .ignoringDisable(true).withName("ManualZeroSubsystems");
+  public Command makeZeroSubsystemsCommand() {
+    Command zeroHood = new ZeroHood().withTimeout(ConstMotion.ZEROING_TIMEOUT.in(Units.Seconds));
+
+    Command zeroIntake = new ZeroIntake().withTimeout(ConstMotion.ZEROING_TIMEOUT.in(Units.Seconds));
+    // If intake already zeroed, replace with a no-op so the parallel group doesn't
+    // block.
+    if (RobotContainer.motionInstance.hasIntakePivotZeroed) {
+      zeroIntake = Commands.none();
+    }
+
+    return new ParallelCommandGroup(zeroHood, zeroIntake)
+        .withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming)
+        .withName("ZeroSubsystems");
+  }
+
+  // NOTE: manualZeroSubsystems is initialized after subsystem instances are
+  // created
+  // (see below). The field is declared here but initialized later to avoid
+  // constructing commands that reference subsystems before those subsystems
+  // exist (which would cause NPEs during RobotContainer class initialization).
+  Command manualZeroSubsystems;
 
   private AutoFactory autoFactory;
 
@@ -124,6 +143,16 @@ public class RobotContainer {
   private final StateMachine loggedStateMachineInstance = stateMachineInstance;
   public static Vision visionInstance = new Vision();
   private final Vision loggedVisionInstance = visionInstance;
+
+  // Initialize manualZeroSubsystems after subsystem instances are created so the
+  // ManualZero commands can safely reference subsystems.
+
+  // we have to zero hood first
+  {
+    manualZeroSubsystems = new ManualZeroHood()
+        .andThen(new ManualZeroIntake())
+        .ignoringDisable(true).withName("ManualZeroSubsystems");
+  }
 
   Command MANUAL = new DeferredCommand(
       driverStateMachineInstance.tryState(
