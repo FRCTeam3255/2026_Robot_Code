@@ -12,13 +12,11 @@ import com.ctre.phoenix6.hardware.CANdle;
 
 import edu.wpi.first.epilogue.Logged;
 import static edu.wpi.first.units.Units.RPM;
-import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DeviceIDs.rotorIDs;
-import frc.robot.RobotContainer;
 import frc.robot.constants.ConstRotors;
 
 @Logged
@@ -32,7 +30,7 @@ public class Rotors extends SubsystemBase {
   final TalonFX flywheelTopEast = new TalonFX(rotorIDs.FLYWHEEL_TOP_EAST_CAN);
   final TalonFX flywheelBottomWest = new TalonFX(rotorIDs.FLYWHEEL_BOTTOM_WEST_CAN);
   final TalonFX flywheelBottomEast = new TalonFX(rotorIDs.FLYWHEEL_BOTTOM_EAST_CAN);
-  AngularVelocity lastDesiredFlywheelSpeed = Units.RPM.of(0);
+  public AngularVelocity lastDesiredFlywheelSpeed = Units.RPM.of(0);
 
   /** Creates a new Rotors. */
   public Rotors() {
@@ -77,7 +75,6 @@ public class Rotors extends SubsystemBase {
     flywheelTopWest.set(percent);
     flywheelBottomEast.set(percent);
     flywheelBottomWest.set(percent);
-    lastDesiredFlywheelSpeed = Units.RPM.of(percent * 5400);
   }
 
   public AngularVelocity getFlywheelSpeeds() {
