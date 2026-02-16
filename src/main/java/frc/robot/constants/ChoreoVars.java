@@ -25,6 +25,7 @@ public final class ChoreoVars {
         public static final Pose2d depot_front = new Pose2d(2.528, 5.902, Rotation2d.kZero);
         public static final Pose2d outpost = new Pose2d(0.4, 0.7, Rotation2d.kZero);
         public static final Pose2d outpost_front = new Pose2d(1.779, 2.156, Rotation2d.fromRadians(0.569));
+        public static final Pose2d bump_forward = new Pose2d(3.605, 5.924, Rotation2d.kZero);
 
         private Poses() {}
     }

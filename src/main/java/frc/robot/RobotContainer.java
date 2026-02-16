@@ -237,6 +237,8 @@ public class RobotContainer {
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_DEFAULT_TIMEOUT));
 
+    Command Test = Commands.sequence(runPath(ChoreoTraj.test));
+
     autoChooser.setDefaultOption("Do Nothing", Commands.none());
     autoChooser.addOption("PreloadDepot", PreloadDepot);
     autoChooser.addOption("PreloadDepotOutpost", PreloadDepotOutpost);
@@ -244,6 +246,7 @@ public class RobotContainer {
     autoChooser.addOption("PreloadOnly", PreloadOnly);
     autoChooser.addOption("PreloadNeutralRight", PreloadNeutralRight);
     autoChooser.addOption("PreloadNeutralLeft", PreloadNeutralLeft);
+    autoChooser.addOption("Test", Test);
 
     // make our entries name
     final Map<Command, ChoreoTraj> autoStartingPoses = Map.ofEntries(
@@ -253,7 +256,7 @@ public class RobotContainer {
         Map.entry(PreloadOnly, ChoreoTraj.Reverse_From_Hub),
         Map.entry(PreloadNeutralLeft, ChoreoTraj.HubLeft_Neutral),
         Map.entry(PreloadDepot, ChoreoTraj.Bump_Depot),
-        Map.entry(PreloadNeutralRight, ChoreoTraj.OppHub_OppNeutral));
+        Map.entry(PreloadNeutralRight, ChoreoTraj.OutpostTrench_NeutralZone));
 
     // enter which we want to do based on name
     autoChooser.onChange(selectedAuto ->
