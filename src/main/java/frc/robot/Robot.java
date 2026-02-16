@@ -36,7 +36,7 @@ public class Robot extends TimedRobot {
   private static final StringPublisher selectedTabPublisher = selectedTabTopic
       .publish(PubSubOption.keepDuplicates(true));
   private boolean bothSubsystemsZeroed = false;
-  boolean hasAutonomousRun = false;
+  private boolean hasAutonomousRun = false;
 
   @Override
   public void robotInit() {

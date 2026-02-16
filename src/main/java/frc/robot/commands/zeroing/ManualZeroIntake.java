@@ -23,6 +23,7 @@ public class ManualZeroIntake extends Command {
   /** Creates a new ManualZeroIntake. */
   public ManualZeroIntake() {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.motionInstance);
   }
 
   // Called when the command is initially scheduled.
@@ -30,6 +31,7 @@ public class ManualZeroIntake extends Command {
   public void initialize() {
     zeroingSuccess = false;
     RobotContainer.motionInstance.hasIntakePivotZeroed = false;
+    RobotContainer.motionInstance.setIntakePivotSoftwareLimits(false, true);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

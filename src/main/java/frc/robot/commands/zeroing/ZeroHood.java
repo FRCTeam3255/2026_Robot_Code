@@ -19,6 +19,7 @@ public class ZeroHood extends Command {
   /** Creates a new ZeroHoodPivot. */
   public ZeroHood() {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.motionInstance);
   }
 
   // Called when the command is initially scheduled.

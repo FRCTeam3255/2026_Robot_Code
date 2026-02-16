@@ -20,6 +20,7 @@ public class ZeroIntake extends Command {
 
   public ZeroIntake() {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.motionInstance);
   }
 
   // Called when the command is initially scheduled.
