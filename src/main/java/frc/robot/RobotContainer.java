@@ -39,6 +39,7 @@ import frc.robot.commands.states.PrepShoots.PrepOutpost;
 import frc.robot.commands.states.PrepShoots.PrepTrench;
 import frc.robot.constants.ChoreoTraj;
 import frc.robot.constants.ConstDrivetrain;
+import frc.robot.constants.ConstLEDs;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
 import frc.robot.constants.ConstSystem;
@@ -158,6 +159,9 @@ public class RobotContainer {
           && drivetrainInstance.isAtDesiredRotation(ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE)
           && motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE));
 
+  public final Trigger isHubActiveTrigger = new Trigger(
+      () -> Robot.isHubActive());
+
   private void configDriverBindings() {
     conDriver.btn_South
         .whileTrue(TRY_EJECTING_HOPPER)
@@ -192,6 +196,9 @@ public class RobotContainer {
     conDriver.btn_X
         .onTrue(TRY_PREP_NON_OUTPOST);
     conDriver.btn_North.onTrue(new ResetPose());
+
+    isHubActiveTrigger.whileTrue(Commands.runOnce(() -> LEDInstance.updateLEDs(ConstLEDs.SHIFT_ACTIVE_ANIMATION)));
+
   }
 
   public void configAutonomous() {

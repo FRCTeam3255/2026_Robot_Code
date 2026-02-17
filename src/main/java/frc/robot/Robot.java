@@ -190,7 +190,7 @@ public class Robot extends TimedRobot {
     }
   }
 
-  public boolean isHubActive() {
+  public static boolean isHubActive() {
     Optional<Alliance> alliance = DriverStation.getAlliance();
     // If we have no alliance, we cannot be enabled, therefore no hub.
     if (alliance.isEmpty()) {
