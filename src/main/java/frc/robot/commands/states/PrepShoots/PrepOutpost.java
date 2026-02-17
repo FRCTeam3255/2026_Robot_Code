@@ -16,6 +16,5 @@ public class PrepOutpost extends BasePrepShooter {
   public PrepOutpost() {
     super(ConstRotors.FLYWHEEL_OUTPOST_SPEED, ConstMotion.HOOD_OUTPOST_ANGLE,
         ConstPoseDrive.PrepShootRotations.OUTPOST_PREP_SHOOT_ROTATION, StateMachine.RobotState.PREP_OUTPOST);
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 }
