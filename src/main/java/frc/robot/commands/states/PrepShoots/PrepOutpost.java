@@ -4,8 +4,6 @@
 
 package frc.robot.commands.states.PrepShoots;
 
-import frc.robot.RobotContainer;
-import frc.robot.constants.ConstLEDs;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstPoseDrive;
 import frc.robot.constants.ConstRotors;
@@ -18,9 +16,5 @@ public class PrepOutpost extends BasePrepShooter {
   public PrepOutpost() {
     super(ConstRotors.FLYWHEEL_OUTPOST_SPEED, ConstMotion.HOOD_OUTPOST_ANGLE,
         ConstPoseDrive.PrepShootRotations.OUTPOST_PREP_SHOOT_ROTATION, StateMachine.RobotState.PREP_OUTPOST);
-    if (RobotContainer.rotorsInstance.areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
-        && RobotContainer.motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE)) {
-      RobotContainer.LEDInstance.setLEDAnimation(ConstLEDs.READY_TO_SHOOT_ANIMATION);
-    }    // Use addRequirements() here to declare subsystem dependencies.
   }
 }

@@ -37,11 +37,9 @@ public class PrepAnywhere extends Command {
   @Override
   public void execute() {
     Pose2d hubPose = RobotContainer.robotPose.getHub();
-    Distance d = Units.Meters.of(RobotContainer.drivetrainInstance.getPose().getTranslation()
-        .getDistance(hubPose.getTranslation()));
-
-    AngularVelocity targetFlyWheelSpeed = Rotors.getMappedFlywheelSpeed(d);
-    Angle targetHoodAngle = Motion.getMappedHoodAngle(d);
+    Distance distanceToHub = RobotContainer.robotPose.getDistanceToHub();
+    AngularVelocity targetFlyWheelSpeed = Rotors.getMappedFlywheelSpeed(distanceToHub);
+    Angle targetHoodAngle = Motion.getMappedHoodAngle(distanceToHub);
 
     Angle targetDrivetrainRotation = RobotContainer.drivetrainInstance
         .snapToTarget(hubPose);
@@ -50,7 +48,8 @@ public class PrepAnywhere extends Command {
     RobotContainer.motionInstance.setHoodAngle(targetHoodAngle);
     RobotContainer.drivetrainInstance.setDriveRotation(targetDrivetrainRotation);
     if (RobotContainer.rotorsInstance.areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
-        && RobotContainer.motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE)) {
+        && RobotContainer.motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE)
+        && RobotContainer.drivetrainInstance.isAtDesiredRotation(Units.Degrees.of(2))) {
       RobotContainer.LEDInstance.setLEDAnimation(ConstLEDs.READY_TO_SHOOT_ANIMATION);
     }
     ;
