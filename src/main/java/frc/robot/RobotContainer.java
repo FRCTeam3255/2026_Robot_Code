@@ -79,6 +79,8 @@ public class RobotContainer {
       () -> stateMachineInstance.tryState(RobotState.PREP_NEUTRAL_TO_ALLIANCE));
   Command TRY_NONE = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.NONE));
+  Command TRY_DEFENSE = Commands.deferredProxy(
+      () -> stateMachineInstance.tryState(RobotState.DEFENSE));
 
   private AutoFactory autoFactory;
 
@@ -161,6 +163,7 @@ public class RobotContainer {
         .onFalse(TRY_NONE);
     conDriver.btn_Back
         .onTrue(TRY_UNCLIMB_L1)
+        .onTrue(TRY_DEFENSE)
         .onFalse(TRY_NONE);
     conDriver.btn_RightBumper
         .onTrue(TRY_PREP_ANYWHERE);

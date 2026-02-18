@@ -48,6 +48,7 @@ public class StateMachine extends SubsystemBase {
       case INTAKING:
         switch (currentRobotState) {
           case NONE:
+          case DEFENSE:
           case PREP_CLIMB_L1:
             return new Intaking();
         }
@@ -221,6 +222,12 @@ public class StateMachine extends SubsystemBase {
         }
         break;
 
+      case DEFENSE:
+        switch (currentRobotState) {
+          case NONE:
+            return new Defense();
+        }
+
     }
 
     return Commands
@@ -245,6 +252,7 @@ public class StateMachine extends SubsystemBase {
     CLIMBING_L1,
     CLIMBING_L2_3,
     UNCLIMB_L1,
+    DEFENSE,
   }
 
   @Override
