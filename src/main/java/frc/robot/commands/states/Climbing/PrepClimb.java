@@ -30,7 +30,6 @@ public class PrepClimb extends Command {
     RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.PREP_CLIMB_L1);
     RobotContainer.motionInstance.setClimberPosition(ConstMotion.EXTEND_CLIMBER);
     RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.RETRACT_INTAKE_PIVOT_ANGLE);
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -46,6 +45,8 @@ public class PrepClimb extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    // Finish when the climber has reached the target position (or consider adding a
+    // timeout)
     return RobotContainer.motionInstance.isClimberAtPosition(ConstMotion.CLIMBER_TOLERANCE);
   }
 }

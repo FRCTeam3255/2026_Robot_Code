@@ -54,7 +54,8 @@ public class RobotContainer {
   Command TRY_UNCLIMB_L1 = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.UNCLIMB_L1));
   Command TRY_PREP_CLIMB_L1 = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.PREP_CLIMB_L1));
+      () -> stateMachineInstance.tryState(RobotState.PREP_CLIMB_L1)
+          .alongWith(runPath(ChoreoTraj.Climb)));
   Command TRY_CLIMBING_L1 = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.CLIMBING_L1));
   Command TRY_CLIMBING_L2_3 = Commands.deferredProxy(
@@ -160,9 +161,9 @@ public class RobotContainer {
         .whileTrue(TRY_REVERSING_SHOOTER)
         .onFalse(TRY_NONE);
     conDriver.btn_Start
-        .onTrue(TRY_PREP_CLIMB_L1);
-    // .onTrue(TRY_CLIMBING_L1)
-    // .onTrue(TRY_CLIMBING_L2_3);
+        .onTrue(TRY_PREP_CLIMB_L1)
+        .onTrue(TRY_CLIMBING_L1)
+        .onTrue(TRY_CLIMBING_L2_3);
     conDriver.btn_LeftTrigger
         .whileTrue(TRY_INTAKING)
         .onFalse(TRY_NONE);
@@ -206,6 +207,12 @@ public class RobotContainer {
             TRY_PREP_ANYWHERE,
             shootingTime));
 
+    Command PreloadWithClimb = Commands.sequence(
+        ScoreOnly(ChoreoTraj.Reverse_From_Hub,
+            TRY_PREP_ANYWHERE,
+            shootingTime),
+        Climb(ChoreoTraj.Reverse_From_Hub));
+
     Command PreloadDepot = Commands.sequence(
         ScoreAndCollect(ChoreoTraj.Bump_HubLeft,
             ChoreoTraj.HubLeft_Depot,
@@ -215,6 +222,17 @@ public class RobotContainer {
         ScoreOnly(ChoreoTraj.Depot_HubFront,
             TRY_PREP_ANYWHERE,
             shootingTime));
+
+    Command PreloadDepotWithClimb = Commands.sequence(
+        ScoreAndCollect(ChoreoTraj.Bump_HubLeft,
+            ChoreoTraj.HubLeft_Depot,
+            TRY_PREP_ANYWHERE,
+            shootingTime,
+            intakingTime),
+        ScoreOnly(ChoreoTraj.Depot_HubFront,
+            TRY_PREP_ANYWHERE,
+            shootingTime),
+        Climb(ChoreoTraj.Depot_HubFront));
 
     Command PreloadDepotOutpost = Commands.sequence(
         ScoreAndCollect(ChoreoTraj.Reverse_From_Hub,
@@ -231,6 +249,22 @@ public class RobotContainer {
             TRY_PREP_ANYWHERE,
             shootingTime));
 
+    Command PreloadDepotOutpostWithClimb = Commands.sequence(
+        ScoreAndCollect(ChoreoTraj.Reverse_From_Hub,
+            ChoreoTraj.HubFront_Outpost,
+            TRY_PREP_ANYWHERE,
+            shootingTime,
+            intakingTime),
+        ScoreAndCollect(ChoreoTraj.Outpost_HubFront,
+            ChoreoTraj.HubFront_Depot,
+            TRY_PREP_ANYWHERE,
+            shootingTime,
+            intakingTime),
+        ScoreOnly(ChoreoTraj.Depot_HubFront2,
+            TRY_PREP_ANYWHERE,
+            shootingTime),
+        Climb(ChoreoTraj.Depot_HubFront2));
+
     Command PreloadNeutralRight = Commands.sequence(
         ScoreAndCollect(ChoreoTraj.OppBump_OppHub,
             ChoreoTraj.OppHub_OppNeutral,
@@ -240,6 +274,17 @@ public class RobotContainer {
         ScoreOnly(ChoreoTraj.OppNeutral_OppHub,
             TRY_PREP_ANYWHERE,
             shootingTime));
+
+    Command PreloadNeutralRightWithClimb = Commands.sequence(
+        ScoreAndCollect(ChoreoTraj.OppBump_OppHub,
+            ChoreoTraj.OppHub_OppNeutral,
+            TRY_PREP_ANYWHERE,
+            shootingTime,
+            intakingTime),
+        ScoreOnly(ChoreoTraj.OppNeutral_OppHub,
+            TRY_PREP_ANYWHERE,
+            shootingTime),
+        Climb(ChoreoTraj.OppNeutral_OppHub));
 
     Command PreloadNeutralLeft = Commands.sequence(
         ScoreAndCollect(ChoreoTraj.Bump_HubLeft,
@@ -251,23 +296,41 @@ public class RobotContainer {
             TRY_PREP_ANYWHERE,
             shootingTime));
 
+    Command PreloadNeutralLeftWithClimb = Commands.sequence(
+        ScoreAndCollect(ChoreoTraj.Bump_HubLeft,
+            ChoreoTraj.HubLeft_Neutral,
+            TRY_PREP_ANYWHERE,
+            shootingTime,
+            intakingTime),
+        ScoreOnly(ChoreoTraj.Neutral_HubLeft,
+            TRY_PREP_ANYWHERE,
+            shootingTime),
+        Climb(ChoreoTraj.Neutral_HubLeft));
+
     autoChooser.setDefaultOption("Do Nothing", Commands.none());
     autoChooser.addOption("PreloadDepot", PreloadDepot);
     autoChooser.addOption("PreloadDepotOutpost", PreloadDepotOutpost);
     // autoChooser.addOption("PreloadOutpost", PreloadOutpost);
     autoChooser.addOption("PreloadOnly", PreloadOnly);
     autoChooser.addOption("PreloadNeutralRight", PreloadNeutralRight);
+    autoChooser.addOption("PreloadNeutralRightWithClimb", PreloadNeutralRightWithClimb);
     autoChooser.addOption("PreloadNeutralLeft", PreloadNeutralLeft);
+    autoChooser.addOption("PreloadNeutralLeftWithClimb", PreloadNeutralLeftWithClimb);
 
     // make our entries name
     final Map<Command, ChoreoTraj> autoStartingPoses = Map.ofEntries(
         // Example
         // Map.entry(PreloadOutpost, "Trench_Outpost"),
-        Map.entry(PreloadDepotOutpost, ChoreoTraj.Reverse_From_Hub),
         Map.entry(PreloadOnly, ChoreoTraj.Reverse_From_Hub),
-        Map.entry(PreloadNeutralLeft, ChoreoTraj.Bump_HubLeft),
+        Map.entry(PreloadWithClimb, ChoreoTraj.Reverse_From_Hub),
+        Map.entry(PreloadDepotOutpost, ChoreoTraj.Reverse_From_Hub),
+        Map.entry(PreloadDepotOutpostWithClimb, ChoreoTraj.Reverse_From_Hub),
         Map.entry(PreloadDepot, ChoreoTraj.Bump_HubLeft),
-        Map.entry(PreloadNeutralRight, ChoreoTraj.OppBump_OppHub));
+        Map.entry(PreloadDepotWithClimb, ChoreoTraj.Reverse_From_Hub),
+        Map.entry(PreloadNeutralLeft, ChoreoTraj.Bump_HubLeft),
+        Map.entry(PreloadNeutralLeftWithClimb, ChoreoTraj.Bump_HubLeft),
+        Map.entry(PreloadNeutralRight, ChoreoTraj.OppBump_OppHub),
+        Map.entry(PreloadNeutralRightWithClimb, ChoreoTraj.OppBump_OppHub));
 
     // enter which we want to do based on name
     autoChooser.onChange(selectedAuto ->
@@ -308,6 +371,7 @@ public class RobotContainer {
     return Commands.sequence(
         Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
         runPath(startPath).asProxy(),
+        runPath(ChoreoTraj.Climb).asProxy(),
         TRY_PREP_CLIMB_L1.asProxy().withTimeout(0.5),
         TRY_CLIMBING_L1.asProxy().withTimeout(4));
   }

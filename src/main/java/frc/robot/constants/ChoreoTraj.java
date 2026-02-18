@@ -31,6 +31,13 @@ public record ChoreoTraj(
 	    new Pose2d(3.6, 5.9, Rotation2d.fromRadians(-1.561)),
 	    new Pose2d(2.6, 5.1, Rotation2d.fromRadians(-0.524))
 	);
+	public static final ChoreoTraj Climb = new ChoreoTraj(
+	    "Climb",
+	    OptionalInt.empty(),
+	    1.79686,
+	    new Pose2d(2.891, 4.117, Rotation2d.fromRadians(3.142)),
+	    new Pose2d(1.517, 4.117, Rotation2d.fromRadians(3.142))
+	);
 	public static final ChoreoTraj Depot_HubFront = new ChoreoTraj(
 	    "Depot_HubFront",
 	    OptionalInt.empty(),
@@ -143,6 +150,7 @@ public record ChoreoTraj(
      */
     public static final Map<String, ChoreoTraj> ALL_TRAJECTORIES = Map.ofEntries(
     	Map.entry("Bump_HubLeft", Bump_HubLeft),
+		Map.entry("Climb", Climb),
 		Map.entry("Depot_HubFront", Depot_HubFront),
 		Map.entry("Depot_HubFront2", Depot_HubFront2),
 		Map.entry("Depot_Outpost", Depot_Outpost),
