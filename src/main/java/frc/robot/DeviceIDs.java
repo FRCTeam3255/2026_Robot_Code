@@ -57,8 +57,8 @@ public class DeviceIDs {
     public static final int HOOD_CAN = 32;
   }
 
-  // LED profile IDs: 50~59 
+  // LED profile IDs: 50~59
   public static class LEDIDs {
-    public static final int LED_CAN = 50;
+    public static final int LED_CAN = 0;
   }
 }

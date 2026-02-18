@@ -50,7 +50,7 @@ public class PrepAnywhere extends Command {
     if (RobotContainer.rotorsInstance.areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
         && RobotContainer.motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE)
         && RobotContainer.drivetrainInstance.isAtDesiredRotation(Units.Degrees.of(2))) {
-      RobotContainer.LEDInstance.setLEDAnimation(ConstLEDs.READY_TO_SHOOT_ANIMATION);
+      RobotContainer.LEDInstance.updateLEDs();
     }
     ;
   }

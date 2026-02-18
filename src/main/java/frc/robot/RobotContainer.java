@@ -128,8 +128,8 @@ public class RobotContainer {
 
     conDriver.setLeftDeadband(constControllers.DRIVER_LEFT_STICK_DEADBAND);
 
-    driverStateMachineInstance
-        .setDefaultCommand(MANUAL);
+    // driverStateMachineInstance
+    // .setDefaultCommand(MANUAL);
 
     configDriverBindings();
     configOperatorBindings();
@@ -171,20 +171,23 @@ public class RobotContainer {
         .onFalse(TRY_NONE);
     conDriver.btn_RightBumper
         .onTrue(TRY_PREP_ANYWHERE);
-    conDriver.btn_A
-        .onTrue(TRY_PREP_DEPOT);
+    // conDriver.btn_A
+    // .onTrue(TRY_PREP_DEPOT);
     conDriver.btn_West
         .onTrue(TRY_PREP_NEAUTRAL_TO_ALLIANCE)
         .onTrue(TRY_PREP_OPPONENT_TO_ALLIANCE);
-    conDriver.btn_B
-        .onTrue(TRY_PREP_OUPOST);
+    // conDriver.btn_B
+    // .onTrue(TRY_PREP_OUPOST);
     conDriver.btn_Y
         .onTrue(TRY_PREP_TRENCH);
     conDriver.btn_X
         .onTrue(TRY_PREP_NON_OUTPOST);
     conDriver.btn_North.onTrue(new ResetPose());
 
-    isHubActiveTrigger.whileTrue(Commands.runOnce(() -> LEDInstance.updateLEDs(ConstLEDs.SHIFT_ACTIVE_ANIMATION)));
+    // isHubActiveTrigger.whileTrue(Commands.runOnce(() ->
+    // LEDInstance.updateLEDs(ConstLEDs.SHIFT_ACTIVE_ANIMATION)));
+    conDriver.btn_A.whileTrue(Commands.runOnce(() -> LEDInstance.twinkleLeds()));
+    conDriver.btn_B.whileTrue(Commands.runOnce(() -> LEDInstance.updateLEDs()));
 
   }
 

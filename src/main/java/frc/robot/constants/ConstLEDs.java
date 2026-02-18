@@ -27,8 +27,9 @@ public class ConstLEDs {
 
   public static final ColorFlowAnimation SHIFT_ACTIVE_ANIMATION = new ColorFlowAnimation(0, 185)
       .withSlot(4)
-      .withColor(new RGBWColor(255, 227, 66, 0))
+      // .withColor(new RGBWColor(255, 227, 66, 0))
+      .withColor(new RGBWColor(0, 0, 255, 0))
       .withDirection(AnimationDirectionValue.Forward)
-      .withFrameRate(Hertz.of(0));
+      .withFrameRate(Hertz.of(25));
 
 }

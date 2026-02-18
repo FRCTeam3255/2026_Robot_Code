@@ -31,7 +31,7 @@ public class None extends Command {
     RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(ConstRotors.STOP);
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.STOP);
     RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.NONE);
-    RobotContainer.LEDInstance.setLEDAnimation(ConstLEDs.NONE_ANIMATION);
+    RobotContainer.LEDInstance.updateLEDs();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
