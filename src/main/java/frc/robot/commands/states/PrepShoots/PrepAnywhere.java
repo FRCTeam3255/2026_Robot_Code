@@ -5,14 +5,11 @@
 package frc.robot.commands.states.PrepShoots;
 
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
-import frc.robot.constants.ConstMotion;
-import frc.robot.constants.ConstRotors;
 import frc.robot.subsystems.Rotors;
 import frc.robot.subsystems.StateMachine.RobotState;
 import frc.robot.subsystems.Motion;
@@ -45,12 +42,6 @@ public class PrepAnywhere extends Command {
     RobotContainer.rotorsInstance.setFlywheelSpeed(targetFlyWheelSpeed);
     RobotContainer.motionInstance.setHoodAngle(targetHoodAngle);
     RobotContainer.drivetrainInstance.setDriveRotation(targetDrivetrainRotation);
-    if (RobotContainer.rotorsInstance.areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
-        && RobotContainer.motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE)
-        && RobotContainer.drivetrainInstance.isAtDesiredRotation(Units.Degrees.of(2))) {
-      // TODO: Add LED animation for ready to shoot
-      // RobotContainer.LEDInstance.setLEDAnimation(ConstLEDs.READY_TO_SHOOT_ANIMATION);
-    };
   }
 
   // Called once the command ends or is interrupted.
