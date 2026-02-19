@@ -192,7 +192,8 @@ public class Robot extends TimedRobot {
 
   public boolean hubsIsSwitching() {
     double matchTime = getMatchTime();
-    if (matchTime < 109 && matchTime > 105 || matchTime < 84 && matchTime > 80 || matchTime < 59 && matchTime > 55
+    if (matchTime < 134 && matchTime > 130 || matchTime < 109 && matchTime > 105 || matchTime < 84 && matchTime > 80
+        || matchTime < 59 && matchTime > 55
         || matchTime < 34 && matchTime > 30) {
       return true;
     }

@@ -84,7 +84,7 @@ public class RobotContainer {
 
   private AutoFactory autoFactory;
 
-  public static final SN_XboxController conDriver = new SN_XboxController(controllerIDs.DRIVER_USB);
+  private final SN_XboxController conDriver = new SN_XboxController(controllerIDs.DRIVER_USB);
 
   public static Rotors rotorsInstance = new Rotors();
   private final Rotors loggedRotorsInstance = rotorsInstance;
@@ -127,8 +127,8 @@ public class RobotContainer {
 
     conDriver.setLeftDeadband(constControllers.DRIVER_LEFT_STICK_DEADBAND);
 
-    driverStateMachineInstance
-        .setDefaultCommand(MANUAL);
+    // driverStateMachineInstance
+    // .setDefaultCommand(MANUAL);
 
     configDriverBindings();
     configOperatorBindings();
@@ -137,9 +137,10 @@ public class RobotContainer {
     // subDrivetrain.resetModulesToAbsolute();
   }
 
-  public final Trigger testFeedback = new Trigger(
-      () -> true);
-  public final Trigger hubSwitchingTrigger = new Trigger(() -> robotInstance.hubsIsSwitching());
+  // public final Trigger testFeedback = new Trigger(
+  // () -> true);
+  public final Trigger hubSwitchingTrigger = new Trigger(
+      () -> robotInstance.hubsIsSwitching());
   public final Trigger climbingL1Trigger = new Trigger(
       () -> stateMachineInstance.getRobotState() == RobotState.CLIMBING_L1);
   public final Trigger climbingL2_L3Trigger = new Trigger(
@@ -184,19 +185,19 @@ public class RobotContainer {
         .onTrue(TRY_PREP_NON_OUTPOST);
     conDriver.btn_North.onTrue(new ResetPose());
 
-    // readyToShootTrigger
-    // .whileTrue(
-    // Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble,
-    // ConstRumble.READY_TO_SHOOT_RUMBLE)))
-    // .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble,
-    // ConstRumble.RUMBLE_OFF)));
-    // hubSwitchingTrigger
-    // .whileTrue(
-    // Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble,
-    // ConstRumble.SHIFT_CHANGE_RUMBLE)))
-    // .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble,
-    // ConstRumble.RUMBLE_OFF)));
-    conDriver.setRumble(RumbleType.kBothRumble, ConstRumble.TEST_RUMBLE);
+    readyToShootTrigger
+        .whileTrue(
+            Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble,
+                ConstRumble.READY_TO_SHOOT_RUMBLE)))
+        .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble,
+            ConstRumble.RUMBLE_OFF)));
+    hubSwitchingTrigger
+        .onTrue(
+            Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble,
+                ConstRumble.SHIFT_CHANGE_RUMBLE)))
+        .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble,
+            ConstRumble.RUMBLE_OFF)));
+    // conDriver.setRumble(RumbleType.kBothRumble, ConstRumble.TEST_RUMBLE);
   }
 
   public void configAutonomous() {

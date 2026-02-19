@@ -4,12 +4,10 @@
 
 package frc.robot.commands.states;
 
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
-import frc.robot.constants.ConstRumble;
 import frc.robot.subsystems.StateMachine;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
@@ -29,7 +27,6 @@ public class Intaking extends Command {
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.INTAKE_ROLLER_SPEED);
     RobotContainer.motionInstance.setClimberPosition(ConstMotion.RETRACT_CLIMBER);
     RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
-    RobotContainer.conDriver.setRumble(RumbleType.kBothRumble, ConstRumble.TEST_RUMBLE);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -40,7 +37,7 @@ public class Intaking extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.conDriver.setRumble(RumbleType.kBothRumble, 0);
+
   }
 
   // Returns true when the command should end.
