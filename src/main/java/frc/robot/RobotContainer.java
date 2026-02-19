@@ -308,6 +308,9 @@ public class RobotContainer {
     autoChooser.addOption("PreloadNeutralRightWithClimb", PreloadNeutralRightWithClimb);
     autoChooser.addOption("PreloadNeutralLeft", PreloadNeutralLeft);
     autoChooser.addOption("PreloadNeutralLeftWithClimb", PreloadNeutralLeftWithClimb);
+    autoChooser.addOption("PreloadDepotWithClimb", PreloadDepotWithClimb);
+    autoChooser.addOption("PreloadDepotOutpostWithClimb", PreloadDepotOutpostWithClimb);
+    autoChooser.addOption("PreloadWithClimb", PreloadWithClimb);
 
     // make our entries name
     final Map<Command, ChoreoTraj> autoStartingPoses = Map.ofEntries(
