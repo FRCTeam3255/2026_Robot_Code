@@ -50,8 +50,8 @@ public class ConstMotion {
     INTAKE_PIVOT_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
     INTAKE_PIVOT_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitEnable = true;
     INTAKE_PIVOT_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
-    INTAKE_PIVOT_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitThreshold = Units.Degree.of(135).in(Rotations);
-    INTAKE_PIVOT_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitThreshold = Units.Degrees.of(0).in(Rotations);
+    INTAKE_PIVOT_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitThreshold = DEPLOY_INTAKE_PIVOT_ANGLE.in(Rotations);
+    INTAKE_PIVOT_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitThreshold = RETRACT_INTAKE_PIVOT_ANGLE.in(Rotations);
     INTAKE_PIVOT_CONFIGURATION.Slot0.GravityType = GravityTypeValue.Arm_Cosine;
     INTAKE_PIVOT_CONFIGURATION.Slot0.kS = 0.3;
     INTAKE_PIVOT_CONFIGURATION.Slot0.kP = 40;
