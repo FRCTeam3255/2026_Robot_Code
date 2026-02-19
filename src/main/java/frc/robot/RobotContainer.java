@@ -84,7 +84,7 @@ public class RobotContainer {
 
   private AutoFactory autoFactory;
 
-  private final SN_XboxController conDriver = new SN_XboxController(controllerIDs.DRIVER_USB);
+  public static final SN_XboxController conDriver = new SN_XboxController(controllerIDs.DRIVER_USB);
 
   public static Rotors rotorsInstance = new Rotors();
   private final Rotors loggedRotorsInstance = rotorsInstance;
