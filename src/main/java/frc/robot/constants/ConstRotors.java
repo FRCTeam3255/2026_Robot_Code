@@ -91,10 +91,12 @@ public class ConstRotors {
 
     // flywheelSpeedMap.put(Inches.of(0.0).in(Inches), RPM.of(3200).in(RPM));
     // TODO: Consider re-adding a close-range (0 in) calibration point if required.
-    flywheelSpeedMap.put(Inches.of(60).in(Inches), RPM.of(3200).in(RPM));
-    flywheelSpeedMap.put(Inches.of(90).in(Inches), RPM.of(3600).in(RPM));
-    flywheelSpeedMap.put(Inches.of(120).in(Inches), RPM.of(4100).in(RPM));
-    flywheelSpeedMap.put(Inches.of(150).in(Inches), RPM.of(4500).in(RPM));
+    // flywheelSpeedMap.put(Inches.of(60).in(Inches), RPM.of(3200).in(RPM));
+    // flywheelSpeedMap.put(Inches.of(90).in(Inches), RPM.of(3600).in(RPM));
+    // flywheelSpeedMap.put(Inches.of(120).in(Inches), RPM.of(4100).in(RPM));
+    // flywheelSpeedMap.put(Inches.of(150).in(Inches), RPM.of(4500).in(RPM));
+    // flywheelSpeedMap.put(Inches.of(187.8).in(Inches), RPM.of(5200).in(RPM));
     flywheelSpeedMap.put(Inches.of(187.8).in(Inches), RPM.of(5200).in(RPM));
+    flywheelSpeedMap.put(Inches.of(0).in(Inches), RPM.of(5200).in(RPM));
   }
 }
