@@ -154,8 +154,8 @@ public class RobotContainer {
         .whileTrue(TRY_REVERSING_SHOOTER)
         .onFalse(TRY_NONE);
     conDriver.btn_Start
-        .onTrue(TRY_PREP_CLIMB_L1)
-        .onTrue(TRY_CLIMBING_L1)
+        .whileTrue(TRY_PREP_CLIMB_L1)
+        .onFalse(TRY_CLIMBING_L1)
         .onTrue(TRY_CLIMBING_L2_3);
     conDriver.btn_LeftTrigger
         .whileTrue(TRY_INTAKING)
@@ -375,15 +375,15 @@ public class RobotContainer {
   }
 
   public static String pathString = "";
-    public static Pose2d pathStartPose = new Pose2d();
-        public static Pose2d pathEndPose = new Pose2d();
-          
-            public static Command runPath(ChoreoTraj path) {
-              return autoFactory.trajectoryCmd(path.name()).asProxy()
-                  .alongWith(Commands.runOnce(() -> {
-                    pathString = path.name();
-                  pathStartPose = path.initialPoseBlue();
-              pathEndPose = path.endPoseBlue();
+  public static Pose2d pathStartPose = new Pose2d();
+  public static Pose2d pathEndPose = new Pose2d();
+
+  public static Command runPath(ChoreoTraj path) {
+    return autoFactory.trajectoryCmd(path.name()).asProxy()
+        .alongWith(Commands.runOnce(() -> {
+          pathString = path.name();
+          pathStartPose = path.initialPoseBlue();
+          pathEndPose = path.endPoseBlue();
           driverStateMachineInstance.setDriverState(DriverState.CHOREO);
         }));
   }
