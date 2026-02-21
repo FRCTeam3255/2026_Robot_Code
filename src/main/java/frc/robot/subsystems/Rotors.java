@@ -76,15 +76,16 @@ public class Rotors extends SubsystemBase {
     flywheelTopWest.set(percent);
     flywheelBottomEast.set(percent);
     flywheelBottomWest.set(percent);
+    lastDesiredFlywheelSpeed = Units.RPM.of(5400 * percent);
   }
 
   public AngularVelocity getFlywheelSpeeds() {
     return flywheelBottomWest.getVelocity().getValue();
   }
 
-  public boolean areFlywheelsAtSpeed(AngularVelocity desiredSpeed, AngularVelocity tolerance) {
-    AngularVelocity lowerLim = desiredSpeed.minus(tolerance);
-    AngularVelocity upperLim = desiredSpeed.plus(tolerance);
+  public boolean areFlywheelsAtSpeed(AngularVelocity tolerance) {
+    AngularVelocity lowerLim = lastDesiredFlywheelSpeed.minus(tolerance);
+    AngularVelocity upperLim = lastDesiredFlywheelSpeed.plus(tolerance);
 
     AngularVelocity flywheelSpeeds = getFlywheelSpeeds();
 

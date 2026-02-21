@@ -62,10 +62,11 @@ public class ConstDrivetrain {
   }
 
   // TODO: Swoffsets
-  public static final Angle FRONT_LEFT_ABS_ENCODER_OFFSET = Rotations.of(-0.178466796875);
-  public static final Angle FRONT_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(-0.498779296875);
-  public static final Angle BACK_LEFT_ABS_ENCODER_OFFSET = Rotations.of(-0.459716796875);
-  public static final Angle BACK_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(-0.31201171875);
+  public static final Angle FRONT_LEFT_ABS_ENCODER_OFFSET = Rotations.of(0.22265625);
+  public static final Angle FRONT_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(0.40185546875);
+  public static final Angle BACK_LEFT_ABS_ENCODER_OFFSET = Rotations.of(0.103515625);
+  public static final Angle BACK_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(-0.182861328125);
+  public static final Angle DRIVETRAIN_ROTATION_TOLERANCE = Units.Degrees.of(1);
 
   // ====== TO MOVE TO SUPERCODE - START ======
   public static class ModuleLocations {
@@ -211,7 +212,7 @@ public class ConstDrivetrain {
         0);
 
     public static final PIDController PATH_TRANS_CONTROLLER = new PIDController(
-        3,
+        4,
         0,
         0);
 
@@ -243,7 +244,6 @@ public class ConstDrivetrain {
         PATH_TRANS_CONTROLLER,
         PATH_TRANS_CONTROLLER,
         PATH_ROTATION_CONTROLLER);
-
   }
 
   public static class SIMULATION {
