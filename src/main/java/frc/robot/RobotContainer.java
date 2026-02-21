@@ -51,8 +51,7 @@ public class RobotContainer {
   Command TRY_UNCLIMB_L1 = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.UNCLIMB_L1));
   Command TRY_PREP_CLIMB_L1 = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.PREP_CLIMB_L1)
-          .alongWith(runPath(ChoreoTraj.Climb)));
+      () -> stateMachineInstance.tryState(RobotState.PREP_CLIMB_L1));
   Command TRY_CLIMBING_L1 = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.CLIMBING_L1));
   Command TRY_CLIMBING_L2_3 = Commands.deferredProxy(
@@ -82,7 +81,7 @@ public class RobotContainer {
   Command TRY_DEFENSE = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.DEFENSE));
 
-  private AutoFactory autoFactory;
+  private static AutoFactory autoFactory;
 
   private final SN_XboxController conDriver = new SN_XboxController(controllerIDs.DRIVER_USB);
 
@@ -375,16 +374,16 @@ public class RobotContainer {
     return RobotController.getSerialNumber().equals(ConstSystem.PRACTICE_BOT_RIO);
   }
 
-  public String pathString = "";
-  public Pose2d pathStartPose = new Pose2d();
-  public Pose2d pathEndPose = new Pose2d();
-
-  public Command runPath(ChoreoTraj path) {
-    return autoFactory.trajectoryCmd(path.name()).asProxy()
-        .alongWith(Commands.runOnce(() -> {
-          pathString = path.name();
-          pathStartPose = path.initialPoseBlue();
-          pathEndPose = path.endPoseBlue();
+  public static String pathString = "";
+    public static Pose2d pathStartPose = new Pose2d();
+        public static Pose2d pathEndPose = new Pose2d();
+          
+            public static Command runPath(ChoreoTraj path) {
+              return autoFactory.trajectoryCmd(path.name()).asProxy()
+                  .alongWith(Commands.runOnce(() -> {
+                    pathString = path.name();
+                  pathStartPose = path.initialPoseBlue();
+              pathEndPose = path.endPoseBlue();
           driverStateMachineInstance.setDriverState(DriverState.CHOREO);
         }));
   }
