@@ -74,11 +74,12 @@ public class ConstMotion {
     HOOD_CONFIGURATION.Slot0.kG = 0.1;
     HOOD_CONFIGURATION.Slot0.StaticFeedforwardSign = StaticFeedforwardSignValue.UseClosedLoopSign;
     // hoodAngleMap.put(Inches.of(0).in(Inches), Degrees.of(3).in(Degrees));
-    hoodAngleMap.put(Inches.of(180).in(Inches), Degrees.of(23).in(Degrees));
-    hoodAngleMap.put(Inches.of(140).in(Inches), Degrees.of(17).in(Degrees));
-    hoodAngleMap.put(Inches.of(120).in(Inches), Degrees.of(15).in(Degrees));
-    hoodAngleMap.put(Inches.of(100).in(Inches), Degrees.of(10).in(Degrees));
-    hoodAngleMap.put(Inches.of(80).in(Inches), Degrees.of(8).in(Degrees));
-    hoodAngleMap.put(Inches.of(50).in(Inches), Degrees.of(3).in(Degrees));
+    hoodAngleMap.put(Inches.of(200).in(Inches), Degrees.of(29).in(Degrees));
+    hoodAngleMap.put(Inches.of(180).in(Inches), Degrees.of(24).in(Degrees));
+    hoodAngleMap.put(Inches.of(140).in(Inches), Degrees.of(16).in(Degrees));
+    hoodAngleMap.put(Inches.of(120).in(Inches), Degrees.of(13).in(Degrees));
+    hoodAngleMap.put(Inches.of(100).in(Inches), Degrees.of(9).in(Degrees));
+    hoodAngleMap.put(Inches.of(80).in(Inches), Degrees.of(6).in(Degrees));
+    hoodAngleMap.put(Inches.of(50).in(Inches), Degrees.of(2).in(Degrees));
   }
 }
