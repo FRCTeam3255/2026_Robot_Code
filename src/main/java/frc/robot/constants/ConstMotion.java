@@ -25,15 +25,15 @@ public class ConstMotion {
   public static final TalonFXConfiguration CLIMBER_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration HOOD_CONFIGURATION = new TalonFXConfiguration();
   public static final double STOP = 0.0;
-  public static final Angle DEPLOY_INTAKE_PIVOT_ANGLE = Units.Degrees.of(135); // TODO: set angle for intake pivot
+  public static final Angle DEPLOY_INTAKE_PIVOT_ANGLE = Units.Degrees.of(126); // TODO: set angle for intake pivot
   public static final Angle RETRACT_INTAKE_PIVOT_ANGLE = Units.Degrees.of(0); // TODO: set angle for intake pivot
   public static final double EXTEND_CLIMBER_SPEED = 0;
   public static final double RETRACT_CLIMBER_SPEED = -0.5;
   public static final double ANGLE_HOOD_SPEED = 0.5;
-  public static final Angle HOOD_TRENCH_ANGLE = Units.Degrees.of(18);
-  public static final Angle HOOD_OUTPOST_ANGLE = Units.Degrees.of(45);
-  public static final Angle HOOD_NON_OUTPOST_ANGLE = Units.Degrees.of(45);
-  public static final Angle HOOD_DEPOT_ANGLE = Units.Degrees.of(45);
+  public static final Angle HOOD_TRENCH_ANGLE = Units.Degrees.of(30);
+  public static final Angle HOOD_OUTPOST_ANGLE = Units.Degrees.of(20);
+  public static final Angle HOOD_NON_OUTPOST_ANGLE = Units.Degrees.of(18);
+  public static final Angle HOOD_DEPOT_ANGLE = Units.Degrees.of(18);
   public static final Angle HOOD_ANYWHERE_ANGLE = Units.Degrees.of(45);
   public static final Angle HOOD_NUETRAL_TO_ALLIANCE_ANGLE = Units.Degrees.of(45);
   public static final Angle HOOD_OPPENENT_TO_ALLIANCE_ANGLE = Units.Degrees.of(45);
@@ -50,8 +50,8 @@ public class ConstMotion {
     INTAKE_PIVOT_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
     INTAKE_PIVOT_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitEnable = true;
     INTAKE_PIVOT_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
-    INTAKE_PIVOT_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitThreshold = Units.Degree.of(135).in(Rotations);
-    INTAKE_PIVOT_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitThreshold = Units.Degrees.of(0).in(Rotations);
+    INTAKE_PIVOT_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitThreshold = DEPLOY_INTAKE_PIVOT_ANGLE.in(Rotations);
+    INTAKE_PIVOT_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitThreshold = RETRACT_INTAKE_PIVOT_ANGLE.in(Rotations);
     INTAKE_PIVOT_CONFIGURATION.Slot0.GravityType = GravityTypeValue.Arm_Cosine;
     INTAKE_PIVOT_CONFIGURATION.Slot0.kS = 0.3;
     INTAKE_PIVOT_CONFIGURATION.Slot0.kP = 40;
@@ -73,12 +73,12 @@ public class ConstMotion {
     HOOD_CONFIGURATION.Slot0.kP = 300;
     HOOD_CONFIGURATION.Slot0.kG = 0.1;
     HOOD_CONFIGURATION.Slot0.StaticFeedforwardSign = StaticFeedforwardSignValue.UseClosedLoopSign;
-
-    hoodAngleMap.put(Inches.of(180).in(Inches), Degrees.of(45).in(Degrees));
-    hoodAngleMap.put(Inches.of(120).in(Inches), Degrees.of(40).in(Degrees));
-    hoodAngleMap.put(Inches.of(100).in(Inches), Degrees.of(35).in(Degrees));
-    hoodAngleMap.put(Inches.of(80).in(Inches), Degrees.of(30).in(Degrees));
-    hoodAngleMap.put(Inches.of(90).in(Inches), Degrees.of(25).in(Degrees));
-    hoodAngleMap.put(Inches.of(50).in(Inches), Degrees.of(0).in(Degrees));
+    // hoodAngleMap.put(Inches.of(0).in(Inches), Degrees.of(3).in(Degrees));
+    hoodAngleMap.put(Inches.of(180).in(Inches), Degrees.of(23).in(Degrees));
+    hoodAngleMap.put(Inches.of(140).in(Inches), Degrees.of(17).in(Degrees));
+    hoodAngleMap.put(Inches.of(120).in(Inches), Degrees.of(15).in(Degrees));
+    hoodAngleMap.put(Inches.of(100).in(Inches), Degrees.of(10).in(Degrees));
+    hoodAngleMap.put(Inches.of(80).in(Inches), Degrees.of(8).in(Degrees));
+    hoodAngleMap.put(Inches.of(50).in(Inches), Degrees.of(3).in(Degrees));
   }
 }
