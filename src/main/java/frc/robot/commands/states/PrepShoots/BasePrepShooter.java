@@ -35,11 +35,7 @@ public class BasePrepShooter extends Command {
   public void initialize() {
     RobotContainer.rotorsInstance.setFlywheelSpeed(globalFlyWheelSpeed);
     RobotContainer.motionInstance.setHoodAngle(globalHoodAngle);
-    if (ConstField.isRedAlliance()) {
-      RobotContainer.drivetrainInstance.setDriveRotation(globalDrivetrainAngle.unaryMinus());
-    } else {
-      RobotContainer.drivetrainInstance.setDriveRotation(globalDrivetrainAngle);
-    }
+    RobotContainer.drivetrainInstance.setDriveRotation(globalDrivetrainAngle);
     RobotContainer.drivetrainInstance.setIsManualRotationEnabled(false);
     RobotContainer.stateMachineInstance.setRobotState(globalState);
   }
