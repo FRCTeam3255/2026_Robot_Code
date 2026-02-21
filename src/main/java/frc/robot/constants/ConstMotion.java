@@ -30,10 +30,10 @@ public class ConstMotion {
   public static final double EXTEND_CLIMBER_SPEED = 0;
   public static final double RETRACT_CLIMBER_SPEED = -0.5;
   public static final double ANGLE_HOOD_SPEED = 0.5;
-  public static final Angle HOOD_TRENCH_ANGLE = Units.Degrees.of(18);
-  public static final Angle HOOD_OUTPOST_ANGLE = Units.Degrees.of(45);
-  public static final Angle HOOD_NON_OUTPOST_ANGLE = Units.Degrees.of(45);
-  public static final Angle HOOD_DEPOT_ANGLE = Units.Degrees.of(45);
+  public static final Angle HOOD_TRENCH_ANGLE = Units.Degrees.of(30);
+  public static final Angle HOOD_OUTPOST_ANGLE = Units.Degrees.of(20);
+  public static final Angle HOOD_NON_OUTPOST_ANGLE = Units.Degrees.of(18);
+  public static final Angle HOOD_DEPOT_ANGLE = Units.Degrees.of(18);
   public static final Angle HOOD_ANYWHERE_ANGLE = Units.Degrees.of(45);
   public static final Angle HOOD_NUETRAL_TO_ALLIANCE_ANGLE = Units.Degrees.of(45);
   public static final Angle HOOD_OPPENENT_TO_ALLIANCE_ANGLE = Units.Degrees.of(45);
@@ -73,12 +73,12 @@ public class ConstMotion {
     HOOD_CONFIGURATION.Slot0.kP = 300;
     HOOD_CONFIGURATION.Slot0.kG = 0.1;
     HOOD_CONFIGURATION.Slot0.StaticFeedforwardSign = StaticFeedforwardSignValue.UseClosedLoopSign;
-
-    hoodAngleMap.put(Inches.of(180).in(Inches), Degrees.of(45).in(Degrees));
-    hoodAngleMap.put(Inches.of(120).in(Inches), Degrees.of(40).in(Degrees));
-    hoodAngleMap.put(Inches.of(100).in(Inches), Degrees.of(35).in(Degrees));
-    hoodAngleMap.put(Inches.of(80).in(Inches), Degrees.of(30).in(Degrees));
-    hoodAngleMap.put(Inches.of(90).in(Inches), Degrees.of(25).in(Degrees));
-    hoodAngleMap.put(Inches.of(50).in(Inches), Degrees.of(0).in(Degrees));
+    // hoodAngleMap.put(Inches.of(0).in(Inches), Degrees.of(3).in(Degrees));
+    hoodAngleMap.put(Inches.of(180).in(Inches), Degrees.of(23).in(Degrees));
+    hoodAngleMap.put(Inches.of(140).in(Inches), Degrees.of(17).in(Degrees));
+    hoodAngleMap.put(Inches.of(120).in(Inches), Degrees.of(15).in(Degrees));
+    hoodAngleMap.put(Inches.of(100).in(Inches), Degrees.of(10).in(Degrees));
+    hoodAngleMap.put(Inches.of(80).in(Inches), Degrees.of(8).in(Degrees));
+    hoodAngleMap.put(Inches.of(50).in(Inches), Degrees.of(3).in(Degrees));
   }
 }
