@@ -24,7 +24,7 @@ public class ConstRotors {
   public static final TalonFXConfiguration SHOOTER_TRANSFER_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration FLYWHEEL_WEST_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration FLYWHEEL_EAST_CONFIGURATION = new TalonFXConfiguration();
-  public static final double INTAKE_ROLLER_SPEED = 0.7;
+  public static final double INTAKE_ROLLER_SPEED = 1;
   public static final double SERIALIZER_V_FUNNEL_SPEED = 0;
   public static final double SERIALIZER_ROLLERS_SPEED = 1;
   public static final double SHOOTER_TRANSFER_SPEED = 1;
@@ -95,7 +95,7 @@ public class ConstRotors {
     // flywheelSpeedMap.put(Inches.of(90).in(Inches), RPM.of(3600).in(RPM));
     // flywheelSpeedMap.put(Inches.of(120).in(Inches), RPM.of(4100).in(RPM));
     // flywheelSpeedMap.put(Inches.of(150).in(Inches), RPM.of(4500).in(RPM));
-    // flywheelSpeedMap.put(Inches.of(187.8).in(Inches), RPM.of(5600).in(RPM));
+    // flywheelSpeedMap.put(Inches.of(187.8).in(Inches), RPM.of(5200).in(RPM));
     flywheelSpeedMap.put(Inches.of(187.8).in(Inches), RPM.of(5600).in(RPM));
     flywheelSpeedMap.put(Inches.of(0).in(Inches), RPM.of(5600).in(RPM));
   }
