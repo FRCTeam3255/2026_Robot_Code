@@ -89,7 +89,6 @@ public class RobotContainer {
   private final SN_XboxController conDriver = new SN_XboxController(controllerIDs.DRIVER_USB);
 
   public static Rotors rotorsInstance = new Rotors();
-  public static Robot robotInstance = new Robot();
   private final Rotors loggedRotorsInstance = rotorsInstance;
   public static Motion motionInstance = new Motion();
   private final Motion loggedMotionInstance = motionInstance;
@@ -129,8 +128,8 @@ public class RobotContainer {
 
     conDriver.setLeftDeadband(constControllers.DRIVER_LEFT_STICK_DEADBAND);
 
-    // driverStateMachineInstance
-    // .setDefaultCommand(MANUAL);
+    driverStateMachineInstance
+        .setDefaultCommand(MANUAL);
 
     configDriverBindings();
     configOperatorBindings();
@@ -139,12 +138,10 @@ public class RobotContainer {
     // subDrivetrain.resetModulesToAbsolute();
   }
 
-  // public final Trigger testFeedback = new Trigger(
-  // () -> true);
   public final Trigger isOurShiftTrigger = new Trigger(
-      () -> robotInstance.isHubActive());
+      () -> Robot.isHubActive());
   public final Trigger hubSwitchingTrigger = new Trigger(
-      () -> robotInstance.hubsIsSwitching());
+      () -> Robot.hubsIsSwitching());
   public final Trigger climbingL1Trigger = new Trigger(
       () -> stateMachineInstance.getRobotState() == RobotState.CLIMBING_L1);
   public final Trigger climbingL2_L3Trigger = new Trigger(
@@ -202,7 +199,7 @@ public class RobotContainer {
                 ConstRumble.SHIFT_CHANGE_RUMBLE)))
         .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble,
             ConstRumble.RUMBLE_OFF)));
-    // conDriver.setRumble(RumbleType.kBothRumble, ConstRumble.TEST_RUMBLE);
+
   }
 
   public void configAutonomous() {
@@ -356,12 +353,7 @@ public class RobotContainer {
   }
 
   public void configFeedback() {
-    // testFeedback.whileTrue(
-    // Commands.runOnce(() -> conDriver.setRumble(RumbleType.kBothRumble,
-    // ConstRumble.TEST_RUMBLE)))
-    // .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble,
-    // ConstRumble.RUMBLE_OFF)));
-    // conDriver.setRumble(RumbleType.kBothRumble, ConstRumble.TEST_RUMBLE);
+    // Add feedback bindings here if needed
   }
 
   public RobotState getRobotState() {

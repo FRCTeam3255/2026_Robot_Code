@@ -29,18 +29,18 @@ import frc.robot.constants.ConstVision;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
-  double autoTime = 140;
-  double transitionShiftTime = 130;
-  double shift1Time = 105;
-  double shift2Time = 80;
-  double shift3Time = 55;
-  double shift4Time = 30;
-  double endgameTime = 0;
-  double preShift1Time = 134;
-  double preShift2Time = 109;
-  double preShift3Time = 84;
-  double preShift4Time = 59;
-  double endgameStartTime = 34;
+  static double autoTime = 140;
+  static double shift1Time = 105;
+  static double transitionShiftTime = 130;
+  static double shift2Time = 80;
+  static double shift3Time = 55;
+  static double shift4Time = 30;
+  static double endgameTime = 0;
+  static double preShift1Time = 134;
+  static double preShift2Time = 109;
+  static double preShift3Time = 84;
+  static double preShift4Time = 59;
+  static double endgameStartTime = 34;
   private RobotContainer m_robotContainer;
   private static final StringTopic selectedTabTopic = NetworkTableInstance.getDefault()
       .getStringTopic("/Elastic/SelectedTab");
@@ -146,7 +146,7 @@ public class Robot extends TimedRobot {
   public void testExit() {
   }
 
-  public double getMatchTime() {
+  public static double getMatchTime() {
     return DriverStation.getMatchTime();
   }
 
@@ -202,7 +202,7 @@ public class Robot extends TimedRobot {
     }
   }
 
-  public boolean hubsIsSwitching() {
+  public static boolean hubsIsSwitching() {
     double matchTime = getMatchTime();
     if (matchTime < preShift1Time && matchTime > transitionShiftTime
         || matchTime < preShift2Time && matchTime > shift1Time
@@ -214,7 +214,7 @@ public class Robot extends TimedRobot {
     return false;
   }
 
-  public boolean isHubActive() {
+  public static boolean isHubActive() {
     Optional<Alliance> alliance = DriverStation.getAlliance();
     // If we have no alliance, we cannot be enabled, therefore no hub.
     if (alliance.isEmpty()) {
