@@ -81,6 +81,8 @@ public class RobotContainer {
       () -> stateMachineInstance.tryState(RobotState.PREP_NEUTRAL_TO_ALLIANCE));
   Command TRY_NONE = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.NONE));
+  Command TRY_DEFENSE = Commands.deferredProxy(
+      () -> stateMachineInstance.tryState(RobotState.DEFENSE));
 
   private AutoFactory autoFactory;
 
@@ -160,14 +162,15 @@ public class RobotContainer {
         .whileTrue(TRY_REVERSING_SHOOTER)
         .onFalse(TRY_NONE);
     conDriver.btn_Start
-        .onTrue(TRY_PREP_CLIMB_L1);
-    // .onTrue(TRY_CLIMBING_L1)
-    // .onTrue(TRY_CLIMBING_L2_3);
+        .whileTrue(TRY_PREP_CLIMB_L1)
+        .onFalse(TRY_CLIMBING_L1)
+        .onTrue(TRY_CLIMBING_L2_3);
     conDriver.btn_LeftTrigger
         .whileTrue(TRY_INTAKING)
         .onFalse(TRY_NONE);
     conDriver.btn_Back
         .onTrue(TRY_UNCLIMB_L1)
+        .onTrue(TRY_DEFENSE)
         .onFalse(TRY_NONE);
     conDriver.btn_RightBumper
         .onTrue(TRY_PREP_ANYWHERE);
