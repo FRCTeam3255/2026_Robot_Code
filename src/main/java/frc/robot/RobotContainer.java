@@ -81,8 +81,6 @@ public class RobotContainer {
   Command TRY_DEFENSE = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.DEFENSE));
 
-  private static AutoFactory autoFactory;
-
   private final SN_XboxController conDriver = new SN_XboxController(controllerIDs.DRIVER_USB);
 
   public static Rotors rotorsInstance = new Rotors();
@@ -100,6 +98,13 @@ public class RobotContainer {
   public static Vision visionInstance = new Vision();
   private final Vision loggedVisionInstance = visionInstance;
 
+  private static AutoFactory autoFactory = new AutoFactory(
+      drivetrainInstance::getPose, // A function that returns the current robot pose
+      drivetrainInstance::resetPose, // A function that resets the current robot pose to the provided Pose2d
+      drivetrainInstance::followTrajectory, // The drive subsystem trajectory follower
+      true, // If alliance flipping should be enabled
+      driverStateMachineInstance // The drive subsystem
+  );
   Command MANUAL = new DeferredCommand(
       driverStateMachineInstance.tryState(
           DriverStateMachine.DriverState.MANUAL,
@@ -181,13 +186,6 @@ public class RobotContainer {
   }
 
   public void configAutonomous() {
-    autoFactory = new AutoFactory(
-        drivetrainInstance::getPose, // A function that returns the current robot pose
-        drivetrainInstance::resetPose, // A function that resets the current robot pose to the provided Pose2d
-        drivetrainInstance::followTrajectory, // The drive subsystem trajectory follower
-        true, // If alliance flipping should be enabled
-        driverStateMachineInstance // The drive subsystem
-    );
 
     // make our entries name
     int shootingTime = 5;
@@ -364,8 +362,6 @@ public class RobotContainer {
   Command Climb(ChoreoTraj startPath) {
     return Commands.sequence(
         Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
-        runPath(startPath).asProxy(),
-        runPath(ChoreoTraj.Climb).asProxy(),
         TRY_PREP_CLIMB_L1.asProxy().withTimeout(0.5),
         TRY_CLIMBING_L1.asProxy().withTimeout(4));
   }
