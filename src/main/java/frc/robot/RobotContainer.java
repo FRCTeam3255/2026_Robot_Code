@@ -39,7 +39,6 @@ import frc.robot.subsystems.Motion;
 import frc.robot.subsystems.RobotPoses;
 import frc.robot.subsystems.Rotors;
 import frc.robot.subsystems.StateMachine;
-import frc.robot.subsystems.Telemetry;
 import frc.robot.subsystems.StateMachine.RobotState;
 import frc.robot.subsystems.Vision;
 
@@ -90,7 +89,7 @@ public class RobotContainer {
   private final SN_XboxController conDriver = new SN_XboxController(controllerIDs.DRIVER_USB);
 
   public static Rotors rotorsInstance = new Rotors();
-  public static Telemetry telemetryInstance = new Telemetry();
+  public static Robot robotInstance = new Robot();
   private final Rotors loggedRotorsInstance = rotorsInstance;
   public static Motion motionInstance = new Motion();
   private final Motion loggedMotionInstance = motionInstance;
@@ -142,8 +141,10 @@ public class RobotContainer {
 
   // public final Trigger testFeedback = new Trigger(
   // () -> true);
+  public final Trigger isOurShiftTrigger = new Trigger(
+      () -> robotInstance.isHubActive());
   public final Trigger hubSwitchingTrigger = new Trigger(
-      () -> telemetryInstance.hubsIsSwitching());
+      () -> robotInstance.hubsIsSwitching());
   public final Trigger climbingL1Trigger = new Trigger(
       () -> stateMachineInstance.getRobotState() == RobotState.CLIMBING_L1);
   public final Trigger climbingL2_L3Trigger = new Trigger(

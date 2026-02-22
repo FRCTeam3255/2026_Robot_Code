@@ -62,7 +62,7 @@
             "height": 544.0,
             "type": "Boolean Box",
             "properties": {
-              "topic": "Robot/isHubActive",
+              "topic": "Robot/m_robotContainer/isOurShiftTrigger",
               "period": 0.06,
               "data_type": "boolean",
               "true_color": 4283215696,
