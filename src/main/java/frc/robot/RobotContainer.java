@@ -362,7 +362,7 @@ public class RobotContainer {
   Command Climb(ChoreoTraj startPath) {
     return Commands.sequence(
         Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
-        TRY_PREP_CLIMB_L1.asProxy().withTimeout(0.5),
+        TRY_PREP_CLIMB_L1.asProxy().withTimeout(4),
         TRY_CLIMBING_L1.asProxy().withTimeout(4));
   }
 
