@@ -36,11 +36,6 @@ public class Robot extends TimedRobot {
   static double shift3Time = 55;
   static double shift4Time = 30;
   static double endgameTime = 0;
-  static double preShift1Time = 134;
-  static double preShift2Time = 109;
-  static double preShift3Time = 84;
-  static double preShift4Time = 59;
-  static double endgameStartTime = 34;
   private RobotContainer m_robotContainer;
   private static final StringTopic selectedTabTopic = NetworkTableInstance.getDefault()
       .getStringTopic("/Elastic/SelectedTab");
@@ -204,11 +199,11 @@ public class Robot extends TimedRobot {
 
   public static boolean hubsIsSwitching() {
     double matchTime = getMatchTime();
-    if (matchTime < preShift1Time && matchTime > transitionShiftTime
-        || matchTime < preShift2Time && matchTime > shift1Time
-        || matchTime < preShift3Time && matchTime > shift2Time
-        || matchTime < preShift4Time && matchTime > shift3Time
-        || matchTime < endgameStartTime && matchTime > shift4Time) {
+    if (matchTime < transitionShiftTime + 4 && matchTime > transitionShiftTime
+        || matchTime < shift1Time + 4 && matchTime > shift1Time
+        || matchTime < shift2Time + 4 && matchTime > shift2Time
+        || matchTime < shift3Time + 4 && matchTime > shift3Time
+        || matchTime < endgameTime + 4 && matchTime > shift4Time) {
       return true;
     }
     return false;
