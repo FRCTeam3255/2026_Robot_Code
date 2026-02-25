@@ -13,7 +13,7 @@
  },
  "params":{
   "waypoints":[
-    {"x":{"exp":"depot.x", "val":0.45}, "y":{"exp":"depot.y", "val":5.9}, "heading":{"exp":"depot.heading", "val":0.0}, "intervals":20, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false},
+    {"x":{"exp":"depot.x", "val":0.6772127151489258}, "y":{"exp":"depot.y", "val":5.9943108558654785}, "heading":{"exp":"depot.heading", "val":0.0}, "intervals":20, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false},
     {"x":{"exp":"depot_front.x", "val":2.527714967727661}, "y":{"exp":"depot_front.y", "val":5.9022393226623535}, "heading":{"exp":"depot_front.heading", "val":0.0}, "intervals":40, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false}],
   "constraints":[
     {"from":"first", "to":null, "data":{"type":"StopPoint", "props":{}}, "enabled":true},
@@ -44,7 +44,7 @@
    "bumper":{
     "front":0.4064,
     "side":0.4064,
-    "back":0.4064
+    "back":0.6476999999999999
    },
    "differentialTrackWidth":0.5588
   },

@@ -14,7 +14,7 @@
  },
  "params":{
   "waypoints":[
-    {"x":{"exp":"depot.x", "val":0.45}, "y":{"exp":"depot.y", "val":5.9}, "heading":{"exp":"depot.heading", "val":0.0}, "intervals":21, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false},
+    {"x":{"exp":"depot.x", "val":0.6772127151489258}, "y":{"exp":"depot.y", "val":5.9943108558654785}, "heading":{"exp":"depot.heading", "val":0.0}, "intervals":21, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false},
     {"x":{"exp":"1.145822286605835 m", "val":1.145822286605835}, "y":{"exp":"5.209413528442383 m", "val":5.209413528442383}, "heading":{"exp":"-0.7058122891115579 rad", "val":-0.7058122891115579}, "intervals":26, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false},
     {"x":{"exp":"Hub_front.x", "val":2.3}, "y":{"exp":"Hub_front.y", "val":4.0}, "heading":{"exp":"Hub_front.heading", "val":0.0}, "intervals":40, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false}],
   "constraints":[
@@ -46,7 +46,7 @@
    "bumper":{
     "front":0.4064,
     "side":0.4064,
-    "back":0.4064
+    "back":0.6476999999999999
    },
    "differentialTrackWidth":0.5588
   },
