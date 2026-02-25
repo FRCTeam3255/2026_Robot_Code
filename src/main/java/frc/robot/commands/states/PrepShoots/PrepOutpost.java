@@ -15,9 +15,7 @@ import frc.robot.subsystems.StateMachine;
 public class PrepOutpost extends BasePrepShooter {
   public PrepOutpost() {
     super(ConstRotors.FLYWHEEL_OUTPOST_SPEED, ConstMotion.HOOD_OUTPOST_ANGLE,
-        ConstField.FieldElementGroups.OUTPOST_PREP_SHOOT_ROTATION_SET
-            .getAlliancePoses().get(0)
-            .getRotation().getMeasure(),
+        ConstField.FieldElementGroups.OUTPOST_PREP_SHOOT_ROTATION_SET,
         StateMachine.RobotState.PREP_OUTPOST);
     // Use addRequirements() here to declare subsystem dependencies.
   }

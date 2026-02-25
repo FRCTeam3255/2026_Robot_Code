@@ -15,9 +15,7 @@ import frc.robot.subsystems.StateMachine;
 public class PrepOpponentToAlliance extends BasePrepShooter {
   public PrepOpponentToAlliance() {
     super(ConstRotors.FLYWHEEL_OPPONENT_TO_ALLIANCE_SPEED, ConstMotion.HOOD_OPPENENT_TO_ALLIANCE_ANGLE,
-        ConstField.FieldElementGroups.OPPONENT_TO_ALLIANCE_PREP_SHOOT_ROTATION_SET
-            .getAlliancePoses().get(0)
-            .getRotation().getMeasure(),
+        ConstField.FieldElementGroups.OPPONENT_TO_ALLIANCE_PREP_SHOOT_ROTATION_SET,
         StateMachine.RobotState.PREP_OPPONENT_TO_ALLIANCE);
     // Use addRequirements() here to declare subsystem dependencies.
   }

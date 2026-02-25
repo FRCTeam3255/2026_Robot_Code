@@ -15,9 +15,7 @@ import frc.robot.subsystems.StateMachine;
 public class PrepNonOutpost extends BasePrepShooter {
   public PrepNonOutpost() {
     super(ConstRotors.FLYWHEEL_NON_OUTPOST_SPEED, ConstMotion.HOOD_NON_OUTPOST_ANGLE,
-        ConstField.FieldElementGroups.NON_OUTPOST_PREP_SHOOT_ROTATION_SET
-            .getAlliancePoses().get(0)
-            .getRotation().getMeasure(),
+        ConstField.FieldElementGroups.NON_OUTPOST_PREP_SHOOT_ROTATION_SET,
         StateMachine.RobotState.PREP_NON_OUTPOST);
     // Use addRequirements() here to declare subsystem dependencies.
   }
