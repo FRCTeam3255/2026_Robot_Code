@@ -9,9 +9,7 @@ import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.commands.ClimbingL1;
-import frc.robot.commands.ClimbingL2_3;
-import frc.robot.commands.Shooting;
+import frc.robot.commands.states.Climbing.*;
 import frc.robot.commands.states.*;
 import frc.robot.commands.states.Climbing.PrepClimb;
 import frc.robot.commands.states.PrepShoots.*;
@@ -50,6 +48,7 @@ public class StateMachine extends SubsystemBase {
       case INTAKING:
         switch (currentRobotState) {
           case NONE:
+          case DEFENSE:
           case PREP_CLIMB_L1:
             return new Intaking();
         }
@@ -223,6 +222,12 @@ public class StateMachine extends SubsystemBase {
         }
         break;
 
+      case DEFENSE:
+        switch (currentRobotState) {
+          case NONE:
+            return new Defense();
+        }
+
     }
 
     return Commands
@@ -247,6 +252,7 @@ public class StateMachine extends SubsystemBase {
     CLIMBING_L1,
     CLIMBING_L2_3,
     UNCLIMB_L1,
+    DEFENSE,
   }
 
   @Override
