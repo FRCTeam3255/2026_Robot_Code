@@ -31,6 +31,8 @@ public class ManualZeroIntake extends Command {
   public void initialize() {
     zeroingSuccess = false;
     RobotContainer.motionInstance.hasIntakePivotZeroed = false;
+    // Disable forward software limit during manual zeroing; re-enabled in end()
+    RobotContainer.motionInstance.setIntakePivotSoftwareLimits(false, true);
 
   }
 
