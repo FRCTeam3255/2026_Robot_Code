@@ -4,6 +4,7 @@
 
 package frc.robot.commands.states.PrepShoots;
 
+import frc.robot.constants.ConstField;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstPoseDrive;
 import frc.robot.constants.ConstRotors;
@@ -15,7 +16,10 @@ import frc.robot.subsystems.StateMachine;
 public class PrepDepot extends BasePrepShooter {
   public PrepDepot() {
     super(ConstRotors.FLYWHEEL_DEPOT_SPEED, ConstMotion.HOOD_DEPOT_ANGLE,
-        ConstPoseDrive.PrepShootRotations.DEPOT_PREP_SHOOT_ROTATION, StateMachine.RobotState.PREP_DEPOT);
+        ConstField.FieldElementGroups.DEPOT_PREP_SHOOT_ROTATION_SET
+            .getAlliancePoses().get(0)
+            .getRotation().getMeasure(),
+        StateMachine.RobotState.PREP_DEPOT);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 }
