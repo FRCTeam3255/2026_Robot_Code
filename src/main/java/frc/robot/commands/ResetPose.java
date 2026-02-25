@@ -6,8 +6,10 @@ package frc.robot.commands;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.LimelightHelpers;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstField;
+import frc.robot.constants.ConstVision;
 
 public class ResetPose extends Command {
 
@@ -21,6 +23,10 @@ public class ResetPose extends Command {
     RobotContainer.drivetrainInstance.getPigeon2()
         .setYaw(getAlliancePose().getRotation().getMeasure());
     RobotContainer.drivetrainInstance.setDriveRotation(getAlliancePose().getRotation().getMeasure());
+    LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.DisabledThrottle);
+    LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.DisabledThrottle);
+    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, 1);
+    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, 1);
   }
 
   @Override
@@ -29,6 +35,10 @@ public class ResetPose extends Command {
 
   @Override
   public void end(boolean interrupted) {
+    LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.TeleopThrottle);
+    LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.TeleopThrottle);
+    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, 4);
+    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, 4);
   }
 
   @Override
