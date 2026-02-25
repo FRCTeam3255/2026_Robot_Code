@@ -104,6 +104,7 @@ public class RobotContainer {
   public static Vision visionInstance = new Vision();
   private final Vision loggedVisionInstance = visionInstance;
   public static Telemetry telemetryInstance = new Telemetry();
+  private final Telemetry loggedTelemetryInstance = telemetryInstance;
 
   Command MANUAL = new DeferredCommand(
       driverStateMachineInstance.tryState(

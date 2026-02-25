@@ -28,7 +28,7 @@
             "height": 170.0,
             "type": "Large Text Display",
             "properties": {
-              "topic": "Robot/getMatchPeriod",
+              "topic": "Robot/m_robotContainer/loggedTelemetryInstance/getMatchPeriod",
               "period": 0.6,
               "data_type": "string"
             }
@@ -96,7 +96,7 @@
             "height": 170.0,
             "type": "Match Time",
             "properties": {
-              "topic": "Robot/getMatchTime",
+              "topic": "Robot/m_robotContainer/loggedTelemetryInstance/getMatchTime",
               "period": 0.06,
               "data_type": "double",
               "time_display_mode": "Minutes and Seconds",
@@ -112,7 +112,7 @@
             "height": 170.0,
             "type": "Match Time",
             "properties": {
-              "topic": "Robot/getMatchPeriodTime",
+              "topic": "Robot/m_robotContainer/loggedTelemetryInstance/getMatchPeriodTime",
               "period": 0.033,
               "data_type": "double",
               "time_display_mode": "Seconds Only",
@@ -200,7 +200,7 @@
             "height": 272.0,
             "type": "Match Time",
             "properties": {
-              "topic": "Robot/getMatchTime",
+              "topic": "Robot/m_robotContainer/loggedTelemetryInstance/getMatchTime",
               "period": 0.06,
               "data_type": "double",
               "time_display_mode": "Minutes and Seconds",
