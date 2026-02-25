@@ -41,6 +41,7 @@ import frc.robot.subsystems.Rotors;
 import frc.robot.subsystems.StateMachine;
 import frc.robot.subsystems.StateMachine.RobotState;
 import frc.robot.subsystems.Vision;
+import frc.robot.subsystems.Telemetry;
 
 @Logged
 public class RobotContainer {
@@ -102,6 +103,7 @@ public class RobotContainer {
   private final StateMachine loggedStateMachineInstance = stateMachineInstance;
   public static Vision visionInstance = new Vision();
   private final Vision loggedVisionInstance = visionInstance;
+  public static Telemetry telemetryInstance = new Telemetry();
 
   Command MANUAL = new DeferredCommand(
       driverStateMachineInstance.tryState(
@@ -139,9 +141,9 @@ public class RobotContainer {
   }
 
   public final Trigger isOurShiftTrigger = new Trigger(
-      () -> Robot.isHubActive());
+      () -> telemetryInstance.isHubActive());
   public final Trigger hubSwitchingTrigger = new Trigger(
-      () -> Robot.hubsIsSwitching());
+      () -> telemetryInstance.hubsIsSwitching());
   public final Trigger climbingL1Trigger = new Trigger(
       () -> stateMachineInstance.getRobotState() == RobotState.CLIMBING_L1);
   public final Trigger climbingL2_L3Trigger = new Trigger(
