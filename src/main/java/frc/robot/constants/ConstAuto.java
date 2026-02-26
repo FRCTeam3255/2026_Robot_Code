@@ -8,8 +8,9 @@ public class ConstAuto {
   public static final double SHOOT_FROM_DEPOT_TIMEOUT = 3.0;
   public static final double INTAKE_DEPOT_TIMEOUT = 4.0;
 
-  public static final double SHOOT_FROM_OUTPOST_TIMEOUT = 3.0;
-  public static final double INTAKE_OUTPOST_TIMEOUT = 3.0;
+  public static final double SHOOT_FROM_OUTPOST_TIMEOUT = 6.0;
+  public static final double INTAKE_OUTPOST_TIMEOUT = 3.5;
 
   public static final double INTAKE_NEUTRAL_ZONE_TIMEOUT = 3.0;
+  public static final double SHOOT_NEUTRAL_ZONE_TIMEOUT = 10.0;
 }

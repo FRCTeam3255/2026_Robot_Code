@@ -215,12 +215,13 @@ public class RobotContainer {
             ConstAuto.SHOOT_FROM_OUTPOST_TIMEOUT));
 
     Command OutpostSideNeutral = Commands.sequence(
+        TRY_INTAKING.asProxy().withTimeout(0.3),
         CollectAndScore(
             ChoreoTraj.OutpostTrench_NeutralZone,
             ChoreoTraj.OppNeutral_OppHub,
             TRY_PREP_ANYWHERE,
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
-            ConstAuto.SHOOT_DEFAULT_TIMEOUT));
+            ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command DepotSideNeutral = Commands.sequence(
         CollectAndScore(
@@ -228,13 +229,14 @@ public class RobotContainer {
             ChoreoTraj.Neutral_HubLeft,
             TRY_PREP_ANYWHERE,
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
-            ConstAuto.SHOOT_DEFAULT_TIMEOUT));
+            ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command PreloadOutpost = Commands.sequence(
-        ScoreOnlyOutpost(
+        CollectAndScore(
             ChoreoTraj.Trench_Outpost,
             ChoreoTraj.Move_Forward_Outpost,
             TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_OUTPOST_TIMEOUT,
             ConstAuto.SHOOT_FROM_OUTPOST_TIMEOUT));
 
     Command Test = Commands.sequence(runPath(ChoreoTraj.test));
