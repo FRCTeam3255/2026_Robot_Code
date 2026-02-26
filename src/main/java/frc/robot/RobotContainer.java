@@ -126,6 +126,19 @@ public class RobotContainer {
           conDriver.btn_RightBumper),
       Set.of(driverStateMachineInstance));
 
+  public final Trigger isOurShiftTrigger = new Trigger(
+      () -> telemetryInstance.isHubActive());
+  public final Trigger hubSwitchingTrigger = new Trigger(
+      () -> telemetryInstance.hubsIsSwitching());
+  public final Trigger climbingL1Trigger = new Trigger(
+      () -> stateMachineInstance.getRobotState() == RobotState.CLIMBING_L1);
+  public final Trigger climbingL2_L3Trigger = new Trigger(
+      () -> stateMachineInstance.getRobotState() == RobotState.CLIMBING_L2_3);
+  public final Trigger readyToShootTrigger = new Trigger(
+      () -> rotorsInstance.areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
+          && drivetrainInstance.isAtDesiredRotation(ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE)
+          && motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE));
+
   public RobotContainer() {
     RobotController.setBrownoutVoltage(5.5);
 
@@ -140,19 +153,6 @@ public class RobotContainer {
     configFeedback();
     // subDrivetrain.resetModulesToAbsolute();
   }
-
-  public final Trigger isOurShiftTrigger = new Trigger(
-      () -> telemetryInstance.isHubActive());
-  public final Trigger hubSwitchingTrigger = new Trigger(
-      () -> telemetryInstance.hubsIsSwitching());
-  public final Trigger climbingL1Trigger = new Trigger(
-      () -> stateMachineInstance.getRobotState() == RobotState.CLIMBING_L1);
-  public final Trigger climbingL2_L3Trigger = new Trigger(
-      () -> stateMachineInstance.getRobotState() == RobotState.CLIMBING_L2_3);
-  public final Trigger readyToShootTrigger = new Trigger(
-      () -> rotorsInstance.areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
-          && drivetrainInstance.isAtDesiredRotation(ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE)
-          && motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE));
 
   private void configDriverBindings() {
     conDriver.btn_South
@@ -192,13 +192,13 @@ public class RobotContainer {
 
     readyToShootTrigger
         .whileTrue(
-            Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble,
+            Commands.run(() -> conDriver.setRumble(RumbleType.kLeftRumble,
                 ConstRumble.READY_TO_SHOOT_RUMBLE)))
         .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble,
             ConstRumble.RUMBLE_OFF)));
     hubSwitchingTrigger
         .onTrue(
-            Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble,
+            Commands.run(() -> conDriver.setRumble(RumbleType.kRightRumble,
                 ConstRumble.SHIFT_CHANGE_RUMBLE)))
         .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble,
             ConstRumble.RUMBLE_OFF)));

@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 @Logged
 public class Telemetry extends SubsystemBase {
   /** Creates a new Telemetry. */
+  double timeBefore = 4;
   double shift1Time = 105;
   double autoTime = 140;
   double transitionShiftTime = 130;
@@ -88,11 +89,11 @@ public class Telemetry extends SubsystemBase {
 
   public boolean hubsIsSwitching() {
     double matchTime = getMatchTime();
-    if (matchTime < transitionShiftTime + 4 && matchTime > transitionShiftTime
-        || matchTime < shift1Time + 4 && matchTime > shift1Time
-        || matchTime < shift2Time + 4 && matchTime > shift2Time
-        || matchTime < shift3Time + 4 && matchTime > shift3Time
-        || matchTime < endgameTime + 4 && matchTime > shift4Time) {
+    if ((matchTime < transitionShiftTime + timeBefore && matchTime > transitionShiftTime)
+        || (matchTime < shift1Time + timeBefore && matchTime > shift1Time)
+        || (matchTime < shift2Time + timeBefore && matchTime > shift2Time)
+        || (matchTime < shift3Time + timeBefore && matchTime > shift3Time)
+        || (matchTime < shift4Time + timeBefore && matchTime > shift4Time)) {
       return true;
     }
     return false;
