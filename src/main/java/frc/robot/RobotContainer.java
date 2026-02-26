@@ -239,6 +239,15 @@ public class RobotContainer {
             ConstAuto.INTAKE_OUTPOST_TIMEOUT,
             ConstAuto.SHOOT_FROM_OUTPOST_TIMEOUT));
 
+    Command OutpostSideNeutralWithOutpost = Commands.sequence(
+        OutpostSideNeutral.asProxy(),
+        CollectAndScore(
+            ChoreoTraj.Op_Side_Neutral_Outpost,
+            ChoreoTraj.Move_Forward_Outpost,
+            TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_OUTPOST_TIMEOUT,
+            ConstAuto.SHOOT_FROM_OUTPOST_TIMEOUT));
+
     Command Test = Commands.sequence(runPath(ChoreoTraj.test));
 
     autoChooser.setDefaultOption("Do Nothing", Commands.none());
@@ -248,6 +257,7 @@ public class RobotContainer {
     autoChooser.addOption("PreloadDepotOutpost", PreloadDepotOutpost);
     autoChooser.addOption("OutpostSideNeutralZone", OutpostSideNeutral);
     autoChooser.addOption("DepotSideNeutralZone", DepotSideNeutral);
+    autoChooser.addOption("OutpostSideNeutralWithOutpost", OutpostSideNeutralWithOutpost);
     autoChooser.addOption("Test", Test);
 
     // make our entries name
@@ -258,7 +268,8 @@ public class RobotContainer {
         Map.entry(PreloadOnly, ChoreoTraj.Reverse_From_Hub),
         Map.entry(DepotSideNeutral, ChoreoTraj.HubLeft_Neutral),
         Map.entry(PreloadDepot, ChoreoTraj.Bump_Depot),
-        Map.entry(OutpostSideNeutral, ChoreoTraj.OutpostTrench_NeutralZone));
+        Map.entry(OutpostSideNeutral, ChoreoTraj.OutpostTrench_NeutralZone),
+        Map.entry(OutpostSideNeutralWithOutpost, ChoreoTraj.OutpostTrench_NeutralZone));
 
     // enter which we want to do based on name
     autoChooser.onChange(selectedAuto ->
