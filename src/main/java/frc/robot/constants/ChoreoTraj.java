@@ -69,9 +69,9 @@ public record ChoreoTraj(
 	public static final ChoreoTraj HubLeft_Neutral = new ChoreoTraj(
 	    "HubLeft_Neutral",
 	    OptionalInt.empty(),
-	    2.40922,
+	    2.56819,
 	    new Pose2d(3.268, 6.812, Rotation2d.fromRadians(-2.159)),
-	    new Pose2d(7.96, 2.532, Rotation2d.fromRadians(1.571))
+	    new Pose2d(7.717, 2.408, Rotation2d.fromRadians(-1.57))
 	);
 	public static final ChoreoTraj Move_Forward_Depot = new ChoreoTraj(
 	    "Move_Forward_Depot",
@@ -90,8 +90,8 @@ public record ChoreoTraj(
 	public static final ChoreoTraj Neutral_HubLeft = new ChoreoTraj(
 	    "Neutral_HubLeft",
 	    OptionalInt.empty(),
-	    2.60678,
-	    new Pose2d(7.96, 2.532, Rotation2d.fromRadians(1.571)),
+	    2.76639,
+	    new Pose2d(7.717, 2.408, Rotation2d.fromRadians(-1.57)),
 	    new Pose2d(2.987, 6.216, Rotation2d.fromRadians(-1.182))
 	);
 	public static final ChoreoTraj OppBump_OppHub = new ChoreoTraj(
@@ -104,23 +104,23 @@ public record ChoreoTraj(
 	public static final ChoreoTraj OppHub_OppNeutral = new ChoreoTraj(
 	    "OppHub_OppNeutral",
 	    OptionalInt.empty(),
-	    2.53606,
+	    2.52755,
 	    new Pose2d(2.673, 1.463, Rotation2d.fromRadians(1.811)),
 	    new Pose2d(7.841, 5.387, Rotation2d.fromRadians(-1.593))
 	);
 	public static final ChoreoTraj OppNeutral_OppHub = new ChoreoTraj(
 	    "OppNeutral_OppHub",
 	    OptionalInt.empty(),
-	    1.99139,
-	    new Pose2d(7.717, 3.274, Rotation2d.fromRadians(-1.547)),
+	    1.81344,
+	    new Pose2d(7.717, 2.408, Rotation2d.fromRadians(-1.57)),
 	    new Pose2d(3.169, 0.824, Rotation2d.fromRadians(1.157))
 	);
 	public static final ChoreoTraj OutpostTrench_NeutralZone = new ChoreoTraj(
 	    "OutpostTrench_NeutralZone",
 	    OptionalInt.empty(),
-	    4.43215,
+	    3.49757,
 	    new Pose2d(3.684, 0.499, Rotation2d.fromRadians(-1.571)),
-	    new Pose2d(7.704, 3.26, Rotation2d.fromRadians(-1.57))
+	    new Pose2d(7.717, 2.408, Rotation2d.fromRadians(-1.57))
 	);
 	public static final ChoreoTraj Outpost_Tower = new ChoreoTraj(
 	    "Outpost_Tower",
