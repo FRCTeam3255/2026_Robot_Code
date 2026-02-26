@@ -214,7 +214,7 @@ public class RobotContainer {
             TRY_PREP_ANYWHERE,
             ConstAuto.SHOOT_FROM_OUTPOST_TIMEOUT));
 
-    Command PreloadNeutralRight = Commands.sequence(
+    Command OutpostSideNeutral = Commands.sequence(
         CollectAndScore(
             ChoreoTraj.OutpostTrench_NeutralZone,
             ChoreoTraj.OppNeutral_OppHub,
@@ -222,7 +222,7 @@ public class RobotContainer {
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_DEFAULT_TIMEOUT));
 
-    Command PreloadNeutralLeft = Commands.sequence(
+    Command DepotSideNeutral = Commands.sequence(
         CollectAndScore(
             ChoreoTraj.HubLeft_Neutral,
             ChoreoTraj.Neutral_HubLeft,
@@ -230,26 +230,33 @@ public class RobotContainer {
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_DEFAULT_TIMEOUT));
 
+    Command PreloadOutpost = Commands.sequence(
+        ScoreOnlyOutpost(
+            ChoreoTraj.Trench_Outpost,
+            ChoreoTraj.Move_Forward_Outpost,
+            TRY_PREP_ANYWHERE,
+            ConstAuto.SHOOT_FROM_OUTPOST_TIMEOUT));
+
     Command Test = Commands.sequence(runPath(ChoreoTraj.test));
 
     autoChooser.setDefaultOption("Do Nothing", Commands.none());
-    autoChooser.addOption("PreloadDepot", PreloadDepot);
-    autoChooser.addOption("PreloadDepotOutpost", PreloadDepotOutpost);
-    // autoChooser.addOption("PreloadOutpost", PreloadOutpost);
     autoChooser.addOption("PreloadOnly", PreloadOnly);
-    autoChooser.addOption("PreloadNeutralRight", PreloadNeutralRight);
-    autoChooser.addOption("PreloadNeutralLeft", PreloadNeutralLeft);
+    autoChooser.addOption("PreloadDepot", PreloadDepot);
+    autoChooser.addOption("PreloadOutpost", PreloadOutpost);
+    autoChooser.addOption("PreloadDepotOutpost", PreloadDepotOutpost);
+    autoChooser.addOption("OutpostSideNeutralZone", OutpostSideNeutral);
+    autoChooser.addOption("DepotSideNeutralZone", DepotSideNeutral);
     autoChooser.addOption("Test", Test);
 
     // make our entries name
     final Map<Command, ChoreoTraj> autoStartingPoses = Map.ofEntries(
         // Example
-        // Map.entry(PreloadOutpost, "Trench_Outpost"),
+        Map.entry(PreloadOutpost, ChoreoTraj.Trench_Outpost),
         Map.entry(PreloadDepotOutpost, ChoreoTraj.Bump_Depot),
         Map.entry(PreloadOnly, ChoreoTraj.Reverse_From_Hub),
-        Map.entry(PreloadNeutralLeft, ChoreoTraj.HubLeft_Neutral),
+        Map.entry(DepotSideNeutral, ChoreoTraj.HubLeft_Neutral),
         Map.entry(PreloadDepot, ChoreoTraj.Bump_Depot),
-        Map.entry(PreloadNeutralRight, ChoreoTraj.OutpostTrench_NeutralZone));
+        Map.entry(OutpostSideNeutral, ChoreoTraj.OutpostTrench_NeutralZone));
 
     // enter which we want to do based on name
     autoChooser.onChange(selectedAuto ->
