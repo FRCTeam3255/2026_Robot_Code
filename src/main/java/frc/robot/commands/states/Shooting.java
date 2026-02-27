@@ -4,13 +4,16 @@
 
 package frc.robot.commands.states;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
+import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
 import frc.robot.subsystems.StateMachine;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class Shooting extends Command {
+  Timer liftIntakeTimer = new Timer();
 
   /** Creates a new Shooting. */
   public Shooting() {
@@ -27,12 +30,17 @@ public class Shooting extends Command {
     RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(ConstRotors.SERIALIZER_V_FUNNEL_SPEED);
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.SHOOTER_TRANSFER_SPEED);
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.INTAKE_ROLLER_SPEED);
+    liftIntakeTimer.reset();
+    liftIntakeTimer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     RobotContainer.drivetrainInstance.xBrake();
+    if (liftIntakeTimer.hasElapsed(ConstMotion.LIFT_INTAKE_DELAY)) {
+      RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.LIFT_INTAKE_SHOOTING_ANGLE);
+    }
   }
 
   // Called once the command ends or is interrupted.
