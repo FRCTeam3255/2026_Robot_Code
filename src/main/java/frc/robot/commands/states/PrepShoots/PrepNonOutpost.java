@@ -14,7 +14,7 @@ import frc.robot.subsystems.StateMachine;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PrepNonOutpost extends BasePrepShooter {
   public PrepNonOutpost() {
-    super(ConstRotors.FLYWHEEL_NON_OUTPOST_SPEED, ConstMotion.HOOD_NON_OUTPOST_ANGLE,
+    super(ConstRotors.FLYWHEEL_NON_OUTPOST_SPEED, ConstMotion.HOOD_TOWER_ANGLE,
         ConstField.FieldElementGroups.NON_OUTPOST_PREP_SHOOT_ROTATION_SET,
         StateMachine.RobotState.PREP_NON_OUTPOST);
     // Use addRequirements() here to declare subsystem dependencies.
