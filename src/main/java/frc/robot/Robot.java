@@ -30,9 +30,9 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-  private static final StringTopic selectedTabTopic = NetworkTableInstance.getDefault()
+  private final StringTopic selectedTabTopic = NetworkTableInstance.getDefault()
       .getStringTopic("/Elastic/SelectedTab");
-  private static final StringPublisher selectedTabPublisher = selectedTabTopic
+  private final StringPublisher selectedTabPublisher = selectedTabTopic
       .publish(PubSubOption.keepDuplicates(true));
 
   @Override
@@ -105,7 +105,7 @@ public class Robot extends TimedRobot {
   public void autonomousExit() {
   }
 
-  public static void selectTab(String tabName) {
+  public void selectTab(String tabName) {
     selectedTabPublisher.set(tabName);
   }
 
@@ -136,121 +136,5 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testExit() {
-  }
-
-  public double getMatchTime() {
-    return DriverStation.getMatchTime();
-  }
-
-  public double getMatchPeriodTime() {
-    double matchTime = getMatchTime();
-    if (matchTime > 140) {
-      return matchTime - 140;
-    } else if (matchTime > 130) {
-      return matchTime - 130;
-    } else if (matchTime > 105) {
-      return matchTime - 105;
-    } else if (matchTime > 80) {
-      return matchTime - 80;
-    } else if (matchTime > 55) {
-      return matchTime - 55;
-    } else if (matchTime > 30) {
-      return matchTime - 30;
-    } else if (matchTime > 0) {
-      return matchTime;
-    } else {
-      return 0;
-    }
-  }
-
-  public enum MatchPeriods {
-    AUTO,
-    TRANSITION_SHIFT,
-    SHIFT_1,
-    SHIFT_2,
-    SHIFT_3,
-    SHIFT_4,
-    ENDGAME,
-    POST_MATCH
-  }
-
-  public String getMatchPeriod() {
-    if (getMatchTime() > 140) {
-      return MatchPeriods.AUTO.toString();
-    } else if (getMatchTime() > 130) {
-      return MatchPeriods.TRANSITION_SHIFT.toString();
-    } else if (getMatchTime() > 105) {
-      return MatchPeriods.SHIFT_1.toString();
-    } else if (getMatchTime() > 80) {
-      return MatchPeriods.SHIFT_2.toString();
-    } else if (getMatchTime() > 55) {
-      return MatchPeriods.SHIFT_3.toString();
-    } else if (getMatchTime() > 30) {
-      return MatchPeriods.SHIFT_4.toString();
-    } else if (getMatchTime() > 0) {
-      return MatchPeriods.ENDGAME.toString();
-    } else {
-      return MatchPeriods.POST_MATCH.toString();
-    }
-  }
-
-  public boolean isHubActive() {
-    Optional<Alliance> alliance = DriverStation.getAlliance();
-    // If we have no alliance, we cannot be enabled, therefore no hub.
-    if (alliance.isEmpty()) {
-      return false;
-    }
-    // Hub is always enabled in autonomous.
-    if (DriverStation.isAutonomousEnabled()) {
-      return true;
-    }
-    // At this point, if we're not teleop enabled, there is no hub.
-    if (!DriverStation.isTeleopEnabled()) {
-      return false;
-    }
-
-    // We're teleop enabled, compute.
-    double matchTime = DriverStation.getMatchTime();
-    String gameData = DriverStation.getGameSpecificMessage();
-    // If we have no game data, we cannot compute, assume hub is active, as its
-    // likely early in teleop.
-    if (gameData.isEmpty()) {
-      return true;
-    }
-    boolean redInactiveFirst = false;
-    switch (gameData.charAt(0)) {
-      case 'R' -> redInactiveFirst = true;
-      case 'B' -> redInactiveFirst = false;
-      default -> {
-        // If we have invalid game data, assume hub is active.
-        return true;
-      }
-    }
-
-    // Shift was is active for blue if red won auto, or red if blue won auto.
-    boolean shift1Active = switch (alliance.get()) {
-      case Red -> !redInactiveFirst;
-      case Blue -> redInactiveFirst;
-    };
-
-    if (matchTime > 130) {
-      // Transition shift, hub is active.
-      return true;
-    } else if (matchTime > 105) {
-      // Shift 1
-      return shift1Active;
-    } else if (matchTime > 80) {
-      // Shift 2
-      return !shift1Active;
-    } else if (matchTime > 55) {
-      // Shift 3
-      return shift1Active;
-    } else if (matchTime > 30) {
-      // Shift 4
-      return !shift1Active;
-    } else {
-      // End game, hub always active.
-      return true;
-    }
   }
 }
