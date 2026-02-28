@@ -318,7 +318,7 @@ public class RobotContainer {
         Map.entry(PreloadDepotOutpost, ChoreoTraj.Reverse_From_Hub),
         Map.entry(PreloadDepotOutpostWithClimb, ChoreoTraj.Reverse_From_Hub),
         Map.entry(PreloadDepot, ChoreoTraj.Bump_HubLeft),
-        Map.entry(PreloadDepotWithClimb, ChoreoTraj.Reverse_From_Hub),
+        Map.entry(PreloadDepotWithClimb, ChoreoTraj.Bump_HubLeft),
         Map.entry(PreloadNeutralLeft, ChoreoTraj.Bump_HubLeft),
         Map.entry(PreloadNeutralLeftWithClimb, ChoreoTraj.Bump_HubLeft),
         Map.entry(PreloadNeutralRight, ChoreoTraj.OppBump_OppHub),
@@ -362,6 +362,7 @@ public class RobotContainer {
   Command Climb(ChoreoTraj startPath) {
     return Commands.sequence(
         Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
+        runPath(startPath).asProxy(),
         TRY_PREP_CLIMB_L1.asProxy().withTimeout(4),
         TRY_CLIMBING_L1.asProxy().withTimeout(4));
   }
