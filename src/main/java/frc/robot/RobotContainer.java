@@ -72,6 +72,8 @@ public class RobotContainer {
       () -> stateMachineInstance.tryState(RobotState.PREP_OUTPOST));
   Command TRY_PREP_DEPOT = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.PREP_DEPOT));
+  Command TRY_PREP_TOWER = Commands.deferredProxy(
+      () -> stateMachineInstance.tryState(RobotState.PREP_TOWER));
   Command TRY_PREP_NON_OUTPOST = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.PREP_NON_OUTPOST));
   Command TRY_REVERSING_SHOOTER = Commands.deferredProxy(
@@ -187,7 +189,7 @@ public class RobotContainer {
     conDriver.btn_Y
         .onTrue(TRY_PREP_TRENCH);
     conDriver.btn_X
-        .onTrue(TRY_PREP_NON_OUTPOST);
+        .onTrue(TRY_PREP_TOWER);
     conDriver.btn_North.whileTrue(new ResetPose());
   }
 
