@@ -27,7 +27,6 @@ public class None extends Command {
     RobotContainer.rotorsInstance.setFlywheelPercentOutput(ConstRotors.STOP);
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.STOP);
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.STOP);
-    RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(ConstRotors.STOP);
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.STOP);
     RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.NONE);
   }

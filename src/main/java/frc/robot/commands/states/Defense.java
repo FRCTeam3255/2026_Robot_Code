@@ -5,27 +5,26 @@
 package frc.robot.commands.states;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.constants.ConstRotors;
-import frc.robot.subsystems.StateMachine;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
+import frc.robot.constants.ConstMotion;
+import frc.robot.subsystems.StateMachine;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class EjectingHopper extends Command {
-  /** Creates a new None. */
-
-  public EjectingHopper() {
+public class Defense extends Command {
+  /** Creates a new Defense. */
+  public Defense() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.stateMachineInstance);
-
+    addRequirements(RobotContainer.motionInstance, RobotContainer.stateMachineInstance);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.EJECTING_HOPPER);
-    RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.REVERSE_SERIALIZER_ROLLERS_SPEED);
-    RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.REVERSE_INTAKE_ROLLER_SPEED);
-    RobotContainer.drivetrainInstance.setIsManualRotationEnabled(true);
+    RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.RETRACT_INTAKE_PIVOT_ANGLE);
+    RobotContainer.motionInstance.setClimberPosition(ConstMotion.RETRACT_CLIMBER);
+    RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.DEFENSE);
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.

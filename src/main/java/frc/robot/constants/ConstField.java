@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -139,6 +140,20 @@ public class ConstField {
         new Rotation2d());
     private static final Pose2d HUB_POSE = new Pose2d(4.629215, 4.0317845, new Rotation2d());
     private static final Pose2d TRENCH_BAR_POSE = new Pose2d(11.973600387573242, 7.374969482421875, new Rotation2d());
+    private static final Pose2d TRENCH_PREP_SHOOT_ROTATION = new Pose2d(Translation2d.kZero,
+        new Rotation2d(ConstPoseDrive.PrepShootRotations.TRENCH_PREP_SHOOT_ROTATION));
+    private static final Pose2d OUTPOST_PREP_SHOOT_ROTATION = new Pose2d(Translation2d.kZero,
+        new Rotation2d(ConstPoseDrive.PrepShootRotations.OUTPOST_PREP_SHOOT_ROTATION));
+    private static final Pose2d NON_OUTPOST_PREP_SHOOT_ROTATION = new Pose2d(Translation2d.kZero,
+        new Rotation2d(ConstPoseDrive.PrepShootRotations.NON_OUTPOST_PREP_SHOOT_ROTATION));
+    private static final Pose2d DEPOT_PREP_SHOOT_ROTATION = new Pose2d(Translation2d.kZero,
+        new Rotation2d(ConstPoseDrive.PrepShootRotations.DEPOT_PREP_SHOOT_ROTATION));
+    private static final Pose2d NEUTRAL_TO_ALLIANCE_PREP_SHOOT_ROTATION = new Pose2d(Translation2d.kZero,
+        new Rotation2d(ConstPoseDrive.PrepShootRotations.NEUTRAL_TO_ALLIANCE_PREP_SHOOT_ROTATION));
+    private static final Pose2d OPPONENT_TO_ALLIANCE_PREP_SHOOT_ROTATION = new Pose2d(Translation2d.kZero,
+        new Rotation2d(ConstPoseDrive.PrepShootRotations.OPPONENT_TO_ALLIANCE_PREP_SHOOT_ROTATION));
+    private static final Pose2d ANYWHERE_PREP_SHOOT_ROTATION = new Pose2d(Translation2d.kZero,
+        new Rotation2d(ConstPoseDrive.PrepShootRotations.ANYWHERE_PREP_SHOOT_ROTATION));
   }
 
   public static class FieldElementGroups {
@@ -148,5 +163,19 @@ public class ConstField {
     public static final Pose2dAllianceSet TRENCH_POSE_SET = new Pose2dAllianceSet((FieldElements.TRENCH_BAR_POSE));
     public static final Pose2dAllianceSet UPRIGHT_OUTPOST_SIDE_POSE_SET = new Pose2dAllianceSet(
         FieldElements.UPRIGHT_OUTPOST_SIDE_POSE, FieldElements.UPRIGHT_DEPOT_SIDE_POSE);
+    public static final Pose2dAllianceSet TRENCH_PREP_SHOOT_ROTATION_SET = new Pose2dAllianceSet(
+        FieldElements.TRENCH_PREP_SHOOT_ROTATION);
+    public static final Pose2dAllianceSet OUTPOST_PREP_SHOOT_ROTATION_SET = new Pose2dAllianceSet(
+        FieldElements.OUTPOST_PREP_SHOOT_ROTATION);
+    public static final Pose2dAllianceSet NON_OUTPOST_PREP_SHOOT_ROTATION_SET = new Pose2dAllianceSet(
+        FieldElements.NON_OUTPOST_PREP_SHOOT_ROTATION);
+    public static final Pose2dAllianceSet DEPOT_PREP_SHOOT_ROTATION_SET = new Pose2dAllianceSet(
+        FieldElements.DEPOT_PREP_SHOOT_ROTATION);
+    public static final Pose2dAllianceSet NEUTRAL_TO_ALLIANCE_PREP_SHOOT_ROTATION_SET = new Pose2dAllianceSet(
+        FieldElements.NEUTRAL_TO_ALLIANCE_PREP_SHOOT_ROTATION);
+    public static final Pose2dAllianceSet OPPONENT_TO_ALLIANCE_PREP_SHOOT_ROTATION_SET = new Pose2dAllianceSet(
+        FieldElements.OPPONENT_TO_ALLIANCE_PREP_SHOOT_ROTATION);
+    public static final Pose2dAllianceSet ANYWHERE_PREP_SHOOT_ROTATION_SET = new Pose2dAllianceSet(
+        FieldElements.ANYWHERE_PREP_SHOOT_ROTATION);
   }
 }

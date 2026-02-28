@@ -13,18 +13,17 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
 import edu.wpi.first.units.measure.AngularVelocity;
+import frc.robot.RobotContainer;
 
 /** Add your docs here. */
 public class ConstRotors {
 
   public static final TalonFXConfiguration SERIALIZER_ROLLERS_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration INTAKE_ROLLER_CONFIGURATION = new TalonFXConfiguration();
-  public static final TalonFXConfiguration SERIALIZER_V_FUNNEL_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration SHOOTER_TRANSFER_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration FLYWHEEL_WEST_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration FLYWHEEL_EAST_CONFIGURATION = new TalonFXConfiguration();
   public static final double INTAKE_ROLLER_SPEED = 1;
-  public static final double SERIALIZER_V_FUNNEL_SPEED = 0;
   public static final double SERIALIZER_ROLLERS_SPEED = 1;
   public static final double SHOOTER_TRANSFER_SPEED = 1;
   public static final AngularVelocity FLYWHEEL_TOLERANCE = RPM.of(50);
@@ -38,16 +37,15 @@ public class ConstRotors {
   }
 
   // different shooting locations shooting speeds
-  public static final AngularVelocity FLYWHEEL_TRENCH_SPEED = RPM.of(5200);
-  public static final AngularVelocity FLYWHEEL_OUTPOST_SPEED = RPM.of(5200);
-  public static final AngularVelocity FLYWHEEL_NON_OUTPOST_SPEED = RPM.of(5200);
-  public static final AngularVelocity FLYWHEEL_DEPOT_SPEED = RPM.of(5200);
-  public static final AngularVelocity FLYWHEEL_ANYWHERE_SPEED = RPM.of(5200);
-  public static final AngularVelocity FLYWHEEL_NEUTRAL_TO_ALLIANCE_SPEED = RPM.of(5200);
-  public static final AngularVelocity FLYWHEEL_OPPONENT_TO_ALLIANCE_SPEED = RPM.of(5200);
+  public static final AngularVelocity FLYWHEEL_TRENCH_SPEED = RPM.of(4300);
+  public static final AngularVelocity FLYWHEEL_OUTPOST_SPEED = RPM.of(4300);
+  public static final AngularVelocity FLYWHEEL_NON_OUTPOST_SPEED = RPM.of(4300);
+  public static final AngularVelocity FLYWHEEL_DEPOT_SPEED = RPM.of(4300);
+  public static final AngularVelocity FLYWHEEL_ANYWHERE_SPEED = RPM.of(4300);
+  public static final AngularVelocity FLYWHEEL_NEUTRAL_TO_ALLIANCE_SPEED = RPM.of(4300);
+  public static final AngularVelocity FLYWHEEL_OPPONENT_TO_ALLIANCE_SPEED = RPM.of(4300);
 
   public static final double REVERSE_INTAKE_ROLLER_SPEED = -1;
-  public static final double REVERSE_SERIALIZER_V_FUNNEL_SPEED = 0;
   public static final double REVERSE_SERIALIZER_ROLLERS_SPEED = -1;
   public static final double REVERSE_FLYWHEEL_SPEED = -1;
   public static final double REVERSE_SHOOTER_TRANSFER_SPEED = -1;
@@ -60,11 +58,10 @@ public class ConstRotors {
     SERIALIZER_ROLLERS_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     SERIALIZER_ROLLERS_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
 
-    SERIALIZER_V_FUNNEL_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
-    SERIALIZER_V_FUNNEL_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
-
     SHOOTER_TRANSFER_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-    SHOOTER_TRANSFER_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+    SHOOTER_TRANSFER_CONFIGURATION.MotorOutput.Inverted = (RobotContainer.isPracticeBot())
+        ? InvertedValue.Clockwise_Positive
+        : InvertedValue.CounterClockwise_Positive;
 
     FLYWHEEL_WEST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     FLYWHEEL_WEST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
@@ -72,9 +69,9 @@ public class ConstRotors {
     FLYWHEEL_WEST_CONFIGURATION.Slot0.kV = 0.11167;
     FLYWHEEL_WEST_CONFIGURATION.Slot0.kA = 0;
     FLYWHEEL_WEST_CONFIGURATION.Slot0.kP = 0.5;
-    FLYWHEEL_WEST_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity = 60;
-    FLYWHEEL_WEST_CONFIGURATION.MotionMagic.MotionMagicAcceleration = 600;
-    FLYWHEEL_WEST_CONFIGURATION.MotionMagic.MotionMagicJerk = 6000;
+    FLYWHEEL_WEST_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity = 0;
+    FLYWHEEL_WEST_CONFIGURATION.MotionMagic.MotionMagicAcceleration = 9999;
+    FLYWHEEL_WEST_CONFIGURATION.MotionMagic.MotionMagicJerk = 0;
 
     FLYWHEEL_EAST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     FLYWHEEL_EAST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
@@ -82,16 +79,18 @@ public class ConstRotors {
     FLYWHEEL_EAST_CONFIGURATION.Slot0.kV = 0.11167;
     FLYWHEEL_EAST_CONFIGURATION.Slot0.kA = 0;
     FLYWHEEL_EAST_CONFIGURATION.Slot0.kP = 0.5;
-    FLYWHEEL_EAST_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity = 60;
-    FLYWHEEL_EAST_CONFIGURATION.MotionMagic.MotionMagicAcceleration = 600;
-    FLYWHEEL_EAST_CONFIGURATION.MotionMagic.MotionMagicJerk = 6000;
+    FLYWHEEL_EAST_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity = 0;
+    FLYWHEEL_EAST_CONFIGURATION.MotionMagic.MotionMagicAcceleration = 9999;
+    FLYWHEEL_EAST_CONFIGURATION.MotionMagic.MotionMagicJerk = 0;
 
     // flywheelSpeedMap.put(Inches.of(0.0).in(Inches), RPM.of(3200).in(RPM));
     // TODO: Consider re-adding a close-range (0 in) calibration point if required.
-    flywheelSpeedMap.put(Inches.of(60).in(Inches), RPM.of(3200).in(RPM));
-    flywheelSpeedMap.put(Inches.of(90).in(Inches), RPM.of(3600).in(RPM));
-    flywheelSpeedMap.put(Inches.of(120).in(Inches), RPM.of(4100).in(RPM));
-    flywheelSpeedMap.put(Inches.of(150).in(Inches), RPM.of(4500).in(RPM));
-    flywheelSpeedMap.put(Inches.of(187.8).in(Inches), RPM.of(5200).in(RPM));
+    // flywheelSpeedMap.put(Inches.of(60).in(Inches), RPM.of(3200).in(RPM));
+    // flywheelSpeedMap.put(Inches.of(90).in(Inches), RPM.of(3600).in(RPM));
+    // flywheelSpeedMap.put(Inches.of(120).in(Inches), RPM.of(4100).in(RPM));
+    // flywheelSpeedMap.put(Inches.of(150).in(Inches), RPM.of(4300).in(RPM));
+    // flywheelSpeedMap.put(Inches.of(187.8).in(Inches), RPM.of(5200).in(RPM));
+    flywheelSpeedMap.put(Inches.of(187.8).in(Inches), RPM.of(4300).in(RPM));
+    flywheelSpeedMap.put(Inches.of(0).in(Inches), RPM.of(4300).in(RPM));
   }
 }

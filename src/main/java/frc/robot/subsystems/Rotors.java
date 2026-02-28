@@ -23,19 +23,19 @@ public class Rotors extends SubsystemBase {
 
   final TalonFX serializerRollers = new TalonFX(rotorIDs.SERIALIZER_ROLLERS_CAN);
   final TalonFX intakeRoller = new TalonFX(rotorIDs.INTAKE_ROLLERS_CAN);
-  final TalonFX serializerVFunnel = new TalonFX(rotorIDs.SERIALIZER_V_FUNNEL_CAN);
   final TalonFX shooterTransfer = new TalonFX(rotorIDs.SHOOTER_TRANSFER_CAN);
   final TalonFX flywheelTopWest = new TalonFX(rotorIDs.FLYWHEEL_TOP_WEST_CAN);
   final TalonFX flywheelTopEast = new TalonFX(rotorIDs.FLYWHEEL_TOP_EAST_CAN);
   final TalonFX flywheelBottomWest = new TalonFX(rotorIDs.FLYWHEEL_BOTTOM_WEST_CAN);
   final TalonFX flywheelBottomEast = new TalonFX(rotorIDs.FLYWHEEL_BOTTOM_EAST_CAN);
-  public AngularVelocity lastDesiredFlywheelSpeed = Units.RPM.of(0);
+  AngularVelocity lastDesiredFlywheelSpeed = Units.RPM.of(0);
+  Follower flywheelEastFollower = new Follower(flywheelTopEast.getDeviceID(), MotorAlignmentValue.Aligned);
+  Follower flywheelWestFollower = new Follower(flywheelTopWest.getDeviceID(), MotorAlignmentValue.Aligned);
 
   /** Creates a new Rotors. */
   public Rotors() {
     serializerRollers.getConfigurator().apply(ConstRotors.SERIALIZER_ROLLERS_CONFIGURATION);
     intakeRoller.getConfigurator().apply(ConstRotors.INTAKE_ROLLER_CONFIGURATION);
-    serializerVFunnel.getConfigurator().apply(ConstRotors.SERIALIZER_V_FUNNEL_CONFIGURATION);
     shooterTransfer.getConfigurator().apply(ConstRotors.SHOOTER_TRANSFER_CONFIGURATION);
     flywheelTopWest.getConfigurator().apply(ConstRotors.FLYWHEEL_WEST_CONFIGURATION);
     flywheelBottomWest.getConfigurator().apply(ConstRotors.FLYWHEEL_WEST_CONFIGURATION);
@@ -57,15 +57,11 @@ public class Rotors extends SubsystemBase {
     shooterTransfer.set(speed);
   }
 
-  public void setSerializerVFunnelSpeed(double speed) {
-    serializerVFunnel.set(speed);
-  }
-
   public void setFlywheelSpeed(AngularVelocity speed) {
     flywheelTopEast.setControl(flywheelVelocityRequest.withVelocity(speed));
     flywheelTopWest.setControl(flywheelVelocityRequest.withVelocity(speed));
-    flywheelBottomEast.setControl(new Follower(flywheelTopEast.getDeviceID(), MotorAlignmentValue.Aligned));
-    flywheelBottomWest.setControl(new Follower(flywheelTopWest.getDeviceID(), MotorAlignmentValue.Aligned));
+    flywheelBottomEast.setControl(flywheelEastFollower);
+    flywheelBottomWest.setControl(flywheelWestFollower);
     lastDesiredFlywheelSpeed = speed;
   }
 
