@@ -188,7 +188,7 @@ public class RobotContainer {
         .onTrue(TRY_PREP_TRENCH);
     conDriver.btn_X
         .onTrue(TRY_PREP_NON_OUTPOST);
-    conDriver.btn_North.onTrue(new ResetPose());
+    conDriver.btn_North.whileTrue(new ResetPose());
   }
 
   public void configAutonomous() {
