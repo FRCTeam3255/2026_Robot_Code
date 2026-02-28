@@ -46,6 +46,25 @@
     "org.mockito.Answers.*",
     "edu.wpi.first.units.Units.*"
   ],
+  "githubIssues.queries": [
+    {
+      "label": "Issues",
+      "query": "is:open repo:${owner}/${repository}",
+      "groupBy": [
+        "milestone"
+      ]
+    }
+  ],
+  "githubPullRequests.queries": [
+    {
+      "label": "Ready PRs",
+      "query": "repo:${owner}/${repository} is:open draft:false"
+    },
+    {
+      "label": "Draft PRs",
+      "query": "repo:${owner}/${repository} is:open draft:true"
+    }
+  ],
   "java.completion.filteredTypes": [
     "java.awt.*",
     "com.sun.*",
