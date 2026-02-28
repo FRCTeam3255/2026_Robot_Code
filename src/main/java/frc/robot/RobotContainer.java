@@ -189,20 +189,6 @@ public class RobotContainer {
     conDriver.btn_X
         .onTrue(TRY_PREP_NON_OUTPOST);
     conDriver.btn_North.onTrue(new ResetPose());
-
-    readyToShootTrigger
-        .whileTrue(
-            Commands.run(() -> conDriver.setRumble(RumbleType.kLeftRumble,
-                ConstRumble.READY_TO_SHOOT_RUMBLE)))
-        .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble,
-            ConstRumble.RUMBLE_OFF)));
-    hubSwitchingTrigger
-        .onTrue(
-            Commands.run(() -> conDriver.setRumble(RumbleType.kRightRumble,
-                ConstRumble.SHIFT_CHANGE_RUMBLE)))
-        .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble,
-            ConstRumble.RUMBLE_OFF)));
-
   }
 
   public void configAutonomous() {
@@ -356,6 +342,18 @@ public class RobotContainer {
   }
 
   public void configFeedback() {
+    readyToShootTrigger
+        .whileTrue(
+            Commands.run(() -> conDriver.setRumble(RumbleType.kLeftRumble,
+                ConstRumble.READY_TO_SHOOT_RUMBLE)))
+        .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble,
+            ConstRumble.RUMBLE_OFF)));
+    hubSwitchingTrigger
+        .onTrue(
+            Commands.run(() -> conDriver.setRumble(RumbleType.kRightRumble,
+                ConstRumble.SHIFT_CHANGE_RUMBLE)))
+        .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble,
+            ConstRumble.RUMBLE_OFF)));
     // Add feedback bindings here if needed
   }
 
