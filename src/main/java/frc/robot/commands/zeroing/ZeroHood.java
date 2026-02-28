@@ -6,7 +6,7 @@ package frc.robot.commands.zeroing;
 
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Time;
-import edu.wpi.first.wpilibj.Timer;
+// Timer is not used directly here; Motion.checkZeroing handles timing.
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
@@ -60,22 +60,11 @@ public class ZeroHood extends Command {
       return true;
     }
 
-    // If the current velocity is low enough to be considered as zeroed
-    if (RobotContainer.motionInstance.getHoodRotorVelocity().lt(ConstMotion.ZEROED_VELOCITY)) {
-      // And this is the first loop it has happened, begin the timer
-      if (zeroingTimestamp.equals(Units.Seconds.zero())) {
-        zeroingTimestamp = Units.Seconds.of(Timer.getFPGATimestamp());
-        return false;
-      }
-
-      // If this isn't the first loop, return if it has been below the threshold for
-      // long enough
-      return (Units.Seconds.of(Timer.getFPGATimestamp()).minus(zeroingTimestamp).gte(ConstMotion.ZEROED_TIME));
-    }
-
-    // If the above wasn't true, we have gained too much velocity, so we aren't at 0
-    // & need to restart the timer
-    zeroingTimestamp = Units.Seconds.zero();
-    return false;
+    // Use the Motion helper to perform the common zeroing check.
+    frc.robot.subsystems.Motion.ZeroingResult res = RobotContainer.motionInstance
+        .checkZeroing(RobotContainer.motionInstance.getHoodRotorVelocity(), zeroingTimestamp);
+    // Persist updated timestamp and return finished state
+    zeroingTimestamp = res.timestamp;
+    return res.finished;
   }
 }

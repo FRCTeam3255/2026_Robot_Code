@@ -6,7 +6,7 @@ package frc.robot.subsystems;
 
 import static edu.wpi.first.units.Units.Degrees;
 import static edu.wpi.first.units.Units.Inches;
-import static edu.wpi.first.units.Units.Meters;
+// Meters import not used in this file
 
 import com.ctre.phoenix6.controls.MotionMagicExpoVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
@@ -18,10 +18,11 @@ import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.units.measure.Voltage;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DeviceIDs;
 import frc.robot.Robot;
-import frc.robot.RobotContainer;
+// RobotContainer is not referenced in this file; commands access Motion via RobotContainer.motionInstance
 import frc.robot.constants.ConstMotion;
 
 @Logged
@@ -171,5 +172,42 @@ public class Motion extends SubsystemBase {
 
   public boolean isHoodRotorVelocityZero() {
     return getHoodRotorVelocity().isNear(Units.RotationsPerSecond.zero(), 0.01);
+  }
+
+  /**
+   * Helper result for zeroing checks. Contains whether the mechanism has been
+   * observed at zero for the configured duration, and the updated zeroing
+   * timestamp to persist across calls.
+   */
+  public static class ZeroingResult {
+    public final boolean finished;
+    public final edu.wpi.first.units.measure.Time timestamp;
+
+    public ZeroingResult(boolean finished, edu.wpi.first.units.measure.Time timestamp) {
+      this.finished = finished;
+      this.timestamp = timestamp;
+    }
+  }
+
+  public ZeroingResult checkZeroing(AngularVelocity rotorVelocity, edu.wpi.first.units.measure.Time zeroingTimestamp) {
+    // If the caller already considers the subsystem zeroed, short-circuit.
+    // (Caller is responsible for that check; we keep helper focused.)
+
+    // If the current velocity is low enough to be considered as zeroed
+    if (rotorVelocity.lt(ConstMotion.ZEROED_VELOCITY)) {
+      // And this is the first loop it has happened, begin the timer
+      if (zeroingTimestamp.equals(Units.Seconds.zero())) {
+        return new ZeroingResult(false, Units.Seconds.of(Timer.getFPGATimestamp()));
+      }
+
+      // If this isn't the first loop, return if it has been below the threshold for
+      // long enough
+      boolean done = Units.Seconds.of(Timer.getFPGATimestamp()).minus(zeroingTimestamp).gte(ConstMotion.ZEROED_TIME);
+      return new ZeroingResult(done, zeroingTimestamp);
+    }
+
+    // If the above wasn't true, we have gained too much velocity, so we aren't at 0
+    // & need to restart the timer
+    return new ZeroingResult(false, Units.Seconds.zero());
   }
 }
