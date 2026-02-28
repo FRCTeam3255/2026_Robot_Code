@@ -13,7 +13,8 @@ import frc.robot.subsystems.StateMachine;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class Shooting extends Command {
-  Timer liftIntakeTimer = new Timer();
+  private final Timer liftIntakeTimer = new Timer();
+  private final Timer deployIntakeTimer = new Timer();
 
   /** Creates a new Shooting. */
   public Shooting() {
@@ -39,7 +40,20 @@ public class Shooting extends Command {
   public void execute() {
     RobotContainer.drivetrainInstance.xBrake();
     if (liftIntakeTimer.hasElapsed(ConstMotion.LIFT_INTAKE_DELAY)) {
-      RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.LIFT_INTAKE_SHOOTING_ANGLE);
+      deployIntakeTimer.start();
+      if (!RobotContainer.motionInstance.isIntakePivotAtPosition(ConstMotion.LIFT_INTAKE_SHOOTING_ANGLE,
+          ConstMotion.INTAKE_PIVOT_ANGLE_TOLERANCE)
+          && deployIntakeTimer.hasElapsed(ConstMotion.LIFT_INTAKE_INTERVAL_TIME)) {
+        RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.LIFT_INTAKE_SHOOTING_ANGLE);
+        deployIntakeTimer.stop();
+        deployIntakeTimer.reset();
+        deployIntakeTimer.start();
+      } else if (deployIntakeTimer.hasElapsed(ConstMotion.LIFT_INTAKE_INTERVAL_TIME)) {
+        RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
+        deployIntakeTimer.stop();
+        deployIntakeTimer.reset();
+      }
+
     }
   }
 

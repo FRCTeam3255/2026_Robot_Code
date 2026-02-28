@@ -97,6 +97,16 @@ public class Motion extends SubsystemBase {
         && pivotAngle.lte(upperLim);
   }
 
+  public boolean isIntakePivotAtPosition(Angle target, Angle tolerance) {
+    Angle lowerLim = target.minus(tolerance);
+    Angle upperLim = target.plus(tolerance);
+
+    Angle pivotAngle = getPivotAngle();
+
+    return pivotAngle.gte(lowerLim)
+        && pivotAngle.lte(upperLim);
+  }
+
   public static Angle getMappedHoodAngle(Distance distance) {
     return Degrees.of(ConstMotion.hoodAngleMap.get(distance.in(Inches)));
   }
