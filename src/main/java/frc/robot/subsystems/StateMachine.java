@@ -195,6 +195,7 @@ public class StateMachine extends SubsystemBase {
           case PREP_ANYWHERE:
           case PREP_TRENCH:
           case PREP_OUTPOST:
+          case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
@@ -209,6 +210,7 @@ public class StateMachine extends SubsystemBase {
           case PREP_ANYWHERE:
           case PREP_TRENCH:
           case PREP_OUTPOST:
+          case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
