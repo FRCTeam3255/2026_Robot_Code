@@ -41,7 +41,7 @@ public class ResetPose extends Command {
 
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 
   public Pose2d getAlliancePose() {
