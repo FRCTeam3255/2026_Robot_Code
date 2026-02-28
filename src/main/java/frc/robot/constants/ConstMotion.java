@@ -43,7 +43,7 @@ public class ConstMotion {
   public static final Distance EXTEND_CLIMBER = Inches.of(0);
   public static final Angle HOOD_TOLERANCE = Units.Degrees.of(.2);
   public final static InterpolatingDoubleTreeMap hoodAngleMap = new InterpolatingDoubleTreeMap();
-  public static final double LIFT_INTAKE_DELAY = 3.0;
+  public static final double LIFT_INTAKE_DELAY = 2.0;
 
   public static final Distance CLIMBER_TOLERANCE = Inches.of(0.2);
   static {
