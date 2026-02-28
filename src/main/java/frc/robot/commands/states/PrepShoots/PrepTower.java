@@ -15,6 +15,7 @@ public class PrepTower extends Command {
   /** Creates a new PrepTower. */
   public PrepTower() {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.stateMachineInstance);
   }
 
   // Called when the command is initially scheduled.

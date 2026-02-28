@@ -47,7 +47,7 @@ public class ConstPoseDrive {
    */
 
   public static class PrepShootRotations {
-    public static final Angle TRENCH_PREP_SHOOT_ROTATION = Units.Degrees.of(-1.6);
+    public static final Angle TRENCH_PREP_SHOOT_ROTATION = Units.Degrees.of(-91.6732);
     public static final Angle OUTPOST_PREP_SHOOT_ROTATION = Units.Degrees.of(40.11);
     public static final Angle DEPOT_PREP_SHOOT_ROTATION = Units.Degrees.of(-20.78);
     public static final Angle NON_OUTPOST_PREP_SHOOT_ROTATION = Units.Degrees.of(-36.87);

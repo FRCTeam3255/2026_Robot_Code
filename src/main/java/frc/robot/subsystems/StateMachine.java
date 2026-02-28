@@ -61,6 +61,7 @@ public class StateMachine extends SubsystemBase {
           case PREP_ANYWHERE:
           case PREP_TRENCH:
           case PREP_OUTPOST:
+          case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
@@ -75,6 +76,7 @@ public class StateMachine extends SubsystemBase {
           case PREP_ANYWHERE:
           case PREP_TRENCH:
           case PREP_OUTPOST:
+          case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
@@ -89,6 +91,7 @@ public class StateMachine extends SubsystemBase {
           case PREP_ANYWHERE:
           case PREP_TRENCH:
           case PREP_OUTPOST:
+          case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
@@ -103,6 +106,7 @@ public class StateMachine extends SubsystemBase {
           case PREP_ANYWHERE:
           case PREP_TRENCH:
           case PREP_OUTPOST:
+          case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
@@ -117,10 +121,25 @@ public class StateMachine extends SubsystemBase {
           case PREP_ANYWHERE:
           case PREP_TRENCH:
           case PREP_OUTPOST:
+          case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
             return new PrepNonOutpost();
+        }
+        break;
+
+      case PREP_TOWER:
+        switch (currentRobotState) {
+          case NONE:
+          case PREP_DEPOT:
+          case PREP_ANYWHERE:
+          case PREP_TRENCH:
+          case PREP_OUTPOST:
+          case PREP_NON_OUTPOST:
+          case PREP_NEUTRAL_TO_ALLIANCE:
+          case PREP_OPPONENT_TO_ALLIANCE:
+            return new PrepTower();
         }
         break;
 
@@ -131,6 +150,7 @@ public class StateMachine extends SubsystemBase {
           case PREP_ANYWHERE:
           case PREP_TRENCH:
           case PREP_OUTPOST:
+          case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
@@ -145,6 +165,7 @@ public class StateMachine extends SubsystemBase {
           case PREP_ANYWHERE:
           case PREP_TRENCH:
           case PREP_OUTPOST:
+          case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
@@ -243,6 +264,7 @@ public class StateMachine extends SubsystemBase {
     PREP_TRENCH,
     PREP_ANYWHERE,
     PREP_NON_OUTPOST,
+    PREP_TOWER,
     PREP_NEUTRAL_TO_ALLIANCE,
     PREP_OPPONENT_TO_ALLIANCE,
     SHOOTING,
