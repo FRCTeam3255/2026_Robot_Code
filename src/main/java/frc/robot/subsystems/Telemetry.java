@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 @Logged
 public class Telemetry extends SubsystemBase {
   /** Creates a new Telemetry. */
-  double timeBefore = 4;
+  double timeBefore = 6;
   double shift1Time = 105;
   double autoTime = 140;
   double transitionShiftTime = 130;

@@ -349,7 +349,7 @@ public class RobotContainer {
         .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble,
             ConstRumble.RUMBLE_OFF)));
     hubSwitchingTrigger
-        .onTrue(
+        .whileTrue(
             Commands.run(() -> conDriver.setRumble(RumbleType.kRightRumble,
                 ConstRumble.SHIFT_CHANGE_RUMBLE)))
         .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble,
