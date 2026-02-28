@@ -13,6 +13,8 @@ import choreo.auto.AutoFactory;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.units.Units;
+import edu.wpi.first.units.measure.Time;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -203,15 +205,12 @@ public class RobotContainer {
             ConstAuto.INTAKE_DEPOT_TIMEOUT,
             ConstAuto.SHOOT_FROM_DEPOT_TIMEOUT));
 
-    Command PreloadDepotOutpost = Commands.sequence(
-        CollectAndScore(ChoreoTraj.Bump_Depot,
-            ChoreoTraj.Move_Forward_Depot,
-            TRY_PREP_ANYWHERE,
-            ConstAuto.INTAKE_DEPOT_TIMEOUT,
-            ConstAuto.SHOOT_FROM_DEPOT_TIMEOUT),
-        ScoreOnlyOutpost(ChoreoTraj.Depot_Outpost,
+    Command PreloadDepotWithOutpost = Commands.sequence(
+        PreloadDepot.asProxy(),
+        CollectAndScore(ChoreoTraj.Depot_Outpost,
             ChoreoTraj.Move_Forward_Outpost,
             TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_OUTPOST_TIMEOUT,
             ConstAuto.SHOOT_FROM_OUTPOST_TIMEOUT));
 
     Command OutpostSideNeutral = Commands.sequence(
@@ -255,7 +254,7 @@ public class RobotContainer {
     autoChooser.addOption("PreloadOnly", PreloadOnly);
     autoChooser.addOption("PreloadDepot", PreloadDepot);
     autoChooser.addOption("PreloadOutpost", PreloadOutpost);
-    autoChooser.addOption("PreloadDepotOutpost", PreloadDepotOutpost);
+    autoChooser.addOption("PreloadDepotOutpost", PreloadDepotWithOutpost);
     autoChooser.addOption("OutpostSideNeutralZone", OutpostSideNeutral);
     autoChooser.addOption("DepotSideNeutralZone", DepotSideNeutral);
     autoChooser.addOption("OutpostSideNeutralWithOutpost", OutpostSideNeutralWithOutpost);
@@ -265,7 +264,7 @@ public class RobotContainer {
     final Map<Command, ChoreoTraj> autoStartingPoses = Map.ofEntries(
         // Example
         Map.entry(PreloadOutpost, ChoreoTraj.Trench_Outpost),
-        Map.entry(PreloadDepotOutpost, ChoreoTraj.Bump_Depot),
+        Map.entry(PreloadDepotWithOutpost, ChoreoTraj.Bump_Depot),
         Map.entry(PreloadOnly, ChoreoTraj.Reverse_From_Hub),
         Map.entry(DepotSideNeutral, ChoreoTraj.HubLeft_Neutral),
         Map.entry(PreloadDepot, ChoreoTraj.Bump_Depot),
@@ -288,48 +287,37 @@ public class RobotContainer {
     SmartDashboard.putData("Auto Chooser", autoChooser);
   }
 
-  Command ScoreAndCollect(ChoreoTraj startPath, ChoreoTraj endPath, Command try_prep_shoot, double shootingTime,
-      double intakingTime) {
+  Command ScoreAndCollect(ChoreoTraj startPath, ChoreoTraj endPath, Command try_prep_shoot, Time shootingTime,
+      Time intakingTime) {
     return Commands.sequence(
         Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
         runPath(startPath).asProxy(),
-        try_prep_shoot.asProxy().withTimeout(1.0),
+        try_prep_shoot.asProxy().withTimeout(Units.Seconds.of(1.0)),
         TRY_SHOOTING.asProxy().withTimeout(shootingTime),
-        TRY_NONE.asProxy().withTimeout(0.05),
+        TRY_NONE.asProxy(),
         runPath(endPath).asProxy().alongWith(TRY_INTAKING.asProxy().withTimeout(intakingTime)),
-        TRY_NONE.asProxy().withTimeout(0.05));
+        TRY_NONE.asProxy());
   }
 
-  Command CollectAndScore(ChoreoTraj startPath, ChoreoTraj endPath, Command try_prep_shoot, double intakingTime,
-      double shootingTime) {
+  Command CollectAndScore(ChoreoTraj collectPath, ChoreoTraj prepShootPath, Command try_prep_shoot, Time intakingTime,
+      Time shootingTime) {
     return Commands.sequence(
         Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
-        runPath(startPath).asProxy().alongWith(TRY_INTAKING.asProxy().withTimeout(intakingTime)),
-        TRY_NONE.asProxy().withTimeout(0.05),
-        runPath(endPath).asProxy(),
-        try_prep_shoot.asProxy().withTimeout(1.0),
+        runPath(collectPath).asProxy().alongWith(TRY_INTAKING.asProxy().withTimeout(intakingTime)),
+        TRY_NONE.asProxy(),
+        runPath(prepShootPath).asProxy(),
+        try_prep_shoot.asProxy().withTimeout(Units.Seconds.of(1.0)),
         TRY_SHOOTING.asProxy().withTimeout(shootingTime),
-        TRY_NONE.asProxy().withTimeout(0.05));
+        TRY_NONE.asProxy());
   }
 
-  Command ScoreOnly(ChoreoTraj startPath, Command try_prep_shoot, double shootingTime) {
+  Command ScoreOnly(ChoreoTraj prepShootPath, Command try_prep_shoot, Time shootingTime) {
     return Commands.sequence(
         Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
-        runPath(startPath).asProxy(),
-        try_prep_shoot.asProxy().withTimeout(0.7),
+        runPath(prepShootPath).asProxy(),
+        try_prep_shoot.asProxy().withTimeout(Units.Seconds.of(0.7)),
         TRY_SHOOTING.asProxy().withTimeout(shootingTime),
-        TRY_NONE.asProxy().withTimeout(0.05));
-  }
-
-  Command ScoreOnlyOutpost(ChoreoTraj startPath, ChoreoTraj endPath, Command try_prep_shoot, double shootingTime) {
-    return Commands.sequence(
-        Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
-        runPath(startPath).asProxy(),
-        TRY_NONE.asProxy().withTimeout(0.05),
-        runPath(endPath).asProxy(),
-        try_prep_shoot.asProxy().withTimeout(0.7),
-        TRY_SHOOTING.asProxy().withTimeout(shootingTime),
-        TRY_NONE.asProxy().withTimeout(0.05));
+        TRY_NONE.asProxy());
   }
 
   Command Climb(ChoreoTraj startPath) {
