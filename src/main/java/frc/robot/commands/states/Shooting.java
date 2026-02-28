@@ -60,6 +60,7 @@ public class Shooting extends Command {
   @Override
   public void end(boolean interrupted) {
     liftIntakeTimer.stop();
+    deployIntakeTimer.stop();
     RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
   }
 
