@@ -144,7 +144,7 @@ public class ConstField {
     private static final Pose2d OUTPOST_PREP_SHOOT_ROTATION = new Pose2d(Translation2d.kZero,
         new Rotation2d(ConstPoseDrive.PrepShootRotations.OUTPOST_PREP_SHOOT_ROTATION));
     private static final Pose2d NON_OUTPOST_PREP_SHOOT_ROTATION = new Pose2d(Translation2d.kZero,
-        new Rotation2d(ConstPoseDrive.PrepShootRotations.TOWER_PREP_SHOOT_ROTATION));
+        new Rotation2d(ConstPoseDrive.PrepShootRotations.NON_OUTPOST_PREP_SHOOT_ROTATION));
     private static final Pose2d DEPOT_PREP_SHOOT_ROTATION = new Pose2d(Translation2d.kZero,
         new Rotation2d(ConstPoseDrive.PrepShootRotations.DEPOT_PREP_SHOOT_ROTATION));
     private static final Pose2d NEUTRAL_TO_ALLIANCE_PREP_SHOOT_ROTATION = new Pose2d(Translation2d.kZero,
