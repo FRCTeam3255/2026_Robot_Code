@@ -25,8 +25,9 @@ public class ConstMotion {
   public static final TalonFXConfiguration CLIMBER_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration HOOD_CONFIGURATION = new TalonFXConfiguration();
   public static final double STOP = 0.0;
-  public static final Angle DEPLOY_INTAKE_PIVOT_ANGLE = Units.Degrees.of(126); // TODO: set angle for intake pivot
-  public static final Angle RETRACT_INTAKE_PIVOT_ANGLE = Units.Degrees.of(0); // TODO: set angle for intake pivot
+  public static final Angle DEPLOY_INTAKE_PIVOT_ANGLE = Units.Degrees.of(126);
+  public static final Angle RETRACT_INTAKE_PIVOT_ANGLE = Units.Degrees.of(0);
+  public static final Angle LIFT_INTAKE_SHOOTING_ANGLE = Units.Degrees.of(63);
   public static final double EXTEND_CLIMBER_SPEED = 0;
   public static final double RETRACT_CLIMBER_SPEED = -0.5;
   public static final double ANGLE_HOOD_SPEED = 0.5;
@@ -42,6 +43,9 @@ public class ConstMotion {
   public static final Distance EXTEND_CLIMBER = Inches.of(0);
   public static final Angle HOOD_TOLERANCE = Units.Degrees.of(.2);
   public final static InterpolatingDoubleTreeMap hoodAngleMap = new InterpolatingDoubleTreeMap();
+  public static final double LIFT_INTAKE_DELAY = 1.0;
+  public static final double LIFT_INTAKE_INTERVAL_TIME = 1.0 / 3.0;
+  public static final Angle INTAKE_PIVOT_ANGLE_TOLERANCE = Units.Degrees.of(1);
 
   public static final Distance CLIMBER_TOLERANCE = Inches.of(0.2);
   static {
