@@ -224,7 +224,7 @@ public class RobotContainer {
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command DepotSideNeutral = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(0.3),
+        TRY_INTAKING.asProxy().withTimeout(0.3), // Force intake down before moving and going under trench
         CollectAndScore(
             ChoreoTraj.HubLeft_Neutral,
             ChoreoTraj.Neutral_HubLeft,
