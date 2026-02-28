@@ -208,7 +208,7 @@ public class RobotContainer {
     Command PreloadOnly = Commands.sequence(
         ScoreOnly(ChoreoTraj.Reverse_From_Hub,
             TRY_PREP_ANYWHERE,
-            ConstAuto.SHOOT_DEFAULT_TIMEOUT));
+            ConstAuto.SHOOT_PRELOAD_TIMEOUT));
 
     Command PreloadDepot = Commands.sequence(
         CollectAndScore(ChoreoTraj.Bump_Depot,
@@ -304,7 +304,7 @@ public class RobotContainer {
     return Commands.sequence(
         Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
         runPath(startPath).asProxy(),
-        try_prep_shoot.asProxy().withTimeout(Units.Seconds.of(1.0)),
+        try_prep_shoot.asProxy().withTimeout(ConstAuto.PREP_SHOOT_TIMEOUT),
         TRY_SHOOTING.asProxy().withTimeout(shootingTime),
         TRY_NONE.asProxy(),
         runPath(endPath).asProxy().alongWith(TRY_INTAKING.asProxy().withTimeout(intakingTime)),
@@ -318,7 +318,7 @@ public class RobotContainer {
         runPath(collectPath).asProxy().alongWith(TRY_INTAKING.asProxy().withTimeout(intakingTime)),
         TRY_NONE.asProxy(),
         runPath(prepShootPath).asProxy(),
-        try_prep_shoot.asProxy().withTimeout(Units.Seconds.of(1.0)),
+        try_prep_shoot.asProxy().withTimeout(ConstAuto.PREP_SHOOT_TIMEOUT),
         TRY_SHOOTING.asProxy().withTimeout(shootingTime),
         TRY_NONE.asProxy());
   }
@@ -327,7 +327,7 @@ public class RobotContainer {
     return Commands.sequence(
         Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
         runPath(prepShootPath).asProxy(),
-        try_prep_shoot.asProxy().withTimeout(Units.Seconds.of(0.7)),
+        try_prep_shoot.asProxy().withTimeout(ConstAuto.PREP_SHOOT_TIMEOUT),
         TRY_SHOOTING.asProxy().withTimeout(shootingTime),
         TRY_NONE.asProxy());
   }
