@@ -1,6 +1,6 @@
 {
   "version": 1.0,
-  "grid_size": 34,
+  "grid_size": 128,
   "tabs": [
     {
       "name": "Teleoperated",
@@ -317,7 +317,7 @@
             "height": 340.0,
             "type": "ComboBox Chooser",
             "properties": {
-              "topic": "/SmartDashboard/SendableChooser[1]",
+              "topic": "/SmartDashboard/Auto Chooser",
               "period": 0.06,
               "sort_options": false
             }
@@ -330,7 +330,7 @@
             "height": 340.0,
             "type": "Large Text Display",
             "properties": {
-              "topic": "/SmartDashboard/SendableChooser[1]/active",
+              "topic": "/SmartDashboard/Auto Chooser/active",
               "period": 0.06,
               "data_type": "string"
             }
