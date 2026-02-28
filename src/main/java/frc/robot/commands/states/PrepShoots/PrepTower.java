@@ -2,31 +2,29 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.states;
+package frc.robot.commands.states.PrepShoots;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
-import frc.robot.subsystems.StateMachine;
+import frc.robot.subsystems.StateMachine.RobotState;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class Intaking extends Command {
-
-  /** Creates a new Intaking. */
-  public Intaking() {
+public class PrepTower extends Command {
+  /** Creates a new PrepTower. */
+  public PrepTower() {
     // Use addRequirements() here to declare subsystem dependencies.
-
     addRequirements(RobotContainer.stateMachineInstance);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.INTAKING);
-    RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.INTAKE_ROLLER_SPEED);
-    RobotContainer.motionInstance.setClimberPosition(ConstMotion.RETRACT_CLIMBER);
-    RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
+    RobotContainer.rotorsInstance.setFlywheelSpeed(ConstRotors.FLYWHEEL_TOWER_SPEED);
+    RobotContainer.motionInstance.setHoodAngle(ConstMotion.HOOD_TOWER_ANGLE);
+    RobotContainer.stateMachineInstance.setRobotState(RobotState.PREP_TOWER);
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -37,12 +35,12 @@ public class Intaking extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return RobotContainer.motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE)
+        && RobotContainer.rotorsInstance.areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE);
   }
 }
