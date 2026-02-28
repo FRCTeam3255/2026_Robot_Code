@@ -13,7 +13,7 @@ import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class ManualZeroHood extends Command {
+public class HumanZeroHood extends Command {
   /** Creates a new ManualZeroHood. */
 
   boolean zeroingSuccess = false;
@@ -21,7 +21,7 @@ public class ManualZeroHood extends Command {
 
   AngularVelocity lastRotorVelocity = Units.RotationsPerSecond.of(0);
 
-  public ManualZeroHood() {
+  public HumanZeroHood() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.motionInstance);
   }
@@ -67,7 +67,6 @@ public class ManualZeroHood extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.motionInstance.setHoodSoftwareLimits(true, true);
 
     if (!interrupted && zeroingSuccess) {
       RobotContainer.motionInstance.hasHoodZeroed = true;

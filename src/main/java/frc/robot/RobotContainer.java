@@ -83,13 +83,6 @@ public class RobotContainer {
   Command TRY_NONE = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.NONE));
 
-  // Command zeroSubsystems = new ParallelCommandGroup(
-  // new ZeroHood().withTimeout(ConstMotion.ZEROING_TIMEOUT.in(Units.Seconds)),
-  // new ZeroIntake().onlyIf(() ->
-  // !RobotContainer.motionInstance.hasIntakePivotZeroed)
-  // .withTimeout(ConstMotion.ZEROING_TIMEOUT.in(Units.Seconds)))
-  // .withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming).withName("ZeroSubsystems");
-
   public Command makeZeroSubsystemsCommand() {
     Command zeroHood = new ZeroHood().withTimeout(ConstMotion.ZEROING_TIMEOUT.in(Units.Seconds));
 
@@ -136,8 +129,8 @@ public class RobotContainer {
 
   // we have to zero hood first
   {
-    manualZeroSubsystems = new ManualZeroHood()
-        .andThen(new ManualZeroIntake())
+    manualZeroSubsystems = new HumanZeroHood()
+        .andThen(new HumanZeroIntake())
         .ignoringDisable(true).withName("ManualZeroSubsystems");
   }
 

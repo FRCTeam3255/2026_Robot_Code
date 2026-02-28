@@ -13,7 +13,7 @@ import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class ManualZeroIntake extends Command {
+public class HumanZeroIntake extends Command {
 
   boolean zeroingSuccess = false;
   Time zeroingTimestamp = Units.Seconds.of(0);
@@ -21,7 +21,7 @@ public class ManualZeroIntake extends Command {
   AngularVelocity lastRotorVelocity = Units.RotationsPerSecond.of(0);
 
   /** Creates a new ManualZeroIntake. */
-  public ManualZeroIntake() {
+  public HumanZeroIntake() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.motionInstance);
   }
@@ -32,7 +32,6 @@ public class ManualZeroIntake extends Command {
     zeroingSuccess = false;
     RobotContainer.motionInstance.hasIntakePivotZeroed = false;
     // Disable forward software limit during manual zeroing; re-enabled in end()
-    RobotContainer.motionInstance.setIntakePivotSoftwareLimits(false, true);
 
   }
 
@@ -70,7 +69,6 @@ public class ManualZeroIntake extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.motionInstance.setIntakePivotSoftwareLimits(true, true);
 
     if (!interrupted && zeroingSuccess) {
       RobotContainer.motionInstance.hasIntakePivotZeroed = true;

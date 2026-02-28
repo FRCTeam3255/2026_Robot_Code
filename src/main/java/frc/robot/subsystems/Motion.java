@@ -35,7 +35,8 @@ public class Motion extends SubsystemBase {
   MotionMagicExpoVoltage hoodMotionRequest = new MotionMagicExpoVoltage(0);
   MotionMagicExpoVoltage intakePivotMotionRequest = new MotionMagicExpoVoltage(0);
 
-  VoltageOut voltageRequest = new VoltageOut(0);
+  VoltageOut intakePivotVoltageRequest = new VoltageOut(0);
+  VoltageOut hoodVoltageRequest = new VoltageOut(0);
 
   public boolean hasIntakePivotZeroed = false;
   public boolean hasHoodZeroed = false;
@@ -86,11 +87,11 @@ public class Motion extends SubsystemBase {
   }
 
   public void setIntakePivotVoltage(Voltage voltage) {
-    intakePivot.setControl(voltageRequest.withOutput(voltage));
+    intakePivot.setControl(intakePivotVoltageRequest.withOutput(voltage));
   }
 
   public void setHoodVoltage(Voltage voltage) {
-    hood.setControl(voltageRequest.withOutput(voltage));
+    hood.setControl(hoodVoltageRequest.withOutput(voltage));
   }
 
   public Angle getPivotAngle() {
