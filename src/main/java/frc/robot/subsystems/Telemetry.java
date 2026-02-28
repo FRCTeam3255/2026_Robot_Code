@@ -22,6 +22,7 @@ public class Telemetry extends SubsystemBase {
   double shift3Time = 55;
   double shift4Time = 30;
   double endgameTime = 0;
+  private String gameData = "";
 
   public Telemetry() {
   }
@@ -29,6 +30,9 @@ public class Telemetry extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    if (gameData.isEmpty()) {
+        gameData = DriverStation.getGameSpecificMessage();
+    }
   }
 
   public double getMatchTime() {
@@ -116,7 +120,6 @@ public class Telemetry extends SubsystemBase {
 
     // We're teleop enabled, compute.
     double matchTime = DriverStation.getMatchTime();
-    String gameData = DriverStation.getGameSpecificMessage();
     // If we have no game data, we cannot compute, assume hub is active, as its
     // likely early in teleop.
     if (gameData.isEmpty()) {
