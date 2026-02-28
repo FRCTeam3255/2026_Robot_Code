@@ -21,9 +21,9 @@ public class PrepTower extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.rotorsInstance.setFlywheelSpeed(ConstRotors.FLYWHEEL_NON_OUTPOST_SPEED);
+    RobotContainer.rotorsInstance.setFlywheelSpeed(ConstRotors.FLYWHEEL_TOWER_SPEED);
     RobotContainer.motionInstance.setHoodAngle(ConstMotion.HOOD_TOWER_ANGLE);
-    RobotContainer.stateMachineInstance.setRobotState(RobotState.PREP_NON_OUTPOST);
+    RobotContainer.stateMachineInstance.setRobotState(RobotState.PREP_TOWER);
 
   }
 
