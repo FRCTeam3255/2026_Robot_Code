@@ -34,7 +34,7 @@ public class ConstMotion {
   public static final Angle HOOD_TRENCH_ANGLE = Units.Degrees.of(13.5);
   public static final Angle HOOD_OUTPOST_ANGLE = Units.Degrees.of(26);
   public static final Angle HOOD_NON_OUTPOST_ANGLE = Units.Degrees.of(12);
-  public static final Angle HOOD_TOWER_ANGLE = Units.Degrees.of(12);
+  public static final Angle HOOD_TOWER_ANGLE = Units.Degrees.of(10);
   public static final Angle HOOD_DEPOT_ANGLE = Units.Degrees.of(18);
   public static final Angle HOOD_ANYWHERE_ANGLE = Units.Degrees.of(45);
   public static final Angle HOOD_NUETRAL_TO_ALLIANCE_ANGLE = Units.Degrees.of(45);
@@ -46,7 +46,7 @@ public class ConstMotion {
   public final static InterpolatingDoubleTreeMap hoodAngleMap = new InterpolatingDoubleTreeMap();
   public static final double LIFT_INTAKE_DELAY = 1.0;
   public static final double LIFT_INTAKE_INTERVAL_TIME = 1.0 / 3.0;
-  public static final Angle INTAKE_PIVOT_ANGLE_TOLERANCE = Units.Degrees.of(1);
+  public static final Angle INTAKE_PIVOT_ANGLE_TOLERANCE = Units.Degrees.of(5);
 
   public static final Distance CLIMBER_TOLERANCE = Inches.of(0.2);
   static {
