@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import static edu.wpi.first.units.Units.Inches;
+
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
@@ -82,11 +84,13 @@ public class DriveManual extends Command {
 
       }
     }
-    Pose2d trenchPose = RobotContainer.robotPose.getTrench();
     Distance distanceToTrench = RobotContainer.robotPose.getDistanceToTrench();
-    Angle targetHoodAngle = Motion.getMappedHoodAngle(distanceToTrench);
 
-    RobotContainer.motionInstance.setHoodAngle(ConstMotion.HOOD_TRENCH_ANGLE);
+    if (distanceToTrench.lte(Inches.of(20))) {
+      RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
+      RobotContainer.motionInstance.setHoodAngle(ConstMotion.HOOD_NONE_ANGLE);
+
+    }
 
   }
 
