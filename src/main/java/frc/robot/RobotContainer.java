@@ -12,6 +12,7 @@ import com.frcteam3255.joystick.SN_XboxController;
 import choreo.auto.AutoFactory;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -28,6 +29,7 @@ import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
 import frc.robot.constants.ConstSystem;
+import frc.robot.constants.ConstRumble;
 import frc.robot.constants.ConstSystem.constControllers;
 import frc.robot.subsystems.DriverStateMachine;
 import frc.robot.subsystems.DriverStateMachine.DriverState;
@@ -38,6 +40,7 @@ import frc.robot.subsystems.Rotors;
 import frc.robot.subsystems.StateMachine;
 import frc.robot.subsystems.StateMachine.RobotState;
 import frc.robot.subsystems.Vision;
+import frc.robot.subsystems.Telemetry;
 
 @Logged
 public class RobotContainer {
@@ -68,6 +71,8 @@ public class RobotContainer {
       () -> stateMachineInstance.tryState(RobotState.PREP_OUTPOST));
   Command TRY_PREP_DEPOT = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.PREP_DEPOT));
+  Command TRY_PREP_TOWER = Commands.deferredProxy(
+      () -> stateMachineInstance.tryState(RobotState.PREP_TOWER));
   Command TRY_PREP_NON_OUTPOST = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.PREP_NON_OUTPOST));
   Command TRY_REVERSING_SHOOTER = Commands.deferredProxy(
@@ -97,6 +102,8 @@ public class RobotContainer {
   private final StateMachine loggedStateMachineInstance = stateMachineInstance;
   public static Vision visionInstance = new Vision();
   private final Vision loggedVisionInstance = visionInstance;
+  public static Telemetry telemetryInstance = new Telemetry();
+  private final Telemetry loggedTelemetryInstance = telemetryInstance;
 
   private static AutoFactory autoFactory = new AutoFactory(
       drivetrainInstance::getPose, // A function that returns the current robot pose
@@ -125,6 +132,19 @@ public class RobotContainer {
           conDriver.btn_RightBumper),
       Set.of(driverStateMachineInstance));
 
+  public final Trigger isOurShiftTrigger = new Trigger(
+      () -> telemetryInstance.isHubActive());
+  public final Trigger hubSwitchingTrigger = new Trigger(
+      () -> telemetryInstance.hubsIsSwitching());
+  public final Trigger climbingL1Trigger = new Trigger(
+      () -> stateMachineInstance.getRobotState() == RobotState.CLIMBING_L1);
+  public final Trigger climbingL2_L3Trigger = new Trigger(
+      () -> stateMachineInstance.getRobotState() == RobotState.CLIMBING_L2_3);
+  public final Trigger readyToShootTrigger = new Trigger(
+      () -> rotorsInstance.areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
+          && drivetrainInstance.isAtDesiredRotation(ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE)
+          && motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE));
+
   public RobotContainer() {
     RobotController.setBrownoutVoltage(5.5);
 
@@ -136,17 +156,9 @@ public class RobotContainer {
     configDriverBindings();
     configOperatorBindings();
     configAutonomous();
+    configFeedback();
     // subDrivetrain.resetModulesToAbsolute();
   }
-
-  public final Trigger climbingL1Trigger = new Trigger(
-      () -> stateMachineInstance.getRobotState() == RobotState.CLIMBING_L1);
-  public final Trigger climbingL2_L3Trigger = new Trigger(
-      () -> stateMachineInstance.getRobotState() == RobotState.CLIMBING_L2_3);
-  public final Trigger readyToShootTrigger = new Trigger(
-      () -> rotorsInstance.areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
-          && drivetrainInstance.isAtDesiredRotation(ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE)
-          && motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE));
 
   private void configDriverBindings() {
     conDriver.btn_South
@@ -181,8 +193,8 @@ public class RobotContainer {
     conDriver.btn_Y
         .onTrue(TRY_PREP_TRENCH);
     conDriver.btn_X
-        .onTrue(TRY_PREP_NON_OUTPOST);
-    conDriver.btn_North.onTrue(new ResetPose());
+        .onTrue(TRY_PREP_TOWER);
+    conDriver.btn_North.whileTrue(new ResetPose());
   }
 
   public void configAutonomous() {
@@ -391,6 +403,22 @@ public class RobotContainer {
 
   private void configOperatorBindings() {
     // Add operator bindings here if needed
+  }
+
+  public void configFeedback() {
+    readyToShootTrigger
+        .whileTrue(
+            Commands.run(() -> conDriver.setRumble(RumbleType.kLeftRumble,
+                ConstRumble.READY_TO_SHOOT_RUMBLE)))
+        .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble,
+            ConstRumble.RUMBLE_OFF)));
+    hubSwitchingTrigger
+        .whileTrue(
+            Commands.run(() -> conDriver.setRumble(RumbleType.kRightRumble,
+                ConstRumble.SHIFT_CHANGE_RUMBLE)))
+        .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble,
+            ConstRumble.RUMBLE_OFF)));
+    // Add feedback bindings here if needed
   }
 
   public RobotState getRobotState() {
