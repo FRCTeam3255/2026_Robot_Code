@@ -157,6 +157,13 @@ public record ChoreoTraj(
 	    new Pose2d(3.612, 0.412, Rotation2d.fromRadians(0)),
 	    new Pose2d(0.733, 0.445, Rotation2d.fromRadians(0))
 	);
+	public static final ChoreoTraj Climb = new ChoreoTraj(
+	    "Climb",
+	    OptionalInt.empty(),
+	    2.77973,
+	    new Pose2d(2.891, 4.18, Rotation2d.fromRadians(-1.571)),
+	    new Pose2d(1.564, 4.195, Rotation2d.fromRadians(-1.571))
+	);
 
     /**
      * A map between trajectory names and their corresponding data.
@@ -181,7 +188,8 @@ public record ChoreoTraj(
 		Map.entry("Outpost_Tower", Outpost_Tower),
 		Map.entry("Reverse_From_Hub", Reverse_From_Hub),
 		Map.entry("test", test),
-		Map.entry("Trench_Outpost", Trench_Outpost)
+		Map.entry("Trench_Outpost", Trench_Outpost),
+		Map.entry("Climb", Climb)
     );
 
     /**
