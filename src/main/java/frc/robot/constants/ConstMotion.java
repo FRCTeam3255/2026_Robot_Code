@@ -46,7 +46,7 @@ public class ConstMotion {
   public final static InterpolatingDoubleTreeMap hoodAngleMap = new InterpolatingDoubleTreeMap();
   public static final double LIFT_INTAKE_DELAY = 1.0;
   public static final double LIFT_INTAKE_INTERVAL_TIME = 1.0 / 3.0;
-  public static final Angle INTAKE_PIVOT_ANGLE_TOLERANCE = Units.Degrees.of(1);
+  public static final Angle INTAKE_PIVOT_ANGLE_TOLERANCE = Units.Degrees.of(5);
 
   public static final Distance CLIMBER_TOLERANCE = Inches.of(0.2);
   static {

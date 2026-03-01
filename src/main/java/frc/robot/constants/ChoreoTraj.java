@@ -104,30 +104,30 @@ public record ChoreoTraj(
 	public static final ChoreoTraj OppHub_OppNeutral = new ChoreoTraj(
 	    "OppHub_OppNeutral",
 	    OptionalInt.empty(),
-	    2.52755,
+	    2.51795,
 	    new Pose2d(2.673, 1.463, Rotation2d.fromRadians(1.811)),
 	    new Pose2d(7.841, 5.387, Rotation2d.fromRadians(-1.593))
 	);
 	public static final ChoreoTraj OppNeutral_OppHub = new ChoreoTraj(
 	    "OppNeutral_OppHub",
 	    OptionalInt.empty(),
-	    1.81344,
-	    new Pose2d(7.717, 2.408, Rotation2d.fromRadians(-1.57)),
-	    new Pose2d(3.169, 0.824, Rotation2d.fromRadians(1.157))
+	    2.10921,
+	    new Pose2d(7.783, 2.453, Rotation2d.fromRadians(-1.571)),
+	    new Pose2d(2.696, 0.965, Rotation2d.fromRadians(1.024))
 	);
 	public static final ChoreoTraj Op_Side_Neutral_Outpost = new ChoreoTraj(
 	    "Op_Side_Neutral_Outpost",
 	    OptionalInt.empty(),
-	    3.46772,
-	    new Pose2d(3.169, 0.824, Rotation2d.fromRadians(1.157)),
+	    3.34389,
+	    new Pose2d(2.696, 0.965, Rotation2d.fromRadians(1.024)),
 	    new Pose2d(0.696, 0.434, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj OutpostTrench_NeutralZone = new ChoreoTraj(
 	    "OutpostTrench_NeutralZone",
 	    OptionalInt.empty(),
-	    3.49757,
+	    3.41935,
 	    new Pose2d(3.684, 0.499, Rotation2d.fromRadians(-1.571)),
-	    new Pose2d(7.717, 2.408, Rotation2d.fromRadians(-1.57))
+	    new Pose2d(7.783, 2.453, Rotation2d.fromRadians(-1.571))
 	);
 	public static final ChoreoTraj Outpost_Tower = new ChoreoTraj(
 	    "Outpost_Tower",
