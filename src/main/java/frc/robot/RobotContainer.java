@@ -299,18 +299,6 @@ public class RobotContainer {
     SmartDashboard.putData("Auto Chooser", autoChooser);
   }
 
-  Command ScoreAndCollect(ChoreoTraj startPath, ChoreoTraj endPath, Command try_prep_shoot, Time shootingTime,
-      Time intakingTime) {
-    return Commands.sequence(
-        Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
-        runPath(startPath).asProxy(),
-        try_prep_shoot.asProxy().withTimeout(ConstAuto.PREP_SHOOT_TIMEOUT),
-        TRY_SHOOTING.asProxy().withTimeout(shootingTime),
-        TRY_NONE.asProxy(),
-        runPath(endPath).asProxy().alongWith(TRY_INTAKING.asProxy().withTimeout(intakingTime)),
-        TRY_NONE.asProxy());
-  }
-
   Command CollectAndScore(ChoreoTraj collectPath, ChoreoTraj prepShootPath, Command try_prep_shoot, Time intakingTime,
       Time shootingTime) {
     return Commands.sequence(
