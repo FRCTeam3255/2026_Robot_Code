@@ -42,6 +42,7 @@ public class RobotPoses extends SubsystemBase {
       Rotation3d.kZero);
   // Keep a cached distance that the logger can read; updated each scheduler cycle
   private Distance distanceToHub = Units.Meters.of(0);
+  private Distance distancetoTrench = Units.Meters.of(0);
 
   Transform3d intakePivotPoint = new Transform3d(
       Units.Inches.zero(),
@@ -94,6 +95,10 @@ public class RobotPoses extends SubsystemBase {
     Pose2d hubPose = getHub();
     distanceToHub = Units.Meters.of(
         RobotContainer.drivetrainInstance.getPose().getTranslation().getDistance(hubPose.getTranslation()));
+
+    Pose2d trenchPose = getTrench();
+    distancetoTrench = Units.Meters.of(
+        RobotContainer.drivetrainInstance.getPose().getTranslation().getDistance(trenchPose.getTranslation()));
   }
 
   public Pose2d getHub() {
@@ -105,7 +110,7 @@ public class RobotPoses extends SubsystemBase {
   }
 
   public Distance getDistanceToTrench() {
-    return distanceToHub;
+    return distancetoTrench;
   }
 
   public Pose2d getTrench() {
