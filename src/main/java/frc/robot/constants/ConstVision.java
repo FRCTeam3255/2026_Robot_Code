@@ -17,9 +17,36 @@ import edu.wpi.first.units.measure.Distance;
  */
 public class ConstVision {
 
+  public static class IMUMode {
+    /**
+     * No internal IMU processing. MT2 uses interpolated yaw from robot's gyro sent
+     * via SetRobotOrientation().
+     */
+    public static final int EXTERNAL_ONLY = 0;
+    /**
+     * Internal IMU offset is calibrated to match external yaw each frame (seeding).
+     * MT2 still uses external yaw for botpose.
+     */
+    public static final int EXTERNAL_SEED = 1;
+    /** Uses internal IMU's fused yaw only. No external input required. */
+    public static final int INTERNAL_ONLY = 2;
+    /**
+     * Complementary filter fuses internal IMU with MT1 vision yaw. When MT1 gets a
+     * valid pose, it slowly corrects internal IMU drift.
+     */
+    public static final int INTERNAL_MT1_ASSIST = 3;
+    /**
+     * Complementary filter fuses internal IMU with external yaw from
+     * SetRobotOrientation(). This is the recommended mode, as the internal IMU's
+     * 1khz update rate is utilized for frame-by-frame motion while the robot's IMU
+     * corrects for any drift over time.
+     */
+    public static final int INTERNAL_EXTERNAL_ASSIST = 4;
+  }
+
   public static final String LIMELIGHT_RIGHT_NAME = "limelight-right";
   public static final String LIMELIGHT_LEFT_NAME = "limelight-left";
-  public static final String LIMELIGHT_BACK_NAME = "limelight-back";
+  public static final String LIMELIGHT_TOP_NAME = "limelight-top";
 
   /**
    * <p>
