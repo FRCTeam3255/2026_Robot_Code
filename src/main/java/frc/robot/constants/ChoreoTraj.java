@@ -27,7 +27,7 @@ public record ChoreoTraj(
     public static final ChoreoTraj Bump_Depot = new ChoreoTraj(
 	    "Bump_Depot",
 	    OptionalInt.empty(),
-	    1.13916,
+	    4.57843,
 	    new Pose2d(3.592, 6.054, Rotation2d.fromRadians(0)),
 	    new Pose2d(0.677, 5.994, Rotation2d.fromRadians(0))
 	);
@@ -153,7 +153,7 @@ public record ChoreoTraj(
 	public static final ChoreoTraj Trench_Outpost = new ChoreoTraj(
 	    "Trench_Outpost",
 	    OptionalInt.empty(),
-	    3.0016,
+	    3.00107,
 	    new Pose2d(3.612, 0.412, Rotation2d.fromRadians(0)),
 	    new Pose2d(0.733, 0.445, Rotation2d.fromRadians(0))
 	);
