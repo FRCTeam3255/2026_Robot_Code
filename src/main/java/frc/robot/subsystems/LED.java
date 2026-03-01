@@ -7,9 +7,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix6.CANBus;
-import com.ctre.phoenix6.controls.RainbowAnimation;
+import com.ctre.phoenix6.controls.ColorFlowAnimation;
 import com.ctre.phoenix6.controls.SolidColor;
-import com.ctre.phoenix6.controls.TwinkleAnimation;
 import com.ctre.phoenix6.hardware.CANdle;
 import com.ctre.phoenix6.signals.AnimationDirectionValue;
 import com.ctre.phoenix6.signals.RGBWColor;
@@ -18,26 +17,22 @@ import com.ctre.phoenix6.signals.RGBWColor;
  * Subsystem that controls an addressable LED strip using a CANdle.
  */
 public class LED extends SubsystemBase {
-  private final CANBus kCANBus = new CANBus("rio");
+  private final CANBus kCANBus = new CANBus("");
   private final CANdle m_candle = new CANdle(0, kCANBus);
 
-  private final RainbowAnimation m_slot0Animation = new RainbowAnimation(0, 255)
+  private final ColorFlowAnimation m_slot0Animation = new ColorFlowAnimation(0, 255)
       .withSlot(0)
-      .withBrightness(1)
+      .withColor(new RGBWColor(45, 255, 1, 0))
       .withDirection(AnimationDirectionValue.Forward)
-      .withFrameRate(Hertz.of(7.84));
-
-  private final TwinkleAnimation m_slot1Animation = new TwinkleAnimation(0, 255)
-      .withSlot(1)
-      .withColor(new RGBWColor(255, 255, 255, 0))
-      .withMaxLEDsOnProportion(0.5)
-      .withFrameRate(Hertz.of(100));
+      .withFrameRate(Hertz.of(2));
 
   private final SolidColor[] m_colors = new SolidColor[] {
+      new SolidColor(0, 255).withColor(new RGBWColor(82, 255, 166, 0)),
+      new SolidColor(0, 255).withColor(new RGBWColor(60, 255, 3, 0)),
   };
 
   public LED() {
-    // updateLEDs();
+    setDefaultCommand(updateLEDs());
   }
 
   /**
@@ -53,14 +48,4 @@ public class LED extends SubsystemBase {
       m_candle.setControl(m_slot0Animation);
     });
   }
-
-  public Command twinkleLeds() {
-    return run(() -> {
-      for (var solidColor : m_colors) {
-        m_candle.setControl(solidColor);
-      }
-      m_candle.setControl(m_slot1Animation);
-    });
-  }
-
 }

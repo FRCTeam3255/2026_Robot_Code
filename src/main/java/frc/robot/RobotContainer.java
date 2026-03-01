@@ -189,7 +189,6 @@ public class RobotContainer {
 
     // isHubActiveTrigger.whileTrue(Commands.runOnce(() ->
     // LEDInstance.updateLEDs(ConstLEDs.SHIFT_ACTIVE_ANIMATION)));
-    conDriver.btn_A.whileTrue(Commands.runOnce(() -> LEDInstance.twinkleLeds()));
     conDriver.btn_B.whileTrue(Commands.runOnce(() -> LEDInstance.updateLEDs()));
 
   }
