@@ -9,6 +9,7 @@ import java.util.function.DoubleSupplier;
 
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.hardware.Pigeon2;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.swerve.SwerveDrivetrainConstants;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants;
@@ -23,6 +24,7 @@ import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.units.measure.Angle;
 import frc.robot.DeviceIDs;
@@ -123,6 +125,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
   public final TalonFX BackLeftSteer;
   public final TalonFX BackRightDrive;
   public final TalonFX BackRightSteer;
+  public final Rotation3d pigeonRotation;
 
   public Drivetrain() {
     super(
@@ -145,6 +148,8 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     // Back Right (index 3)
     BackRightDrive = getModule(3).getDriveMotor();
     BackRightSteer = getModule(3).getSteerMotor();
+    // Pigeon2
+    pigeonRotation = getRotation3d();
   }
 
   public void followTrajectory(SwerveSample sample) {
