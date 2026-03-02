@@ -16,9 +16,9 @@
  },
  "params":{
   "waypoints":[
-    {"x":{"exp":"2.89126 m", "val":2.89126}, "y":{"exp":"4.18 m", "val":4.18}, "heading":{"exp":"-90 deg", "val":-1.5707963267948966}, "intervals":13, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false},
+    {"x":{"exp":"D_side_climb_starting_pose.x", "val":2.89126}, "y":{"exp":"D_side_climb_starting_pose.y", "val":4.18}, "heading":{"exp":"D_side_climb_starting_pose.heading", "val":-1.5707963267948966}, "intervals":13, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false},
     {"x":{"exp":"2.228600263595581 m", "val":2.228600263595581}, "y":{"exp":"4.19539213180542 m", "val":4.19539213180542}, "heading":{"exp":"-90 deg", "val":-1.5707963267948966}, "intervals":45, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false},
-    {"x":{"exp":"1.5641552734375 m", "val":1.5641552734375}, "y":{"exp":"4.19539213180542 m", "val":4.19539213180542}, "heading":{"exp":"-90 deg", "val":-1.5707963267948966}, "intervals":40, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false}],
+    {"x":{"exp":"D_side_tower.x", "val":1.5641552734375}, "y":{"exp":"D_side_tower.y", "val":4.19539213180542}, "heading":{"exp":"D_side_tower.heading", "val":-1.5707963267948966}, "intervals":40, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false}],
   "constraints":[
     {"from":"first", "to":null, "data":{"type":"StopPoint", "props":{}}, "enabled":true},
     {"from":"last", "to":null, "data":{"type":"StopPoint", "props":{}}, "enabled":true},
