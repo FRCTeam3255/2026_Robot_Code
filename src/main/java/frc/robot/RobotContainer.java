@@ -313,9 +313,9 @@ public class RobotContainer {
       Time shootingTime) {
     return Commands.sequence(
         Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
-        runPath(collectPath).asProxy().alongWith(TRY_INTAKING.asProxy().withTimeout(intakingTime)),
+        runPath(collectPath).asProxy().deadlineFor(TRY_INTAKING.asProxy()),
+        runPath(prepShootPath).asProxy().deadlineFor(TRY_INTAKING.asProxy()),
         TRY_NONE.asProxy(),
-        runPath(prepShootPath).asProxy(),
         try_prep_shoot.asProxy().withTimeout(ConstAuto.PREP_SHOOT_TIMEOUT),
         TRY_SHOOTING.asProxy().withTimeout(shootingTime),
         TRY_NONE.asProxy());
