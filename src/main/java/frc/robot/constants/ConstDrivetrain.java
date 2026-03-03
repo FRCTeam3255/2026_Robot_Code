@@ -183,7 +183,7 @@ public class ConstDrivetrain {
   public static ClosedLoopOutputType closedLoopOutputType = ClosedLoopOutputType.Voltage;
 
   // Rotational speed (degrees per second) while manually driving
-  public static final AngularVelocity TURN_SPEED = Units.DegreesPerSecond.of(360);
+  public static final AngularVelocity TURN_SPEED = Units.DegreesPerSecond.of(300);
   // -- Motor Configurations --
   static {
     // This PID is implemented on each module, not the Drivetrain subsystem.
