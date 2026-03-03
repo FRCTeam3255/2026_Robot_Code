@@ -38,6 +38,20 @@ public record ChoreoTraj(
 	    new Pose2d(3.6, 5.9, Rotation2d.fromRadians(-1.561)),
 	    new Pose2d(2.6, 5.1, Rotation2d.fromRadians(-0.524))
 	);
+	public static final ChoreoTraj Climb = new ChoreoTraj(
+	    "Climb",
+	    OptionalInt.empty(),
+	    2.77973,
+	    new Pose2d(2.891, 4.18, Rotation2d.fromRadians(-1.571)),
+	    new Pose2d(1.564, 4.195, Rotation2d.fromRadians(-1.571))
+	);
+	public static final ChoreoTraj Depot_Climb = new ChoreoTraj(
+	    "Depot_Climb",
+	    OptionalInt.empty(),
+	    0.88269,
+	    new Pose2d(2.458, 5.825, Rotation2d.fromRadians(0)),
+	    new Pose2d(2.891, 4.18, Rotation2d.fromRadians(-1.571))
+	);
 	public static final ChoreoTraj Depot_HubFront = new ChoreoTraj(
 	    "Depot_HubFront",
 	    OptionalInt.empty(),
@@ -136,6 +150,20 @@ public record ChoreoTraj(
 	    new Pose2d(0.6, 0.7, Rotation2d.fromRadians(0)),
 	    new Pose2d(1.5, 3.5, Rotation2d.fromRadians(3.142))
 	);
+	public static final ChoreoTraj O_Side_Climb = new ChoreoTraj(
+	    "O_Side_Climb",
+	    OptionalInt.empty(),
+	    2.68316,
+	    new Pose2d(2.854, 3.228, Rotation2d.fromRadians(-1.571)),
+	    new Pose2d(1.564, 3.34, Rotation2d.fromRadians(-1.571))
+	);
+	public static final ChoreoTraj O_Side_Neutral_Climb = new ChoreoTraj(
+	    "O_Side_Neutral_Climb",
+	    OptionalInt.empty(),
+	    1.03904,
+	    new Pose2d(2.696, 0.965, Rotation2d.fromRadians(1.024)),
+	    new Pose2d(2.854, 3.228, Rotation2d.fromRadians(-1.571))
+	);
 	public static final ChoreoTraj Reverse_From_Hub = new ChoreoTraj(
 	    "Reverse_From_Hub",
 	    OptionalInt.empty(),
@@ -157,34 +185,6 @@ public record ChoreoTraj(
 	    new Pose2d(3.612, 0.412, Rotation2d.fromRadians(0)),
 	    new Pose2d(0.733, 0.445, Rotation2d.fromRadians(0))
 	);
-	public static final ChoreoTraj Climb = new ChoreoTraj(
-	    "Climb",
-	    OptionalInt.empty(),
-	    2.77973,
-	    new Pose2d(2.891, 4.18, Rotation2d.fromRadians(-1.571)),
-	    new Pose2d(1.564, 4.195, Rotation2d.fromRadians(-1.571))
-	);
-	public static final ChoreoTraj Depot_Climb = new ChoreoTraj(
-	    "Depot_Climb",
-	    OptionalInt.empty(),
-	    0.88269,
-	    new Pose2d(2.458, 5.825, Rotation2d.fromRadians(0)),
-	    new Pose2d(2.891, 4.18, Rotation2d.fromRadians(-1.571))
-	);
-	public static final ChoreoTraj O_Side_Climb = new ChoreoTraj(
-	    "O_Side_Climb",
-	    OptionalInt.empty(),
-	    2.68316,
-	    new Pose2d(2.854, 3.228, Rotation2d.fromRadians(-1.571)),
-	    new Pose2d(1.564, 3.34, Rotation2d.fromRadians(-1.571))
-	);
-	public static final ChoreoTraj O_Side_Neutral_Climb = new ChoreoTraj(
-	    "O_Side_Neutral_Climb",
-	    OptionalInt.empty(),
-	    1.03904,
-	    new Pose2d(2.696, 0.965, Rotation2d.fromRadians(1.024)),
-	    new Pose2d(2.854, 3.228, Rotation2d.fromRadians(-1.571))
-	);
 
     /**
      * A map between trajectory names and their corresponding data.
@@ -193,6 +193,8 @@ public record ChoreoTraj(
     public static final Map<String, ChoreoTraj> ALL_TRAJECTORIES = Map.ofEntries(
     	Map.entry("Bump_Depot", Bump_Depot),
 		Map.entry("Bump_HubLeft", Bump_HubLeft),
+		Map.entry("Climb", Climb),
+		Map.entry("Depot_Climb", Depot_Climb),
 		Map.entry("Depot_HubFront", Depot_HubFront),
 		Map.entry("Depot_Outpost", Depot_Outpost),
 		Map.entry("HubFront_Outpost", HubFront_Outpost),
@@ -207,13 +209,11 @@ public record ChoreoTraj(
 		Map.entry("Op_Side_Neutral_Outpost", Op_Side_Neutral_Outpost),
 		Map.entry("OutpostTrench_NeutralZone", OutpostTrench_NeutralZone),
 		Map.entry("Outpost_Tower", Outpost_Tower),
+		Map.entry("O_Side_Climb", O_Side_Climb),
+		Map.entry("O_Side_Neutral_Climb", O_Side_Neutral_Climb),
 		Map.entry("Reverse_From_Hub", Reverse_From_Hub),
 		Map.entry("test", test),
-		Map.entry("Trench_Outpost", Trench_Outpost),
-		Map.entry("Climb", Climb),
-		Map.entry("Depot_Climb", Depot_Climb),
-		Map.entry("O_Side_Climb", O_Side_Climb),
-		Map.entry("O_Side_Neutral_Climb", O_Side_Neutral_Climb)
+		Map.entry("Trench_Outpost", Trench_Outpost)
     );
 
     /**
