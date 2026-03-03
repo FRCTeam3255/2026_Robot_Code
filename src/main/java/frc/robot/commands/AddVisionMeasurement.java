@@ -29,12 +29,13 @@ public class AddVisionMeasurement extends Command {
   @Override
   public void execute() {
     // Tells the limelight where we are on the field
+    double yaw = RobotContainer.drivetrainInstance.getPose().getRotation().getDegrees();
     LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_RIGHT_NAME,
-        RobotContainer.drivetrainInstance.getPigeon2().getYaw().getValueAsDouble(), 0, 0, 0, 0, 0);
+        yaw, 0, 0, 0, 0, 0);
     LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_LEFT_NAME,
-        RobotContainer.drivetrainInstance.getPigeon2().getYaw().getValueAsDouble(), 0, 0, 0, 0, 0);
+        yaw, 0, 0, 0, 0, 0);
     LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_TOP_NAME,
-        RobotContainer.drivetrainInstance.getPigeon2().getYaw().getValueAsDouble(), 0, 0, 0, 0, 0);
+        yaw, 0, 0, 0, 0, 0);
     AngularVelocity gyroRate = RobotContainer.drivetrainInstance.getGyroRate();
 
     estimatedPose = RobotContainer.visionInstance.determinePoseEstimate(gyroRate);

@@ -3,7 +3,15 @@
  "version":2,
  "type":"Swerve",
  "variables":{
-  "expressions":{},
+  "expressions":{
+   "ground_intaking":{
+    "dimension":"LinVel",
+    "var":{
+     "exp":"2 ft / s",
+     "val":0.6096
+    }
+   }
+  },
   "poses":{
    "D_side_climb_starting_pose":{
     "x":{
@@ -287,12 +295,12 @@
    },
    "outpost_side_neutral":{
     "x":{
-     "exp":"7.25749397277832 m",
-     "val":7.25749397277832
+     "exp":"7.1908488273620605 m",
+     "val":7.1908488273620605
     },
     "y":{
-     "exp":"2.568406581878662 m",
-     "val":2.568406581878662
+     "exp":"2.575071096420288 m",
+     "val":2.575071096420288
     },
     "heading":{
      "exp":"-120 deg",
@@ -301,16 +309,16 @@
    },
    "outpost_side_neutral_shoot":{
     "x":{
-     "exp":"2.6963601112365723 m",
-     "val":2.6963601112365723
+     "exp":"2.778940439224243 m",
+     "val":2.778940439224243
     },
     "y":{
-     "exp":"0.964924693107605 m",
-     "val":0.964924693107605
+     "exp":"2.581735610961914 m",
+     "val":2.581735610961914
     },
     "heading":{
-     "exp":"1.0240074859056492 rad",
-     "val":1.0240074859056492
+     "exp":"0 deg",
+     "val":0.0
     }
    },
    "outpost_side_trench":{

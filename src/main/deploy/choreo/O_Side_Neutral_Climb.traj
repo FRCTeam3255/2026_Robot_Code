@@ -13,7 +13,7 @@
  },
  "params":{
   "waypoints":[
-    {"x":{"exp":"outpost_side_neutral_shoot.x", "val":2.6963601112365723}, "y":{"exp":"outpost_side_neutral_shoot.y", "val":0.964924693107605}, "heading":{"exp":"outpost_side_neutral_shoot.heading", "val":1.0240074859056492}, "intervals":35, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false},
+    {"x":{"exp":"outpost_side_neutral_shoot.x", "val":2.778940439224243}, "y":{"exp":"outpost_side_neutral_shoot.y", "val":2.581735610961914}, "heading":{"exp":"outpost_side_neutral_shoot.heading", "val":0.0}, "intervals":35, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false},
     {"x":{"exp":"O_side_climb_starting_pose.x", "val":2.854172945022583}, "y":{"exp":"O_side_climb_starting_pose.y", "val":3.2280397415161133}, "heading":{"exp":"O_side_climb_starting_pose.heading", "val":-1.5707963267948966}, "intervals":40, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false}],
   "constraints":[
     {"from":"first", "to":null, "data":{"type":"StopPoint", "props":{}}, "enabled":true},

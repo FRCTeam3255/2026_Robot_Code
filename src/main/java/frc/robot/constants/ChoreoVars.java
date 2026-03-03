@@ -11,6 +11,7 @@ import edu.wpi.first.units.measure.*;
  * in the Choreo GUI.
  */
 public final class ChoreoVars {
+    public static final LinearVelocity ground_intaking = Units.MetersPerSecond.of(0.61);
 
     public static final class Poses {
         public static final Pose2d D_side_climb_starting_pose = new Pose2d(2.891, 4.18, Rotation2d.fromRadians(-1.571));
@@ -33,9 +34,9 @@ public final class ChoreoVars {
         public static final Pose2d outpost = new Pose2d(1.098, 0.648, Rotation2d.kZero);
         public static final Pose2d outpost_front = new Pose2d(1.779, 2.156, Rotation2d.fromRadians(0.569));
         public static final Pose2d outpost_intake = new Pose2d(0.696, 0.434, Rotation2d.kZero);
-        public static final Pose2d outpost_side_neutral_shoot = new Pose2d(2.696, 0.965, Rotation2d.fromRadians(1.024));
         public static final Pose2d outpost_side_trench = new Pose2d(3.612, 0.412, Rotation2d.kZero);
-        public static final Pose2d outpost_side_neutral = new Pose2d(7.257, 2.568, Rotation2d.fromRadians(-2.094));
+        public static final Pose2d outpost_side_neutral = new Pose2d(7.191, 2.575, Rotation2d.fromRadians(-2.094));
+        public static final Pose2d outpost_side_neutral_shoot = new Pose2d(2.779, 2.582, Rotation2d.kZero);
 
         private Poses() {}
     }

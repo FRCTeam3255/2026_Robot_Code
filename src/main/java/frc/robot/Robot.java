@@ -74,6 +74,14 @@ public class Robot extends TimedRobot {
   public void disabledPeriodic() {
     ConstField.ALLIANCE = DriverStation.getAlliance();
     SmartDashboard.putString("ALLIANCE", ConstField.ALLIANCE.toString());
+    double yaw = m_robotContainer.drivetrainInstance.getPose().getRotation().getDegrees();
+    LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_RIGHT_NAME,
+        yaw, 0, 0, 0, 0, 0);
+    LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_LEFT_NAME,
+        yaw, 0, 0, 0, 0, 0);
+    LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_TOP_NAME,
+        yaw, 0, 0, 0, 0, 0);
+
   }
 
   @Override
