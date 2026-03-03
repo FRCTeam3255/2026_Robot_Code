@@ -52,7 +52,6 @@ public class Robot extends TimedRobot {
     // Log the DS data and joysticks
     DriverStation.startDataLog(DataLogManager.getLog(), true);
     DriverStation.silenceJoystickConnectionWarning(ConstSystem.constControllers.SILENCE_JOYSTICK_WARNINGS);
-    m_robotContainer.addVisionMeasurement().schedule();
   }
 
   @Override
@@ -85,6 +84,7 @@ public class Robot extends TimedRobot {
     LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.IMUMode.EXTERNAL_ONLY);
     LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.IMUMode.EXTERNAL_ONLY);
     LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.IMUMode.EXTERNAL_ONLY);
+    m_robotContainer.addVisionMeasurement().schedule();
   }
 
   @Override

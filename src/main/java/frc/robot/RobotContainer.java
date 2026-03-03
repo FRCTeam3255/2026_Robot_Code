@@ -394,6 +394,6 @@ public class RobotContainer {
 
   public Command addVisionMeasurement() {
     return new AddVisionMeasurement()
-        .withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming).ignoringDisable(true);
+        .withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming).ignoringDisable(false);
   }
 }
