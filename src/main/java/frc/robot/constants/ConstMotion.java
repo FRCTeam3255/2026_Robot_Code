@@ -40,8 +40,9 @@ public class ConstMotion {
   public static final Angle HOOD_NUETRAL_TO_ALLIANCE_ANGLE = Units.Degrees.of(45);
   public static final Angle HOOD_OPPENENT_TO_ALLIANCE_ANGLE = Units.Degrees.of(45);
   public static final Angle HOOD_NONE_ANGLE = Units.Degrees.of(1.6);
-  public static final Distance RETRACT_CLIMBER = Inches.of(0);
-  public static final Distance EXTEND_CLIMBER = Inches.of(0);
+  public static final Distance STORE_CLIMBER = Inches.of(0);
+  public static final Distance RETRACT_CLIMBER = Inches.of(1.2);
+  public static final Distance EXTEND_CLIMBER = Inches.of(35);
   public static final Angle HOOD_TOLERANCE = Units.Degrees.of(.2);
   public final static InterpolatingDoubleTreeMap hoodAngleMap = new InterpolatingDoubleTreeMap();
   public static final double LIFT_INTAKE_DELAY = 1.0;
@@ -65,6 +66,15 @@ public class ConstMotion {
 
     CLIMBER_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     CLIMBER_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+    CLIMBER_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitEnable = true;
+    CLIMBER_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
+    CLIMBER_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitThreshold = EXTEND_CLIMBER.in(Inches);
+    CLIMBER_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitThreshold = STORE_CLIMBER.in(Inches);
+    CLIMBER_CONFIGURATION.Slot0.GravityType = GravityTypeValue.Elevator_Static;
+    CLIMBER_CONFIGURATION.Slot0.kS = 0;
+    CLIMBER_CONFIGURATION.Slot0.kP = 0;
+    CLIMBER_CONFIGURATION.Slot0.StaticFeedforwardSign = StaticFeedforwardSignValue.UseClosedLoopSign;
+    CLIMBER_CONFIGURATION.Feedback.SensorToMechanismRatio = (12.0 / 38.0) * (18.0 / 38.0) * (1.273 * Math.PI);
 
     HOOD_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     HOOD_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
