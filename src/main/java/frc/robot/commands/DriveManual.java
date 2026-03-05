@@ -55,29 +55,27 @@ public class DriveManual extends Command {
 
     double rotInput = -rotationXAxis.getAsDouble();
 
-    if (RobotContainer.drivetrainInstance.isManualRotationEnabled()
-        || Math.abs(rotInput) > ConstDrivetrain.ROTATION_STICK_DEADBAND) {
+    if (Math.abs(rotInput) > ConstDrivetrain.ROTATION_STICK_DEADBAND) {
       RobotContainer.drivetrainInstance.setIsManualRotationEnabled(true);
-      ;
       RobotContainer.drivetrainInstance.drive(velocities);
       RobotContainer.drivetrainInstance
           .setDriveRotation(RobotContainer.drivetrainInstance.getPose().getRotation().getMeasure());
-      // delayTimer.reset();
+      delayTimer.reset();
     } else {
-      // delayTimer.start();
-      // if (delayTimer.hasElapsed(ConstDrivetrain.ROTATION_DELAY)) {
-      RobotContainer.drivetrainInstance.drive(
-          velocities,
-          RobotContainer.drivetrainInstance.getDriveRotation(),
-          ConstDrivetrain.ROTATION_PID.kP,
-          ConstDrivetrain.ROTATION_PID.kI,
-          ConstDrivetrain.ROTATION_PID.kD);
-      // } else {
-      // RobotContainer.drivetrainInstance.drive(velocities);
-      // RobotContainer.drivetrainInstance
-      // .setDriveRotation(RobotContainer.drivetrainInstance.getPose().getRotation().getMeasure());
+      delayTimer.start();
+      if (delayTimer.hasElapsed(ConstDrivetrain.ROTATION_DELAY)) {
+        RobotContainer.drivetrainInstance.drive(
+            velocities,
+            RobotContainer.drivetrainInstance.getDriveRotation(),
+            ConstDrivetrain.ROTATION_PID.kP,
+            ConstDrivetrain.ROTATION_PID.kI,
+            ConstDrivetrain.ROTATION_PID.kD);
+      } else {
+        RobotContainer.drivetrainInstance.drive(velocities);
+        RobotContainer.drivetrainInstance
+            .setDriveRotation(RobotContainer.drivetrainInstance.getPose().getRotation().getMeasure());
 
-      // }
+      }
     }
   }
 

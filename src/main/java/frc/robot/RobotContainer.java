@@ -161,14 +161,14 @@ public class RobotContainer {
 
   private void configDriverBindings() {
     conDriver.btn_South
-        .whileTrue(TRY_REVERSING_SHOOTER)
+        .whileTrue(TRY_EJECTING_HOPPER)
         .onFalse(TRY_NONE);
     conDriver.btn_RightTrigger
         .whileTrue(TRY_SHOOTING)
         .onFalse(TRY_NONE);
     conDriver.btn_East
-        .whileTrue(TRY_CLIMBING_L1);
-    // .onFalse(TRY_NONE);
+        .whileTrue(TRY_REVERSING_SHOOTER)
+        .onFalse(TRY_NONE);
     conDriver.btn_Start
         .whileTrue(TRY_PREP_CLIMB_L1)
         .onTrue(TRY_UNCLIMB_L1);
@@ -245,11 +245,19 @@ public class RobotContainer {
     Command DepotSideNeutral = Commands.sequence(
         TRY_INTAKING.asProxy().withTimeout(0.3), // Force intake down before moving and going under trench
         CollectAndScore(
-            ChoreoTraj.HubLeft_Neutral,
+            ChoreoTraj.DepotTrench_Neutral,
             ChoreoTraj.Neutral_HubLeft,
             TRY_PREP_ANYWHERE,
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
+
+    Command DepotSideNeutralWithClimb = Commands.sequence(
+        DepotSideNeutral.asProxy(),
+        Climb(ChoreoTraj.D_Side_Neutral_Climb));
+
+    Command DepotSideNeutralWithDepot = Commands.sequence(DepotSideNeutral.asProxy(),
+        runPath(ChoreoTraj.D_Side_Neutral_Depot).asProxy(),
+        PreloadDepot.asProxy());
 
     Command PreloadOutpost = Commands.sequence(
         CollectAndScore(
@@ -272,13 +280,15 @@ public class RobotContainer {
 
     autoChooser.setDefaultOption("Do Nothing", Commands.none());
     autoChooser.addOption("OutpostSideNeutralZone", OutpostSideNeutral);
-    autoChooser.addOption("OutpostSideNeutralWithOutpost", OutpostSideNeutralWithOutpost);
     autoChooser.addOption("OutpostSideNeutralWithClimb", OutpostSideNeutralWithClimb);
-    autoChooser.addOption("PreloadOnly", PreloadOnly);
-    autoChooser.addOption("Depot", PreloadDepot);
-    autoChooser.addOption("DepotSideNeutralZone", DepotSideNeutral);
-    autoChooser.addOption("DepotWithClimb", PreloadDepotWithClimb);
+    autoChooser.addOption("OutpostSideNeutralWithOutpost", OutpostSideNeutralWithOutpost);
     autoChooser.addOption("Outpost", PreloadOutpost);
+    autoChooser.addOption("DepotSideNeutralZone", DepotSideNeutral);
+    autoChooser.addOption("DepotSideNeutralWithClimb", DepotSideNeutralWithClimb);
+    autoChooser.addOption("DepotSideNeutralWithDepot", DepotSideNeutralWithDepot);
+    autoChooser.addOption("Depot", PreloadDepot);
+    autoChooser.addOption("DepotWithClimb", PreloadDepotWithClimb);
+    autoChooser.addOption("PreloadOnly", PreloadOnly);
     autoChooser.addOption("DepotOutpost", PreloadDepotWithOutpost);
     autoChooser.addOption("Test", Test);
 
@@ -289,10 +299,13 @@ public class RobotContainer {
         Map.entry(PreloadDepotWithOutpost, ChoreoTraj.Bump_Depot),
         Map.entry(PreloadDepotWithClimb, ChoreoTraj.Bump_Depot),
         Map.entry(PreloadOnly, ChoreoTraj.Reverse_From_Hub),
-        Map.entry(DepotSideNeutral, ChoreoTraj.HubLeft_Neutral),
+        Map.entry(DepotSideNeutral, ChoreoTraj.DepotTrench_Neutral),
         Map.entry(PreloadDepot, ChoreoTraj.Bump_Depot),
+        Map.entry(DepotSideNeutralWithClimb, ChoreoTraj.DepotTrench_Neutral),
+        Map.entry(DepotSideNeutralWithDepot, ChoreoTraj.DepotTrench_Neutral),
         Map.entry(OutpostSideNeutral, ChoreoTraj.OutpostTrench_NeutralZone),
-        Map.entry(OutpostSideNeutralWithOutpost, ChoreoTraj.OutpostTrench_NeutralZone));
+        Map.entry(OutpostSideNeutralWithOutpost, ChoreoTraj.OutpostTrench_NeutralZone),
+        Map.entry(OutpostSideNeutralWithClimb, ChoreoTraj.OutpostTrench_NeutralZone));
 
     // enter which we want to do based on name
     autoChooser.onChange(selectedAuto ->
