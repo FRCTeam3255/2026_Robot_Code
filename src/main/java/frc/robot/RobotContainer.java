@@ -271,14 +271,15 @@ public class RobotContainer {
     Command Test = Commands.sequence(runPath(ChoreoTraj.test));
 
     autoChooser.setDefaultOption("Do Nothing", Commands.none());
-    autoChooser.addOption("PreloadOnly", PreloadOnly);
-    autoChooser.addOption("PreloadDepot", PreloadDepot);
-    autoChooser.addOption("PreloadDepotWithClimb", PreloadDepotWithClimb);
-    autoChooser.addOption("PreloadOutpost", PreloadOutpost);
-    autoChooser.addOption("PreloadDepotOutpost", PreloadDepotWithOutpost);
     autoChooser.addOption("OutpostSideNeutralZone", OutpostSideNeutral);
-    autoChooser.addOption("DepotSideNeutralZone", DepotSideNeutral);
     autoChooser.addOption("OutpostSideNeutralWithOutpost", OutpostSideNeutralWithOutpost);
+    autoChooser.addOption("OutpostSideNeutralWithClimb", OutpostSideNeutralWithClimb);
+    autoChooser.addOption("PreloadOnly", PreloadOnly);
+    autoChooser.addOption("Depot", PreloadDepot);
+    autoChooser.addOption("DepotSideNeutralZone", DepotSideNeutral);
+    autoChooser.addOption("DepotWithClimb", PreloadDepotWithClimb);
+    autoChooser.addOption("Outpost", PreloadOutpost);
+    autoChooser.addOption("DepotOutpost", PreloadDepotWithOutpost);
     autoChooser.addOption("Test", Test);
 
     // make our entries name

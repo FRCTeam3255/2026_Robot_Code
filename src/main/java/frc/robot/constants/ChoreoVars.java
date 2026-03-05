@@ -15,7 +15,7 @@ public final class ChoreoVars {
 
     public static final class Poses {
         public static final Pose2d D_side_climb_starting_pose = new Pose2d(2.891, 4.18, Rotation2d.fromRadians(-1.571));
-        public static final Pose2d D_side_tower = new Pose2d(1.564, 4.195, Rotation2d.fromRadians(-1.571));
+        public static final Pose2d D_side_tower = new Pose2d(1.484, 4.205, Rotation2d.fromRadians(-1.571));
         public static final Pose2d Hub = new Pose2d(4.629, 4.032, Rotation2d.kZero);
         public static final Pose2d Hub_front = new Pose2d(2.3, 4, Rotation2d.kZero);
         public static final Pose2d O_side_climb_starting_pose = new Pose2d(2.854, 3.228, Rotation2d.fromRadians(-1.571));

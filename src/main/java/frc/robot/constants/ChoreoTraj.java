@@ -41,9 +41,9 @@ public record ChoreoTraj(
 	public static final ChoreoTraj Climb = new ChoreoTraj(
 	    "Climb",
 	    OptionalInt.empty(),
-	    2.77973,
-	    new Pose2d(2.891, 4.18, Rotation2d.fromRadians(-1.571)),
-	    new Pose2d(1.564, 4.195, Rotation2d.fromRadians(-1.571))
+	    3.0423,
+	    new Pose2d(2.891, 4.205, Rotation2d.fromRadians(-1.571)),
+	    new Pose2d(1.484, 4.205, Rotation2d.fromRadians(-1.571))
 	);
 	public static final ChoreoTraj Depot_Climb = new ChoreoTraj(
 	    "Depot_Climb",
