@@ -161,25 +161,25 @@ public class RobotContainer {
 
   private void configDriverBindings() {
     conDriver.btn_South
-        .whileTrue(TRY_CLIMBING_L1);
-    // .onFalse(TRY_NONE);
+        .whileTrue(TRY_REVERSING_SHOOTER)
+        .onFalse(TRY_NONE);
     conDriver.btn_RightTrigger
         .whileTrue(TRY_SHOOTING)
         .onFalse(TRY_NONE);
     conDriver.btn_East
-        .whileTrue(TRY_REVERSING_SHOOTER)
-        .onFalse(TRY_NONE);
+        .whileTrue(TRY_CLIMBING_L1);
+    // .onFalse(TRY_NONE);
     conDriver.btn_Start
-        .whileTrue(TRY_PREP_CLIMB_L1);
-    // .onFalse(TRY_CLIMBING_L1)
+        .whileTrue(TRY_PREP_CLIMB_L1)
+        .onTrue(TRY_UNCLIMB_L1);
     // .onTrue(TRY_CLIMBING_L2_3);
     conDriver.btn_LeftTrigger
         .whileTrue(TRY_INTAKING)
         .onFalse(TRY_NONE);
     conDriver.btn_Back
-        .onTrue(TRY_UNCLIMB_L1)
-        .onTrue(TRY_DEFENSE)
-        .onFalse(TRY_NONE);
+        .onFalse(TRY_CLIMBING_L1);
+    // .onTrue(TRY_DEFENSE)
+    // .onFalse(TRY_NONE);
     conDriver.btn_RightBumper
         .onTrue(TRY_PREP_ANYWHERE);
     conDriver.btn_A

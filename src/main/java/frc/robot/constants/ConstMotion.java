@@ -41,13 +41,15 @@ public class ConstMotion {
   public static final Angle HOOD_OPPENENT_TO_ALLIANCE_ANGLE = Units.Degrees.of(45);
   public static final Angle HOOD_NONE_ANGLE = Units.Degrees.of(1.6);
   public static final Distance STORE_CLIMBER = Inches.of(0);
-  public static final Distance RETRACT_CLIMBER = Inches.of(1.2);
-  public static final Distance EXTEND_CLIMBER = Inches.of(35);
+  public static final Distance RETRACT_CLIMBER = Inches.of(1.5);
+  public static final Distance EXTEND_CLIMBER = Inches.of(13.1);
   public static final Angle HOOD_TOLERANCE = Units.Degrees.of(.2);
   public final static InterpolatingDoubleTreeMap hoodAngleMap = new InterpolatingDoubleTreeMap();
   public static final double LIFT_INTAKE_DELAY = 1.0;
   public static final double LIFT_INTAKE_INTERVAL_TIME = 1.0 / 3.0;
   public static final Angle INTAKE_PIVOT_ANGLE_TOLERANCE = Units.Degrees.of(5);
+  public static final int ELEVATOR_SLOW_PID_ID = 0;
+  public static final int ELEVATOR_FAST_PID_ID = 1;
 
   public static final Distance CLIMBER_TOLERANCE = Inches.of(0.2);
   static {
@@ -70,11 +72,18 @@ public class ConstMotion {
     CLIMBER_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
     CLIMBER_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitThreshold = EXTEND_CLIMBER.in(Inches);
     CLIMBER_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitThreshold = STORE_CLIMBER.in(Inches);
+    // Slot 0
     CLIMBER_CONFIGURATION.Slot0.GravityType = GravityTypeValue.Elevator_Static;
-    CLIMBER_CONFIGURATION.Slot0.kS = 0;
-    CLIMBER_CONFIGURATION.Slot0.kP = 0;
+    CLIMBER_CONFIGURATION.Slot0.kS = 0.15;
+    CLIMBER_CONFIGURATION.Slot0.kP = 1;
     CLIMBER_CONFIGURATION.Slot0.StaticFeedforwardSign = StaticFeedforwardSignValue.UseClosedLoopSign;
-    CLIMBER_CONFIGURATION.Feedback.SensorToMechanismRatio = (12.0 / 38.0) * (18.0 / 38.0) * (1.273 * Math.PI);
+
+    // Slot 1
+    CLIMBER_CONFIGURATION.Slot1.GravityType = GravityTypeValue.Elevator_Static;
+    CLIMBER_CONFIGURATION.Slot1.kS = 0.15;
+    CLIMBER_CONFIGURATION.Slot1.kP = 1;
+    CLIMBER_CONFIGURATION.Slot1.StaticFeedforwardSign = StaticFeedforwardSignValue.UseClosedLoopSign;
+    CLIMBER_CONFIGURATION.Feedback.SensorToMechanismRatio = 3.0769;
 
     HOOD_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     HOOD_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;

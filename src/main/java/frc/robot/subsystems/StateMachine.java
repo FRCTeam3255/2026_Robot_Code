@@ -51,6 +51,7 @@ public class StateMachine extends SubsystemBase {
           case NONE:
           case DEFENSE:
           case PREP_CLIMB_L1:
+          case UNCLIMB_L1:
             return new Intaking();
         }
         break;
@@ -222,7 +223,8 @@ public class StateMachine extends SubsystemBase {
       case PREP_CLIMB_L1:
         switch (currentRobotState) {
           case NONE:
-            return new PrepClimb().alongWith(RobotContainer.runPath(ChoreoTraj.Climb));
+            return new PrepClimb();
+          // .alongWith(RobotContainer.runPath(ChoreoTraj.Climb))
         }
         break;
 
