@@ -190,7 +190,9 @@ public class RobotContainer {
     conDriver.btn_B
         .onTrue(TRY_PREP_OUPOST);
     conDriver.btn_Y
-        .onTrue(TRY_PREP_TRENCH);
+        // .onTrue(TRY_PREP_TRENCH);
+        .onTrue(TRY_DEFENSE)
+        .onFalse(TRY_NONE);
     conDriver.btn_X
         .onTrue(TRY_PREP_TOWER);
     conDriver.btn_North.whileTrue(new ResetPose());
@@ -348,7 +350,7 @@ public class RobotContainer {
     return Commands.sequence(
         Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
         runPath(startPath).asProxy(),
-        TRY_PREP_CLIMB_L1.asProxy().withTimeout(5),
+        TRY_PREP_CLIMB_L1.asProxy().withTimeout(6),
         TRY_CLIMBING_L1.asProxy().withTimeout(4));
   }
 

@@ -22,7 +22,7 @@ public class Unclimb extends Command {
   @Override
   public void initialize() {
     RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.UNCLIMB_L1);
-    RobotContainer.motionInstance.setClimberPosition(ConstMotion.EXTEND_CLIMBER, ConstMotion.ELEVATOR_SLOW_PID_ID);
+    RobotContainer.motionInstance.setClimberPosition(ConstMotion.EXTEND_CLIMBER, ConstMotion.ELEVATOR_FAST_PID_ID);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

@@ -25,7 +25,7 @@
             "x": 374.0,
             "y": 170.0,
             "width": 714.0,
-            "height": 170.0,
+            "height": 136.0,
             "type": "Large Text Display",
             "properties": {
               "topic": "Robot/m_robotContainer/loggedTelemetryInstance/getMatchPeriod",
@@ -38,7 +38,7 @@
             "x": 0.0,
             "y": 170.0,
             "width": 374.0,
-            "height": 544.0,
+            "height": 374.0,
             "type": "Boolean Box",
             "properties": {
               "topic": "Robot/m_robotContainer/isOurShiftTrigger",
@@ -86,9 +86,9 @@
           {
             "title": "remaining period time",
             "x": 374.0,
-            "y": 340.0,
+            "y": 306.0,
             "width": 714.0,
-            "height": 340.0,
+            "height": 238.0,
             "type": "Match Time",
             "properties": {
               "topic": "Robot/m_robotContainer/loggedTelemetryInstance/getMatchPeriodTime",
@@ -104,7 +104,7 @@
             "x": 1088.0,
             "y": 170.0,
             "width": 408.0,
-            "height": 544.0,
+            "height": 374.0,
             "type": "Boolean Box",
             "properties": {
               "topic": "Robot/m_robotContainer/isOurShiftTrigger",
@@ -120,6 +120,99 @@
       }
     },
     {
+      "name": "Disabled",
+      "grid_layout": {
+        "layouts": [],
+        "containers": [
+          {
+            "title": "FMSInfo",
+            "x": 1122.0,
+            "y": 0.0,
+            "width": 408.0,
+            "height": 272.0,
+            "type": "FMSInfo",
+            "properties": {
+              "topic": "/FMSInfo",
+              "period": 0.06
+            }
+          },
+          {
+            "title": "Field",
+            "x": 374.0,
+            "y": 272.0,
+            "width": 748.0,
+            "height": 272.0,
+            "type": "Field",
+            "properties": {
+              "topic": "/SmartDashboard/Field",
+              "period": 0.06,
+              "field_game": "Reefscape",
+              "robot_width": 0.85,
+              "robot_length": 0.85,
+              "show_other_objects": true,
+              "show_trajectories": true,
+              "field_rotation": 0.0,
+              "robot_color": 4294198070,
+              "trajectory_color": 4294967295,
+              "show_robot_outside_widget": true
+            }
+          },
+          {
+            "title": "Right Limelight",
+            "x": 1122.0,
+            "y": 272.0,
+            "width": 408.0,
+            "height": 272.0,
+            "type": "Camera Stream",
+            "properties": {
+              "topic": "/CameraPublisher/limelight-right",
+              "period": 0.06,
+              "rotation_turns": 0
+            }
+          },
+          {
+            "title": "Left Limelight",
+            "x": 0.0,
+            "y": 272.0,
+            "width": 374.0,
+            "height": 272.0,
+            "type": "Camera Stream",
+            "properties": {
+              "topic": "/CameraPublisher/limelight-left",
+              "period": 0.06,
+              "rotation_turns": 0
+            }
+          },
+          {
+            "title": "Auto Choser",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 374.0,
+            "height": 272.0,
+            "type": "ComboBox Chooser",
+            "properties": {
+              "topic": "/SmartDashboard/Auto Chooser",
+              "period": 0.06,
+              "sort_options": false
+            }
+          },
+          {
+            "title": "Active Auto",
+            "x": 374.0,
+            "y": 0.0,
+            "width": 748.0,
+            "height": 272.0,
+            "type": "Large Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Auto Chooser/active",
+              "period": 0.06,
+              "data_type": "string"
+            }
+          }
+        ]
+      }
+    },
+    {
       "name": "Autonomous",
       "grid_layout": {
         "layouts": [],
@@ -129,7 +222,7 @@
             "x": 748.0,
             "y": 0.0,
             "width": 782.0,
-            "height": 476.0,
+            "height": 340.0,
             "type": "Field",
             "properties": {
               "topic": "/SmartDashboard/Field",
@@ -150,7 +243,7 @@
             "x": 510.0,
             "y": 0.0,
             "width": 238.0,
-            "height": 272.0,
+            "height": 170.0,
             "type": "Large Text Display",
             "properties": {
               "topic": "Robot/m_robotContainer/robotStateToString",
@@ -161,9 +254,9 @@
           {
             "title": "Driving State",
             "x": 510.0,
-            "y": 272.0,
+            "y": 170.0,
             "width": 238.0,
-            "height": 204.0,
+            "height": 170.0,
             "type": "Large Text Display",
             "properties": {
               "topic": "Robot/m_robotContainer/driverStateToString",
@@ -174,9 +267,9 @@
           {
             "title": "All Zeroed",
             "x": 0.0,
-            "y": 272.0,
+            "y": 170.0,
             "width": 510.0,
-            "height": 204.0,
+            "height": 170.0,
             "type": "Boolean Box",
             "properties": {
               "topic": "Robot/bothSubsystemsZeroed",
@@ -193,7 +286,7 @@
             "x": 0.0,
             "y": 0.0,
             "width": 510.0,
-            "height": 272.0,
+            "height": 170.0,
             "type": "Match Time",
             "properties": {
               "topic": "Robot/m_robotContainer/loggedTelemetryInstance/getMatchTime",
@@ -207,9 +300,9 @@
           {
             "title": "Ready to shoot",
             "x": 0.0,
-            "y": 476.0,
+            "y": 340.0,
             "width": 748.0,
-            "height": 238.0,
+            "height": 204.0,
             "type": "Boolean Box",
             "properties": {
               "topic": "Robot/m_robotContainer/readyToShootTrigger",
@@ -224,9 +317,9 @@
           {
             "title": "climbed?",
             "x": 748.0,
-            "y": 476.0,
+            "y": 340.0,
             "width": 782.0,
-            "height": 238.0,
+            "height": 204.0,
             "type": "Boolean Box",
             "properties": {
               "topic": "Robot/m_robotContainer/climbingL1Trigger",
@@ -236,99 +329,6 @@
               "false_color": 4294198070,
               "true_icon": "None",
               "false_icon": "None"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "name": "Disabled",
-      "grid_layout": {
-        "layouts": [],
-        "containers": [
-          {
-            "title": "FMSInfo",
-            "x": 1122.0,
-            "y": 0.0,
-            "width": 408.0,
-            "height": 340.0,
-            "type": "FMSInfo",
-            "properties": {
-              "topic": "/FMSInfo",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Field",
-            "x": 374.0,
-            "y": 340.0,
-            "width": 748.0,
-            "height": 374.0,
-            "type": "Field",
-            "properties": {
-              "topic": "/SmartDashboard/Field",
-              "period": 0.06,
-              "field_game": "Reefscape",
-              "robot_width": 0.85,
-              "robot_length": 0.85,
-              "show_other_objects": true,
-              "show_trajectories": true,
-              "field_rotation": 0.0,
-              "robot_color": 4294198070,
-              "trajectory_color": 4294967295,
-              "show_robot_outside_widget": true
-            }
-          },
-          {
-            "title": "Right Limelight",
-            "x": 1122.0,
-            "y": 340.0,
-            "width": 408.0,
-            "height": 374.0,
-            "type": "Camera Stream",
-            "properties": {
-              "topic": "/CameraPublisher/limelight-right",
-              "period": 0.06,
-              "rotation_turns": 0
-            }
-          },
-          {
-            "title": "Left Limelight",
-            "x": 0.0,
-            "y": 340.0,
-            "width": 374.0,
-            "height": 374.0,
-            "type": "Camera Stream",
-            "properties": {
-              "topic": "/CameraPublisher/limelight-left",
-              "period": 0.06,
-              "rotation_turns": 0
-            }
-          },
-          {
-            "title": "Auto Choser",
-            "x": 0.0,
-            "y": 0.0,
-            "width": 374.0,
-            "height": 340.0,
-            "type": "ComboBox Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Auto Chooser",
-              "period": 0.06,
-              "sort_options": false
-            }
-          },
-          {
-            "title": "Active Auto",
-            "x": 374.0,
-            "y": 0.0,
-            "width": 748.0,
-            "height": 340.0,
-            "type": "Large Text Display",
-            "properties": {
-              "topic": "/SmartDashboard/Auto Chooser/active",
-              "period": 0.06,
-              "data_type": "string"
             }
           }
         ]
@@ -344,7 +344,7 @@
             "x": 0.0,
             "y": 0.0,
             "width": 646.0,
-            "height": 714.0,
+            "height": 544.0,
             "type": "Camera Stream",
             "properties": {
               "topic": "/CameraPublisher/USB Camera 0",
@@ -359,7 +359,7 @@
             "x": 646.0,
             "y": 0.0,
             "width": 850.0,
-            "height": 340.0,
+            "height": 272.0,
             "type": "Boolean Box",
             "properties": {
               "topic": "Robot/m_robotContainer/climbingL1Trigger",
@@ -374,9 +374,9 @@
           {
             "title": "Climbed L2 or L3",
             "x": 646.0,
-            "y": 340.0,
+            "y": 272.0,
             "width": 850.0,
-            "height": 374.0,
+            "height": 272.0,
             "type": "Boolean Box",
             "properties": {
               "topic": "Robot/m_robotContainer/climbingL2_L3Trigger",
