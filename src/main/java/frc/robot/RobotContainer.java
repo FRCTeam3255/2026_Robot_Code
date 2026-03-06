@@ -190,7 +190,9 @@ public class RobotContainer {
     conDriver.btn_B
         .onTrue(TRY_PREP_OUPOST);
     conDriver.btn_Y
-        .onTrue(TRY_PREP_TRENCH);
+        // .onTrue(TRY_PREP_TRENCH);
+        .onTrue(TRY_DEFENSE)
+        .onFalse(TRY_NONE);
     conDriver.btn_X
         .onTrue(TRY_PREP_TOWER);
     conDriver.btn_North.whileTrue(new ResetPose());
