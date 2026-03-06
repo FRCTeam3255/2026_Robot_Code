@@ -90,7 +90,7 @@ public class RobotContainer {
   Command TRY_DEFENSE = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.DEFENSE));
 
-  private AutoFactory autoFactory;
+  private static AutoFactory autoFactory;
 
   private final SN_XboxController conDriver = new SN_XboxController(controllerIDs.DRIVER_USB);
 
@@ -171,15 +171,15 @@ public class RobotContainer {
         .onFalse(TRY_NONE);
     conDriver.btn_Start
         .whileTrue(TRY_PREP_CLIMB_L1)
-        .onFalse(TRY_CLIMBING_L1)
-        .onTrue(TRY_CLIMBING_L2_3);
+        .onTrue(TRY_UNCLIMB_L1);
+    // .onTrue(TRY_CLIMBING_L2_3);
     conDriver.btn_LeftTrigger
         .whileTrue(TRY_INTAKING)
         .onFalse(TRY_NONE);
     conDriver.btn_Back
-        .onTrue(TRY_UNCLIMB_L1)
-        .onTrue(TRY_DEFENSE)
-        .onFalse(TRY_NONE);
+        .onFalse(TRY_CLIMBING_L1);
+    // .onTrue(TRY_DEFENSE)
+    // .onFalse(TRY_NONE);
     conDriver.btn_RightBumper
         .onTrue(TRY_PREP_ANYWHERE);
     conDriver.btn_A
@@ -217,6 +217,10 @@ public class RobotContainer {
             ConstAuto.INTAKE_DEPOT_TIMEOUT,
             ConstAuto.SHOOT_FROM_DEPOT_TIMEOUT));
 
+    Command PreloadDepotWithClimb = Commands.sequence(
+        PreloadDepot.asProxy(),
+        Climb(ChoreoTraj.Depot_Climb));
+
     Command PreloadDepotWithOutpost = Commands.sequence(
         PreloadDepot.asProxy(),
         CollectAndScore(ChoreoTraj.Depot_Outpost,
@@ -234,14 +238,26 @@ public class RobotContainer {
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
+    Command OutpostSideNeutralWithClimb = Commands.sequence(
+        OutpostSideNeutral.asProxy(),
+        Climb(ChoreoTraj.O_Side_Neutral_Climb));
+
     Command DepotSideNeutral = Commands.sequence(
         TRY_INTAKING.asProxy().withTimeout(0.3), // Force intake down before moving and going under trench
         CollectAndScore(
-            ChoreoTraj.HubLeft_Neutral,
+            ChoreoTraj.DepotTrench_Neutral,
             ChoreoTraj.Neutral_HubLeft,
             TRY_PREP_ANYWHERE,
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
+
+    Command DepotSideNeutralWithClimb = Commands.sequence(
+        DepotSideNeutral.asProxy(),
+        Climb(ChoreoTraj.D_Side_Neutral_Climb));
+
+    Command DepotSideNeutralWithDepot = Commands.sequence(DepotSideNeutral.asProxy(),
+        runPath(ChoreoTraj.D_Side_Neutral_Depot).asProxy(),
+        PreloadDepot.asProxy());
 
     Command PreloadOutpost = Commands.sequence(
         CollectAndScore(
@@ -263,13 +279,17 @@ public class RobotContainer {
     Command Test = Commands.sequence(runPath(ChoreoTraj.test));
 
     autoChooser.setDefaultOption("Do Nothing", Commands.none());
-    autoChooser.addOption("PreloadOnly", PreloadOnly);
-    autoChooser.addOption("PreloadDepot", PreloadDepot);
-    autoChooser.addOption("PreloadOutpost", PreloadOutpost);
-    autoChooser.addOption("PreloadDepotOutpost", PreloadDepotWithOutpost);
     autoChooser.addOption("OutpostSideNeutralZone", OutpostSideNeutral);
-    autoChooser.addOption("DepotSideNeutralZone", DepotSideNeutral);
+    autoChooser.addOption("OutpostSideNeutralWithClimb", OutpostSideNeutralWithClimb);
     autoChooser.addOption("OutpostSideNeutralWithOutpost", OutpostSideNeutralWithOutpost);
+    autoChooser.addOption("Outpost", PreloadOutpost);
+    autoChooser.addOption("DepotSideNeutralZone", DepotSideNeutral);
+    autoChooser.addOption("DepotSideNeutralWithClimb", DepotSideNeutralWithClimb);
+    autoChooser.addOption("DepotSideNeutralWithDepot", DepotSideNeutralWithDepot);
+    autoChooser.addOption("Depot", PreloadDepot);
+    autoChooser.addOption("DepotWithClimb", PreloadDepotWithClimb);
+    autoChooser.addOption("PreloadOnly", PreloadOnly);
+    autoChooser.addOption("DepotOutpost", PreloadDepotWithOutpost);
     autoChooser.addOption("Test", Test);
 
     // make our entries name
@@ -277,11 +297,15 @@ public class RobotContainer {
         // Example
         Map.entry(PreloadOutpost, ChoreoTraj.Trench_Outpost),
         Map.entry(PreloadDepotWithOutpost, ChoreoTraj.Bump_Depot),
+        Map.entry(PreloadDepotWithClimb, ChoreoTraj.Bump_Depot),
         Map.entry(PreloadOnly, ChoreoTraj.Reverse_From_Hub),
-        Map.entry(DepotSideNeutral, ChoreoTraj.HubLeft_Neutral),
+        Map.entry(DepotSideNeutral, ChoreoTraj.DepotTrench_Neutral),
         Map.entry(PreloadDepot, ChoreoTraj.Bump_Depot),
+        Map.entry(DepotSideNeutralWithClimb, ChoreoTraj.DepotTrench_Neutral),
+        Map.entry(DepotSideNeutralWithDepot, ChoreoTraj.DepotTrench_Neutral),
         Map.entry(OutpostSideNeutral, ChoreoTraj.OutpostTrench_NeutralZone),
-        Map.entry(OutpostSideNeutralWithOutpost, ChoreoTraj.OutpostTrench_NeutralZone));
+        Map.entry(OutpostSideNeutralWithOutpost, ChoreoTraj.OutpostTrench_NeutralZone),
+        Map.entry(OutpostSideNeutralWithClimb, ChoreoTraj.OutpostTrench_NeutralZone));
 
     // enter which we want to do based on name
     autoChooser.onChange(selectedAuto ->
@@ -303,9 +327,9 @@ public class RobotContainer {
       Time shootingTime) {
     return Commands.sequence(
         Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
-        runPath(collectPath).asProxy().alongWith(TRY_INTAKING.asProxy().withTimeout(intakingTime)),
+        runPath(collectPath).asProxy().deadlineFor(TRY_INTAKING.asProxy()),
+        runPath(prepShootPath).asProxy().deadlineFor(TRY_INTAKING.asProxy()),
         TRY_NONE.asProxy(),
-        runPath(prepShootPath).asProxy(),
         try_prep_shoot.asProxy().withTimeout(ConstAuto.PREP_SHOOT_TIMEOUT),
         TRY_SHOOTING.asProxy().withTimeout(shootingTime),
         TRY_NONE.asProxy());
@@ -324,7 +348,7 @@ public class RobotContainer {
     return Commands.sequence(
         Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
         runPath(startPath).asProxy(),
-        TRY_PREP_CLIMB_L1.asProxy().withTimeout(0.5),
+        TRY_PREP_CLIMB_L1.asProxy().withTimeout(5),
         TRY_CLIMBING_L1.asProxy().withTimeout(4));
   }
 
@@ -332,11 +356,11 @@ public class RobotContainer {
     return RobotController.getSerialNumber().equals(ConstSystem.PRACTICE_BOT_RIO);
   }
 
-  public String pathString = "";
-  public Pose2d pathStartPose = new Pose2d();
-  public Pose2d pathEndPose = new Pose2d();
+  public static String pathString = "";
+  public static Pose2d pathStartPose = new Pose2d();
+  public static Pose2d pathEndPose = new Pose2d();
 
-  public Command runPath(ChoreoTraj path) {
+  public static Command runPath(ChoreoTraj path) {
     return autoFactory.trajectoryCmd(path.name()).asProxy()
         .alongWith(Commands.runOnce(() -> {
           pathString = path.name();
@@ -384,6 +408,6 @@ public class RobotContainer {
 
   public Command addVisionMeasurement() {
     return new AddVisionMeasurement()
-        .withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming).ignoringDisable(true);
+        .withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming).ignoringDisable(false);
   }
 }

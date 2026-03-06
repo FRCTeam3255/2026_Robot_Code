@@ -10,6 +10,10 @@ import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
+import frc.robot.constants.ConstDrivetrain;
+import frc.robot.constants.ConstMotion;
+import frc.robot.constants.ConstPoseDrive;
+import frc.robot.constants.ConstRotors;
 import frc.robot.subsystems.Rotors;
 import frc.robot.subsystems.StateMachine.RobotState;
 import frc.robot.subsystems.Motion;
@@ -25,8 +29,8 @@ public class PrepAnywhere extends Command {
 
   @Override
   public void initialize() {
-    RobotContainer.drivetrainInstance.setIsManualRotationEnabled(false);
     RobotContainer.stateMachineInstance.setRobotState(RobotState.PREP_ANYWHERE);
+    RobotContainer.drivetrainInstance.setIsManualRotationEnabled(false);
   }
 
   @Override
@@ -46,11 +50,18 @@ public class PrepAnywhere extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    RobotContainer.drivetrainInstance.setIsManualRotationEnabled(true);
+
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return RobotContainer.rotorsInstance
+        .areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
+        && RobotContainer.motionInstance
+            .isHoodAtPosition(ConstMotion.HOOD_TOLERANCE)
+        && RobotContainer.drivetrainInstance
+            .isAtDesiredRotation(ConstPoseDrive.PrepShootRotations.DRIVETRAIN_TOLERANCE);
   }
 }

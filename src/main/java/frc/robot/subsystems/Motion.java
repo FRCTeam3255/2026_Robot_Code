@@ -58,8 +58,8 @@ public class Motion extends SubsystemBase {
     lastDesiredHoodAngle = setPoint;
   }
 
-  public void setClimberPosition(Distance setpoint) {
-    climber.setControl(climberMotionRequest.withPosition(setpoint.in(Units.Inches)));
+  public void setClimberPosition(Distance setpoint, int slot) {
+    climber.setControl(climberMotionRequest.withPosition(setpoint.in(Units.Inches)).withSlot(slot));
     lastDesiredClimberPosition = setpoint;
   }
 

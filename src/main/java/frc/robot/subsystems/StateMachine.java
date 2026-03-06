@@ -10,9 +10,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.commands.states.Climbing.*;
+import frc.robot.RobotContainer;
 import frc.robot.commands.states.*;
-import frc.robot.commands.states.Climbing.PrepClimb;
 import frc.robot.commands.states.PrepShoots.*;
+import frc.robot.constants.ChoreoTraj;
 
 @Logged
 public class StateMachine extends SubsystemBase {
@@ -50,6 +51,7 @@ public class StateMachine extends SubsystemBase {
           case NONE:
           case DEFENSE:
           case PREP_CLIMB_L1:
+          case UNCLIMB_L1:
             return new Intaking();
         }
         break;
@@ -221,13 +223,15 @@ public class StateMachine extends SubsystemBase {
       case PREP_CLIMB_L1:
         switch (currentRobotState) {
           case NONE:
-            return new PrepClimb();
+            return new PrepClimb()
+                .alongWith(RobotContainer.runPath(ChoreoTraj.Climb));
         }
         break;
 
       case CLIMBING_L1:
         switch (currentRobotState) {
           case PREP_CLIMB_L1:
+          case UNCLIMB_L1:
             return new ClimbingL1();
         }
         break;

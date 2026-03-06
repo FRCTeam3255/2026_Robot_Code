@@ -54,6 +54,7 @@ public class ConstPoseDrive {
     public static final Angle NEUTRAL_TO_ALLIANCE_PREP_SHOOT_ROTATION = Units.Degrees.of(-180.0);
     public static final Angle OPPONENT_TO_ALLIANCE_PREP_SHOOT_ROTATION = Units.Degrees.of(-180.0);
     public static final Angle ANYWHERE_PREP_SHOOT_ROTATION = Units.Degrees.of(0.0);
+    public static final Angle DRIVETRAIN_TOLERANCE = Units.Degrees.of(1.0);
   }
 
   public static class PoseDriveGroup {

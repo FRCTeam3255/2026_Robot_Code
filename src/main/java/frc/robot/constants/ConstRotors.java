@@ -26,7 +26,7 @@ public class ConstRotors {
   public static final double INTAKE_ROLLER_SPEED = 1;
   public static final double SERIALIZER_ROLLERS_SPEED = 1;
   public static final double SHOOTER_TRANSFER_SPEED = 1;
-  public static final AngularVelocity FLYWHEEL_TOLERANCE = RPM.of(50);
+  public static final AngularVelocity FLYWHEEL_TOLERANCE = RPM.of(100);
   public final static InterpolatingDoubleTreeMap flywheelSpeedMap = new InterpolatingDoubleTreeMap();
 
   static {

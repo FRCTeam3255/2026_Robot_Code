@@ -52,7 +52,6 @@ public class Robot extends TimedRobot {
     // Log the DS data and joysticks
     DriverStation.startDataLog(DataLogManager.getLog(), true);
     DriverStation.silenceJoystickConnectionWarning(ConstSystem.constControllers.SILENCE_JOYSTICK_WARNINGS);
-    m_robotContainer.addVisionMeasurement().schedule();
   }
 
   @Override
@@ -75,6 +74,14 @@ public class Robot extends TimedRobot {
   public void disabledPeriodic() {
     ConstField.ALLIANCE = DriverStation.getAlliance();
     SmartDashboard.putString("ALLIANCE", ConstField.ALLIANCE.toString());
+    double yaw = m_robotContainer.drivetrainInstance.getPose().getRotation().getDegrees();
+    LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_RIGHT_NAME,
+        yaw, 0, 0, 0, 0, 0);
+    LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_LEFT_NAME,
+        yaw, 0, 0, 0, 0, 0);
+    LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_TOP_NAME,
+        yaw, 0, 0, 0, 0, 0);
+
   }
 
   @Override
@@ -82,9 +89,10 @@ public class Robot extends TimedRobot {
     LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.TeleopThrottle);
     LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.TeleopThrottle);
     LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.TeleopThrottle);
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.IMUMode.EXTERNAL_ONLY);
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.IMUMode.EXTERNAL_ONLY);
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.IMUMode.EXTERNAL_ONLY);
+    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.IMUMode.INTERNAL_ONLY);
+    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.IMUMode.INTERNAL_ONLY);
+    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.IMUMode.INTERNAL_ONLY);
+    m_robotContainer.addVisionMeasurement().schedule();
   }
 
   @Override
