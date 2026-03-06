@@ -348,7 +348,7 @@ public class RobotContainer {
     return Commands.sequence(
         Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
         runPath(startPath).asProxy(),
-        TRY_PREP_CLIMB_L1.asProxy().withTimeout(5),
+        TRY_PREP_CLIMB_L1.asProxy().withTimeout(6),
         TRY_CLIMBING_L1.asProxy().withTimeout(4));
   }
 
