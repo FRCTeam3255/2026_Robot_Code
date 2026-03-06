@@ -464,7 +464,7 @@
 			"hoveredShapeId": null,
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
-			"focusedGroupId": null,
+			"focusedGroupId": "shape:JxhO-FqGGvaq26RX9C8oj",
 			"meta": {},
 			"id": "instance_page_state:page:grvVnvcP2QYOnDHPI3N7D",
 			"pageId": "page:grvVnvcP2QYOnDHPI3N7D",
@@ -1428,7 +1428,7 @@
 				"h": 64,
 				"geo": "rectangle",
 				"dash": "solid",
-				"growY": 26,
+				"growY": 27.375,
 				"url": "",
 				"scale": 1,
 				"color": "black",
@@ -1452,7 +1452,7 @@
 							"content": [
 								{
 									"type": "text",
-									"text": "PrepNeautralToAlliance"
+									"text": "PrepNeutralToAlliance"
 								}
 							]
 						}
@@ -6947,7 +6947,7 @@
 							"content": [
 								{
 									"type": "text",
-									"text": "Defrnce"
+									"text": "Defence"
 								}
 							]
 						}
@@ -7312,10 +7312,12 @@
 			"typeName": "binding"
 		},
 		{
-			"editingShapeId": null,
+			"editingShapeId": "shape:_pq1MHyMK6yj_1l3tlKxW",
 			"croppingShapeId": null,
-			"selectedShapeIds": [],
-			"hoveredShapeId": "shape:VVsLcsMmoUoFc0sDMQsVV",
+			"selectedShapeIds": [
+				"shape:_pq1MHyMK6yj_1l3tlKxW"
+			],
+			"hoveredShapeId": "shape:_pq1MHyMK6yj_1l3tlKxW",
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -8403,9 +8405,9 @@
 			"typeName": "binding"
 		},
 		{
-			"x": -1345.5139274967005,
-			"y": 125.17495290765251,
-			"z": 0.3758171928118613,
+			"x": -1291.4653455197927,
+			"y": -632.4169500718589,
+			"z": 0.8487093500917142,
 			"meta": {},
 			"id": "camera:page:Wfhj8q2d0tvavwNlrwo_4",
 			"typeName": "camera"
