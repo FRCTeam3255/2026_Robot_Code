@@ -212,6 +212,9 @@ public class RobotContainer {
             TRY_PREP_ANYWHERE,
             ConstAuto.SHOOT_PRELOAD_TIMEOUT));
 
+    Command PreloadWithClimb = Commands.sequence(PreloadOnly.asProxy(),
+        Climb(ChoreoTraj.Preload_Climb));
+
     Command PreloadDepot = Commands.sequence(
         CollectAndScore(ChoreoTraj.Bump_Depot,
             ChoreoTraj.Move_Forward_Depot,
@@ -291,6 +294,7 @@ public class RobotContainer {
     autoChooser.addOption("Depot", PreloadDepot);
     autoChooser.addOption("DepotWithClimb", PreloadDepotWithClimb);
     autoChooser.addOption("PreloadOnly", PreloadOnly);
+    autoChooser.addOption("PreloadWithClimb", PreloadWithClimb);
     autoChooser.addOption("DepotOutpost", PreloadDepotWithOutpost);
     autoChooser.addOption("Test", Test);
 
@@ -301,6 +305,7 @@ public class RobotContainer {
         Map.entry(PreloadDepotWithOutpost, ChoreoTraj.Bump_Depot),
         Map.entry(PreloadDepotWithClimb, ChoreoTraj.Bump_Depot),
         Map.entry(PreloadOnly, ChoreoTraj.Reverse_From_Hub),
+        Map.entry(PreloadWithClimb, ChoreoTraj.Reverse_From_Hub),
         Map.entry(DepotSideNeutral, ChoreoTraj.DepotTrench_Neutral),
         Map.entry(PreloadDepot, ChoreoTraj.Bump_Depot),
         Map.entry(DepotSideNeutralWithClimb, ChoreoTraj.DepotTrench_Neutral),
