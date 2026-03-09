@@ -69,9 +69,9 @@ public record ChoreoTraj(
 	public static final ChoreoTraj Depot_Outpost = new ChoreoTraj(
 	    "Depot_Outpost",
 	    OptionalInt.empty(),
-	    1.85023,
+	    1.93485,
 	    new Pose2d(2.458, 5.825, Rotation2d.fromRadians(0)),
-	    new Pose2d(1.098, 0.648, Rotation2d.fromRadians(0))
+	    new Pose2d(0.733, 0.445, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj D_Side_Neutral_Climb = new ChoreoTraj(
 	    "D_Side_Neutral_Climb",
@@ -90,9 +90,9 @@ public record ChoreoTraj(
 	public static final ChoreoTraj HubFront_Outpost = new ChoreoTraj(
 	    "HubFront_Outpost",
 	    OptionalInt.empty(),
-	    1.27208,
+	    1.33696,
 	    new Pose2d(2.3, 4, Rotation2d.fromRadians(0)),
-	    new Pose2d(1.098, 0.648, Rotation2d.fromRadians(0))
+	    new Pose2d(0.733, 0.445, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj HubLeft_Depot = new ChoreoTraj(
 	    "HubLeft_Depot",
@@ -111,8 +111,8 @@ public record ChoreoTraj(
 	public static final ChoreoTraj Move_Forward_Outpost = new ChoreoTraj(
 	    "Move_Forward_Outpost",
 	    OptionalInt.empty(),
-	    0.85958,
-	    new Pose2d(1.098, 0.648, Rotation2d.fromRadians(0)),
+	    0.94499,
+	    new Pose2d(0.733, 0.445, Rotation2d.fromRadians(0)),
 	    new Pose2d(1.779, 2.156, Rotation2d.fromRadians(0.569))
 	);
 	public static final ChoreoTraj Neutral_HubLeft = new ChoreoTraj(
@@ -206,6 +206,13 @@ public record ChoreoTraj(
 	    new Pose2d(2.512, 4.004, Rotation2d.fromRadians(0)),
 	    new Pose2d(2.891, 4.205, Rotation2d.fromRadians(-1.571))
 	);
+	public static final ChoreoTraj Outpost_Climb = new ChoreoTraj(
+	    "Outpost_Climb",
+	    OptionalInt.empty(),
+	    1.0398,
+	    new Pose2d(1.779, 2.156, Rotation2d.fromRadians(0.569)),
+	    new Pose2d(2.891, 4.205, Rotation2d.fromRadians(-1.571))
+	);
 
     /**
      * A map between trajectory names and their corresponding data.
@@ -237,7 +244,8 @@ public record ChoreoTraj(
 		Map.entry("Reverse_From_Hub", Reverse_From_Hub),
 		Map.entry("test", test),
 		Map.entry("Trench_Outpost", Trench_Outpost),
-		Map.entry("Preload_Climb", Preload_Climb)
+		Map.entry("Preload_Climb", Preload_Climb),
+		Map.entry("Outpost_Climb", Outpost_Climb)
     );
 
     /**

@@ -272,6 +272,9 @@ public class RobotContainer {
             ConstAuto.INTAKE_OUTPOST_TIMEOUT,
             ConstAuto.SHOOT_FROM_OUTPOST_TIMEOUT));
 
+    Command OutpostWithClimb = Commands.sequence(PreloadOutpost.asProxy(),
+        Climb(ChoreoTraj.Outpost_Climb));
+
     Command OutpostSideNeutralWithOutpost = Commands.sequence(
         OutpostSideNeutral.asProxy(),
         CollectAndScore(
@@ -288,6 +291,7 @@ public class RobotContainer {
     autoChooser.addOption("OutpostSideNeutralWithClimb", OutpostSideNeutralWithClimb);
     autoChooser.addOption("OutpostSideNeutralWithOutpost", OutpostSideNeutralWithOutpost);
     autoChooser.addOption("Outpost", PreloadOutpost);
+    autoChooser.addOption("OutpostWithClimb", OutpostWithClimb);
     autoChooser.addOption("DepotSideNeutralZone", DepotSideNeutral);
     autoChooser.addOption("DepotSideNeutralWithClimb", DepotSideNeutralWithClimb);
     autoChooser.addOption("DepotSideNeutralWithDepot", DepotSideNeutralWithDepot);
@@ -302,6 +306,7 @@ public class RobotContainer {
     final Map<Command, ChoreoTraj> autoStartingPoses = Map.ofEntries(
         // Example
         Map.entry(PreloadOutpost, ChoreoTraj.Trench_Outpost),
+        Map.entry(OutpostWithClimb, ChoreoTraj.Trench_Outpost),
         Map.entry(PreloadDepotWithOutpost, ChoreoTraj.Bump_Depot),
         Map.entry(PreloadDepotWithClimb, ChoreoTraj.Bump_Depot),
         Map.entry(PreloadOnly, ChoreoTraj.Reverse_From_Hub),
