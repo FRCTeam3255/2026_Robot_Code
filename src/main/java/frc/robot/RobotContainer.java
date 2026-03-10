@@ -212,6 +212,9 @@ public class RobotContainer {
             TRY_PREP_ANYWHERE,
             ConstAuto.SHOOT_PRELOAD_TIMEOUT));
 
+    Command PreloadWithClimb = Commands.sequence(PreloadOnly.asProxy(),
+        Climb(ChoreoTraj.Preload_Climb));
+
     Command PreloadDepot = Commands.sequence(
         CollectAndScore(ChoreoTraj.Bump_Depot,
             ChoreoTraj.Move_Forward_Depot,
@@ -269,6 +272,9 @@ public class RobotContainer {
             ConstAuto.INTAKE_OUTPOST_TIMEOUT,
             ConstAuto.SHOOT_FROM_OUTPOST_TIMEOUT));
 
+    Command OutpostWithClimb = Commands.sequence(PreloadOutpost.asProxy(),
+        Climb(ChoreoTraj.Outpost_Climb));
+
     Command OutpostSideNeutralWithOutpost = Commands.sequence(
         OutpostSideNeutral.asProxy(),
         CollectAndScore(
@@ -285,12 +291,14 @@ public class RobotContainer {
     autoChooser.addOption("OutpostSideNeutralWithClimb", OutpostSideNeutralWithClimb);
     autoChooser.addOption("OutpostSideNeutralWithOutpost", OutpostSideNeutralWithOutpost);
     autoChooser.addOption("Outpost", PreloadOutpost);
+    autoChooser.addOption("OutpostWithClimb", OutpostWithClimb);
     autoChooser.addOption("DepotSideNeutralZone", DepotSideNeutral);
     autoChooser.addOption("DepotSideNeutralWithClimb", DepotSideNeutralWithClimb);
     autoChooser.addOption("DepotSideNeutralWithDepot", DepotSideNeutralWithDepot);
     autoChooser.addOption("Depot", PreloadDepot);
     autoChooser.addOption("DepotWithClimb", PreloadDepotWithClimb);
     autoChooser.addOption("PreloadOnly", PreloadOnly);
+    autoChooser.addOption("PreloadWithClimb", PreloadWithClimb);
     autoChooser.addOption("DepotOutpost", PreloadDepotWithOutpost);
     autoChooser.addOption("Test", Test);
 
@@ -298,9 +306,11 @@ public class RobotContainer {
     final Map<Command, ChoreoTraj> autoStartingPoses = Map.ofEntries(
         // Example
         Map.entry(PreloadOutpost, ChoreoTraj.Trench_Outpost),
+        Map.entry(OutpostWithClimb, ChoreoTraj.Trench_Outpost),
         Map.entry(PreloadDepotWithOutpost, ChoreoTraj.Bump_Depot),
         Map.entry(PreloadDepotWithClimb, ChoreoTraj.Bump_Depot),
         Map.entry(PreloadOnly, ChoreoTraj.Reverse_From_Hub),
+        Map.entry(PreloadWithClimb, ChoreoTraj.Reverse_From_Hub),
         Map.entry(DepotSideNeutral, ChoreoTraj.DepotTrench_Neutral),
         Map.entry(PreloadDepot, ChoreoTraj.Bump_Depot),
         Map.entry(DepotSideNeutralWithClimb, ChoreoTraj.DepotTrench_Neutral),
