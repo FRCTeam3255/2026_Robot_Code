@@ -63,15 +63,6 @@ public class Vision extends SubsystemBase {
     if (gyroRate.compareTo(ConstVision.MAX_ANGULAR_VELOCITY) > 0) {
       return true;
     }
-
-    if (poseEstimate == null
-        || poseEstimate.pose == null
-        || poseEstimate.pose.getTranslation() == null
-        || !Double.isFinite(poseEstimate.pose.getTranslation().getX())
-        || !Double.isFinite(poseEstimate.pose.getTranslation().getY())) {
-      System.err.println("********RECEIVED A NULL POSE ESTIMATE********");
-      return true;
-    }
     // No tags :<
     if (poseEstimate.tagCount == 0) {
       return true;
