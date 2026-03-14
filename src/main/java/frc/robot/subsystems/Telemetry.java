@@ -22,6 +22,7 @@ public class Telemetry extends SubsystemBase {
   double shift3Time = 55;
   double shift4Time = 30;
   double endgameTime = 0;
+
   private String gameData = "";
 
   public Telemetry() {
@@ -31,8 +32,24 @@ public class Telemetry extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     if (gameData.isEmpty()) {
-        gameData = DriverStation.getGameSpecificMessage();
+      gameData = DriverStation.getGameSpecificMessage();
     }
+  }
+
+  public boolean isOurShiftFirst() {
+    if (gameData.isEmpty()) {
+      return true;
+    }
+    boolean redInactiveFirst = false;
+    switch (gameData.charAt(0)) {
+      case 'R' -> redInactiveFirst = true;
+      case 'B' -> redInactiveFirst = false;
+      default -> {
+        // If we have invalid game data, assume hub is active.
+        return true;
+      }
+    }
+    return redInactiveFirst;
   }
 
   public double getMatchTime() {
@@ -160,5 +177,25 @@ public class Telemetry extends SubsystemBase {
       // End game, hub always active.
       return true;
     }
+  }
+
+  public boolean ourShiftFirst() {
+    Optional<Alliance> alliance = DriverStation.getAlliance();
+
+    if (alliance.isEmpty()) {
+      return false;
+    }
+    if (gameData.isEmpty()) {
+      return true;
+    }
+
+    if (((alliance.get() == Alliance.Red && isOurShiftFirst() == false)
+        ||
+        (alliance.get() == Alliance.Blue && isOurShiftFirst() == true))
+        && getMatchTime() < autoTime
+        && getMatchTime() > transitionShiftTime) {
+      return true;
+    }
+    return false;
   }
 }

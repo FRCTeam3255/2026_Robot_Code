@@ -17,6 +17,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Time;
 import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -407,11 +408,12 @@ public class RobotContainer {
             ConstRumble.RUMBLE_OFF)));
 
     isOurShiftFirstTrigger
-        .whileTrue(
-            Commands.run(() -> conDriver.setRumble(RumbleType.kRightRumble,
-                ConstRumble.OUR_SHIFT_FIRST_RUMBLE)))
-        .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble,
-            ConstRumble.RUMBLE_OFF)));
+        .whileTrue(Commands.run(() -> {
+          double t = Timer.getFPGATimestamp(); // seconds since FPGA boot
+          boolean on = ((int) Math.floor(t) % 2) == 0; // toggle every 1 second
+          conDriver.setRumble(RumbleType.kLeftRumble, on ? ConstRumble.READY_TO_SHOOT_RUMBLE : ConstRumble.RUMBLE_OFF);
+        }))
+        .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble, ConstRumble.RUMBLE_OFF)));
     // Add feedback bindings here if needed
   }
 
