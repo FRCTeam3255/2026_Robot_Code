@@ -17,7 +17,6 @@ import frc.robot.constants.ConstVision;
 
 @Logged
 public class Vision extends SubsystemBase {
-
   PoseEstimate lastEstimateRight = new PoseEstimate();
   PoseEstimate lastEstimateLeft = new PoseEstimate();
   PoseEstimate lastEstimateBack = new PoseEstimate();
@@ -63,7 +62,10 @@ public class Vision extends SubsystemBase {
       return true;
     }
 
-    if (!Double.isFinite(poseEstimate.pose.getTranslation().getX())
+    if (poseEstimate == null
+        || poseEstimate.pose == null
+        || poseEstimate.pose.getTranslation() == null
+        || !Double.isFinite(poseEstimate.pose.getTranslation().getX())
         || !Double.isFinite(poseEstimate.pose.getTranslation().getY())) {
       System.err.println("********REJECTING POSE ESTIMATE: pose contained non-finite X or Y (NaN/Inf)********");
       return true;
