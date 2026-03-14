@@ -65,18 +65,22 @@ public class RobotContainer {
       () -> stateMachineInstance.tryState(RobotState.CLIMBING_L2_3));
   Command TRY_INTAKING = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.INTAKING));
+  Command TRY_BASE_PREP_SHOOTER = Commands.deferredProxy(
+      () -> stateMachineInstance.tryState(RobotState.BASE_PREP_SHOOTER));
   Command TRY_SHOOTING = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.SHOOTING));
   Command TRY_PREP_ANYWHERE = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.PREP_ANYWHERE));
   Command TRY_PREP_TRENCH = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.PREP_TRENCH));
-  Command TRY_PREP_OUPOST = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.PREP_OUTPOST));
+  Command TRY_PREP_CORNER = Commands.deferredProxy(
+      () -> stateMachineInstance.tryState(RobotState.PREP_CORNER));
   Command TRY_PREP_DEPOT = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.PREP_DEPOT));
   Command TRY_PREP_TOWER = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.PREP_TOWER));
+  Command TRY_PREP_HUB = Commands.deferredProxy(
+      () -> stateMachineInstance.tryState(RobotState.PREP_HUB));
   Command TRY_PREP_NON_OUTPOST = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.PREP_NON_OUTPOST));
   Command TRY_REVERSING_SHOOTER = Commands.deferredProxy(
@@ -183,18 +187,18 @@ public class RobotContainer {
     conDriver.btn_RightBumper
         .onTrue(TRY_PREP_ANYWHERE);
     conDriver.btn_A
-        .onTrue(TRY_PREP_DEPOT);
+        .onTrue(TRY_PREP_TRENCH);
     conDriver.btn_West
         .onTrue(TRY_PREP_NEAUTRAL_TO_ALLIANCE)
         .onTrue(TRY_PREP_OPPONENT_TO_ALLIANCE);
     conDriver.btn_B
-        .onTrue(TRY_PREP_TRENCH);
+        .onTrue(TRY_PREP_CORNER);
     conDriver.btn_Y
-        // .onTrue(TRY_PREP_TRENCH);
-        .onTrue(TRY_DEFENSE)
-        .onFalse(TRY_NONE);
+        .onTrue(TRY_PREP_HUB);
+    // .onTrue(TRY_DEFENSE) rethink where to put defense
+    // .onFalse(TRY_NONE);
     conDriver.btn_X
-        .onTrue(TRY_PREP_TOWER);
+        .onTrue(TRY_BASE_PREP_SHOOTER);
     conDriver.btn_North.whileTrue(new ResetPose());
   }
 

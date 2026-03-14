@@ -55,7 +55,7 @@ public class StateMachine extends SubsystemBase {
           case PREP_ANYWHERE:
           case PREP_DEPOT:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -64,13 +64,32 @@ public class StateMachine extends SubsystemBase {
         }
         break;
 
+      case BASE_PREP_SHOOTER:
+        switch (currentRobotState) {
+          case NONE:
+          case BASE_PREP_SHOOTER:
+          case PREP_DEPOT:
+          case PREP_HUB:
+          case PREP_ANYWHERE:
+          case PREP_TRENCH:
+          case PREP_CORNER:
+          case PREP_TOWER:
+          case PREP_NON_OUTPOST:
+          case PREP_NEUTRAL_TO_ALLIANCE:
+          case PREP_OPPONENT_TO_ALLIANCE:
+            return new BasePrepShooter();
+        }
+        break;
+
       case PREP_ANYWHERE:
         switch (currentRobotState) {
           case NONE:
+          case BASE_PREP_SHOOTER:
           case PREP_DEPOT:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -82,10 +101,12 @@ public class StateMachine extends SubsystemBase {
       case PREP_DEPOT:
         switch (currentRobotState) {
           case NONE:
+          case BASE_PREP_SHOOTER:
           case PREP_DEPOT:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -94,13 +115,32 @@ public class StateMachine extends SubsystemBase {
         }
         break;
 
+      case PREP_HUB:
+        switch (currentRobotState) {
+          case NONE:
+          case BASE_PREP_SHOOTER:
+          case PREP_DEPOT:
+          case PREP_HUB:
+          case PREP_ANYWHERE:
+          case PREP_TRENCH:
+          case PREP_CORNER:
+          case PREP_TOWER:
+          case PREP_NON_OUTPOST:
+          case PREP_NEUTRAL_TO_ALLIANCE:
+          case PREP_OPPONENT_TO_ALLIANCE:
+            return new PrepHub();
+        }
+        break;
+
       case PREP_TRENCH:
         switch (currentRobotState) {
           case NONE:
+          case BASE_PREP_SHOOTER:
           case PREP_DEPOT:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -109,13 +149,15 @@ public class StateMachine extends SubsystemBase {
         }
         break;
 
-      case PREP_OUTPOST:
+      case PREP_CORNER:
         switch (currentRobotState) {
           case NONE:
+          case BASE_PREP_SHOOTER:
           case PREP_DEPOT:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -127,10 +169,12 @@ public class StateMachine extends SubsystemBase {
       case PREP_NON_OUTPOST:
         switch (currentRobotState) {
           case NONE:
+          case BASE_PREP_SHOOTER:
           case PREP_DEPOT:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -142,10 +186,12 @@ public class StateMachine extends SubsystemBase {
       case PREP_TOWER:
         switch (currentRobotState) {
           case NONE:
+          case BASE_PREP_SHOOTER:
           case PREP_DEPOT:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -157,10 +203,12 @@ public class StateMachine extends SubsystemBase {
       case PREP_NEUTRAL_TO_ALLIANCE:
         switch (currentRobotState) {
           case NONE:
+          case BASE_PREP_SHOOTER:
           case PREP_DEPOT:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -172,10 +220,12 @@ public class StateMachine extends SubsystemBase {
       case PREP_OPPONENT_TO_ALLIANCE:
         switch (currentRobotState) {
           case NONE:
+          case BASE_PREP_SHOOTER:
           case PREP_DEPOT:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -186,10 +236,12 @@ public class StateMachine extends SubsystemBase {
 
       case SHOOTING:
         switch (currentRobotState) {
+          case BASE_PREP_SHOOTER:
           case PREP_DEPOT:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_NON_OUTPOST:
           case PREP_TOWER:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -201,10 +253,12 @@ public class StateMachine extends SubsystemBase {
       case EJECTING_HOPPER:
         switch (currentRobotState) {
           case NONE:
+          case BASE_PREP_SHOOTER:
           case PREP_DEPOT:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -216,10 +270,12 @@ public class StateMachine extends SubsystemBase {
       case REVERSING_SHOOTER:
         switch (currentRobotState) {
           case NONE:
+          case BASE_PREP_SHOOTER:
           case PREP_DEPOT:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -275,8 +331,10 @@ public class StateMachine extends SubsystemBase {
   public enum RobotState {
     NONE,
     INTAKING,
-    PREP_OUTPOST,
+    BASE_PREP_SHOOTER,
+    PREP_CORNER,
     PREP_DEPOT,
+    PREP_HUB,
     PREP_TRENCH,
     PREP_ANYWHERE,
     PREP_NON_OUTPOST,

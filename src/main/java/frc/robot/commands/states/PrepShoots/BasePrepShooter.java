@@ -8,9 +8,7 @@ import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
-import frc.robot.constants.ConstField.Pose2dAllianceSet;
 import frc.robot.constants.ConstMotion;
-import frc.robot.constants.ConstPoseDrive;
 import frc.robot.constants.ConstRotors;
 import frc.robot.subsystems.StateMachine.RobotState;
 
@@ -30,12 +28,15 @@ public class BasePrepShooter extends Command {
     globalState = state;
   }
 
+  public BasePrepShooter() {
+    // TODO Auto-generated constructor stub
+  }
+
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     RobotContainer.rotorsInstance.setFlywheelSpeed(globalFlyWheelSpeed);
     RobotContainer.motionInstance.setHoodAngle(globalHoodAngle);
-    RobotContainer.drivetrainInstance.setIsManualRotationEnabled(false);
     RobotContainer.stateMachineInstance.setRobotState(globalState);
   }
 
@@ -47,8 +48,6 @@ public class BasePrepShooter extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.drivetrainInstance.setIsManualRotationEnabled(true);
-
   }
 
   // Returns true when the command should end.

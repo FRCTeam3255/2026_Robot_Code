@@ -24,6 +24,7 @@ public class PrepTower extends Command {
     RobotContainer.rotorsInstance.setFlywheelSpeed(ConstRotors.FLYWHEEL_TOWER_SPEED);
     RobotContainer.motionInstance.setHoodAngle(ConstMotion.HOOD_TOWER_ANGLE);
     RobotContainer.stateMachineInstance.setRobotState(RobotState.PREP_TOWER);
+    RobotContainer.stateMachineInstance.setRobotState(RobotState.BASE_PREP_SHOOTER);
 
   }
 

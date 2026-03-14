@@ -15,6 +15,7 @@ import frc.robot.subsystems.StateMachine;
 public class PrepTrench extends BasePrepShooter {
   public PrepTrench() {
     // TODO: change the drivetrain angle to correct value
+    // Configure shooter for trench shot (flywheel speed and hood angle); drivetrain aiming is handled elsewhere.
     super(ConstRotors.FLYWHEEL_TRENCH_SPEED, ConstMotion.HOOD_TRENCH_ANGLE,
         StateMachine.RobotState.PREP_TRENCH);
     // Use addRequirements() here to declare subsystem dependencies.

@@ -7,14 +7,14 @@
 			"com.tldraw.asset": 1,
 			"com.tldraw.camera": 1,
 			"com.tldraw.document": 2,
-			"com.tldraw.instance": 25,
+			"com.tldraw.instance": 26,
 			"com.tldraw.instance_page_state": 5,
 			"com.tldraw.page": 1,
 			"com.tldraw.instance_presence": 6,
 			"com.tldraw.pointer": 1,
 			"com.tldraw.shape": 4,
 			"com.tldraw.asset.bookmark": 2,
-			"com.tldraw.asset.image": 5,
+			"com.tldraw.asset.image": 6,
 			"com.tldraw.asset.video": 5,
 			"com.tldraw.shape.group": 0,
 			"com.tldraw.shape.text": 4,
@@ -464,7 +464,7 @@
 			"hoveredShapeId": null,
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
-			"focusedGroupId": "shape:JxhO-FqGGvaq26RX9C8oj",
+			"focusedGroupId": null,
 			"meta": {},
 			"id": "instance_page_state:page:grvVnvcP2QYOnDHPI3N7D",
 			"pageId": "page:grvVnvcP2QYOnDHPI3N7D",
@@ -1069,7 +1069,7 @@
 							"content": [
 								{
 									"type": "text",
-									"text": "PrepOutpost"
+									"text": "PrepCorner"
 								}
 							]
 						}
@@ -1660,9 +1660,9 @@
 			"typeName": "shape"
 		},
 		{
-			"x": 1056.7460477096772,
-			"y": 313.5190771677335,
-			"z": 0.5118547064274089,
+			"x": 1900.4620487906686,
+			"y": 321.1172957686434,
+			"z": 0.43969911670608697,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -2637,9 +2637,9 @@
 			"typeName": "shape"
 		},
 		{
-			"x": 2472.5831629670956,
-			"y": 962.4466310411342,
-			"z": 0.14342100936484956,
+			"x": 690.3169610491666,
+			"y": -331.03511382297734,
+			"z": 0.5072976539778296,
 			"meta": {},
 			"id": "camera:page:grvVnvcP2QYOnDHPI3N7D",
 			"typeName": "camera"
@@ -4449,7 +4449,7 @@
 							"content": [
 								{
 									"type": "text",
-									"text": "PrepDepot"
+									"text": "PrepTrench"
 								}
 							]
 						}
@@ -4989,7 +4989,8 @@
 				"h": 393,
 				"fileSize": 269456,
 				"mimeType": "image/png",
-				"isAnimated": false
+				"isAnimated": false,
+				"pixelRatio": 2
 			},
 			"meta": {}
 		},
@@ -5276,7 +5277,8 @@
 				"h": 446,
 				"fileSize": 273490,
 				"mimeType": "image/png",
-				"isAnimated": false
+				"isAnimated": false,
+				"pixelRatio": 2
 			},
 			"meta": {}
 		},
@@ -6911,7 +6913,7 @@
 		},
 		{
 			"x": 1805.6565463701254,
-			"y": 598.4537340096238,
+			"y": 598.4537340096239,
 			"rotation": 0,
 			"isLocked": false,
 			"opacity": 1,
@@ -6919,8 +6921,8 @@
 			"id": "shape:pU0-eUpYAmeTQ812jhuph",
 			"type": "geo",
 			"props": {
-				"w": 199,
-				"h": 64,
+				"w": 209.6221184844162,
+				"h": 68.36040995043106,
 				"geo": "rectangle",
 				"dash": "solid",
 				"growY": 0,
@@ -6947,7 +6949,7 @@
 							"content": [
 								{
 									"type": "text",
-									"text": "Defence"
+									"text": "PrepHub"
 								}
 							]
 						}
@@ -7312,12 +7314,12 @@
 			"typeName": "binding"
 		},
 		{
-			"editingShapeId": "shape:_pq1MHyMK6yj_1l3tlKxW",
+			"editingShapeId": null,
 			"croppingShapeId": null,
 			"selectedShapeIds": [
-				"shape:_pq1MHyMK6yj_1l3tlKxW"
+				"shape:pU0-eUpYAmeTQ812jhuph"
 			],
-			"hoveredShapeId": "shape:_pq1MHyMK6yj_1l3tlKxW",
+			"hoveredShapeId": null,
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -7484,7 +7486,7 @@
 			"brush": null,
 			"scribbles": [],
 			"cursor": {
-				"type": "default",
+				"type": "move",
 				"rotation": 0
 			},
 			"isFocusMode": false,
@@ -7494,8 +7496,8 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 1018,
-				"h": 455
+				"w": 1572,
+				"h": 918
 			},
 			"insets": [
 				false,
@@ -7518,6 +7520,7 @@
 			"isReadonly": false,
 			"meta": {},
 			"duplicateProps": null,
+			"cameraState": "idle",
 			"id": "instance:instance",
 			"currentPageId": "page:Wfhj8q2d0tvavwNlrwo_4",
 			"typeName": "instance"
@@ -7604,7 +7607,7 @@
 							"content": [
 								{
 									"type": "text",
-									"text": "PrepTower"
+									"text": "BasePrepShooter"
 								}
 							]
 						}
@@ -8405,9 +8408,9 @@
 			"typeName": "binding"
 		},
 		{
-			"x": -1291.4653455197927,
-			"y": -632.4169500718589,
-			"z": 0.8487093500917142,
+			"x": -1203.322607992055,
+			"y": 328.32499515118025,
+			"z": 0.564859072962,
 			"meta": {},
 			"id": "camera:page:Wfhj8q2d0tvavwNlrwo_4",
 			"typeName": "camera"
