@@ -91,7 +91,7 @@ public class ConstMotion {
     HOOD_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitEnable = true;
     HOOD_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
     HOOD_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitThreshold = Units.Degrees.of(46).in(Rotations);
-    HOOD_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitThreshold = Units.Degrees.of(1.6).in(Rotations);
+    HOOD_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitThreshold = Units.Degrees.of(0).in(Rotations);
     HOOD_CONFIGURATION.Slot0.GravityType = GravityTypeValue.Arm_Cosine;
     HOOD_CONFIGURATION.Slot0.kS = 0.2;
     HOOD_CONFIGURATION.Slot0.kP = 300;
