@@ -30,7 +30,7 @@ public class Rotors extends SubsystemBase {
   final TalonFX flywheelBottomEast = new TalonFX(rotorIDs.FLYWHEEL_BOTTOM_EAST_CAN);
   AngularVelocity lastDesiredFlywheelSpeed = Units.RPM.of(0);
   Follower flywheelEastFollower = new Follower(flywheelTopEast.getDeviceID(), MotorAlignmentValue.Aligned);
-  Follower flywheelWestFollower = new Follower(flywheelTopWest.getDeviceID(), MotorAlignmentValue.Aligned);
+  Follower flywheelWestFollower = new Follower(flywheelTopEast.getDeviceID(), MotorAlignmentValue.Opposed);
 
   /** Creates a new Rotors. */
   public Rotors() {
@@ -59,7 +59,7 @@ public class Rotors extends SubsystemBase {
 
   public void setFlywheelSpeed(AngularVelocity speed) {
     flywheelTopEast.setControl(flywheelVelocityRequest.withVelocity(speed));
-    flywheelTopWest.setControl(flywheelVelocityRequest.withVelocity(speed));
+    flywheelTopWest.setControl(flywheelWestFollower);
     flywheelBottomEast.setControl(flywheelEastFollower);
     flywheelBottomWest.setControl(flywheelWestFollower);
     lastDesiredFlywheelSpeed = speed;
@@ -67,9 +67,9 @@ public class Rotors extends SubsystemBase {
 
   public void setFlywheelPercentOutput(double percent) {
     flywheelTopEast.set(percent);
-    flywheelTopWest.set(percent);
-    flywheelBottomEast.set(percent);
-    flywheelBottomWest.set(percent);
+    flywheelTopWest.setControl(flywheelWestFollower);
+    flywheelBottomEast.setControl(flywheelEastFollower);
+    flywheelBottomWest.setControl(flywheelWestFollower);
     lastDesiredFlywheelSpeed = Units.RPM.of(5400 * percent);
   }
 
