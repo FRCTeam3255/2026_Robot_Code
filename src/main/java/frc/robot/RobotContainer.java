@@ -243,6 +243,11 @@ public class RobotContainer {
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
+    Command DoubleOutpostSideNeutral = Commands.sequence(
+        OutpostSideNeutral.asProxy(),
+        runPath(ChoreoTraj.OSideShoot_Trench).asProxy(),
+        OutpostSideNeutral.asProxy());
+
     Command OutpostSideNeutralWithClimb = Commands.sequence(
         OutpostSideNeutral.asProxy(),
         Climb(ChoreoTraj.O_Side_Neutral_Climb));
@@ -288,6 +293,7 @@ public class RobotContainer {
 
     autoChooser.setDefaultOption("Do Nothing", Commands.none());
     autoChooser.addOption("OutpostSideNeutralZone", OutpostSideNeutral);
+    autoChooser.addOption("DoubleOutpostSideNeutral", DoubleOutpostSideNeutral);
     autoChooser.addOption("OutpostSideNeutralWithClimb", OutpostSideNeutralWithClimb);
     autoChooser.addOption("OutpostSideNeutralWithOutpost", OutpostSideNeutralWithOutpost);
     autoChooser.addOption("Outpost", PreloadOutpost);
@@ -316,6 +322,7 @@ public class RobotContainer {
         Map.entry(DepotSideNeutralWithClimb, ChoreoTraj.DepotTrench_Neutral),
         Map.entry(DepotSideNeutralWithDepot, ChoreoTraj.DepotTrench_Neutral),
         Map.entry(OutpostSideNeutral, ChoreoTraj.OutpostTrench_NeutralZone),
+        Map.entry(DoubleOutpostSideNeutral, ChoreoTraj.OutpostTrench_NeutralZone),
         Map.entry(OutpostSideNeutralWithOutpost, ChoreoTraj.OutpostTrench_NeutralZone),
         Map.entry(OutpostSideNeutralWithClimb, ChoreoTraj.OutpostTrench_NeutralZone));
 
