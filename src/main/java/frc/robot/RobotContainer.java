@@ -131,6 +131,8 @@ public class RobotContainer {
           conDriver.btn_RightBumper),
       Set.of(driverStateMachineInstance));
 
+  public final Trigger isOurShiftFirstTrigger = new Trigger(
+      () -> telemetryInstance.ourShiftFirst());
   public final Trigger isOurShiftTrigger = new Trigger(
       () -> telemetryInstance.isHubActive());
   public final Trigger hubSwitchingTrigger = new Trigger(
@@ -401,6 +403,13 @@ public class RobotContainer {
         .whileTrue(
             Commands.run(() -> conDriver.setRumble(RumbleType.kRightRumble,
                 ConstRumble.SHIFT_CHANGE_RUMBLE)))
+        .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble,
+            ConstRumble.RUMBLE_OFF)));
+
+    isOurShiftFirstTrigger
+        .whileTrue(
+            Commands.run(() -> conDriver.setRumble(RumbleType.kRightRumble,
+                ConstRumble.OUR_SHIFT_FIRST_RUMBLE)))
         .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble,
             ConstRumble.RUMBLE_OFF)));
     // Add feedback bindings here if needed
