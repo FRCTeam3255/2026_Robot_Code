@@ -217,19 +217,19 @@ public class RobotContainer {
 
     Command PreloadDepot = Commands.sequence(
         CollectAndScore(ChoreoTraj.DSideBump_Depot,
-            ChoreoTraj.Depot_MoveForward,
+            ChoreoTraj.Depot_DSidePrep,
             TRY_PREP_ANYWHERE,
             ConstAuto.INTAKE_DEPOT_TIMEOUT,
             ConstAuto.SHOOT_FROM_DEPOT_TIMEOUT));
 
     Command PreloadDepotWithClimb = Commands.sequence(
         PreloadDepot.asProxy(),
-        Climb(ChoreoTraj.DSide_PrepClimb));
+        Climb(ChoreoTraj.DSidePrep_PrepClimb));
 
     Command PreloadDepotWithOutpost = Commands.sequence(
         PreloadDepot.asProxy(),
-        CollectAndScore(ChoreoTraj.DSide_Outpost,
-            ChoreoTraj.Outpost_MoveForward,
+        CollectAndScore(ChoreoTraj.DSidePrep_Outpost,
+            ChoreoTraj.Outpost_OSidePrep,
             TRY_PREP_ANYWHERE,
             ConstAuto.INTAKE_OUTPOST_TIMEOUT,
             ConstAuto.SHOOT_FROM_OUTPOST_TIMEOUT));
@@ -266,13 +266,13 @@ public class RobotContainer {
         Climb(ChoreoTraj.DSideBump_PrepClimb));
 
     Command DepotSideNeutralWithDepot = Commands.sequence(DepotSideNeutral.asProxy(),
-        runPath(ChoreoTraj.DSide_DSideBump).asProxy(),
+        runPath(ChoreoTraj.DSidePrep_DSideBump).asProxy(),
         PreloadDepot.asProxy());
 
     Command PreloadOutpost = Commands.sequence(
         CollectAndScore(
             ChoreoTraj.OSideTrench_Outpost,
-            ChoreoTraj.Outpost_MoveForward,
+            ChoreoTraj.Outpost_OSidePrep,
             TRY_PREP_ANYWHERE,
             ConstAuto.INTAKE_OUTPOST_TIMEOUT,
             ConstAuto.SHOOT_FROM_OUTPOST_TIMEOUT));
@@ -284,7 +284,7 @@ public class RobotContainer {
         OutpostSideNeutral.asProxy(),
         CollectAndScore(
             ChoreoTraj.OSideShoot_Outpost,
-            ChoreoTraj.Outpost_MoveForward,
+            ChoreoTraj.Outpost_OSidePrep,
             TRY_PREP_ANYWHERE,
             ConstAuto.INTAKE_OUTPOST_TIMEOUT,
             ConstAuto.SHOOT_FROM_OUTPOST_TIMEOUT));
