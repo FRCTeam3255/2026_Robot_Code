@@ -418,9 +418,10 @@ public class RobotContainer {
         .whileTrue(Commands.run(() -> {
           double t = Timer.getFPGATimestamp(); // seconds since FPGA boot
           boolean on = ((int) Math.floor(t) % 2) == 0; // toggle every 1 second
-          conDriver.setRumble(RumbleType.kLeftRumble, on ? ConstRumble.READY_TO_SHOOT_RUMBLE : ConstRumble.RUMBLE_OFF);
+          conDriver.setRumble(RumbleType.kRightRumble,
+              on ? ConstRumble.OUR_SHIFT_FIRST_RUMBLE : ConstRumble.RUMBLE_OFF);
         }))
-        .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble, ConstRumble.RUMBLE_OFF)));
+        .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble, ConstRumble.RUMBLE_OFF)));
     // Add feedback bindings here if needed
   }
 

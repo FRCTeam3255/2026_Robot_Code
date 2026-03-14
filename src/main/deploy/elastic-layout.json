@@ -41,7 +41,7 @@
             "height": 374.0,
             "type": "Boolean Box",
             "properties": {
-              "topic": "Robot/m_robotContainer/isOurShiftFirstTrigger",
+              "topic": "Robot/m_robotContainer/isOurShiftTrigger",
               "period": 0.06,
               "data_type": "boolean",
               "true_color": 4283215696,
@@ -58,7 +58,7 @@
             "height": 170.0,
             "type": "Boolean Box",
             "properties": {
-              "topic": "Robot/m_robotContainer/isOurShiftTrigger",
+              "topic": "Robot/m_robotContainer/readyToShootTrigger",
               "period": 0.06,
               "data_type": "boolean",
               "true_color": 4283215696,
