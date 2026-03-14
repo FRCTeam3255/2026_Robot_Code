@@ -65,8 +65,6 @@ public class RobotContainer {
       () -> stateMachineInstance.tryState(RobotState.CLIMBING_L2_3));
   Command TRY_INTAKING = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.INTAKING));
-  Command TRY_BASE_PREP_SHOOTER = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.BASE_PREP_SHOOTER));
   Command TRY_SHOOTING = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.SHOOTING));
   Command TRY_PREP_ANYWHERE = Commands.deferredProxy(
@@ -198,7 +196,9 @@ public class RobotContainer {
     // .onTrue(TRY_DEFENSE) rethink where to put defense
     // .onFalse(TRY_NONE);
     conDriver.btn_X
-        .onTrue(TRY_BASE_PREP_SHOOTER);
+        .onTrue(TRY_PREP_TOWER);
+    conDriver.btn_RightStick
+        .onTrue(TRY_DEFENSE);
     conDriver.btn_North.whileTrue(new ResetPose());
   }
 

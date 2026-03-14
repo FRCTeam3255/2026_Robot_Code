@@ -1974,6 +1974,55 @@
 			"typeName": "shape"
 		},
 		{
+			"x": 1139.7353437731358,
+			"y": 1137.1001510649173,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:ZHrk-Qx-C2v4JHHdQknF8",
+			"type": "geo",
+			"props": {
+				"w": 231.28364603733803,
+				"h": 67.59256864829763,
+				"geo": "rectangle",
+				"dash": "solid",
+				"growY": 0,
+				"url": "",
+				"scale": 1,
+				"color": "black",
+				"labelColor": "black",
+				"fill": "semi",
+				"size": "m",
+				"font": "mono",
+				"align": "middle",
+				"verticalAlign": "middle",
+				"richText": {
+					"type": "doc",
+					"attrs": {
+						"dir": "auto"
+					},
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "Defence"
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "shape:uGRWI4m6QItFOSMyV6rxb",
+			"index": "aHMKzWaG",
+			"typeName": "shape"
+		},
+		{
 			"x": 344.69939175835464,
 			"y": 1632.573061448968,
 			"rotation": 0,
@@ -7317,7 +7366,7 @@
 			"editingShapeId": null,
 			"croppingShapeId": null,
 			"selectedShapeIds": [
-				"shape:pU0-eUpYAmeTQ812jhuph"
+				"shape:ZHrk-Qx-C2v4JHHdQknF8"
 			],
 			"hoveredShapeId": null,
 			"erasingShapeIds": [],
@@ -7607,7 +7656,7 @@
 							"content": [
 								{
 									"type": "text",
-									"text": "BasePrepShooter"
+									"text": "PrepTower"
 								}
 							]
 						}
@@ -8408,9 +8457,9 @@
 			"typeName": "binding"
 		},
 		{
-			"x": -1203.322607992055,
-			"y": 328.32499515118025,
-			"z": 0.564859072962,
+			"x": -1092.5771874971206,
+			"y": 397.17205940202746,
+			"z": 0.5083731656658,
 			"meta": {},
 			"id": "camera:page:Wfhj8q2d0tvavwNlrwo_4",
 			"typeName": "camera"

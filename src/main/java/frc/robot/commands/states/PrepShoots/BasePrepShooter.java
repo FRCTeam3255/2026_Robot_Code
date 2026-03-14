@@ -28,10 +28,6 @@ public class BasePrepShooter extends Command {
     globalState = state;
   }
 
-  public BasePrepShooter() {
-    // TODO Auto-generated constructor stub
-  }
-
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {

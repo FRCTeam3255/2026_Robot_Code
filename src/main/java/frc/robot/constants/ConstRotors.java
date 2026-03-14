@@ -41,7 +41,7 @@ public class ConstRotors {
   public static final AngularVelocity FLYWHEEL_OUTPOST_SPEED = RPM.of(4100);
   public static final AngularVelocity FLYWHEEL_NON_OUTPOST_SPEED = RPM.of(4100);
   public static final AngularVelocity FLYWHEEL_TOWER_SPEED = RPM.of(4300);
-  public static final AngularVelocity FLYWHEEL_HUB_SPEED = RPM.of(3700); // adjust
+  public static final AngularVelocity FLYWHEEL_HUB_SPEED = RPM.of(3700); // TODO: adjust
   public static final AngularVelocity FLYWHEEL_DEPOT_SPEED = RPM.of(4100);
   public static final AngularVelocity FLYWHEEL_ANYWHERE_SPEED = RPM.of(4100);
   public static final AngularVelocity FLYWHEEL_NEUTRAL_TO_ALLIANCE_SPEED = RPM.of(3700);
