@@ -11,7 +11,6 @@ import frc.robot.LimelightHelpers.PoseEstimate;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.ConstVision;
@@ -64,12 +63,9 @@ public class Vision extends SubsystemBase {
       return true;
     }
 
-    if (poseEstimate == null
-        || poseEstimate.pose == null
-        || poseEstimate.pose.getTranslation() == null
-        || !Double.isFinite(poseEstimate.pose.getTranslation().getX())
+    if (!Double.isFinite(poseEstimate.pose.getTranslation().getX())
         || !Double.isFinite(poseEstimate.pose.getTranslation().getY())) {
-      System.err.println("********RECEIVED A NULL POSE ESTIMATE********");
+      System.err.println("********REJECTING POSE ESTIMATE: pose contained non-finite X or Y (NaN/Inf)********");
       return true;
     }
     // No tags :<
