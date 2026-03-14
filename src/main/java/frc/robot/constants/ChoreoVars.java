@@ -37,7 +37,9 @@ public final class ChoreoVars {
         public static final Pose2d outpost_intake = new Pose2d(0.696, 0.434, Rotation2d.kZero);
         public static final Pose2d outpost_side_neutral = new Pose2d(7.604, 2.375, Rotation2d.fromRadians(-1.571));
         public static final Pose2d outpost_side_neutral_shoot = new Pose2d(2.779, 2.582, Rotation2d.kZero);
+        public static final Pose2d outpost_side_neutral_zone = new Pose2d(6.045, 2.249, Rotation2d.fromRadians(-1.048));
         public static final Pose2d outpost_side_trench = new Pose2d(3.612, 0.412, Rotation2d.kZero);
+        public static final Pose2d outpost_side_trench_nuetral = new Pose2d(3.684, 0.499, Rotation2d.fromRadians(4.712));
         public static final Pose2d preload_shoot = new Pose2d(2.512, 4.004, Rotation2d.kZero);
 
         private Poses() {}
