@@ -1,5 +1,5 @@
 {
- "name":"D_Side_Neutral_Climb",
+ "name":"DSideBump_PrepClimb",
  "version":3,
  "snapshot":{
   "waypoints":[

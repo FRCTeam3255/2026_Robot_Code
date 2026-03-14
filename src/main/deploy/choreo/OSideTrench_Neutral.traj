@@ -1,5 +1,5 @@
 {
- "name":"OutpostTrench_NeutralZone",
+ "name":"OSideTrench_Neutral",
  "version":3,
  "snapshot":{
   "waypoints":[
@@ -20,7 +20,7 @@
  },
  "params":{
   "waypoints":[
-    {"x":{"exp":"3.6836977005004883 m", "val":3.683697700500488}, "y":{"exp":"0.49910447001457214 m", "val":0.49910447001457214}, "heading":{"exp":"270 deg", "val":4.71238898038469}, "intervals":19, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false},
+    {"x":{"exp":"outpost_side_trench_nuetral.x", "val":3.683697700500488}, "y":{"exp":"outpost_side_trench_nuetral.y", "val":0.49910447001457214}, "heading":{"exp":"outpost_side_trench_nuetral.heading", "val":4.71238898038469}, "intervals":19, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false},
     {"x":{"exp":"5.576816558837891 m", "val":5.576816558837891}, "y":{"exp":"0.5247266888618469 m", "val":0.5247266888618469}, "heading":{"exp":"270 deg", "val":4.71238898038469}, "intervals":19, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false},
     {"x":{"exp":"7.604073524475098 m", "val":7.604073524475098}, "y":{"exp":"0.6407618522644043 m", "val":0.6407618522644043}, "heading":{"exp":"-90 deg", "val":-1.5707963267948966}, "intervals":59, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false},
     {"x":{"exp":"outpost_side_neutral.x", "val":7.604073524475098}, "y":{"exp":"outpost_side_neutral.y", "val":2.375071096420288}, "heading":{"exp":"outpost_side_neutral.heading", "val":-1.5707963267948966}, "intervals":40, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false}],

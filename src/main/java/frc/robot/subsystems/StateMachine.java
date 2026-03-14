@@ -232,7 +232,7 @@ public class StateMachine extends SubsystemBase {
         switch (currentRobotState) {
           case NONE:
             return new PrepClimb()
-                .alongWith(RobotContainer.runPath(ChoreoTraj.Climb));
+                .alongWith(RobotContainer.runPath(ChoreoTraj.DSideClimb));
         }
         break;
 

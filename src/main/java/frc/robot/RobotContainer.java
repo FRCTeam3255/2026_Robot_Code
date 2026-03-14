@@ -211,28 +211,28 @@ public class RobotContainer {
     );
 
     Command PreloadOnly = Commands.sequence(
-        ScoreOnly(ChoreoTraj.Reverse_From_Hub,
+        ScoreOnly(ChoreoTraj.Hub_ShootPreload,
             TRY_PREP_ANYWHERE,
             ConstAuto.SHOOT_PRELOAD_TIMEOUT));
 
     Command PreloadWithClimb = Commands.sequence(PreloadOnly.asProxy(),
-        Climb(ChoreoTraj.Preload_Climb));
+        Climb(ChoreoTraj.Preload_PrepClimb));
 
     Command PreloadDepot = Commands.sequence(
-        CollectAndScore(ChoreoTraj.Bump_Depot,
-            ChoreoTraj.Move_Forward_Depot,
+        CollectAndScore(ChoreoTraj.DSideBump_Depot,
+            ChoreoTraj.Depot_DSidePrep,
             TRY_PREP_ANYWHERE,
             ConstAuto.INTAKE_DEPOT_TIMEOUT,
             ConstAuto.SHOOT_FROM_DEPOT_TIMEOUT));
 
     Command PreloadDepotWithClimb = Commands.sequence(
         PreloadDepot.asProxy(),
-        Climb(ChoreoTraj.Depot_Climb));
+        Climb(ChoreoTraj.DSidePrep_PrepClimb));
 
     Command PreloadDepotWithOutpost = Commands.sequence(
         PreloadDepot.asProxy(),
-        CollectAndScore(ChoreoTraj.Depot_Outpost,
-            ChoreoTraj.Move_Forward_Outpost,
+        CollectAndScore(ChoreoTraj.DSidePrep_Outpost,
+            ChoreoTraj.Outpost_OSidePrep,
             TRY_PREP_ANYWHERE,
             ConstAuto.INTAKE_OUTPOST_TIMEOUT,
             ConstAuto.SHOOT_FROM_OUTPOST_TIMEOUT));
@@ -240,57 +240,63 @@ public class RobotContainer {
     Command OutpostSideNeutral = Commands.sequence(
         TRY_INTAKING.asProxy().withTimeout(0.3), // Force intake down before moving and going under trench
         CollectAndScore(
-            ChoreoTraj.OutpostTrench_NeutralZone,
-            ChoreoTraj.OppNeutral_OppHub,
+            ChoreoTraj.OSideTrench_Neutral,
+            ChoreoTraj.OSideNeutral_OSidePrep,
             TRY_PREP_ANYWHERE,
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
+    Command DoubleOutpostSideNeutral = Commands.sequence(
+        OutpostSideNeutral.asProxy(),
+        runPath(ChoreoTraj.OSideShoot_OSideTrench).asProxy(),
+        OutpostSideNeutral.asProxy());
+
     Command OutpostSideNeutralWithClimb = Commands.sequence(
         OutpostSideNeutral.asProxy(),
-        Climb(ChoreoTraj.O_Side_Neutral_Climb));
+        Climb(ChoreoTraj.OSideShoot_PrepClimb));
 
     Command DepotSideNeutral = Commands.sequence(
         TRY_INTAKING.asProxy().withTimeout(0.3), // Force intake down before moving and going under trench
         CollectAndScore(
-            ChoreoTraj.DepotTrench_Neutral,
-            ChoreoTraj.Neutral_HubLeft,
+            ChoreoTraj.DSideTrench_Neutral,
+            ChoreoTraj.DSideNeutral_DSidePrep,
             TRY_PREP_ANYWHERE,
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command DepotSideNeutralWithClimb = Commands.sequence(
         DepotSideNeutral.asProxy(),
-        Climb(ChoreoTraj.D_Side_Neutral_Climb));
+        Climb(ChoreoTraj.DSideBump_PrepClimb));
 
     Command DepotSideNeutralWithDepot = Commands.sequence(DepotSideNeutral.asProxy(),
-        runPath(ChoreoTraj.D_Side_Neutral_Depot).asProxy(),
+        runPath(ChoreoTraj.DSidePrep_DSideBump).asProxy(),
         PreloadDepot.asProxy());
 
     Command PreloadOutpost = Commands.sequence(
         CollectAndScore(
-            ChoreoTraj.Trench_Outpost,
-            ChoreoTraj.Move_Forward_Outpost,
+            ChoreoTraj.OSideTrench_Outpost,
+            ChoreoTraj.Outpost_OSidePrep,
             TRY_PREP_ANYWHERE,
             ConstAuto.INTAKE_OUTPOST_TIMEOUT,
             ConstAuto.SHOOT_FROM_OUTPOST_TIMEOUT));
 
     Command OutpostWithClimb = Commands.sequence(PreloadOutpost.asProxy(),
-        Climb(ChoreoTraj.Outpost_Climb));
+        Climb(ChoreoTraj.Outpost_PrepClimb));
 
     Command OutpostSideNeutralWithOutpost = Commands.sequence(
         OutpostSideNeutral.asProxy(),
         CollectAndScore(
-            ChoreoTraj.Op_Side_Neutral_Outpost,
-            ChoreoTraj.Move_Forward_Outpost,
+            ChoreoTraj.OSideShoot_Outpost,
+            ChoreoTraj.Outpost_OSidePrep,
             TRY_PREP_ANYWHERE,
             ConstAuto.INTAKE_OUTPOST_TIMEOUT,
             ConstAuto.SHOOT_FROM_OUTPOST_TIMEOUT));
 
-    Command Test = Commands.sequence(runPath(ChoreoTraj.test));
+    Command AutoPIDTuning = Commands.sequence(runPath(ChoreoTraj.AutoPIDTuning));
 
     autoChooser.setDefaultOption("Do Nothing", Commands.none());
     autoChooser.addOption("OutpostSideNeutralZone", OutpostSideNeutral);
+    autoChooser.addOption("DoubleOutpostSideNeutral", DoubleOutpostSideNeutral);
     autoChooser.addOption("OutpostSideNeutralWithClimb", OutpostSideNeutralWithClimb);
     autoChooser.addOption("OutpostSideNeutralWithOutpost", OutpostSideNeutralWithOutpost);
     autoChooser.addOption("Outpost", PreloadOutpost);
@@ -303,24 +309,25 @@ public class RobotContainer {
     autoChooser.addOption("PreloadOnly", PreloadOnly);
     autoChooser.addOption("PreloadWithClimb", PreloadWithClimb);
     autoChooser.addOption("DepotOutpost", PreloadDepotWithOutpost);
-    autoChooser.addOption("Test", Test);
+    autoChooser.addOption("AutoPIDTuning", AutoPIDTuning);
 
     // make our entries name
     final Map<Command, ChoreoTraj> autoStartingPoses = Map.ofEntries(
         // Example
-        Map.entry(PreloadOutpost, ChoreoTraj.Trench_Outpost),
-        Map.entry(OutpostWithClimb, ChoreoTraj.Trench_Outpost),
-        Map.entry(PreloadDepotWithOutpost, ChoreoTraj.Bump_Depot),
-        Map.entry(PreloadDepotWithClimb, ChoreoTraj.Bump_Depot),
-        Map.entry(PreloadOnly, ChoreoTraj.Reverse_From_Hub),
-        Map.entry(PreloadWithClimb, ChoreoTraj.Reverse_From_Hub),
-        Map.entry(DepotSideNeutral, ChoreoTraj.DepotTrench_Neutral),
-        Map.entry(PreloadDepot, ChoreoTraj.Bump_Depot),
-        Map.entry(DepotSideNeutralWithClimb, ChoreoTraj.DepotTrench_Neutral),
-        Map.entry(DepotSideNeutralWithDepot, ChoreoTraj.DepotTrench_Neutral),
-        Map.entry(OutpostSideNeutral, ChoreoTraj.OutpostTrench_NeutralZone),
-        Map.entry(OutpostSideNeutralWithOutpost, ChoreoTraj.OutpostTrench_NeutralZone),
-        Map.entry(OutpostSideNeutralWithClimb, ChoreoTraj.OutpostTrench_NeutralZone));
+        Map.entry(PreloadOutpost, ChoreoTraj.OSideTrench_Outpost),
+        Map.entry(OutpostWithClimb, ChoreoTraj.OSideTrench_Outpost),
+        Map.entry(PreloadDepotWithOutpost, ChoreoTraj.DSideBump_Depot),
+        Map.entry(PreloadDepotWithClimb, ChoreoTraj.DSideBump_Depot),
+        Map.entry(PreloadOnly, ChoreoTraj.Hub_ShootPreload),
+        Map.entry(PreloadWithClimb, ChoreoTraj.Hub_ShootPreload),
+        Map.entry(DepotSideNeutral, ChoreoTraj.DSideTrench_Neutral),
+        Map.entry(PreloadDepot, ChoreoTraj.DSideBump_Depot),
+        Map.entry(DepotSideNeutralWithClimb, ChoreoTraj.DSideTrench_Neutral),
+        Map.entry(DepotSideNeutralWithDepot, ChoreoTraj.DSideTrench_Neutral),
+        Map.entry(OutpostSideNeutral, ChoreoTraj.OSideTrench_Neutral),
+        Map.entry(DoubleOutpostSideNeutral, ChoreoTraj.OSideTrench_Neutral),
+        Map.entry(OutpostSideNeutralWithOutpost, ChoreoTraj.OSideTrench_Neutral),
+        Map.entry(OutpostSideNeutralWithClimb, ChoreoTraj.OSideTrench_Neutral));
 
     // enter which we want to do based on name
     autoChooser.onChange(selectedAuto ->
