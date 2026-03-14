@@ -67,9 +67,9 @@ public class Rotors extends SubsystemBase {
 
   public void setFlywheelPercentOutput(double percent) {
     flywheelTopEast.set(percent);
-    flywheelTopWest.set(percent);
+    flywheelTopWest.set(-percent);
     flywheelBottomEast.set(percent);
-    flywheelBottomWest.set(percent);
+    flywheelBottomWest.set(-percent);
     lastDesiredFlywheelSpeed = Units.RPM.of(5400 * percent);
   }
 
