@@ -16,7 +16,6 @@ public class PrepTrench extends BasePrepShooter {
   public PrepTrench() {
     // TODO: change the drivetrain angle to correct value
     super(ConstRotors.FLYWHEEL_TRENCH_SPEED, ConstMotion.HOOD_TRENCH_ANGLE,
-        ConstField.FieldElementGroups.TRENCH_PREP_SHOOT_ROTATION_SET,
         StateMachine.RobotState.PREP_TRENCH);
     // Use addRequirements() here to declare subsystem dependencies.
   }

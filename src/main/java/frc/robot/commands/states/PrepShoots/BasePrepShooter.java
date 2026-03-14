@@ -19,16 +19,14 @@ public class BasePrepShooter extends Command {
   /** Creates a new BasePrepShooter. */
   AngularVelocity globalFlyWheelSpeed;
   Angle globalHoodAngle;
-  Pose2dAllianceSet globalDrivetrainAngle;
   RobotState globalState;
 
-  public BasePrepShooter(AngularVelocity flyWheelSpeed, Angle hoodAngle, Pose2dAllianceSet drivetrainAngle,
+  public BasePrepShooter(AngularVelocity flyWheelSpeed, Angle hoodAngle,
       RobotState state) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.stateMachineInstance);
     globalFlyWheelSpeed = flyWheelSpeed;
     globalHoodAngle = hoodAngle;
-    globalDrivetrainAngle = drivetrainAngle;
     globalState = state;
   }
 
@@ -37,10 +35,6 @@ public class BasePrepShooter extends Command {
   public void initialize() {
     RobotContainer.rotorsInstance.setFlywheelSpeed(globalFlyWheelSpeed);
     RobotContainer.motionInstance.setHoodAngle(globalHoodAngle);
-    RobotContainer.drivetrainInstance
-        .setDriveRotation(globalDrivetrainAngle
-            .getAlliancePoses().get(0)
-            .getRotation().getMeasure());
     RobotContainer.drivetrainInstance.setIsManualRotationEnabled(false);
     RobotContainer.stateMachineInstance.setRobotState(globalState);
   }
@@ -63,9 +57,6 @@ public class BasePrepShooter extends Command {
     return RobotContainer.motionInstance
         .isHoodAtPosition(ConstMotion.HOOD_TOLERANCE)
         && RobotContainer.rotorsInstance
-            .areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
-        && RobotContainer.drivetrainInstance
-            .isAtDesiredRotation(ConstPoseDrive.PrepShootRotations.DRIVETRAIN_TOLERANCE);
-
+            .areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE);
   }
 }
