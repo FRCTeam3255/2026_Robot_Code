@@ -188,7 +188,7 @@ public class RobotContainer {
         .onTrue(TRY_PREP_NEAUTRAL_TO_ALLIANCE)
         .onTrue(TRY_PREP_OPPONENT_TO_ALLIANCE);
     conDriver.btn_B
-        .onTrue(TRY_PREP_OUPOST);
+        .onTrue(TRY_PREP_TRENCH);
     conDriver.btn_Y
         // .onTrue(TRY_PREP_TRENCH);
         .onTrue(TRY_DEFENSE)
@@ -261,6 +261,11 @@ public class RobotContainer {
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
+    Command DoubleDepotSideNeutral = Commands.sequence(
+        DepotSideNeutral.asProxy(),
+        runPath(ChoreoTraj.DSideShoot_DSideTrench).asProxy(),
+        DepotSideNeutral.asProxy());
+
     Command DepotSideNeutralWithClimb = Commands.sequence(
         DepotSideNeutral.asProxy(),
         Climb(ChoreoTraj.DSideBump_PrepClimb));
@@ -299,6 +304,7 @@ public class RobotContainer {
     autoChooser.addOption("Outpost", PreloadOutpost);
     autoChooser.addOption("OutpostWithClimb", OutpostWithClimb);
     autoChooser.addOption("DepotSideNeutralZone", DepotSideNeutral);
+    autoChooser.addOption("DoubleDepotSideNeutral", DoubleDepotSideNeutral);
     autoChooser.addOption("DepotSideNeutralWithClimb", DepotSideNeutralWithClimb);
     autoChooser.addOption("DepotSideNeutralWithDepot", DepotSideNeutralWithDepot);
     autoChooser.addOption("Depot", PreloadDepot);
@@ -318,6 +324,7 @@ public class RobotContainer {
         Map.entry(PreloadOnly, ChoreoTraj.Hub_ShootPreload),
         Map.entry(PreloadWithClimb, ChoreoTraj.Hub_ShootPreload),
         Map.entry(DepotSideNeutral, ChoreoTraj.DSideTrench_Neutral),
+        Map.entry(DoubleDepotSideNeutral, ChoreoTraj.DSideTrench_Neutral),
         Map.entry(PreloadDepot, ChoreoTraj.DSideBump_Depot),
         Map.entry(DepotSideNeutralWithClimb, ChoreoTraj.DSideTrench_Neutral),
         Map.entry(DepotSideNeutralWithDepot, ChoreoTraj.DSideTrench_Neutral),
