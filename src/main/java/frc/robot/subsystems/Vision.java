@@ -17,7 +17,6 @@ import frc.robot.constants.ConstVision;
 
 @Logged
 public class Vision extends SubsystemBase {
-
   PoseEstimate lastEstimateRight = new PoseEstimate();
   PoseEstimate lastEstimateLeft = new PoseEstimate();
   PoseEstimate lastEstimateBack = new PoseEstimate();
@@ -62,6 +61,7 @@ public class Vision extends SubsystemBase {
     if (gyroRate.compareTo(ConstVision.MAX_ANGULAR_VELOCITY) > 0) {
       return true;
     }
+
     // No tags :<
     if (poseEstimate.tagCount == 0) {
       return true;
