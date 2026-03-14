@@ -14,7 +14,7 @@ import frc.robot.subsystems.StateMachine;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PrepCorner extends BasePrepShooter {
   public PrepCorner() {
-    super(ConstRotors.FLYWHEEL_OUTPOST_SPEED, ConstMotion.HOOD_OUTPOST_ANGLE,
+    super(ConstRotors.FLYWHEEL_CORNER_SPEED, ConstMotion.HOOD_CORNER_ANGLE,
         StateMachine.RobotState.PREP_CORNER);
     // Use addRequirements() here to declare subsystem dependencies.
   }
