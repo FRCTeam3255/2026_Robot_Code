@@ -57,6 +57,7 @@ public class StateMachine extends SubsystemBase {
           case PREP_TRENCH:
           case PREP_CORNER:
           case PREP_TOWER:
+          case PREP_HUB:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
