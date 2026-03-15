@@ -62,14 +62,10 @@ public class ConstRotors {
     SERIALIZER_ROLLERS_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
 
     SHOOTER_TRANSFER_EAST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-    SHOOTER_TRANSFER_EAST_CONFIGURATION.MotorOutput.Inverted = (RobotContainer.isPracticeBot())
-        ? InvertedValue.Clockwise_Positive
-        : InvertedValue.CounterClockwise_Positive;
+    SHOOTER_TRANSFER_WEST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
 
     SHOOTER_TRANSFER_WEST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-    SHOOTER_TRANSFER_WEST_CONFIGURATION.MotorOutput.Inverted = (RobotContainer.isPracticeBot())
-        ? InvertedValue.CounterClockwise_Positive
-        : InvertedValue.Clockwise_Positive;
+    SHOOTER_TRANSFER_WEST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
 
     FLYWHEEL_WEST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     FLYWHEEL_WEST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
