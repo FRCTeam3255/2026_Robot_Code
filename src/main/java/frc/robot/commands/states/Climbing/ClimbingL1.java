@@ -21,7 +21,7 @@ public class ClimbingL1 extends Command {
   @Override
   public void initialize() {
     RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.CLIMBING_L1);
-    RobotContainer.motionInstance.setClimberPosition(ConstMotion.RETRACT_CLIMBER, ConstMotion.CLIMBER_SLOW_PID_ID_SLOT);
+    RobotContainer.motionInstance.setClimberPosition(ConstMotion.RETRACT_CLIMBER, ConstMotion.CLIMBER_SLOW_PID_SLOT);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

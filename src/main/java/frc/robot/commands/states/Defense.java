@@ -22,7 +22,7 @@ public class Defense extends Command {
   @Override
   public void initialize() {
     RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.RETRACT_INTAKE_PIVOT_ANGLE);
-    RobotContainer.motionInstance.setClimberPosition(ConstMotion.STORE_CLIMBER, ConstMotion.CLIMBER_FAST_PID_ID_SLOT);
+    RobotContainer.motionInstance.setClimberPosition(ConstMotion.STORE_CLIMBER, ConstMotion.CLIMBER_FAST_PID_SLOT);
     RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.DEFENSE);
 
   }
