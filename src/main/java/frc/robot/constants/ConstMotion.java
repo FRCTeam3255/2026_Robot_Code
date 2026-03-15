@@ -18,6 +18,7 @@ import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.Distance;
+import edu.wpi.first.units.measure.Time;
 
 /** Add your docs here. */
 public class ConstMotion {
@@ -46,8 +47,8 @@ public class ConstMotion {
   public static final Distance EXTEND_CLIMBER = Inches.of(13.1);
   public static final Angle HOOD_TOLERANCE = Units.Degrees.of(1.0);
   public final static InterpolatingDoubleTreeMap hoodAngleMap = new InterpolatingDoubleTreeMap();
-  public static final double LIFT_INTAKE_DELAY = 1.0;
-  public static final double LIFT_INTAKE_INTERVAL_TIME = 1.0 / 3.0;
+  public static final Time LIFT_INTAKE_DELAY = Units.Seconds.of(1.0);
+  public static final Time LIFT_INTAKE_INTERVAL_TIME = Units.Seconds.of(1.0 / 3.0);
   public static final Angle INTAKE_PIVOT_ANGLE_TOLERANCE = Units.Degrees.of(5);
   public static final int CLIMBER_SLOW_PID_SLOT = 0;
   public static final int CLIMBER_FAST_PID_SLOT = 1;
