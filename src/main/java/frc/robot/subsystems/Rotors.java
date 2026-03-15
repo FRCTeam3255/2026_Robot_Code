@@ -15,6 +15,7 @@ import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
 import frc.robot.DeviceIDs.rotorIDs;
 import frc.robot.constants.ConstRotors;
 
@@ -31,6 +32,7 @@ public class Rotors extends SubsystemBase {
   AngularVelocity lastDesiredFlywheelSpeed = Units.RPM.of(0);
   Follower flywheelEastFollower = new Follower(flywheelTopEast.getDeviceID(), MotorAlignmentValue.Aligned);
   Follower flywheelWestFollower = new Follower(flywheelTopWest.getDeviceID(), MotorAlignmentValue.Aligned);
+  boolean flywheelsAtSpeed = false;
 
   /** Creates a new Rotors. */
   public Rotors() {
@@ -74,6 +76,9 @@ public class Rotors extends SubsystemBase {
   }
 
   public AngularVelocity getFlywheelSpeeds() {
+    if (Robot.isSimulation()) {
+      return lastDesiredFlywheelSpeed;
+    }
     return flywheelBottomWest.getVelocity().getValue();
   }
 
@@ -83,8 +88,9 @@ public class Rotors extends SubsystemBase {
 
     AngularVelocity flywheelSpeeds = getFlywheelSpeeds();
 
-    return flywheelSpeeds.gte(lowerLim)
+    flywheelsAtSpeed = flywheelSpeeds.gte(lowerLim)
         && flywheelSpeeds.lte(upperLim);
+    return flywheelsAtSpeed;
   }
 
   public static AngularVelocity getMappedFlywheelSpeed(Distance distance) {
