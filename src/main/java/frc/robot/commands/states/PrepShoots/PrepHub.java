@@ -9,9 +9,10 @@ import frc.robot.constants.ConstRotors;
 import frc.robot.subsystems.StateMachine;
 
 /** Add your docs here. */
-public class PrepTower extends BasePrepShooter {
-  public PrepTower() {
-    super(ConstRotors.FLYWHEEL_TOWER_SPEED, ConstMotion.HOOD_TOWER_ANGLE,
-        StateMachine.RobotState.PREP_TOWER);
+public class PrepHub extends BasePrepShooter {
+  public PrepHub() {
+    super(ConstRotors.FLYWHEEL_HUB_SPEED, ConstMotion.HOOD_HUB_ANGLE,
+        StateMachine.RobotState.PREP_HUB);
+
   }
 }

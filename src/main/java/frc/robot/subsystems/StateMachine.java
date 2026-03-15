@@ -5,7 +5,6 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.epilogue.Logged;
-import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -52,10 +51,11 @@ public class StateMachine extends SubsystemBase {
           case DEFENSE:
           case PREP_CLIMB_L1:
           case UNCLIMB_L1:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_DEPOT:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -68,9 +68,10 @@ public class StateMachine extends SubsystemBase {
         switch (currentRobotState) {
           case NONE:
           case PREP_DEPOT:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -83,9 +84,10 @@ public class StateMachine extends SubsystemBase {
         switch (currentRobotState) {
           case NONE:
           case PREP_DEPOT:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -94,13 +96,30 @@ public class StateMachine extends SubsystemBase {
         }
         break;
 
+      case PREP_HUB:
+        switch (currentRobotState) {
+          case NONE:
+          case PREP_DEPOT:
+          case PREP_HUB:
+          case PREP_ANYWHERE:
+          case PREP_TRENCH:
+          case PREP_CORNER:
+          case PREP_TOWER:
+          case PREP_NON_OUTPOST:
+          case PREP_NEUTRAL_TO_ALLIANCE:
+          case PREP_OPPONENT_TO_ALLIANCE:
+            return new PrepHub();
+        }
+        break;
+
       case PREP_TRENCH:
         switch (currentRobotState) {
           case NONE:
           case PREP_DEPOT:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -109,18 +128,19 @@ public class StateMachine extends SubsystemBase {
         }
         break;
 
-      case PREP_OUTPOST:
+      case PREP_CORNER:
         switch (currentRobotState) {
           case NONE:
           case PREP_DEPOT:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
           case PREP_OPPONENT_TO_ALLIANCE:
-            return new PrepOutpost();
+            return new PrepCorner();
         }
         break;
 
@@ -128,9 +148,10 @@ public class StateMachine extends SubsystemBase {
         switch (currentRobotState) {
           case NONE:
           case PREP_DEPOT:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -143,9 +164,10 @@ public class StateMachine extends SubsystemBase {
         switch (currentRobotState) {
           case NONE:
           case PREP_DEPOT:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -158,9 +180,10 @@ public class StateMachine extends SubsystemBase {
         switch (currentRobotState) {
           case NONE:
           case PREP_DEPOT:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -173,9 +196,10 @@ public class StateMachine extends SubsystemBase {
         switch (currentRobotState) {
           case NONE:
           case PREP_DEPOT:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -187,9 +211,10 @@ public class StateMachine extends SubsystemBase {
       case SHOOTING:
         switch (currentRobotState) {
           case PREP_DEPOT:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_NON_OUTPOST:
           case PREP_TOWER:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -202,9 +227,10 @@ public class StateMachine extends SubsystemBase {
         switch (currentRobotState) {
           case NONE:
           case PREP_DEPOT:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -217,9 +243,10 @@ public class StateMachine extends SubsystemBase {
         switch (currentRobotState) {
           case NONE:
           case PREP_DEPOT:
+          case PREP_HUB:
           case PREP_ANYWHERE:
           case PREP_TRENCH:
-          case PREP_OUTPOST:
+          case PREP_CORNER:
           case PREP_TOWER:
           case PREP_NON_OUTPOST:
           case PREP_NEUTRAL_TO_ALLIANCE:
@@ -275,8 +302,9 @@ public class StateMachine extends SubsystemBase {
   public enum RobotState {
     NONE,
     INTAKING,
-    PREP_OUTPOST,
+    PREP_CORNER,
     PREP_DEPOT,
+    PREP_HUB,
     PREP_TRENCH,
     PREP_ANYWHERE,
     PREP_NON_OUTPOST,

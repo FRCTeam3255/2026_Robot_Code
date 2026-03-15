@@ -4,7 +4,6 @@
 
 package frc.robot.commands.states.PrepShoots;
 
-import frc.robot.constants.ConstField;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
 import frc.robot.subsystems.StateMachine;
@@ -15,7 +14,6 @@ import frc.robot.subsystems.StateMachine;
 public class PrepNeutralToAlliance extends BasePrepShooter {
   public PrepNeutralToAlliance() {
     super(ConstRotors.FLYWHEEL_NEUTRAL_TO_ALLIANCE_SPEED, ConstMotion.HOOD_NUETRAL_TO_ALLIANCE_ANGLE,
-        ConstField.FieldElementGroups.NEUTRAL_TO_ALLIANCE_PREP_SHOOT_ROTATION_SET,
         StateMachine.RobotState.PREP_NEUTRAL_TO_ALLIANCE);
     // Use addRequirements() here to declare subsystem dependencies.
   }
