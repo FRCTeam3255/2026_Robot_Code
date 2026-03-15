@@ -34,9 +34,9 @@ public class Motion extends SubsystemBase {
   Angle lastDesiredIntakePivotAngle = Degrees.zero();
   Distance lastDesiredClimberPosition = Inches.zero();
 
-  boolean hoodAtPosition = false;
-  boolean intakePivotAtPosition = false;
-  boolean climberAtPosition = false;
+  private boolean hoodAtPosition = false;
+  private boolean intakePivotAtPosition = false;
+  private boolean climberAtPosition = false;
 
   public Motion() {
     intakePivot.getConfigurator().apply(ConstMotion.INTAKE_PIVOT_CONFIGURATION);
