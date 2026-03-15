@@ -60,14 +60,18 @@ public class Rotors extends SubsystemBase {
 
   public void setShooterTransferSpeed(AngularVelocity speed) {
     shooterTransferEast.setControl(shooterTransferVelocityRequest.withVelocity(speed));
-    shooterTransferWest.setControl(shooterTransferVelocityRequest.withVelocity(speed));
+    shooterTransferWest.setControl(shooterTransferFollower);
     lastDesiredTransferPercentOutput = speed;
   }
 
   public void setShooterTransferSpeed(double percent) {
     shooterTransferEast.set(percent);
-    shooterTransferWest.set(percent);
+    shooterTransferWest.setControl(shooterTransferFollower);
     lastDesiredTransferPercentOutput = Units.RPM.of(5400 * percent);
+  }
+
+  public AngularVelocity getShooterTransferSpeed() {
+    return shooterTransferEast.getVelocity().getValue();
   }
 
   public void setFlywheelSpeed(AngularVelocity speed) {
@@ -98,6 +102,16 @@ public class Rotors extends SubsystemBase {
 
     return flywheelSpeeds.gte(lowerLim)
         && flywheelSpeeds.lte(upperLim);
+  }
+
+  public boolean isShooterTransferAtSpeed(AngularVelocity tolerance) {
+    AngularVelocity lowerLim = lastDesiredTransferPercentOutput.minus(tolerance);
+    AngularVelocity upperLim = lastDesiredTransferPercentOutput.plus(tolerance);
+
+    AngularVelocity shooterTransferSpeed = getShooterTransferSpeed();
+
+    return shooterTransferSpeed.gte(lowerLim)
+        && shooterTransferSpeed.lte(upperLim);
   }
 
   public static AngularVelocity getMappedFlywheelSpeed(Distance distance) {
