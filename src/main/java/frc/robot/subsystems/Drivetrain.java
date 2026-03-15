@@ -231,13 +231,10 @@ public class Drivetrain extends SN_SuperSwerveV2 {
   }
 
   public boolean isAtDesiredRotation(Angle tolerance) {
-    if (Robot.isSimulation()) {
-      return true;
-    }
     Angle upperLim = getDriveRotation().getMeasure().plus(tolerance);
     Angle lowerLim = getDriveRotation().getMeasure().minus(tolerance);
-    drivetrainAtRotation = getPose().getRotation().getMeasure().gte(lowerLim)
-        && getPose().getRotation().getMeasure().lte(upperLim);
+    drivetrainAtRotation = getDrivetrainRotation().gte(lowerLim)
+        && getDrivetrainRotation().lte(upperLim);
     return drivetrainAtRotation;
   }
 
