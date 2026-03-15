@@ -36,7 +36,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
 
   public PoseDriveGroup lastDesiredPoseGroup;
   public Pose2d lastDesiredTarget;
-  private Rotation2d driveRotation = new Rotation2d();
+  private Rotation2d targetDriveRotation = new Rotation2d();
   private double manualDriveRotation = 0.0;
   private boolean manualRotationEnabled = true;
   private boolean drivetrainAtRotation = false;
@@ -212,11 +212,11 @@ public class Drivetrain extends SN_SuperSwerveV2 {
   }
 
   public void setDriveRotation(Angle rotation) {
-    this.driveRotation = Rotation2d.fromDegrees(rotation.in(Degrees));
+    this.targetDriveRotation = Rotation2d.fromDegrees(rotation.in(Degrees));
   }
 
-  public Rotation2d getDriveRotation() {
-    return this.driveRotation;
+  public Rotation2d getTargetRotation() {
+    return this.targetDriveRotation;
   }
 
   public Angle snapToTarget(Pose2d targetPose) {
@@ -231,8 +231,8 @@ public class Drivetrain extends SN_SuperSwerveV2 {
   }
 
   public boolean isAtDesiredRotation(Angle tolerance) {
-    Angle upperLim = getDriveRotation().getMeasure().plus(tolerance);
-    Angle lowerLim = getDriveRotation().getMeasure().minus(tolerance);
+    Angle upperLim = getTargetRotation().getMeasure().plus(tolerance);
+    Angle lowerLim = getTargetRotation().getMeasure().minus(tolerance);
     drivetrainAtRotation = getDrivetrainRotation().gte(lowerLim)
         && getDrivetrainRotation().lte(upperLim);
     return drivetrainAtRotation;
