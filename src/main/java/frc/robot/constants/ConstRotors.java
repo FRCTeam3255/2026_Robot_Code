@@ -64,6 +64,13 @@ public class ConstRotors {
     SHOOTER_TRANSFER_CONFIGURATION.MotorOutput.Inverted = (RobotContainer.isPracticeBot())
         ? InvertedValue.Clockwise_Positive
         : InvertedValue.CounterClockwise_Positive;
+    SHOOTER_TRANSFER_CONFIGURATION.Slot0.kS = 0.12;
+    SHOOTER_TRANSFER_CONFIGURATION.Slot0.kV = 0.1;
+    SHOOTER_TRANSFER_CONFIGURATION.Slot0.kA = 0.7;
+    SHOOTER_TRANSFER_CONFIGURATION.Slot0.kP = 0.3;
+    SHOOTER_TRANSFER_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity = 0;
+    SHOOTER_TRANSFER_CONFIGURATION.MotionMagic.MotionMagicAcceleration = 9999;
+    SHOOTER_TRANSFER_CONFIGURATION.MotionMagic.MotionMagicJerk = 0;
 
     FLYWHEEL_WEST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     FLYWHEEL_WEST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
