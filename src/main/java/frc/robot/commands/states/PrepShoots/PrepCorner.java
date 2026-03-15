@@ -12,11 +12,10 @@ import frc.robot.subsystems.StateMachine;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class PrepOutpost extends BasePrepShooter {
-  public PrepOutpost() {
-    super(ConstRotors.FLYWHEEL_OUTPOST_SPEED, ConstMotion.HOOD_OUTPOST_ANGLE,
-        ConstField.FieldElementGroups.OUTPOST_PREP_SHOOT_ROTATION_SET,
-        StateMachine.RobotState.PREP_OUTPOST);
+public class PrepCorner extends BasePrepShooter {
+  public PrepCorner() {
+    super(ConstRotors.FLYWHEEL_CORNER_SPEED, ConstMotion.HOOD_CORNER_ANGLE,
+        StateMachine.RobotState.PREP_CORNER);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 }

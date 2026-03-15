@@ -18,6 +18,7 @@ import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.Distance;
+import edu.wpi.first.units.measure.Time;
 
 /** Add your docs here. */
 public class ConstMotion {
@@ -32,9 +33,10 @@ public class ConstMotion {
   public static final double RETRACT_CLIMBER_SPEED = -0.5;
   public static final double ANGLE_HOOD_SPEED = 0.5;
   public static final Angle HOOD_TRENCH_ANGLE = Units.Degrees.of(13.5);
-  public static final Angle HOOD_OUTPOST_ANGLE = Units.Degrees.of(26);
+  public static final Angle HOOD_CORNER_ANGLE = Units.Degrees.of(26);
   public static final Angle HOOD_NON_OUTPOST_ANGLE = Units.Degrees.of(12);
   public static final Angle HOOD_TOWER_ANGLE = Units.Degrees.of(11);
+  public static final Angle HOOD_HUB_ANGLE = Units.Degrees.of(43); // TODO: adjust
   public static final Angle HOOD_DEPOT_ANGLE = Units.Degrees.of(18);
   public static final Angle HOOD_ANYWHERE_ANGLE = Units.Degrees.of(45);
   public static final Angle HOOD_NUETRAL_TO_ALLIANCE_ANGLE = Units.Degrees.of(45);
@@ -45,11 +47,11 @@ public class ConstMotion {
   public static final Distance EXTEND_CLIMBER = Inches.of(13.1);
   public static final Angle HOOD_TOLERANCE = Units.Degrees.of(1.0);
   public final static InterpolatingDoubleTreeMap hoodAngleMap = new InterpolatingDoubleTreeMap();
-  public static final double LIFT_INTAKE_DELAY = 1.0;
-  public static final double LIFT_INTAKE_INTERVAL_TIME = 1.0 / 3.0;
+  public static final Time LIFT_INTAKE_DELAY = Units.Seconds.of(1.0);
+  public static final Time LIFT_INTAKE_INTERVAL_TIME = Units.Seconds.of(1.0 / 3.0);
   public static final Angle INTAKE_PIVOT_ANGLE_TOLERANCE = Units.Degrees.of(5);
-  public static final int ELEVATOR_SLOW_PID_ID = 0;
-  public static final int ELEVATOR_FAST_PID_ID = 1;
+  public static final int CLIMBER_SLOW_PID_SLOT = 0;
+  public static final int CLIMBER_FAST_PID_SLOT = 1;
 
   public static final Distance CLIMBER_TOLERANCE = Inches.of(0.2);
   static {
