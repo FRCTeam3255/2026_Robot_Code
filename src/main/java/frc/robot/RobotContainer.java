@@ -14,7 +14,6 @@ import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Time;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
@@ -27,7 +26,6 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.DeviceIDs.controllerIDs;
 import frc.robot.commands.AddVisionMeasurement;
 import frc.robot.commands.ResetPose;
-import frc.robot.commands.states.*;
 import frc.robot.constants.ChoreoTraj;
 import frc.robot.constants.ConstAuto;
 import frc.robot.constants.ConstDrivetrain;
@@ -72,12 +70,14 @@ public class RobotContainer {
       () -> stateMachineInstance.tryState(RobotState.PREP_ANYWHERE));
   Command TRY_PREP_TRENCH = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.PREP_TRENCH));
-  Command TRY_PREP_OUPOST = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.PREP_OUTPOST));
+  Command TRY_PREP_CORNER = Commands.deferredProxy(
+      () -> stateMachineInstance.tryState(RobotState.PREP_CORNER));
   Command TRY_PREP_DEPOT = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.PREP_DEPOT));
   Command TRY_PREP_TOWER = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.PREP_TOWER));
+  Command TRY_PREP_HUB = Commands.deferredProxy(
+      () -> stateMachineInstance.tryState(RobotState.PREP_HUB));
   Command TRY_PREP_NON_OUTPOST = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.PREP_NON_OUTPOST));
   Command TRY_REVERSING_SHOOTER = Commands.deferredProxy(
@@ -186,18 +186,20 @@ public class RobotContainer {
     conDriver.btn_RightBumper
         .onTrue(TRY_PREP_ANYWHERE);
     conDriver.btn_A
-        .onTrue(TRY_PREP_DEPOT);
+        .onTrue(TRY_PREP_TRENCH);
     conDriver.btn_West
         .onTrue(TRY_PREP_NEAUTRAL_TO_ALLIANCE)
         .onTrue(TRY_PREP_OPPONENT_TO_ALLIANCE);
     conDriver.btn_B
-        .onTrue(TRY_PREP_OUPOST);
+        .onTrue(TRY_PREP_CORNER);
     conDriver.btn_Y
-        // .onTrue(TRY_PREP_TRENCH);
-        .onTrue(TRY_DEFENSE)
-        .onFalse(TRY_NONE);
+        .onTrue(TRY_PREP_HUB);
+    // .onTrue(TRY_DEFENSE) rethink where to put defense
+    // .onFalse(TRY_NONE);
     conDriver.btn_X
         .onTrue(TRY_PREP_TOWER);
+    conDriver.btn_RightStick
+        .onTrue(TRY_DEFENSE);
     conDriver.btn_North.whileTrue(new ResetPose());
   }
 
@@ -264,6 +266,11 @@ public class RobotContainer {
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
+    Command DoubleDepotSideNeutral = Commands.sequence(
+        DepotSideNeutral.asProxy(),
+        runPath(ChoreoTraj.DSideShoot_DSideTrench).asProxy(),
+        DepotSideNeutral.asProxy());
+
     Command DepotSideNeutralWithClimb = Commands.sequence(
         DepotSideNeutral.asProxy(),
         Climb(ChoreoTraj.DSideBump_PrepClimb));
@@ -302,6 +309,7 @@ public class RobotContainer {
     autoChooser.addOption("Outpost", PreloadOutpost);
     autoChooser.addOption("OutpostWithClimb", OutpostWithClimb);
     autoChooser.addOption("DepotSideNeutralZone", DepotSideNeutral);
+    autoChooser.addOption("DoubleDepotSideNeutral", DoubleDepotSideNeutral);
     autoChooser.addOption("DepotSideNeutralWithClimb", DepotSideNeutralWithClimb);
     autoChooser.addOption("DepotSideNeutralWithDepot", DepotSideNeutralWithDepot);
     autoChooser.addOption("Depot", PreloadDepot);
@@ -321,6 +329,7 @@ public class RobotContainer {
         Map.entry(PreloadOnly, ChoreoTraj.Hub_ShootPreload),
         Map.entry(PreloadWithClimb, ChoreoTraj.Hub_ShootPreload),
         Map.entry(DepotSideNeutral, ChoreoTraj.DSideTrench_Neutral),
+        Map.entry(DoubleDepotSideNeutral, ChoreoTraj.DSideTrench_Neutral),
         Map.entry(PreloadDepot, ChoreoTraj.DSideBump_Depot),
         Map.entry(DepotSideNeutralWithClimb, ChoreoTraj.DSideTrench_Neutral),
         Map.entry(DepotSideNeutralWithDepot, ChoreoTraj.DSideTrench_Neutral),
