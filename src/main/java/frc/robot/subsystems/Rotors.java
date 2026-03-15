@@ -30,6 +30,7 @@ public class Rotors extends SubsystemBase {
   final TalonFX flywheelBottomWest = new TalonFX(rotorIDs.FLYWHEEL_BOTTOM_WEST_CAN);
   final TalonFX flywheelBottomEast = new TalonFX(rotorIDs.FLYWHEEL_BOTTOM_EAST_CAN);
   AngularVelocity lastDesiredFlywheelSpeed = Units.RPM.of(0);
+  AngularVelocity lastDesiredTransferPercentOutput = Units.RPM.of(0);
   Follower flywheelEastFollower = new Follower(flywheelTopEast.getDeviceID(), MotorAlignmentValue.Aligned);
   Follower flywheelWestFollower = new Follower(flywheelTopWest.getDeviceID(), MotorAlignmentValue.Aligned);
   Follower shooterTransferFollower = new Follower(shooterTransferEast.getDeviceID(), MotorAlignmentValue.Opposed);
@@ -47,6 +48,7 @@ public class Rotors extends SubsystemBase {
   }
 
   final MotionMagicVelocityVoltage flywheelVelocityRequest = new MotionMagicVelocityVoltage(0);
+  final MotionMagicVelocityVoltage shooterTransferVelocityRequest = new MotionMagicVelocityVoltage(0);
 
   public void setSerializerRollersSpeed(double speed) {
     serializerRollers.set(speed);
@@ -56,9 +58,10 @@ public class Rotors extends SubsystemBase {
     intakeRoller.set(speed);
   }
 
-  public void setShooterTransferSpeed(double speed) {
-    shooterTransferEast.set(speed);
-    shooterTransferWest.set(speed);
+  public void setShooterTransferSpeed(AngularVelocity speed) {
+    shooterTransferEast.setControl(shooterTransferVelocityRequest.withVelocity(speed));
+    shooterTransferWest.setControl(shooterTransferVelocityRequest.withVelocity(speed));
+    lastDesiredTransferPercentOutput = speed;
   }
 
   public void setFlywheelSpeed(AngularVelocity speed) {
