@@ -139,7 +139,7 @@ public class Telemetry extends SubsystemBase {
     double matchTime = DriverStation.getMatchTime();
     // If we have no game data, we cannot compute, assume hub is active, as its
     // likely early in teleop.
-    if (gameData.isEmpty() && DriverStation.isTeleopEnabled()) {
+    if (gameData.isEmpty()) {
       return true;
     }
     boolean redInactiveFirst = false;
