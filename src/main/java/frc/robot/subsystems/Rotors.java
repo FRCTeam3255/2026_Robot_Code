@@ -64,6 +64,12 @@ public class Rotors extends SubsystemBase {
     lastDesiredTransferPercentOutput = speed;
   }
 
+  public void setShooterTransferSpeed(double percent) {
+    shooterTransferEast.set(percent);
+    shooterTransferWest.set(percent);
+    lastDesiredTransferPercentOutput = Units.RPM.of(5400 * percent);
+  }
+
   public void setFlywheelSpeed(AngularVelocity speed) {
     flywheelTopEast.setControl(flywheelVelocityRequest.withVelocity(speed));
     flywheelTopWest.setControl(flywheelWestFollower);
