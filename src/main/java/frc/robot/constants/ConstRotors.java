@@ -20,7 +20,8 @@ public class ConstRotors {
 
   public static final TalonFXConfiguration SERIALIZER_ROLLERS_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration INTAKE_ROLLER_CONFIGURATION = new TalonFXConfiguration();
-  public static final TalonFXConfiguration SHOOTER_TRANSFER_CONFIGURATION = new TalonFXConfiguration();
+  public static final TalonFXConfiguration SHOOTER_TRANSFER_EAST_CONFIGURATION = new TalonFXConfiguration();
+  public static final TalonFXConfiguration SHOOTER_TRANSFER_WEST_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration FLYWHEEL_WEST_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration FLYWHEEL_EAST_CONFIGURATION = new TalonFXConfiguration();
   public static final double INTAKE_ROLLER_SPEED = 1;
@@ -60,10 +61,15 @@ public class ConstRotors {
     SERIALIZER_ROLLERS_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     SERIALIZER_ROLLERS_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
 
-    SHOOTER_TRANSFER_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-    SHOOTER_TRANSFER_CONFIGURATION.MotorOutput.Inverted = (RobotContainer.isPracticeBot())
+    SHOOTER_TRANSFER_EAST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+    SHOOTER_TRANSFER_EAST_CONFIGURATION.MotorOutput.Inverted = (RobotContainer.isPracticeBot())
         ? InvertedValue.Clockwise_Positive
         : InvertedValue.CounterClockwise_Positive;
+
+    SHOOTER_TRANSFER_WEST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+    SHOOTER_TRANSFER_WEST_CONFIGURATION.MotorOutput.Inverted = (RobotContainer.isPracticeBot())
+        ? InvertedValue.CounterClockwise_Positive
+        : InvertedValue.Clockwise_Positive;
 
     FLYWHEEL_WEST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     FLYWHEEL_WEST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;

@@ -23,20 +23,23 @@ public class Rotors extends SubsystemBase {
 
   final TalonFX serializerRollers = new TalonFX(rotorIDs.SERIALIZER_ROLLERS_CAN);
   final TalonFX intakeRoller = new TalonFX(rotorIDs.INTAKE_ROLLERS_CAN);
-  final TalonFX shooterTransfer = new TalonFX(rotorIDs.SHOOTER_TRANSFER_CAN);
+  final TalonFX shooterTransferEast = new TalonFX(rotorIDs.SHOOTER_TRANSFER_EAST_CAN);
+  final TalonFX shooterTransferWest = new TalonFX(rotorIDs.SHOOTER_TRANSFER_WEST_CAN);
   final TalonFX flywheelTopWest = new TalonFX(rotorIDs.FLYWHEEL_TOP_WEST_CAN);
   final TalonFX flywheelTopEast = new TalonFX(rotorIDs.FLYWHEEL_TOP_EAST_CAN);
   final TalonFX flywheelBottomWest = new TalonFX(rotorIDs.FLYWHEEL_BOTTOM_WEST_CAN);
   final TalonFX flywheelBottomEast = new TalonFX(rotorIDs.FLYWHEEL_BOTTOM_EAST_CAN);
   AngularVelocity lastDesiredFlywheelSpeed = Units.RPM.of(0);
   Follower flywheelEastFollower = new Follower(flywheelTopEast.getDeviceID(), MotorAlignmentValue.Aligned);
-  Follower flywheelWestFollower = new Follower(flywheelTopEast.getDeviceID(), MotorAlignmentValue.Opposed);
+  Follower flywheelWestFollower = new Follower(flywheelTopWest.getDeviceID(), MotorAlignmentValue.Aligned);
+  Follower shooterTransferFollower = new Follower(shooterTransferEast.getDeviceID(), MotorAlignmentValue.Opposed);
 
   /** Creates a new Rotors. */
   public Rotors() {
     serializerRollers.getConfigurator().apply(ConstRotors.SERIALIZER_ROLLERS_CONFIGURATION);
     intakeRoller.getConfigurator().apply(ConstRotors.INTAKE_ROLLER_CONFIGURATION);
-    shooterTransfer.getConfigurator().apply(ConstRotors.SHOOTER_TRANSFER_CONFIGURATION);
+    shooterTransferEast.getConfigurator().apply(ConstRotors.SHOOTER_TRANSFER_EAST_CONFIGURATION);
+    shooterTransferWest.getConfigurator().apply(ConstRotors.SHOOTER_TRANSFER_WEST_CONFIGURATION);
     flywheelTopWest.getConfigurator().apply(ConstRotors.FLYWHEEL_WEST_CONFIGURATION);
     flywheelBottomWest.getConfigurator().apply(ConstRotors.FLYWHEEL_WEST_CONFIGURATION);
     flywheelTopEast.getConfigurator().apply(ConstRotors.FLYWHEEL_EAST_CONFIGURATION);
@@ -54,7 +57,8 @@ public class Rotors extends SubsystemBase {
   }
 
   public void setShooterTransferSpeed(double speed) {
-    shooterTransfer.set(speed);
+    shooterTransferEast.set(speed);
+    shooterTransferWest.set(speed);
   }
 
   public void setFlywheelSpeed(AngularVelocity speed) {
