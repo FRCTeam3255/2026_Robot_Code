@@ -26,6 +26,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.units.measure.Angle;
 import frc.robot.DeviceIDs;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstPoseDrive.PoseDriveGroup;
@@ -38,7 +39,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
   private Rotation2d driveRotation = new Rotation2d();
   private double manualDriveRotation = 0.0;
   private boolean manualRotationEnabled = true;
-  boolean drivetrainAtRotation = false;
+  private boolean drivetrainAtRotation = false;
 
   /** Creates a new Drivetrain. */
   public static final SwerveModuleConstantsFactory<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> constantCreator = new SwerveModuleConstantsFactory<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>()
@@ -225,9 +226,16 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     return Degrees.of(Math.toDegrees(angleRad));
   }
 
+  public Angle getDrivetrainRotation() {
+    return getPose().getRotation().getMeasure();
+  }
+
   public boolean isAtDesiredRotation(Angle tolerance) {
-    Angle upperLim = getPose().getRotation().getMeasure().plus(tolerance);
-    Angle lowerLim = getPose().getRotation().getMeasure().minus(tolerance);
+    if (Robot.isSimulation()) {
+      return true;
+    }
+    Angle upperLim = getDriveRotation().getMeasure().plus(tolerance);
+    Angle lowerLim = getDriveRotation().getMeasure().minus(tolerance);
     drivetrainAtRotation = getPose().getRotation().getMeasure().gte(lowerLim)
         && getPose().getRotation().getMeasure().lte(upperLim);
     return drivetrainAtRotation;
