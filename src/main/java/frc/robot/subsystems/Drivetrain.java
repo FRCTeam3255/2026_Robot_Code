@@ -5,6 +5,8 @@
 package frc.robot.subsystems;
 
 import static edu.wpi.first.units.Units.Degrees;
+
+import java.util.List;
 import java.util.function.DoubleSupplier;
 
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
@@ -17,7 +19,7 @@ import com.ctre.phoenix6.swerve.SwerveModuleConstants.SteerFeedbackType;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants.SteerMotorArrangement;
 import com.ctre.phoenix6.swerve.SwerveModuleConstantsFactory;
 import com.frcteam3255.components.swerve.SN_SuperSwerveV2;
-
+import frc.robot.constants.ConstField;
 import choreo.trajectory.SwerveSample;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -207,6 +209,14 @@ public class Drivetrain extends SN_SuperSwerveV2 {
       manualDriveRotation = Math.atan2(rightStickY, rightStickX) - Math.PI / 2;
     }
     return manualDriveRotation;
+  }
+
+  public Pose2d getDesiredTower() {
+    List<Pose2d> TowerPoses = ConstField.getTowerPositions().get();
+    Pose2d currentPose = getPose();
+    Pose2d desiredTower = currentPose.nearest(TowerPoses);
+
+    return desiredTower;
   }
 
   public void setDriveRotation(Angle rotation) {

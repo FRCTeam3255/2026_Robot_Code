@@ -176,4 +176,11 @@ public class ConstField {
     public static final Pose2dAllianceSet ANYWHERE_PREP_SHOOT_ROTATION_SET = new Pose2dAllianceSet(
         FieldElements.ANYWHERE_PREP_SHOOT_ROTATION);
   }
+
+  public static class POSES {
+    private static final Pose2d TOWER_DEPOT_SIDE = new Pose2d(1.4912198781967163, 4.236628532409668,
+        Rotation2d.fromDegrees(-90));
+    private static final Pose2d TOWER_OUTPOST_SIDE = new Pose2d(1.4912198781967163, 3.2593746185302734,
+        Rotation2d.fromDegrees(-90));
+  }
 }
