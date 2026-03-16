@@ -41,7 +41,8 @@ public class ConstMotion {
   public static final Angle HOOD_ANYWHERE_ANGLE = Units.Degrees.of(45);
   public static final Angle HOOD_NUETRAL_TO_ALLIANCE_ANGLE = Units.Degrees.of(45);
   public static final Angle HOOD_OPPENENT_TO_ALLIANCE_ANGLE = Units.Degrees.of(45);
-  public static final Angle HOOD_NONE_ANGLE = Units.Degrees.of(1.6);
+  public static final Angle HOOD_NONE_ANGLE = Units.Degrees.of(1.6); // Do not change, it's not at zero because the hood
+                                                                     // is not perfectly at 0 when the encoder reads 0
   public static final Distance STORE_CLIMBER = Inches.of(0);
   public static final Distance RETRACT_CLIMBER = Inches.of(1.5);
   public static final Distance EXTEND_CLIMBER = Inches.of(13.1);
@@ -93,6 +94,8 @@ public class ConstMotion {
     HOOD_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitEnable = true;
     HOOD_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
     HOOD_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitThreshold = Units.Degrees.of(46).in(Rotations);
+    // Do not change, it's not at zero because the hood is not perfectly at 0 when
+    // the encoder reads 0
     HOOD_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitThreshold = Units.Degrees.of(1.6).in(Rotations);
     HOOD_CONFIGURATION.Slot0.GravityType = GravityTypeValue.Arm_Cosine;
     HOOD_CONFIGURATION.Slot0.kS = 0.2;
