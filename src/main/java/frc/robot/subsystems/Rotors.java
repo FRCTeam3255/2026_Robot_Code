@@ -15,6 +15,7 @@ import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
 import frc.robot.DeviceIDs.rotorIDs;
 import frc.robot.constants.ConstRotors;
 
@@ -74,6 +75,9 @@ public class Rotors extends SubsystemBase {
   }
 
   public AngularVelocity getFlywheelSpeeds() {
+    if (Robot.isSimulation()) {
+      return lastDesiredFlywheelSpeed;
+    }
     return flywheelBottomWest.getVelocity().getValue();
   }
 

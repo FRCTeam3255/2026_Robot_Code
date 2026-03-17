@@ -250,6 +250,22 @@ public class RobotContainer {
         runPath(ChoreoTraj.OSideShoot_OSideTrench).asProxy(),
         OutpostSideNeutral.asProxy());
 
+    Command DoubleUTurnOutpostSideNeutral = Commands.sequence(
+        TRY_INTAKING.asProxy().withTimeout(0.3), // Force intake down before moving and going under trench
+        CollectAndScore(
+            ChoreoTraj.FirstUTurn_OSideTrench_Neutral,
+            ChoreoTraj.FirstUTurnOSideNeutral_OSidePrep,
+            TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
+            ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
+        runPath(ChoreoTraj.OSideShoot_OSideTrench).asProxy(),
+        CollectAndScore(
+            ChoreoTraj.SecondUTurn_OSideTrench_Neutral,
+            ChoreoTraj.SecondUTurnOSideNeutral_OSidePrep,
+            TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
+            ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
+
     Command OutpostSideNeutralWithClimb = Commands.sequence(
         OutpostSideNeutral.asProxy(),
         Climb(ChoreoTraj.OSideShoot_PrepClimb));
@@ -301,6 +317,7 @@ public class RobotContainer {
     autoChooser.setDefaultOption("Do Nothing", Commands.none());
     autoChooser.addOption("OutpostSideNeutralZone", OutpostSideNeutral);
     autoChooser.addOption("DoubleOutpostSideNeutral", DoubleOutpostSideNeutral);
+    autoChooser.addOption("UTurnOutpostSideNeutral", DoubleUTurnOutpostSideNeutral);
     autoChooser.addOption("OutpostSideNeutralWithClimb", OutpostSideNeutralWithClimb);
     autoChooser.addOption("OutpostSideNeutralWithOutpost", OutpostSideNeutralWithOutpost);
     autoChooser.addOption("Outpost", PreloadOutpost);
@@ -332,6 +349,7 @@ public class RobotContainer {
         Map.entry(DepotSideNeutralWithDepot, ChoreoTraj.DSideTrench_Neutral),
         Map.entry(OutpostSideNeutral, ChoreoTraj.OSideTrench_Neutral),
         Map.entry(DoubleOutpostSideNeutral, ChoreoTraj.OSideTrench_Neutral),
+        Map.entry(DoubleUTurnOutpostSideNeutral, ChoreoTraj.FirstUTurn_OSideTrench_Neutral),
         Map.entry(OutpostSideNeutralWithOutpost, ChoreoTraj.OSideTrench_Neutral),
         Map.entry(OutpostSideNeutralWithClimb, ChoreoTraj.OSideTrench_Neutral));
 

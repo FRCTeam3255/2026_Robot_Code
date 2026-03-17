@@ -237,6 +237,20 @@
      "val":1.5707963267948966
     }
    },
+   "first_oside_neutral_intake_end":{
+    "x":{
+     "exp":"7.2274489402771 m",
+     "val":7.2274489402771
+    },
+    "y":{
+     "exp":"2.7776989936828613 m",
+     "val":2.7776989936828613
+    },
+    "heading":{
+     "exp":"90 deg",
+     "val":1.5707963267948966
+    }
+   },
    "hub_left":{
     "x":{
      "exp":"2.6 m",
@@ -389,6 +403,20 @@
     "heading":{
      "exp":"0 deg",
      "val":0.0
+    }
+   },
+   "second_oside_neutral_intake_end":{
+    "x":{
+     "exp":"5.8854217529296875 m",
+     "val":5.8854217529296875
+    },
+    "y":{
+     "exp":"2.6075828075408936 m",
+     "val":2.6075828075408936
+    },
+    "heading":{
+     "exp":"first_oside_neutral_intake_end.heading",
+     "val":1.5707963267948966
     }
    }
   }
