@@ -259,7 +259,7 @@ public class StateMachine extends SubsystemBase {
         switch (currentRobotState) {
           case NONE:
             return new PrepClimb()
-                .alongWith(RobotContainer.runPath(ChoreoTraj.DSideClimb));
+                .alongWith(RobotContainer.runPath(RobotContainer.drivetrainInstance.getDesiredClimbingPath()));
         }
         break;
 

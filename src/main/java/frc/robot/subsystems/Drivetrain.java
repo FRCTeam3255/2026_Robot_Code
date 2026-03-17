@@ -8,6 +8,7 @@ import static edu.wpi.first.units.Units.Degrees;
 
 import java.util.List;
 import java.util.function.DoubleSupplier;
+import java.util.function.Supplier;
 
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
@@ -26,9 +27,12 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
+import edu.wpi.first.units.measure.Distance;
 import frc.robot.DeviceIDs;
 import frc.robot.RobotContainer;
+import frc.robot.constants.ChoreoTraj;
 import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstPoseDrive.PoseDriveGroup;
 
@@ -211,12 +215,17 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     return manualDriveRotation;
   }
 
-  public Pose2d getDesiredTower() {
-    List<Pose2d> TowerPoses = ConstField.getTowerPositions().get();
+  public ChoreoTraj getDesiredClimbingPath() {
+    List<Pose2d> TowerPoses = ConstField.FieldElementGroups.TOWER_POSES.getAlliancePoses();
     Pose2d currentPose = getPose();
     Pose2d desiredTower = currentPose.nearest(TowerPoses);
-
-    return desiredTower;
+    Distance distanceToTower = Units.Meters.of(currentPose.getTranslation().getDistance(desiredTower.getTranslation()));
+    System.out.println("Distance to tower: " + distanceToTower.in(Units.Meters) + " meters");
+    if (desiredTower == TowerPoses.get(0)) {
+      return ChoreoTraj.OSideClimb;
+    } else {
+      return ChoreoTraj.DSideClimb;
+    }
   }
 
   public void setDriveRotation(Angle rotation) {
