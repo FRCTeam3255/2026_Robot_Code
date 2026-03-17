@@ -33,7 +33,7 @@ public class Rotors extends SubsystemBase {
   AngularVelocity lastDesiredTransferPercentOutput = Units.RPM.of(0);
   Follower flywheelEastFollower = new Follower(flywheelTopEast.getDeviceID(), MotorAlignmentValue.Aligned);
   Follower flywheelWestFollower = new Follower(flywheelTopWest.getDeviceID(), MotorAlignmentValue.Aligned);
-  Follower shooterTransferFollower = new Follower(shooterTransferEast.getDeviceID(), MotorAlignmentValue.Aligned);
+  Follower shooterTransferFollower = new Follower(shooterTransferEast.getDeviceID(), MotorAlignmentValue.Opposed);
 
   /** Creates a new Rotors. */
   public Rotors() {
@@ -66,7 +66,7 @@ public class Rotors extends SubsystemBase {
 
   public void setShooterTransferSpeed(double percent) {
     shooterTransferEast.set(percent);
-    shooterTransferWest.setControl(shooterTransferFollower);
+    shooterTransferWest.set(percent);
     lastDesiredTransferPercentOutput = Units.RPM.of(5400 * percent);
   }
 
@@ -76,9 +76,9 @@ public class Rotors extends SubsystemBase {
 
   public void setFlywheelSpeed(AngularVelocity speed) {
     flywheelTopEast.setControl(flywheelVelocityRequest.withVelocity(speed));
-    flywheelTopWest.setControl(flywheelEastFollower);
+    flywheelTopWest.setControl(flywheelVelocityRequest.withVelocity(speed));
     flywheelBottomEast.setControl(flywheelEastFollower);
-    flywheelBottomWest.setControl(flywheelEastFollower);
+    flywheelBottomWest.setControl(flywheelWestFollower);
     lastDesiredFlywheelSpeed = speed;
   }
 

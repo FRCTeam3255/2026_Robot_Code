@@ -41,7 +41,7 @@ public class ConstRotors {
   public static final AngularVelocity FLYWHEEL_TRENCH_SPEED = RPM.of(4100);
   public static final AngularVelocity FLYWHEEL_CORNER_SPEED = RPM.of(4100);
   public static final AngularVelocity FLYWHEEL_NON_OUTPOST_SPEED = RPM.of(4100);
-  public static final AngularVelocity FLYWHEEL_TOWER_SPEED = RPM.of(4300);
+  public static final AngularVelocity FLYWHEEL_TOWER_SPEED = RPM.of(6000);
   public static final AngularVelocity FLYWHEEL_HUB_SPEED = RPM.of(3700); // TODO: adjust
   public static final AngularVelocity FLYWHEEL_DEPOT_SPEED = RPM.of(4100);
   public static final AngularVelocity FLYWHEEL_ANYWHERE_SPEED = RPM.of(4100);
@@ -61,25 +61,29 @@ public class ConstRotors {
     SERIALIZER_ROLLERS_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     SERIALIZER_ROLLERS_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
 
-    SHOOTER_TRANSFER_EAST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+    SHOOTER_TRANSFER_EAST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     SHOOTER_TRANSFER_EAST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
-    SHOOTER_TRANSFER_EAST_CONFIGURATION.Slot0.kS = 0;
-    SHOOTER_TRANSFER_EAST_CONFIGURATION.Slot0.kV = 0;
-    SHOOTER_TRANSFER_EAST_CONFIGURATION.Slot0.kA = 0;
-    SHOOTER_TRANSFER_EAST_CONFIGURATION.Slot0.kP = 0;
-    SHOOTER_TRANSFER_EAST_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity = 0;
-    SHOOTER_TRANSFER_EAST_CONFIGURATION.MotionMagic.MotionMagicAcceleration = 9999;
-    SHOOTER_TRANSFER_EAST_CONFIGURATION.MotionMagic.MotionMagicJerk = 0;
+    // SHOOTER_TRANSFER_EAST_CONFIGURATION.Slot0.kS = 0;
+    // SHOOTER_TRANSFER_EAST_CONFIGURATION.Slot0.kV = 0;
+    // SHOOTER_TRANSFER_EAST_CONFIGURATION.Slot0.kA = 0;
+    // SHOOTER_TRANSFER_EAST_CONFIGURATION.Slot0.kP = 0;
+    // SHOOTER_TRANSFER_EAST_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity =
+    // 0;
+    // SHOOTER_TRANSFER_EAST_CONFIGURATION.MotionMagic.MotionMagicAcceleration =
+    // 9999;
+    // SHOOTER_TRANSFER_EAST_CONFIGURATION.MotionMagic.MotionMagicJerk = 0;
 
-    SHOOTER_TRANSFER_WEST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+    SHOOTER_TRANSFER_WEST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     SHOOTER_TRANSFER_WEST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
-    SHOOTER_TRANSFER_WEST_CONFIGURATION.Slot0.kS = 0;
-    SHOOTER_TRANSFER_WEST_CONFIGURATION.Slot0.kV = 0;
-    SHOOTER_TRANSFER_WEST_CONFIGURATION.Slot0.kA = 0;
-    SHOOTER_TRANSFER_WEST_CONFIGURATION.Slot0.kP = 0;
-    SHOOTER_TRANSFER_WEST_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity = 0;
-    SHOOTER_TRANSFER_WEST_CONFIGURATION.MotionMagic.MotionMagicAcceleration = 9999;
-    SHOOTER_TRANSFER_WEST_CONFIGURATION.MotionMagic.MotionMagicJerk = 0;
+    // SHOOTER_TRANSFER_WEST_CONFIGURATION.Slot0.kS = 0;
+    // SHOOTER_TRANSFER_WEST_CONFIGURATION.Slot0.kV = 0;
+    // SHOOTER_TRANSFER_WEST_CONFIGURATION.Slot0.kA = 0;
+    // SHOOTER_TRANSFER_WEST_CONFIGURATION.Slot0.kP = 0;
+    // SHOOTER_TRANSFER_WEST_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity =
+    // 0;
+    // SHOOTER_TRANSFER_WEST_CONFIGURATION.MotionMagic.MotionMagicAcceleration =
+    // 9999;
+    // SHOOTER_TRANSFER_WEST_CONFIGURATION.MotionMagic.MotionMagicJerk = 0;
 
     FLYWHEEL_WEST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     FLYWHEEL_WEST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
