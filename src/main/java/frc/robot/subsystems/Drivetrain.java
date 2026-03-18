@@ -212,10 +212,10 @@ public class Drivetrain extends SN_SuperSwerveV2 {
   }
 
   public ChoreoTraj getDesiredClimbingPath() {
-    List<Pose2d> TowerPoses = ConstField.FieldElementGroups.TOWER_POSES.getAlliancePoses();
+    List<Pose2d> towerPoses = ConstField.FieldElementGroups.TOWER_POSES.getAlliancePoses();
     Pose2d currentPose = getPose();
-    Pose2d desiredTower = currentPose.nearest(TowerPoses);
-    if (desiredTower == TowerPoses.get(0)) {
+    Pose2d desiredTower = currentPose.nearest(towerPoses);
+    if (desiredTower == towerPoses.get(0)) {
       return ChoreoTraj.DSideClimb;
     } else {
       return ChoreoTraj.OSideClimb;
