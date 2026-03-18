@@ -118,9 +118,9 @@ public record ChoreoTraj(
 	public static final ChoreoTraj OSideClimb = new ChoreoTraj(
 	    "OSideClimb",
 	    OptionalInt.empty(),
-	    2.68316,
-	    new Pose2d(2.854, 3.228, Rotation2d.fromRadians(-1.571)),
-	    new Pose2d(1.564, 3.34, Rotation2d.fromRadians(-1.571))
+	    2.9347,
+	    new Pose2d(2.854, 3.427, Rotation2d.fromRadians(-1.571)),
+	    new Pose2d(1.484, 3.427, Rotation2d.fromRadians(-1.571))
 	);
 	public static final ChoreoTraj OSideNeutral_OSidePrep = new ChoreoTraj(
 	    "OSideNeutral_OSidePrep",
