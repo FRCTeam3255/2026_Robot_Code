@@ -22,12 +22,11 @@ public class None extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.motionInstance.setClimberPosition(ConstMotion.RETRACT_CLIMBER);
+    RobotContainer.motionInstance.setClimberPosition(ConstMotion.STORE_CLIMBER, ConstMotion.CLIMBER_FAST_PID_SLOT);
     RobotContainer.motionInstance.setHoodAngle(ConstMotion.HOOD_NONE_ANGLE);
     RobotContainer.rotorsInstance.setFlywheelPercentOutput(ConstRotors.STOP);
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.STOP);
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.STOP);
-    RobotContainer.rotorsInstance.setSerializerVFunnelSpeed(ConstRotors.STOP);
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.STOP);
     RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.NONE);
   }

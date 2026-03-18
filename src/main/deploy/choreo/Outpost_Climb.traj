@@ -1,5 +1,5 @@
 {
- "name":"Outpost_Tower",
+ "name":"Outpost_Climb",
  "version":3,
  "snapshot":{
   "waypoints":[
@@ -46,7 +46,7 @@
    "bumper":{
     "front":0.4064,
     "side":0.4064,
-    "back":0.4064
+    "back":0.6476999999999999
    },
    "differentialTrackWidth":0.5588
   },

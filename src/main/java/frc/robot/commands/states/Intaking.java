@@ -25,7 +25,7 @@ public class Intaking extends Command {
   public void initialize() {
     RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.INTAKING);
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.INTAKE_ROLLER_SPEED);
-    RobotContainer.motionInstance.setClimberPosition(ConstMotion.RETRACT_CLIMBER);
+    RobotContainer.motionInstance.setClimberPosition(ConstMotion.STORE_CLIMBER, ConstMotion.CLIMBER_FAST_PID_SLOT);
     RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
   }
 
@@ -37,11 +37,12 @@ public class Intaking extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

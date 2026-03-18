@@ -6,8 +6,10 @@ package frc.robot.commands;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.LimelightHelpers;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstField;
+import frc.robot.constants.ConstVision;
 
 public class ResetPose extends Command {
 
@@ -25,15 +27,21 @@ public class ResetPose extends Command {
 
   @Override
   public void execute() {
+    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.IMUMode.EXTERNAL_SEED);
+    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.IMUMode.EXTERNAL_SEED);
+    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.IMUMode.EXTERNAL_SEED);
   }
 
   @Override
   public void end(boolean interrupted) {
+    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.IMUMode.INTERNAL_ONLY);
+    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.IMUMode.INTERNAL_ONLY);
+    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.IMUMode.INTERNAL_ONLY);
   }
 
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 
   public Pose2d getAlliancePose() {

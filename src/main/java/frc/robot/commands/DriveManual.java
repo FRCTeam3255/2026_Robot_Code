@@ -56,6 +56,7 @@ public class DriveManual extends Command {
     double rotInput = -rotationXAxis.getAsDouble();
 
     if (Math.abs(rotInput) > ConstDrivetrain.ROTATION_STICK_DEADBAND) {
+      RobotContainer.drivetrainInstance.setIsManualRotationEnabled(true);
       RobotContainer.drivetrainInstance.drive(velocities);
       RobotContainer.drivetrainInstance
           .setDriveRotation(RobotContainer.drivetrainInstance.getPose().getRotation().getMeasure());

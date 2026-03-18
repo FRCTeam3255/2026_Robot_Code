@@ -70,8 +70,8 @@ public class Motion extends SubsystemBase {
     lastDesiredHoodAngle = setPoint;
   }
 
-  public void setClimberPosition(Distance setpoint) {
-    climber.setControl(climberMotionRequest.withPosition(setpoint.in(Units.Inches)));
+  public void setClimberPosition(Distance setpoint, int slot) {
+    climber.setControl(climberMotionRequest.withPosition(setpoint.in(Units.Inches)).withSlot(slot));
     lastDesiredClimberPosition = setpoint;
   }
 
@@ -135,6 +135,15 @@ public class Motion extends SubsystemBase {
 
   public AngularVelocity getHoodRotorVelocity() {
     return hood.getRotorVelocity().getValue();
+  }
+
+  public boolean isIntakePivotAtPosition(Angle target, Angle tolerance) {
+    Angle lowerLim = target.minus(tolerance);
+    Angle upperLim = target.plus(tolerance);
+
+    Angle pivotAngle = getPivotAngle();
+    return pivotAngle.gte(lowerLim) && pivotAngle.lte(upperLim);
+
   }
 
   public static Angle getMappedHoodAngle(Distance distance) {

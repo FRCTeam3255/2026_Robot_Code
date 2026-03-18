@@ -4,7 +4,6 @@
 
 package frc.robot.commands.states.PrepShoots;
 
-import frc.robot.constants.ConstField;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
 import frc.robot.subsystems.StateMachine;
@@ -14,9 +13,7 @@ import frc.robot.subsystems.StateMachine;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PrepTrench extends BasePrepShooter {
   public PrepTrench() {
-    // TODO: change the drivetrain angle to correct value
     super(ConstRotors.FLYWHEEL_TRENCH_SPEED, ConstMotion.HOOD_TRENCH_ANGLE,
-        ConstField.FieldElementGroups.TRENCH_PREP_SHOOT_ROTATION_SET,
         StateMachine.RobotState.PREP_TRENCH);
     // Use addRequirements() here to declare subsystem dependencies.
   }

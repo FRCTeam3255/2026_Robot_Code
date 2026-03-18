@@ -37,7 +37,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
   public Pose2d lastDesiredTarget;
   private Rotation2d driveRotation = new Rotation2d();
   private double manualDriveRotation = 0.0;
-  public boolean manualRotationEnabled = true;
+  private boolean manualRotationEnabled = true;
 
   /** Creates a new Drivetrain. */
   public static final SwerveModuleConstantsFactory<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> constantCreator = new SwerveModuleConstantsFactory<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>()
@@ -217,10 +217,6 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     return this.driveRotation;
   }
 
-  public void setIsManualRotationEnabled(boolean set) {
-    manualRotationEnabled = set;
-  }
-
   public Angle snapToTarget(Pose2d targetPose) {
     double dx = targetPose.getX() - getPose().getX();
     double dy = targetPose.getY() - getPose().getY();
@@ -233,5 +229,13 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     Angle lowerLim = getDriveRotation().getMeasure().plus(tolerance);
     return getPose().getRotation().getMeasure().gte(lowerLim)
         && getPose().getRotation().getMeasure().lte(upperLim);
+  }
+
+  public boolean isManualRotationEnabled() {
+    return manualRotationEnabled;
+  }
+
+  public void setIsManualRotationEnabled(boolean set) {
+    manualRotationEnabled = set;
   }
 }

@@ -7,14 +7,14 @@
 			"com.tldraw.asset": 1,
 			"com.tldraw.camera": 1,
 			"com.tldraw.document": 2,
-			"com.tldraw.instance": 25,
+			"com.tldraw.instance": 26,
 			"com.tldraw.instance_page_state": 5,
 			"com.tldraw.page": 1,
 			"com.tldraw.instance_presence": 6,
 			"com.tldraw.pointer": 1,
 			"com.tldraw.shape": 4,
 			"com.tldraw.asset.bookmark": 2,
-			"com.tldraw.asset.image": 5,
+			"com.tldraw.asset.image": 6,
 			"com.tldraw.asset.video": 5,
 			"com.tldraw.shape.group": 0,
 			"com.tldraw.shape.text": 4,
@@ -1069,7 +1069,7 @@
 							"content": [
 								{
 									"type": "text",
-									"text": "PrepOutpost"
+									"text": "PrepCorner"
 								}
 							]
 						}
@@ -1174,7 +1174,7 @@
 							"content": [
 								{
 									"type": "text",
-									"text": "ClimbingL1"
+									"text": "UnclimbL1"
 								}
 							]
 						}
@@ -1428,7 +1428,7 @@
 				"h": 64,
 				"geo": "rectangle",
 				"dash": "solid",
-				"growY": 26,
+				"growY": 27.375,
 				"url": "",
 				"scale": 1,
 				"color": "black",
@@ -1452,7 +1452,7 @@
 							"content": [
 								{
 									"type": "text",
-									"text": "PrepNeautralToAlliance"
+									"text": "PrepNeutralToAlliance"
 								}
 							]
 						}
@@ -1461,55 +1461,6 @@
 			},
 			"parentId": "shape:uGRWI4m6QItFOSMyV6rxb",
 			"index": "aFZick2V",
-			"typeName": "shape"
-		},
-		{
-			"x": 2541.5874459792176,
-			"y": -7.249084480777697,
-			"rotation": 0,
-			"isLocked": false,
-			"opacity": 1,
-			"meta": {},
-			"id": "shape:J66qoOM5cc5Ac-8d_RJPg",
-			"type": "geo",
-			"props": {
-				"w": 256.8252498937138,
-				"h": 90,
-				"geo": "rectangle",
-				"dash": "solid",
-				"growY": 0,
-				"url": "",
-				"scale": 1,
-				"color": "black",
-				"labelColor": "black",
-				"fill": "none",
-				"size": "m",
-				"font": "mono",
-				"align": "middle",
-				"verticalAlign": "middle",
-				"richText": {
-					"type": "doc",
-					"attrs": {
-						"dir": "auto"
-					},
-					"content": [
-						{
-							"type": "paragraph",
-							"attrs": {
-								"dir": "auto"
-							},
-							"content": [
-								{
-									"type": "text",
-									"text": "ClimbingL2_3"
-								}
-							]
-						}
-					]
-				}
-			},
-			"parentId": "page:Wfhj8q2d0tvavwNlrwo_4",
-			"index": "a8b9i2VV",
 			"typeName": "shape"
 		},
 		{
@@ -1709,9 +1660,9 @@
 			"typeName": "shape"
 		},
 		{
-			"x": 1056.7460477096772,
-			"y": 313.5190771677335,
-			"z": 0.5118547064274089,
+			"x": 1900.4620487906686,
+			"y": 321.1172957686434,
+			"z": 0.43969911670608697,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -2020,6 +1971,55 @@
 			},
 			"parentId": "shape:l1WQMDDUXD08p5gcJ4kHJ",
 			"index": "a7U6armG",
+			"typeName": "shape"
+		},
+		{
+			"x": 1139.7353437731358,
+			"y": 1137.1001510649173,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:ZHrk-Qx-C2v4JHHdQknF8",
+			"type": "geo",
+			"props": {
+				"w": 231.28364603733803,
+				"h": 67.59256864829763,
+				"geo": "rectangle",
+				"dash": "solid",
+				"growY": 0,
+				"url": "",
+				"scale": 1,
+				"color": "black",
+				"labelColor": "black",
+				"fill": "semi",
+				"size": "m",
+				"font": "mono",
+				"align": "middle",
+				"verticalAlign": "middle",
+				"richText": {
+					"type": "doc",
+					"attrs": {
+						"dir": "auto"
+					},
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "Defence"
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "shape:uGRWI4m6QItFOSMyV6rxb",
+			"index": "aHMKzWaG",
 			"typeName": "shape"
 		},
 		{
@@ -2686,9 +2686,9 @@
 			"typeName": "shape"
 		},
 		{
-			"x": 1311.493221573631,
-			"y": 816.454968469068,
-			"z": 0.21315783043216174,
+			"x": 690.3169610491666,
+			"y": -331.03511382297734,
+			"z": 0.5072976539778296,
 			"meta": {},
 			"id": "camera:page:grvVnvcP2QYOnDHPI3N7D",
 			"typeName": "camera"
@@ -4498,7 +4498,7 @@
 							"content": [
 								{
 									"type": "text",
-									"text": "PrepDepot"
+									"text": "PrepTrench"
 								}
 							]
 						}
@@ -4565,7 +4565,7 @@
 							"content": [
 								{
 									"type": "text",
-									"text": "UnClimbL1"
+									"text": "ClimbL1"
 								}
 							]
 						}
@@ -5038,7 +5038,8 @@
 				"h": 393,
 				"fileSize": 269456,
 				"mimeType": "image/png",
-				"isAnimated": false
+				"isAnimated": false,
+				"pixelRatio": 2
 			},
 			"meta": {}
 		},
@@ -5325,7 +5326,8 @@
 				"h": 446,
 				"fileSize": 273490,
 				"mimeType": "image/png",
-				"isAnimated": false
+				"isAnimated": false,
+				"pixelRatio": 2
 			},
 			"meta": {}
 		},
@@ -6960,7 +6962,7 @@
 		},
 		{
 			"x": 1805.6565463701254,
-			"y": 598.4537340096238,
+			"y": 598.4537340096239,
 			"rotation": 0,
 			"isLocked": false,
 			"opacity": 1,
@@ -6968,8 +6970,8 @@
 			"id": "shape:pU0-eUpYAmeTQ812jhuph",
 			"type": "geo",
 			"props": {
-				"w": 199,
-				"h": 64,
+				"w": 209.6221184844162,
+				"h": 68.36040995043106,
 				"geo": "rectangle",
 				"dash": "solid",
 				"growY": 0,
@@ -6996,7 +6998,7 @@
 							"content": [
 								{
 									"type": "text",
-									"text": "PrepTrench"
+									"text": "PrepHub"
 								}
 							]
 						}
@@ -7363,7 +7365,9 @@
 		{
 			"editingShapeId": null,
 			"croppingShapeId": null,
-			"selectedShapeIds": [],
+			"selectedShapeIds": [
+				"shape:ZHrk-Qx-C2v4JHHdQknF8"
+			],
 			"hoveredShapeId": null,
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
@@ -7531,7 +7535,7 @@
 			"brush": null,
 			"scribbles": [],
 			"cursor": {
-				"type": "default",
+				"type": "move",
 				"rotation": 0
 			},
 			"isFocusMode": false,
@@ -7541,8 +7545,8 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 1018,
-				"h": 614
+				"w": 1572,
+				"h": 918
 			},
 			"insets": [
 				false,
@@ -7565,8 +7569,9 @@
 			"isReadonly": false,
 			"meta": {},
 			"duplicateProps": null,
+			"cameraState": "idle",
 			"id": "instance:instance",
-			"currentPageId": "page:grvVnvcP2QYOnDHPI3N7D",
+			"currentPageId": "page:Wfhj8q2d0tvavwNlrwo_4",
 			"typeName": "instance"
 		},
 		{
@@ -7651,7 +7656,7 @@
 							"content": [
 								{
 									"type": "text",
-									"text": "PrepNonOutpost"
+									"text": "PrepTower"
 								}
 							]
 						}
@@ -8452,9 +8457,9 @@
 			"typeName": "binding"
 		},
 		{
-			"x": 0,
-			"y": 0,
-			"z": 1,
+			"x": -1092.5771874971206,
+			"y": 397.17205940202746,
+			"z": 0.5083731656658,
 			"meta": {},
 			"id": "camera:page:Wfhj8q2d0tvavwNlrwo_4",
 			"typeName": "camera"
