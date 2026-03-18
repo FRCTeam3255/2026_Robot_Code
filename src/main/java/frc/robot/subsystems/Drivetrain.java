@@ -222,9 +222,9 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     Distance distanceToTower = Units.Meters.of(currentPose.getTranslation().getDistance(desiredTower.getTranslation()));
     System.out.println("Distance to tower: " + distanceToTower.in(Units.Meters) + " meters");
     if (desiredTower == TowerPoses.get(0)) {
-      return ChoreoTraj.OSideClimb;
-    } else {
       return ChoreoTraj.DSideClimb;
+    } else {
+      return ChoreoTraj.OSideClimb;
     }
   }
 
