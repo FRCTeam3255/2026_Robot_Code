@@ -28,7 +28,7 @@ public class PrepClimb extends Command {
     // globalDrivetrain.rotationalAlign(ConstField.TOWER_POSE,
     // ConstDrivetrain.TURN_SPEED);
     RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.PREP_CLIMB_L1);
-    RobotContainer.motionInstance.setClimberPosition(ConstMotion.EXTEND_CLIMBER, ConstMotion.ELEVATOR_FAST_PID_ID);
+    RobotContainer.motionInstance.setClimberPosition(ConstMotion.EXTEND_CLIMBER, ConstMotion.CLIMBER_FAST_PID_SLOT);
     RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.RETRACT_INTAKE_PIVOT_ANGLE);
 
   }
