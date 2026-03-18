@@ -5,8 +5,9 @@
 package frc.robot.subsystems;
 
 import static edu.wpi.first.units.Units.Degrees;
-import java.util.function.DoubleSupplier;
 
+import java.util.List;
+import java.util.function.DoubleSupplier;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -17,7 +18,7 @@ import com.ctre.phoenix6.swerve.SwerveModuleConstants.SteerFeedbackType;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants.SteerMotorArrangement;
 import com.ctre.phoenix6.swerve.SwerveModuleConstantsFactory;
 import com.frcteam3255.components.swerve.SN_SuperSwerveV2;
-
+import frc.robot.constants.ConstField;
 import choreo.trajectory.SwerveSample;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -27,6 +28,7 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.units.measure.Angle;
 import frc.robot.DeviceIDs;
 import frc.robot.RobotContainer;
+import frc.robot.constants.ChoreoTraj;
 import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstPoseDrive.PoseDriveGroup;
 
@@ -207,6 +209,17 @@ public class Drivetrain extends SN_SuperSwerveV2 {
       manualDriveRotation = Math.atan2(rightStickY, rightStickX) - Math.PI / 2;
     }
     return manualDriveRotation;
+  }
+
+  public ChoreoTraj getDesiredClimbingPath() {
+    List<Pose2d> towerPoses = ConstField.FieldElementGroups.TOWER_POSES.getAlliancePoses();
+    Pose2d currentPose = getPose();
+    Pose2d desiredTower = currentPose.nearest(towerPoses);
+    if (desiredTower == towerPoses.get(0)) {
+      return ChoreoTraj.DSideClimb;
+    } else {
+      return ChoreoTraj.OSideClimb;
+    }
   }
 
   public void setDriveRotation(Angle rotation) {
