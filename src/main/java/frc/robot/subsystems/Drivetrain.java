@@ -33,7 +33,6 @@ import edu.wpi.first.units.measure.Distance;
 import frc.robot.DeviceIDs;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ChoreoTraj;
-import frc.robot.constants.ChoreoVars;
 import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstPoseDrive.PoseDriveGroup;
 
@@ -222,7 +221,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     Pose2d desiredTower = currentPose.nearest(TowerPoses);
     Distance distanceToTower = Units.Meters.of(currentPose.getTranslation().getDistance(desiredTower.getTranslation()));
     System.out.println("Distance to tower: " + distanceToTower.in(Units.Meters) + " meters");
-    if (desiredTower == ChoreoVars.Poses.D_side_climb_starting_pose) {
+    if (desiredTower == TowerPoses.get(0)) {
       return ChoreoTraj.DSideClimb;
     } else {
       return ChoreoTraj.OSideClimb;
