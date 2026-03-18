@@ -27,6 +27,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.units.measure.Angle;
 import frc.robot.DeviceIDs;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ChoreoTraj;
 import frc.robot.constants.ConstDrivetrain;
@@ -37,9 +38,10 @@ public class Drivetrain extends SN_SuperSwerveV2 {
 
   public PoseDriveGroup lastDesiredPoseGroup;
   public Pose2d lastDesiredTarget;
-  private Rotation2d driveRotation = new Rotation2d();
+  private Rotation2d targetDriveRotation = new Rotation2d();
   private double manualDriveRotation = 0.0;
   private boolean manualRotationEnabled = true;
+  private boolean drivetrainAtRotation = false;
 
   /** Creates a new Drivetrain. */
   public static final SwerveModuleConstantsFactory<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> constantCreator = new SwerveModuleConstantsFactory<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>()
@@ -223,11 +225,11 @@ public class Drivetrain extends SN_SuperSwerveV2 {
   }
 
   public void setDriveRotation(Angle rotation) {
-    this.driveRotation = Rotation2d.fromDegrees(rotation.in(Degrees));
+    this.targetDriveRotation = Rotation2d.fromDegrees(rotation.in(Degrees));
   }
 
-  public Rotation2d getDriveRotation() {
-    return this.driveRotation;
+  public Rotation2d getTargetRotation() {
+    return this.targetDriveRotation;
   }
 
   public Angle snapToTarget(Pose2d targetPose) {
@@ -237,11 +239,16 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     return Degrees.of(Math.toDegrees(angleRad));
   }
 
+  public Angle getDrivetrainRotation() {
+    return getPose().getRotation().getMeasure();
+  }
+
   public boolean isAtDesiredRotation(Angle tolerance) {
-    Angle upperLim = getDriveRotation().getMeasure().plus(tolerance);
-    Angle lowerLim = getDriveRotation().getMeasure().plus(tolerance);
-    return getPose().getRotation().getMeasure().gte(lowerLim)
-        && getPose().getRotation().getMeasure().lte(upperLim);
+    Angle upperLim = getTargetRotation().getMeasure().plus(tolerance);
+    Angle lowerLim = getTargetRotation().getMeasure().minus(tolerance);
+    drivetrainAtRotation = getDrivetrainRotation().gte(lowerLim)
+        && getDrivetrainRotation().lte(upperLim);
+    return drivetrainAtRotation;
   }
 
   public boolean isManualRotationEnabled() {
