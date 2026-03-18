@@ -12,7 +12,6 @@ import frc.robot.commands.states.Climbing.*;
 import frc.robot.RobotContainer;
 import frc.robot.commands.states.*;
 import frc.robot.commands.states.PrepShoots.*;
-import frc.robot.constants.ChoreoTraj;
 
 @Logged
 public class StateMachine extends SubsystemBase {
