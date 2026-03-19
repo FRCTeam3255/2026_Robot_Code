@@ -36,7 +36,7 @@ public class Telemetry extends SubsystemBase {
     }
   }
 
-  public boolean isOurShiftFirst() {
+  public boolean redIsNotFirst() {
     if (gameData.isEmpty()) {
       return true;
     }
@@ -189,9 +189,9 @@ public class Telemetry extends SubsystemBase {
       return true;
     }
 
-    if (((alliance.get() == Alliance.Red && isOurShiftFirst() == false)
+    if (((alliance.get().equals(Alliance.Red) && redIsNotFirst() == false)
         ||
-        (alliance.get() == Alliance.Blue && isOurShiftFirst() == true))
+        (alliance.get().equals(Alliance.Blue) && redIsNotFirst() == true))
         && getMatchTime() < autoTime
         && getMatchTime() > transitionShiftTime) {
       return true;
