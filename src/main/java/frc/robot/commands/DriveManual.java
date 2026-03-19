@@ -66,7 +66,7 @@ public class DriveManual extends Command {
       if (delayTimer.hasElapsed(ConstDrivetrain.ROTATION_DELAY)) {
         RobotContainer.drivetrainInstance.drive(
             velocities,
-            RobotContainer.drivetrainInstance.getDriveRotation(),
+            RobotContainer.drivetrainInstance.getTargetRotation(),
             ConstDrivetrain.ROTATION_PID.kP,
             ConstDrivetrain.ROTATION_PID.kI,
             ConstDrivetrain.ROTATION_PID.kD);
