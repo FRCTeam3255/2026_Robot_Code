@@ -209,16 +209,16 @@ public record ChoreoTraj(
 	public static final ChoreoTraj SecondUTurnOSideNeutral_OSidePrep = new ChoreoTraj(
 	    "SecondUTurnOSideNeutral_OSidePrep",
 	    OptionalInt.empty(),
-	    1.65384,
-	    new Pose2d(5.885, 2.608, Rotation2d.fromRadians(1.571)),
+	    1.34748,
+	    new Pose2d(6.594, 2.329, Rotation2d.fromRadians(0)),
 	    new Pose2d(2.779, 2.582, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj SecondUTurn_OSideTrench_Neutral = new ChoreoTraj(
 	    "SecondUTurn_OSideTrench_Neutral",
 	    OptionalInt.empty(),
-	    3.74932,
+	    4.53488,
 	    new Pose2d(3.684, 0.499, Rotation2d.fromRadians(-1.571)),
-	    new Pose2d(5.885, 2.608, Rotation2d.fromRadians(1.571))
+	    new Pose2d(6.594, 2.329, Rotation2d.fromRadians(0))
 	);
 
     /**
