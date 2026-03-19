@@ -6,6 +6,7 @@ package frc.robot.constants;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -175,5 +176,8 @@ public class ConstField {
         FieldElements.OPPONENT_TO_ALLIANCE_PREP_SHOOT_ROTATION);
     public static final Pose2dAllianceSet ANYWHERE_PREP_SHOOT_ROTATION_SET = new Pose2dAllianceSet(
         FieldElements.ANYWHERE_PREP_SHOOT_ROTATION);
+    public static final Pose2dAllianceSet TOWER_POSES = new Pose2dAllianceSet(
+        ChoreoVars.Poses.D_side_climb_starting_pose,
+        ChoreoVars.Poses.O_side_climb_starting_pose);
   }
 }

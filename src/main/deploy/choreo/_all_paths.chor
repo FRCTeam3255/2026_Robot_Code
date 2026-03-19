@@ -75,8 +75,8 @@
      "val":2.854172945022583
     },
     "y":{
-     "exp":"3.2280397415161133 m",
-     "val":3.2280397415161133
+     "exp":"O_side_tower.y",
+     "val":3.427
     },
     "heading":{
      "exp":"D_side_climb_starting_pose.heading",
@@ -85,12 +85,12 @@
    },
    "O_side_tower":{
     "x":{
-     "exp":"1.5643733739852905 m",
-     "val":1.5643733739852903
+     "exp":"D_side_tower.x",
+     "val":1.4841552734375
     },
     "y":{
-     "exp":"3.3400301933288574 m",
-     "val":3.3400301933288574
+     "exp":"3.427 m",
+     "val":3.427
     },
     "heading":{
      "exp":"D_side_tower.heading",
@@ -407,16 +407,16 @@
    },
    "second_oside_neutral_intake_end":{
     "x":{
-     "exp":"6.5943603515625 m",
-     "val":6.5943603515625
+     "exp":"5.8854217529296875 m",
+     "val":5.8854217529296875
     },
     "y":{
-     "exp":"2.3292248249053955 m",
-     "val":2.3292248249053955
+     "exp":"2.6075828075408936 m",
+     "val":2.6075828075408936
     },
     "heading":{
-     "exp":"0 deg",
-     "val":0.0
+     "exp":"first_oside_neutral_intake_end.heading",
+     "val":1.5707963267948966
     }
    }
   }

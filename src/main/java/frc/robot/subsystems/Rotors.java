@@ -32,6 +32,7 @@ public class Rotors extends SubsystemBase {
   AngularVelocity lastDesiredFlywheelSpeed = Units.RPM.of(0);
   Follower flywheelEastFollower = new Follower(flywheelTopEast.getDeviceID(), MotorAlignmentValue.Aligned);
   Follower flywheelWestFollower = new Follower(flywheelTopWest.getDeviceID(), MotorAlignmentValue.Aligned);
+  private boolean flywheelsAtSpeed = false;
 
   /** Creates a new Rotors. */
   public Rotors() {
@@ -87,8 +88,9 @@ public class Rotors extends SubsystemBase {
 
     AngularVelocity flywheelSpeeds = getFlywheelSpeeds();
 
-    return flywheelSpeeds.gte(lowerLim)
+    flywheelsAtSpeed = flywheelSpeeds.gte(lowerLim)
         && flywheelSpeeds.lte(upperLim);
+    return flywheelsAtSpeed;
   }
 
   public static AngularVelocity getMappedFlywheelSpeed(Distance distance) {
