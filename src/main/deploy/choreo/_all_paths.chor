@@ -71,15 +71,15 @@
    },
    "O_side_climb_starting_pose":{
     "x":{
-     "exp":"2.854172945022583 m",
-     "val":2.854172945022583
+     "exp":"2.196908473968506 m",
+     "val":2.196908473968506
     },
     "y":{
      "exp":"O_side_tower.y",
      "val":3.427
     },
     "heading":{
-     "exp":"D_side_climb_starting_pose.heading",
+     "exp":"-90 deg",
      "val":-1.5707963267948966
     }
    },
