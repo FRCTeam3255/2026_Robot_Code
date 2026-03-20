@@ -14,11 +14,10 @@ public final class ChoreoVars {
     public static final LinearVelocity ground_intaking = Units.MetersPerSecond.of(0.61);
 
     public static final class Poses {
-        public static final Pose2d D_side_climb_starting_pose = new Pose2d(2.891, 4.205, Rotation2d.fromRadians(-1.571));
+        public static final Pose2d D_side_climb_starting_pose = new Pose2d(2.229, 4.205, Rotation2d.fromRadians(-1.571));
         public static final Pose2d D_side_tower = new Pose2d(1.484, 4.205, Rotation2d.fromRadians(-1.571));
         public static final Pose2d Hub = new Pose2d(4.629, 4.032, Rotation2d.kZero);
         public static final Pose2d Hub_front = new Pose2d(2.3, 4, Rotation2d.kZero);
-        public static final Pose2d O_side_climb_starting_pose = new Pose2d(2.854, 3.427, Rotation2d.fromRadians(-1.571));
         public static final Pose2d O_side_tower = new Pose2d(1.484, 3.427, Rotation2d.fromRadians(-1.571));
         public static final Pose2d OppBump = new Pose2d(3.6, 2.6, Rotation2d.fromRadians(1.571));
         public static final Pose2d OppHub = new Pose2d(2.7, 3, Rotation2d.fromRadians(0.524));
@@ -30,7 +29,7 @@ public final class ChoreoVars {
         public static final Pose2d depot_side_neutral = new Pose2d(7.601, 5.857, Rotation2d.fromRadians(1.588));
         public static final Pose2d depot_side_neutral_shoot = new Pose2d(2.779, 5.269, Rotation2d.kZero);
         public static final Pose2d depot_side_trench = new Pose2d(3.683, 7.568, Rotation2d.fromRadians(1.571));
-        public static final Pose2d first_oside_neutral_intake_end = new Pose2d(7.227, 2.778, Rotation2d.fromRadians(1.571));
+        public static final Pose2d first_oside_neutral_intake_end = new Pose2d(7.017, 2.359, Rotation2d.fromRadians(1.571));
         public static final Pose2d hub_left = new Pose2d(2.6, 5.1, Rotation2d.fromRadians(5.76));
         public static final Pose2d neutral = new Pose2d(7.7, 5.2, Rotation2d.fromRadians(1.71));
         public static final Pose2d outpost = new Pose2d(0.733, 0.445, Rotation2d.kZero);
@@ -42,7 +41,8 @@ public final class ChoreoVars {
         public static final Pose2d outpost_side_trench = new Pose2d(3.612, 0.412, Rotation2d.kZero);
         public static final Pose2d outpost_side_trench_nuetral = new Pose2d(3.684, 0.499, Rotation2d.fromRadians(4.712));
         public static final Pose2d preload_shoot = new Pose2d(2.512, 4.004, Rotation2d.kZero);
-        public static final Pose2d second_oside_neutral_intake_end = new Pose2d(5.885, 2.608, Rotation2d.fromRadians(1.571));
+        public static final Pose2d second_oside_neutral_intake_end = new Pose2d(6.594, 2.329, Rotation2d.kZero);
+        public static final Pose2d O_side_climb_starting_pose = new Pose2d(2.197, 3.427, Rotation2d.fromRadians(-1.571));
 
         private Poses() {}
     }
