@@ -26,7 +26,7 @@ public class Intaking extends Command {
     RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.INTAKING);
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.INTAKE_ROLLER_SPEED);
     RobotContainer.motionInstance.setClimberPosition(ConstMotion.STORE_CLIMBER, ConstMotion.CLIMBER_FAST_PID_SLOT);
-    // RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
+    RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
