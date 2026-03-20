@@ -38,24 +38,22 @@ public class Shooting extends Command {
   @Override
   public void execute() {
     RobotContainer.drivetrainInstance.xBrake();
-    // if (liftIntakeTimer.hasElapsed(ConstMotion.LIFT_INTAKE_DELAY)) {
-    // deployIntakeTimer.start();
-    // if
-    // (!RobotContainer.motionInstance.isIntakePivotAtPosition(ConstMotion.LIFT_INTAKE_SHOOTING_ANGLE,
-    // ConstMotion.INTAKE_PIVOT_ANGLE_TOLERANCE)
-    // && deployIntakeTimer.hasElapsed(ConstMotion.LIFT_INTAKE_INTERVAL_TIME)) {
-    // RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.LIFT_INTAKE_SHOOTING_ANGLE);
-    // deployIntakeTimer.stop();
-    // deployIntakeTimer.reset();
-    // deployIntakeTimer.start();
-    // } else if
-    // (deployIntakeTimer.hasElapsed(ConstMotion.LIFT_INTAKE_INTERVAL_TIME)) {
-    // RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
-    // deployIntakeTimer.stop();
-    // deployIntakeTimer.reset();
-    // }
+    if (liftIntakeTimer.hasElapsed(ConstMotion.LIFT_INTAKE_DELAY)) {
+      deployIntakeTimer.start();
+      if (!RobotContainer.motionInstance.isIntakePivotAtPosition(ConstMotion.LIFT_INTAKE_SHOOTING_ANGLE,
+          ConstMotion.INTAKE_PIVOT_ANGLE_TOLERANCE)
+          && deployIntakeTimer.hasElapsed(ConstMotion.LIFT_INTAKE_INTERVAL_TIME)) {
+        RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.LIFT_INTAKE_SHOOTING_ANGLE);
+        deployIntakeTimer.stop();
+        deployIntakeTimer.reset();
+        deployIntakeTimer.start();
+      } else if (deployIntakeTimer.hasElapsed(ConstMotion.LIFT_INTAKE_INTERVAL_TIME)) {
+        RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
+        deployIntakeTimer.stop();
+        deployIntakeTimer.reset();
+      }
 
-    // }
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -63,7 +61,7 @@ public class Shooting extends Command {
   public void end(boolean interrupted) {
     liftIntakeTimer.stop();
     deployIntakeTimer.stop();
-    // RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
+    RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
   }
 
   // Returns true when the command should end.
