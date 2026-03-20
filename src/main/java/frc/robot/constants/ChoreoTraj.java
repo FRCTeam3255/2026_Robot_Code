@@ -118,7 +118,7 @@ public record ChoreoTraj(
 	public static final ChoreoTraj FirstUTurn_OSideTrench_Neutral = new ChoreoTraj(
 	    "FirstUTurn_OSideTrench_Neutral",
 	    OptionalInt.empty(),
-	    6.63367,
+	    8.26557,
 	    new Pose2d(3.684, 0.499, Rotation2d.fromRadians(-1.571)),
 	    new Pose2d(7.017, 2.359, Rotation2d.fromRadians(1.571))
 	);
@@ -220,6 +220,20 @@ public record ChoreoTraj(
 	    new Pose2d(3.684, 0.499, Rotation2d.fromRadians(-1.571)),
 	    new Pose2d(6.594, 2.329, Rotation2d.fromRadians(0))
 	);
+	public static final ChoreoTraj FirstUTurnDSideNeutral_OSidePrep = new ChoreoTraj(
+	    "FirstUTurnDSideNeutral_OSidePrep",
+	    OptionalInt.empty(),
+	    1.59176,
+	    new Pose2d(6.92, 5.983, Rotation2d.fromRadians(-1.571)),
+	    new Pose2d(2.779, 5.269, Rotation2d.fromRadians(0))
+	);
+	public static final ChoreoTraj FirstUTurn_DSideTrench_Neutral = new ChoreoTraj(
+	    "FirstUTurn_DSideTrench_Neutral",
+	    OptionalInt.empty(),
+	    9.51125,
+	    new Pose2d(3.683, 7.568, Rotation2d.fromRadians(1.571)),
+	    new Pose2d(6.909, 6.057, Rotation2d.fromRadians(-1.571))
+	);
 
     /**
      * A map between trajectory names and their corresponding data.
@@ -253,7 +267,9 @@ public record ChoreoTraj(
 		Map.entry("Outpost_PrepClimb", Outpost_PrepClimb),
 		Map.entry("Preload_PrepClimb", Preload_PrepClimb),
 		Map.entry("SecondUTurnOSideNeutral_OSidePrep", SecondUTurnOSideNeutral_OSidePrep),
-		Map.entry("SecondUTurn_OSideTrench_Neutral", SecondUTurn_OSideTrench_Neutral)
+		Map.entry("SecondUTurn_OSideTrench_Neutral", SecondUTurn_OSideTrench_Neutral),
+		Map.entry("FirstUTurnDSideNeutral_OSidePrep", FirstUTurnDSideNeutral_OSidePrep),
+		Map.entry("FirstUTurn_DSideTrench_Neutral", FirstUTurn_DSideTrench_Neutral)
     );
 
     /**
