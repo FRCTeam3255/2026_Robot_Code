@@ -50,10 +50,10 @@ public class Motion extends SubsystemBase {
 
   }
 
-  public void setIntakePivotAngle(Angle setPoint) {
-    intakePivot.setControl(intakePivotMotionRequest.withPosition(setPoint));
-    lastDesiredIntakePivotAngle = setPoint;
-  }
+  // public void setIntakePivotAngle(Angle setPoint) {
+  // intakePivot.setControl(intakePivotMotionRequest.withPosition(setPoint));
+  // lastDesiredIntakePivotAngle = setPoint;
+  // }
 
   public void setHoodAngle(Angle setPoint) {
     hood.setControl(hoodMotionRequest.withPosition(setPoint));
