@@ -48,15 +48,15 @@ public record ChoreoTraj(
 	public static final ChoreoTraj DSideBump_PrepClimb = new ChoreoTraj(
 	    "DSideBump_PrepClimb",
 	    OptionalInt.empty(),
-	    0.71106,
+	    1.03735,
 	    new Pose2d(2.779, 5.269, Rotation2d.fromRadians(0)),
-	    new Pose2d(2.891, 4.205, Rotation2d.fromRadians(-1.571))
+	    new Pose2d(2.229, 4.205, Rotation2d.fromRadians(-1.571))
 	);
 	public static final ChoreoTraj DSideClimb = new ChoreoTraj(
 	    "DSideClimb",
 	    OptionalInt.empty(),
-	    3.0423,
-	    new Pose2d(2.891, 4.205, Rotation2d.fromRadians(-1.571)),
+	    0.91776,
+	    new Pose2d(2.229, 4.205, Rotation2d.fromRadians(-1.571)),
 	    new Pose2d(1.484, 4.205, Rotation2d.fromRadians(-1.571))
 	);
 	public static final ChoreoTraj DSideHub_Depot = new ChoreoTraj(
@@ -90,9 +90,9 @@ public record ChoreoTraj(
 	public static final ChoreoTraj DSidePrep_PrepClimb = new ChoreoTraj(
 	    "DSidePrep_PrepClimb",
 	    OptionalInt.empty(),
-	    0.64173,
+	    0.63509,
 	    new Pose2d(2.458, 5.825, Rotation2d.fromRadians(0)),
-	    new Pose2d(2.891, 4.205, Rotation2d.fromRadians(-1.571))
+	    new Pose2d(2.229, 4.205, Rotation2d.fromRadians(-1.571))
 	);
 	public static final ChoreoTraj DSideShoot_DSideTrench = new ChoreoTraj(
 	    "DSideShoot_DSideTrench",
@@ -107,6 +107,20 @@ public record ChoreoTraj(
 	    3.8914,
 	    new Pose2d(3.683, 7.568, Rotation2d.fromRadians(1.571)),
 	    new Pose2d(7.601, 5.857, Rotation2d.fromRadians(1.588))
+	);
+	public static final ChoreoTraj FirstUTurnOSideNeutral_OSidePrep = new ChoreoTraj(
+	    "FirstUTurnOSideNeutral_OSidePrep",
+	    OptionalInt.empty(),
+	    1.46915,
+	    new Pose2d(7.017, 2.359, Rotation2d.fromRadians(1.571)),
+	    new Pose2d(2.779, 2.582, Rotation2d.fromRadians(0))
+	);
+	public static final ChoreoTraj FirstUTurn_OSideTrench_Neutral = new ChoreoTraj(
+	    "FirstUTurn_OSideTrench_Neutral",
+	    OptionalInt.empty(),
+	    6.63367,
+	    new Pose2d(3.684, 0.499, Rotation2d.fromRadians(-1.571)),
+	    new Pose2d(7.017, 2.359, Rotation2d.fromRadians(1.571))
 	);
 	public static final ChoreoTraj Hub_ShootPreload = new ChoreoTraj(
 	    "Hub_ShootPreload",
@@ -128,13 +142,6 @@ public record ChoreoTraj(
 	    1.28791,
 	    new Pose2d(7.604, 2.375, Rotation2d.fromRadians(-1.571)),
 	    new Pose2d(2.779, 2.582, Rotation2d.fromRadians(0))
-	);
-	public static final ChoreoTraj OSideNeutral_OSidePrep_CC = new ChoreoTraj(
-	    "OSideNeutral_OSidePrep_CC",
-	    OptionalInt.empty(),
-	    1.93082,
-	    new Pose2d(2.779, 2.582, Rotation2d.fromRadians(0)),
-	    new Pose2d(7.604, 2.375, Rotation2d.fromRadians(3.142))
 	);
 	public static final ChoreoTraj OSideShoot_OSideTrench = new ChoreoTraj(
 	    "OSideShoot_OSideTrench",
@@ -163,13 +170,6 @@ public record ChoreoTraj(
 	    4.26645,
 	    new Pose2d(3.684, 0.499, Rotation2d.fromRadians(-1.571)),
 	    new Pose2d(7.604, 2.375, Rotation2d.fromRadians(-1.571))
-	);
-	public static final ChoreoTraj OSideTrench_Neutral_CC = new ChoreoTraj(
-	    "OSideTrench_Neutral_CC",
-	    OptionalInt.empty(),
-	    3.00457,
-	    new Pose2d(3.684, 0.499, Rotation2d.fromRadians(-1.571)),
-	    new Pose2d(7.053, 3.514, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj OSideTrench_Outpost = new ChoreoTraj(
 	    "OSideTrench_Outpost",
@@ -202,9 +202,23 @@ public record ChoreoTraj(
 	public static final ChoreoTraj Preload_PrepClimb = new ChoreoTraj(
 	    "Preload_PrepClimb",
 	    OptionalInt.empty(),
-	    0.50378,
+	    0.47746,
 	    new Pose2d(2.512, 4.004, Rotation2d.fromRadians(0)),
-	    new Pose2d(2.891, 4.205, Rotation2d.fromRadians(-1.571))
+	    new Pose2d(2.229, 4.205, Rotation2d.fromRadians(-1.571))
+	);
+	public static final ChoreoTraj SecondUTurnOSideNeutral_OSidePrep = new ChoreoTraj(
+	    "SecondUTurnOSideNeutral_OSidePrep",
+	    OptionalInt.empty(),
+	    1.34748,
+	    new Pose2d(6.594, 2.329, Rotation2d.fromRadians(0)),
+	    new Pose2d(2.779, 2.582, Rotation2d.fromRadians(0))
+	);
+	public static final ChoreoTraj SecondUTurn_OSideTrench_Neutral = new ChoreoTraj(
+	    "SecondUTurn_OSideTrench_Neutral",
+	    OptionalInt.empty(),
+	    11.38036,
+	    new Pose2d(3.684, 0.499, Rotation2d.fromRadians(-1.571)),
+	    new Pose2d(6.594, 2.329, Rotation2d.fromRadians(0))
 	);
 
     /**
@@ -224,20 +238,22 @@ public record ChoreoTraj(
 		Map.entry("DSidePrep_PrepClimb", DSidePrep_PrepClimb),
 		Map.entry("DSideShoot_DSideTrench", DSideShoot_DSideTrench),
 		Map.entry("DSideTrench_Neutral", DSideTrench_Neutral),
+		Map.entry("FirstUTurnOSideNeutral_OSidePrep", FirstUTurnOSideNeutral_OSidePrep),
+		Map.entry("FirstUTurn_OSideTrench_Neutral", FirstUTurn_OSideTrench_Neutral),
 		Map.entry("Hub_ShootPreload", Hub_ShootPreload),
 		Map.entry("OSideClimb", OSideClimb),
 		Map.entry("OSideNeutral_OSidePrep", OSideNeutral_OSidePrep),
-		Map.entry("OSideNeutral_OSidePrep_CC", OSideNeutral_OSidePrep_CC),
 		Map.entry("OSideShoot_OSideTrench", OSideShoot_OSideTrench),
 		Map.entry("OSideShoot_Outpost", OSideShoot_Outpost),
 		Map.entry("OSideShoot_PrepClimb", OSideShoot_PrepClimb),
 		Map.entry("OSideTrench_Neutral", OSideTrench_Neutral),
-		Map.entry("OSideTrench_Neutral_CC", OSideTrench_Neutral_CC),
 		Map.entry("OSideTrench_Outpost", OSideTrench_Outpost),
 		Map.entry("Outpost_Climb", Outpost_Climb),
 		Map.entry("Outpost_OSidePrep", Outpost_OSidePrep),
 		Map.entry("Outpost_PrepClimb", Outpost_PrepClimb),
-		Map.entry("Preload_PrepClimb", Preload_PrepClimb)
+		Map.entry("Preload_PrepClimb", Preload_PrepClimb),
+		Map.entry("SecondUTurnOSideNeutral_OSidePrep", SecondUTurnOSideNeutral_OSidePrep),
+		Map.entry("SecondUTurn_OSideTrench_Neutral", SecondUTurn_OSideTrench_Neutral)
     );
 
     /**
