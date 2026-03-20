@@ -186,7 +186,7 @@ public class Telemetry extends SubsystemBase {
       return false;
     }
     if (gameData.isEmpty()) {
-      return true;
+      return false;
     }
 
     if (((alliance.get().equals(Alliance.Red) && redIsNotFirst() == false)
