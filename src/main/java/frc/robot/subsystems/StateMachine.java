@@ -47,7 +47,7 @@ public class StateMachine extends SubsystemBase {
       case INTAKING:
         switch (currentRobotState) {
           case NONE:
-          case DEFENSE:
+          case RETRACT_INTAKE:
           case PREP_CLIMB_L1:
           case UNCLIMB_L1:
           case PREP_HUB:
@@ -285,7 +285,7 @@ public class StateMachine extends SubsystemBase {
         }
         break;
 
-      case DEFENSE:
+      case RETRACT_INTAKE:
         switch (currentRobotState) {
           case NONE:
             return new RetractIntake();
@@ -317,7 +317,7 @@ public class StateMachine extends SubsystemBase {
     CLIMBING_L1,
     CLIMBING_L2_3,
     UNCLIMB_L1,
-    DEFENSE,
+    RETRACT_INTAKE,
   }
 
   @Override
