@@ -8,6 +8,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Distance;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
@@ -61,6 +62,7 @@ public class PrepAnywhere extends Command {
         && RobotContainer.motionInstance
             .isHoodAtPosition(ConstMotion.HOOD_TOLERANCE)
         && RobotContainer.drivetrainInstance
-            .isAtDesiredRotation(ConstPoseDrive.PrepShootRotations.DRIVETRAIN_TOLERANCE);
+            .isAtDesiredRotation(ConstPoseDrive.PrepShootRotations.DRIVETRAIN_TOLERANCE)
+        && DriverStation.isAutonomousEnabled();
   }
 }
