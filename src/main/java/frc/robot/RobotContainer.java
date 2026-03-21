@@ -194,7 +194,6 @@ public class RobotContainer {
         .onTrue(TRY_PREP_CORNER);
     conDriver.btn_Y
         .onTrue(TRY_PREP_HUB);
-    // .onTrue() rethink where to put retract intake
     // .onFalse(TRY_NONE);
     conDriver.btn_X
         .onTrue(TRY_PREP_TOWER);
