@@ -115,8 +115,8 @@ public record ChoreoTraj(
 	    new Pose2d(7.017, 2.359, Rotation2d.fromRadians(1.571)),
 	    new Pose2d(2.779, 2.582, Rotation2d.fromRadians(0))
 	);
-	public static final ChoreoTraj FirstUTurnDSideNeutral_OSidePrep = new ChoreoTraj(
-	    "FirstUTurnDSideNeutral_OSidePrep",
+	public static final ChoreoTraj FirstUTurnDSideNeutral_DSidePrep = new ChoreoTraj(
+	    "FirstUTurnDSideNeutral_DSidePrep",
 	    OptionalInt.empty(),
 	    1.59176,
 	    new Pose2d(6.92, 5.983, Rotation2d.fromRadians(-1.571)),
@@ -241,6 +241,20 @@ public record ChoreoTraj(
 	    new Pose2d(3.684, 0.499, Rotation2d.fromRadians(-1.571)),
 	    new Pose2d(6.594, 2.329, Rotation2d.fromRadians(0))
 	);
+	public static final ChoreoTraj SecondUTurn_DSideTrench_Neutral = new ChoreoTraj(
+	    "SecondUTurn_DSideTrench_Neutral",
+	    OptionalInt.empty(),
+	    11.27074,
+	    new Pose2d(3.683, 7.568, Rotation2d.fromRadians(1.571)),
+	    new Pose2d(6.62, 5.825, Rotation2d.fromRadians(0))
+	);
+	public static final ChoreoTraj SecondUTurnDSideNeutral_DSidePrep = new ChoreoTraj(
+	    "SecondUTurnDSideNeutral_DSidePrep",
+	    OptionalInt.empty(),
+	    1.36926,
+	    new Pose2d(6.62, 5.825, Rotation2d.fromRadians(0)),
+	    new Pose2d(2.779, 5.269, Rotation2d.fromRadians(0))
+	);
 
     /**
      * A map between trajectory names and their corresponding data.
@@ -260,7 +274,7 @@ public record ChoreoTraj(
 		Map.entry("DSideShoot_DSideTrench", DSideShoot_DSideTrench),
 		Map.entry("DSideTrench_Neutral", DSideTrench_Neutral),
 		Map.entry("FirstCCOSideNeutral_OSidePrep", FirstCCOSideNeutral_OSidePrep),
-		Map.entry("FirstUTurnDSideNeutral_OSidePrep", FirstUTurnDSideNeutral_OSidePrep),
+		Map.entry("FirstUTurnDSideNeutral_DSidePrep", FirstUTurnDSideNeutral_DSidePrep),
 		Map.entry("FirstUTurnOSideNeutral_OSidePrep", FirstUTurnOSideNeutral_OSidePrep),
 		Map.entry("FirstUTurn_DSideTrench_Neutral", FirstUTurn_DSideTrench_Neutral),
 		Map.entry("FirstUTurn_OSideTrench_Neutral", FirstUTurn_OSideTrench_Neutral),
@@ -277,7 +291,9 @@ public record ChoreoTraj(
 		Map.entry("Outpost_PrepClimb", Outpost_PrepClimb),
 		Map.entry("Preload_PrepClimb", Preload_PrepClimb),
 		Map.entry("SecondUTurnOSideNeutral_OSidePrep", SecondUTurnOSideNeutral_OSidePrep),
-		Map.entry("SecondUTurn_OSideTrench_Neutral", SecondUTurn_OSideTrench_Neutral)
+		Map.entry("SecondUTurn_OSideTrench_Neutral", SecondUTurn_OSideTrench_Neutral),
+		Map.entry("SecondUTurn_DSideTrench_Neutral", SecondUTurn_DSideTrench_Neutral),
+		Map.entry("SecondUTurnDSideNeutral_DSidePrep", SecondUTurnDSideNeutral_DSidePrep)
     );
 
     /**

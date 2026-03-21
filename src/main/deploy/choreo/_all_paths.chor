@@ -419,6 +419,20 @@
      "val":0.0
     }
    },
+   "second_dside_neutral_intake_end":{
+    "x":{
+     "exp":"6.619997978210449 m",
+     "val":6.619997978210449
+    },
+    "y":{
+     "exp":"5.82485818862915 m",
+     "val":5.82485818862915
+    },
+    "heading":{
+     "exp":"0 deg",
+     "val":0.0
+    }
+   },
    "second_oside_neutral_intake_end":{
     "x":{
      "exp":"6.5943603515625 m",

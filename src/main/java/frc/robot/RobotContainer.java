@@ -287,6 +287,22 @@ public class RobotContainer {
         runPath(ChoreoTraj.DSideShoot_DSideTrench).asProxy(),
         DepotSideNeutral.asProxy());
 
+    Command DoubleUTurnDepotSideNeutral = Commands.sequence(
+        TRY_INTAKING.asProxy().withTimeout(0.3), // Force intake down before moving and going under trench
+        CollectAndScore(
+            ChoreoTraj.FirstUTurn_DSideTrench_Neutral,
+            ChoreoTraj.FirstUTurnDSideNeutral_DSidePrep,
+            TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
+            ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
+        runPath(ChoreoTraj.DSideShoot_DSideTrench).asProxy(),
+        CollectAndScore(
+            ChoreoTraj.SecondUTurn_DSideTrench_Neutral,
+            ChoreoTraj.SecondUTurnDSideNeutral_DSidePrep,
+            TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
+            ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
+
     Command DepotSideNeutralWithClimb = Commands.sequence(
         DepotSideNeutral.asProxy(),
         Climb(ChoreoTraj.DSideBump_PrepClimb));
@@ -327,6 +343,7 @@ public class RobotContainer {
     autoChooser.addOption("OutpostWithClimb", OutpostWithClimb);
     autoChooser.addOption("DepotSideNeutralZone", DepotSideNeutral);
     autoChooser.addOption("DoubleDepotSideNeutral", DoubleDepotSideNeutral);
+    autoChooser.addOption("UTurnDepotSideNeutral", DoubleUTurnDepotSideNeutral);
     autoChooser.addOption("DepotSideNeutralWithClimb", DepotSideNeutralWithClimb);
     autoChooser.addOption("DepotSideNeutralWithDepot", DepotSideNeutralWithDepot);
     autoChooser.addOption("Depot", PreloadDepot);
@@ -349,6 +366,7 @@ public class RobotContainer {
         Map.entry(DoubleDepotSideNeutral, ChoreoTraj.DSideTrench_Neutral),
         Map.entry(PreloadDepot, ChoreoTraj.DSideBump_Depot),
         Map.entry(DepotSideNeutralWithClimb, ChoreoTraj.DSideTrench_Neutral),
+        Map.entry(DoubleUTurnDepotSideNeutral, ChoreoTraj.FirstUTurn_DSideTrench_Neutral),
         Map.entry(DepotSideNeutralWithDepot, ChoreoTraj.DSideTrench_Neutral),
         Map.entry(OutpostSideNeutral, ChoreoTraj.OSideTrench_Neutral),
         Map.entry(DoubleOutpostSideNeutral, ChoreoTraj.OSideTrench_Neutral),
