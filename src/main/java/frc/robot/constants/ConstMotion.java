@@ -89,7 +89,7 @@ public class ConstMotion {
 
     HOOD_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     HOOD_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
-    HOOD_CONFIGURATION.Feedback.SensorToMechanismRatio = 1.0 / ((10.0 / 44.0) * (10.0 / 190.0));
+    HOOD_CONFIGURATION.Feedback.SensorToMechanismRatio = 1.0 / ((10.0 / 42.0) * (10.0 / 210.0));
     HOOD_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitEnable = true;
     HOOD_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
     HOOD_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitThreshold = Units.Degrees.of(46).in(Rotations);
