@@ -19,6 +19,7 @@ public class ResetPose extends Command {
 
   @Override
   public void initialize() {
+    RobotContainer.visionInstance.setVisionEnabled(false);
     RobotContainer.drivetrainInstance.resetPose(getAlliancePose());
     RobotContainer.drivetrainInstance.getPigeon2()
         .setYaw(getAlliancePose().getRotation().getMeasure());

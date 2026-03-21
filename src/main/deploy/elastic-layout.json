@@ -51,14 +51,14 @@
             }
           },
           {
-            "title": "Ready to shoot",
+            "title": "Our Shift First",
             "x": 1088.0,
             "y": 0.0,
             "width": 408.0,
             "height": 170.0,
             "type": "Boolean Box",
             "properties": {
-              "topic": "Robot/m_robotContainer/readyToShootTrigger",
+              "topic": "Robot/m_robotContainer/isOurShiftFirstTrigger",
               "period": 0.06,
               "data_type": "boolean",
               "true_color": 4283215696,
