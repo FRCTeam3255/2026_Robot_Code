@@ -30,6 +30,8 @@ public class Shooting extends Command {
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.SERIALIZER_ROLLERS_SPEED);
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.SHOOTER_TRANSFER_SPEED);
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.INTAKE_ROLLER_SPEED);
+    RobotContainer.motionInstance.setClimberPosition(ConstMotion.STORE_CLIMBER,
+        ConstMotion.CLIMBER_HOPPER_EXPANSION_PID_SLOT);
     liftIntakeTimer.reset();
     liftIntakeTimer.start();
   }
