@@ -53,7 +53,7 @@ public class ConstMotion {
   public static final Angle INTAKE_PIVOT_ANGLE_TOLERANCE = Units.Degrees.of(5);
   public static final int CLIMBER_SLOW_PID_SLOT = 0;
   public static final int CLIMBER_FAST_PID_SLOT = 1;
-
+  public static final int CLIMBER_HOPPER_EXPANSION_PID_SLOT = 2;
   public static final Distance CLIMBER_TOLERANCE = Inches.of(0.2);
   static {
 
@@ -87,6 +87,13 @@ public class ConstMotion {
     CLIMBER_CONFIGURATION.Slot1.kP = 20;
     CLIMBER_CONFIGURATION.Slot1.StaticFeedforwardSign = StaticFeedforwardSignValue.UseClosedLoopSign;
     CLIMBER_CONFIGURATION.Feedback.SensorToMechanismRatio = 3.0769;
+
+    // Slot 2 HOPPER
+    CLIMBER_CONFIGURATION.Slot2.GravityType = GravityTypeValue.Elevator_Static;
+    CLIMBER_CONFIGURATION.Slot2.kS = 0.13;
+    CLIMBER_CONFIGURATION.Slot2.kP = 50;
+    CLIMBER_CONFIGURATION.Slot2.StaticFeedforwardSign = StaticFeedforwardSignValue.UseClosedLoopSign;
+    CLIMBER_CONFIGURATION.Feedback.SensorToMechanismRatio = 3.7;
 
     HOOD_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     HOOD_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
