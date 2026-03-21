@@ -5,9 +5,7 @@
 package frc.robot.subsystems;
 
 import java.util.Optional;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import frc.robot.LimelightHelpers;
@@ -92,11 +90,11 @@ public class Vision extends SubsystemBase {
     return true;
   }
 
-  public int getDetectedApriltags() {
+  public Set<Integer> getDetectedApriltags() {
 
     // Gather raw fiducial detections from each Limelight and return the
     // number of unique AprilTag IDs currently visible.
-    List ids = new ArrayList<>();
+    Set<Integer> ids = new HashSet<>();
 
     try {
       var right = LimelightHelpers.getRawFiducials(ConstVision.LIMELIGHT_RIGHT_NAME);
@@ -129,7 +127,7 @@ public class Vision extends SubsystemBase {
       // ignore
     }
 
-    return ids.size();
+    return ids;
 
   }
 
