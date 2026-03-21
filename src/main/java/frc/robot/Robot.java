@@ -93,6 +93,9 @@ public class Robot extends TimedRobot {
     LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.IMUMode.INTERNAL_ONLY);
     LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.IMUMode.INTERNAL_ONLY);
     m_robotContainer.addVisionMeasurement().schedule();
+    LimelightHelpers.setRewindEnabled(ConstVision.LIMELIGHT_LEFT_NAME, true);
+    LimelightHelpers.setRewindEnabled(ConstVision.LIMELIGHT_RIGHT_NAME, true);
+    LimelightHelpers.setRewindEnabled(ConstVision.LIMELIGHT_TOP_NAME, true);
   }
 
   @Override
@@ -131,6 +134,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopExit() {
+    LimelightHelpers.setRewindEnabled(ConstVision.LIMELIGHT_LEFT_NAME, false);
+    LimelightHelpers.setRewindEnabled(ConstVision.LIMELIGHT_RIGHT_NAME, false);
+    LimelightHelpers.setRewindEnabled(ConstVision.LIMELIGHT_TOP_NAME, false);
   }
 
   @Override
