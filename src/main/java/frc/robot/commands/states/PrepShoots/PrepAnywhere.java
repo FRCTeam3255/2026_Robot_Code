@@ -28,6 +28,7 @@ public class PrepAnywhere extends Command {
 
   @Override
   public void initialize() {
+    RobotContainer.visionInstance.setVisionEnabled(true);
     RobotContainer.stateMachineInstance.setRobotState(RobotState.PREP_ANYWHERE);
     RobotContainer.drivetrainInstance.setIsManualRotationEnabled(false);
   }
