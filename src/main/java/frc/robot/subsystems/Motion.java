@@ -6,12 +6,9 @@ package frc.robot.subsystems;
 
 import static edu.wpi.first.units.Units.Degrees;
 import static edu.wpi.first.units.Units.Inches;
-// Meters import not used in this file
-
 import com.ctre.phoenix6.controls.MotionMagicExpoVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
-
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
@@ -22,7 +19,6 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DeviceIDs;
 import frc.robot.Robot;
-// RobotContainer is not referenced in this file; commands access Motion via RobotContainer.motionInstance
 import frc.robot.constants.ConstMotion;
 
 @Logged
@@ -47,6 +43,10 @@ public class Motion extends SubsystemBase {
   Angle lastDesiredHoodAngle = Degrees.zero();
   Angle lastDesiredIntakePivotAngle = Degrees.zero();
   Distance lastDesiredClimberPosition = Inches.zero();
+
+  private boolean hoodAtPosition = false;
+  private boolean intakePivotAtPosition = false;
+  private boolean climberAtPosition = false;
 
   public Motion() {
     intakePivot.getConfigurator().apply(ConstMotion.INTAKE_PIVOT_CONFIGURATION);
@@ -115,8 +115,9 @@ public class Motion extends SubsystemBase {
 
     Angle hoodAngle = getHoodAngle();
 
-    return hoodAngle.gte(lowerLim)
+    hoodAtPosition = hoodAngle.gte(lowerLim)
         && hoodAngle.lte(upperLim);
+    return hoodAtPosition;
   }
 
   public boolean isIntakePivotAtPosition(Angle tolerance) {
@@ -125,8 +126,9 @@ public class Motion extends SubsystemBase {
 
     Angle pivotAngle = getPivotAngle();
 
-    return pivotAngle.gte(lowerLim)
+    intakePivotAtPosition = pivotAngle.gte(lowerLim)
         && pivotAngle.lte(upperLim);
+    return intakePivotAtPosition;
   }
 
   public AngularVelocity getIntakePivotRotorVelocity() {
@@ -143,7 +145,6 @@ public class Motion extends SubsystemBase {
 
     Angle pivotAngle = getPivotAngle();
     return pivotAngle.gte(lowerLim) && pivotAngle.lte(upperLim);
-
   }
 
   public static Angle getMappedHoodAngle(Distance distance) {
@@ -171,8 +172,9 @@ public class Motion extends SubsystemBase {
 
     Distance climberPosition = getClimberPosition();
 
-    return climberPosition.gte(lowerLim)
+    climberAtPosition = climberPosition.gte(lowerLim)
         && climberPosition.lte(upperLim);
+    return climberAtPosition;
   }
 
   public boolean isIntakePivotRotorVelocityZero() {

@@ -12,7 +12,6 @@ import frc.robot.commands.states.Climbing.*;
 import frc.robot.RobotContainer;
 import frc.robot.commands.states.*;
 import frc.robot.commands.states.PrepShoots.*;
-import frc.robot.constants.ChoreoTraj;
 
 @Logged
 public class StateMachine extends SubsystemBase {
@@ -259,7 +258,7 @@ public class StateMachine extends SubsystemBase {
         switch (currentRobotState) {
           case NONE:
             return new PrepClimb()
-                .alongWith(RobotContainer.runPath(ChoreoTraj.DSideClimb));
+                .alongWith(RobotContainer.runPath(RobotContainer.drivetrainInstance.getDesiredClimbingPath()));
         }
         break;
 
