@@ -39,7 +39,8 @@ public class HumanZeroIntake extends Command {
   @Override
   public void execute() {
     // Check if we have raised the intake above a certain speed
-    if (RobotContainer.motionInstance.getIntakePivotRotorVelocity().gte(ConstMotion.MANUAL_ZEROING_START_VELOCITY)
+    if (RobotContainer.motionInstance.getRotorVelocity(RobotContainer.motionInstance.intakePivot)
+        .gte(ConstMotion.MANUAL_ZEROING_START_VELOCITY)
         || RobotContainer.motionInstance.intakePivotAttemptingZeroing) {
       // Enter zeroing mode!
       if (!RobotContainer.motionInstance.intakePivotAttemptingZeroing) {
@@ -53,14 +54,15 @@ public class HumanZeroIntake extends Command {
         RobotContainer.motionInstance.intakePivotAttemptingZeroing = false;
         System.out.println("Intake Pivot Zeroing Failed :(");
       } else {
-        boolean deltaRotorVelocity = RobotContainer.motionInstance.getIntakePivotRotorVelocity()
+        boolean deltaRotorVelocity = RobotContainer.motionInstance
+            .getRotorVelocity(RobotContainer.motionInstance.intakePivot)
             .minus(lastRotorVelocity)
             .lte(ConstMotion.MANUAL_ZEROING_DELTA_VELOCITY);
 
         if (deltaRotorVelocity && lastRotorVelocity.lte(Units.RotationsPerSecond.of(0))) {
           zeroingSuccess = true;
         } else {
-          lastRotorVelocity = RobotContainer.motionInstance.getIntakePivotRotorVelocity();
+          lastRotorVelocity = RobotContainer.motionInstance.getRotorVelocity(RobotContainer.motionInstance.intakePivot);
         }
       }
     }
@@ -72,7 +74,8 @@ public class HumanZeroIntake extends Command {
 
     if (!interrupted && zeroingSuccess) {
       RobotContainer.motionInstance.hasIntakePivotZeroed = true;
-      RobotContainer.motionInstance.resetIntakePivotSensorPosition(ConstMotion.ZEROED_INTAKE_MANUAL_POS);
+      RobotContainer.motionInstance.resetSensorPosition(ConstMotion.ZEROED_INTAKE_MANUAL_POS,
+          RobotContainer.motionInstance.intakePivot);
       System.out.println("Intake Pivot Zeroing Successful!!!! Yippee and hooray!!! :3");
     } else {
       System.out.println("Intake Pivot was never zeroed :((( blame eli");
@@ -82,6 +85,7 @@ public class HumanZeroIntake extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return zeroingSuccess && RobotContainer.motionInstance.isIntakePivotRotorVelocityZero();
+    return zeroingSuccess
+        && RobotContainer.motionInstance.isRotorVelocityZero(RobotContainer.motionInstance.intakePivot);
   }
 }

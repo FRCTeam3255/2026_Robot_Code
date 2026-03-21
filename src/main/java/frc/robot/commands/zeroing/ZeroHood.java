@@ -27,7 +27,7 @@ public class ZeroHood extends Command {
   public void initialize() {
     RobotContainer.motionInstance.setHoodSoftwareLimits(true, false);
 
-    RobotContainer.motionInstance.setHoodVoltage(Units.Volts.zero());
+    RobotContainer.motionInstance.setMotorVoltage(Units.Volts.zero(), RobotContainer.motionInstance.hood);
     zeroingTimestamp = Units.Seconds.zero();
     hasZeroed = RobotContainer.motionInstance.hasHoodZeroed;
   }
@@ -35,7 +35,7 @@ public class ZeroHood extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.motionInstance.setHoodVoltage(ConstMotion.ZEROING_HOOD_VOLTAGE);
+    RobotContainer.motionInstance.setMotorVoltage(ConstMotion.ZEROING_HOOD_VOLTAGE, RobotContainer.motionInstance.hood);
   }
 
   // Called once the command ends or is interrupted.
@@ -44,11 +44,12 @@ public class ZeroHood extends Command {
     RobotContainer.motionInstance.setHoodSoftwareLimits(true, true);
 
     // Stop all movement
-    RobotContainer.motionInstance.setHoodVoltage(Units.Volts.zero());
+    RobotContainer.motionInstance.setMotorVoltage(Units.Volts.zero(), RobotContainer.motionInstance.hood);
 
     // Reset to the current position if this command was not interrupted
     if (!interrupted) {
-      RobotContainer.motionInstance.resetHoodSensorPosition(ConstMotion.ZEROED_HOOD_AUTO_POS);
+      RobotContainer.motionInstance.resetSensorPosition(ConstMotion.ZEROED_HOOD_AUTO_POS,
+          RobotContainer.motionInstance.hood);
       RobotContainer.motionInstance.hasHoodZeroed = true;
     }
   }
@@ -62,7 +63,8 @@ public class ZeroHood extends Command {
 
     // Use the Motion helper to perform the common zeroing check.
     frc.robot.subsystems.Motion.ZeroingResult res = RobotContainer.motionInstance
-        .checkZeroing(RobotContainer.motionInstance.getHoodRotorVelocity(), zeroingTimestamp);
+        .checkZeroing(RobotContainer.motionInstance.getRotorVelocity(RobotContainer.motionInstance.hood),
+            zeroingTimestamp);
     // Persist updated timestamp and return finished state
     zeroingTimestamp = res.timestamp;
     return res.finished;

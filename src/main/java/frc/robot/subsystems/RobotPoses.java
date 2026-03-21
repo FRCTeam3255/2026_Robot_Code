@@ -55,7 +55,8 @@ public class RobotPoses extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    if (RobotContainer.motionInstance.getPivotAngle().equals(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE)) {
+    if (RobotContainer.motionInstance.getMotorAngle(RobotContainer.motionInstance.intakePivot)
+        .equals(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE)) {
       hopperTransform3d = new Transform3d(
           Units.Inches.zero(),
           Units.Inches.zero(),
@@ -75,11 +76,11 @@ public class RobotPoses extends SubsystemBase {
         Rotation3d.kZero);
     intakePivotRotation3d = new Rotation3d(
         Units.Degrees.zero(),
-        RobotContainer.motionInstance.getPivotAngle(),
+        RobotContainer.motionInstance.getMotorAngle(RobotContainer.motionInstance.intakePivot),
         Units.Degrees.zero());
     hoodPivotRotation3d = new Rotation3d(
         Units.Degrees.zero(),
-        RobotContainer.motionInstance.getHoodAngle(),
+        RobotContainer.motionInstance.getMotorAngle(RobotContainer.motionInstance.hood),
         Units.Degrees.zero());
 
     // Component Positions

@@ -59,7 +59,7 @@ public class PrepAnywhere extends Command {
     return RobotContainer.rotorsInstance
         .areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
         && RobotContainer.motionInstance
-            .isHoodAtPosition(ConstMotion.HOOD_TOLERANCE)
+            .isMotorAtPosition(ConstMotion.HOOD_TOLERANCE, RobotContainer.motionInstance.hood)
         && RobotContainer.drivetrainInstance
             .isAtDesiredRotation(ConstPoseDrive.PrepShootRotations.DRIVETRAIN_TOLERANCE);
   }

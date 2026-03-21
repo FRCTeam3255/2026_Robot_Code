@@ -181,7 +181,7 @@ public class RobotContainer {
   public final Trigger readyToShootTrigger = new Trigger(
       () -> rotorsInstance.areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
           && drivetrainInstance.isAtDesiredRotation(ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE)
-          && motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE));
+          && motionInstance.isMotorAtPosition(ConstMotion.HOOD_TOLERANCE, motionInstance.hood));
 
   public RobotContainer() {
     RobotController.setBrownoutVoltage(5.5);

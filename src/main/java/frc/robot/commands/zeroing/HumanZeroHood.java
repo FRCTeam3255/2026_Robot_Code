@@ -37,7 +37,8 @@ public class HumanZeroHood extends Command {
   @Override
   public void execute() {
     // Check if we have raised the hood above a certain speed
-    if (RobotContainer.motionInstance.getHoodRotorVelocity().gte(ConstMotion.MANUAL_ZEROING_START_VELOCITY)
+    if (RobotContainer.motionInstance.getRotorVelocity(RobotContainer.motionInstance.hood)
+        .gte(ConstMotion.MANUAL_ZEROING_START_VELOCITY)
         || RobotContainer.motionInstance.hoodAttemptingZeroing) {
       // Enter zeroing mode!
       if (!RobotContainer.motionInstance.hoodAttemptingZeroing) {
@@ -51,14 +52,14 @@ public class HumanZeroHood extends Command {
         RobotContainer.motionInstance.hoodAttemptingZeroing = false;
         System.out.println("Hood Zeroing Failed :(");
       } else {
-        boolean deltaRotorVelocity = RobotContainer.motionInstance.getHoodRotorVelocity()
+        boolean deltaRotorVelocity = RobotContainer.motionInstance.getRotorVelocity(RobotContainer.motionInstance.hood)
             .minus(lastRotorVelocity)
             .lte(ConstMotion.MANUAL_ZEROING_DELTA_VELOCITY);
 
         if (deltaRotorVelocity && lastRotorVelocity.lte(Units.RotationsPerSecond.of(0))) {
           zeroingSuccess = true;
         } else {
-          lastRotorVelocity = RobotContainer.motionInstance.getHoodRotorVelocity();
+          lastRotorVelocity = RobotContainer.motionInstance.getRotorVelocity(RobotContainer.motionInstance.hood);
         }
       }
     }
@@ -70,7 +71,8 @@ public class HumanZeroHood extends Command {
 
     if (!interrupted && zeroingSuccess) {
       RobotContainer.motionInstance.hasHoodZeroed = true;
-      RobotContainer.motionInstance.resetHoodSensorPosition(ConstMotion.ZEROED_HOOD_MANUAL_POS);
+      RobotContainer.motionInstance.resetSensorPosition(ConstMotion.ZEROED_HOOD_MANUAL_POS,
+          RobotContainer.motionInstance.hood);
       System.out.println("Hood Zeroing Successful!!!! Yippee and hooray!!! :3");
     } else {
       System.out.println("Hood was never zeroed :((( blame eli");
@@ -80,6 +82,6 @@ public class HumanZeroHood extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return zeroingSuccess && RobotContainer.motionInstance.isHoodRotorVelocityZero();
+    return zeroingSuccess && RobotContainer.motionInstance.isRotorVelocityZero(RobotContainer.motionInstance.hood);
   }
 }

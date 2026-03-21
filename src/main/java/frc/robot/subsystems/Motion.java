@@ -19,14 +19,15 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DeviceIDs;
 import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
 
 @Logged
 public class Motion extends SubsystemBase {
   /** Creates a new Motion. */
-  final TalonFX intakePivot = new TalonFX(DeviceIDs.motionIDs.INTAKE_PIVOT_CAN);
-  final TalonFX climber = new TalonFX(DeviceIDs.motionIDs.CLIMBER_CAN);
-  final TalonFX hood = new TalonFX(DeviceIDs.motionIDs.HOOD_CAN);
+  public final TalonFX intakePivot = new TalonFX(DeviceIDs.motionIDs.INTAKE_PIVOT_CAN);
+  public final TalonFX climber = new TalonFX(DeviceIDs.motionIDs.CLIMBER_CAN);
+  public final TalonFX hood = new TalonFX(DeviceIDs.motionIDs.HOOD_CAN);
 
   MotionMagicExpoVoltage climberMotionRequest = new MotionMagicExpoVoltage(0);
   MotionMagicExpoVoltage hoodMotionRequest = new MotionMagicExpoVoltage(0);
@@ -87,63 +88,37 @@ public class Motion extends SubsystemBase {
     hood.getConfigurator().apply(ConstMotion.HOOD_CONFIGURATION);
   }
 
-  public void setIntakePivotVoltage(Voltage voltage) {
-    intakePivot.setControl(intakePivotVoltageRequest.withOutput(voltage));
+  public void setMotorVoltage(Voltage voltage, TalonFX motor) {
+    motor.setControl(hoodVoltageRequest.withOutput(voltage));
   }
 
-  public void setHoodVoltage(Voltage voltage) {
-    hood.setControl(hoodVoltageRequest.withOutput(voltage));
-  }
-
-  public Angle getPivotAngle() {
-    if (Robot.isSimulation()) {
-      return lastDesiredIntakePivotAngle;
-    }
-    return intakePivot.getPosition().getValue();
-  }
-
-  public Angle getHoodAngle() {
+  public Angle getMotorAngle(TalonFX motor) {
     if (Robot.isSimulation()) {
       return lastDesiredHoodAngle;
     }
-    return hood.getPosition().getValue();
+    return motor.getPosition().getValue();
   }
 
-  public boolean isHoodAtPosition(Angle tolerance) {
+  public boolean isMotorAtPosition(Angle tolerance, TalonFX motor) {
     Angle lowerLim = lastDesiredHoodAngle.minus(tolerance);
     Angle upperLim = lastDesiredHoodAngle.plus(tolerance);
 
-    Angle hoodAngle = getHoodAngle();
+    Angle hoodAngle = getMotorAngle(motor);
 
     hoodAtPosition = hoodAngle.gte(lowerLim)
         && hoodAngle.lte(upperLim);
     return hoodAtPosition;
   }
 
-  public boolean isIntakePivotAtPosition(Angle tolerance) {
-    Angle lowerLim = lastDesiredIntakePivotAngle.minus(tolerance);
-    Angle upperLim = lastDesiredIntakePivotAngle.plus(tolerance);
-
-    Angle pivotAngle = getPivotAngle();
-
-    intakePivotAtPosition = pivotAngle.gte(lowerLim)
-        && pivotAngle.lte(upperLim);
-    return intakePivotAtPosition;
+  public AngularVelocity getRotorVelocity(TalonFX motor) {
+    return motor.getRotorVelocity().getValue();
   }
 
-  public AngularVelocity getIntakePivotRotorVelocity() {
-    return intakePivot.getRotorVelocity().getValue();
-  }
-
-  public AngularVelocity getHoodRotorVelocity() {
-    return hood.getRotorVelocity().getValue();
-  }
-
-  public boolean isIntakePivotAtPosition(Angle target, Angle tolerance) {
+  public boolean isIntakePivotAtPosition(Angle target, Angle tolerance) {// This one is used for the shooting command
     Angle lowerLim = target.minus(tolerance);
     Angle upperLim = target.plus(tolerance);
 
-    Angle pivotAngle = getPivotAngle();
+    Angle pivotAngle = getMotorAngle(intakePivot);
     return pivotAngle.gte(lowerLim) && pivotAngle.lte(upperLim);
   }
 
@@ -158,12 +133,8 @@ public class Motion extends SubsystemBase {
     return Units.Inches.of(climber.getPosition().getValueAsDouble());
   }
 
-  public void resetIntakePivotSensorPosition(Angle zeroedPos) {
-    intakePivot.setPosition(zeroedPos);
-  }
-
-  public void resetHoodSensorPosition(Angle zeroedPos) {
-    hood.setPosition(zeroedPos);
+  public void resetSensorPosition(Angle zeroedPos, TalonFX motor) {
+    motor.setPosition(zeroedPos);
   }
 
   public boolean isClimberAtPosition(Distance distanceTolerance) {
@@ -177,12 +148,8 @@ public class Motion extends SubsystemBase {
     return climberAtPosition;
   }
 
-  public boolean isIntakePivotRotorVelocityZero() {
-    return getIntakePivotRotorVelocity().isNear(Units.RotationsPerSecond.zero(), 0.01);
-  }
-
-  public boolean isHoodRotorVelocityZero() {
-    return getHoodRotorVelocity().isNear(Units.RotationsPerSecond.zero(), 0.01);
+  public boolean isRotorVelocityZero(TalonFX motor) {
+    return getRotorVelocity(motor).isNear(Units.RotationsPerSecond.zero(), 0.01);
   }
 
   /**
