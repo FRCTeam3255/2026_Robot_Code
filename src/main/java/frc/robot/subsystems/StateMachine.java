@@ -288,7 +288,7 @@ public class StateMachine extends SubsystemBase {
       case DEFENSE:
         switch (currentRobotState) {
           case NONE:
-            return new Defense();
+            return new RetractIntake();
         }
 
     }
