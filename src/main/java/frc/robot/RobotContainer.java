@@ -14,6 +14,7 @@ import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Time;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
@@ -22,10 +23,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.DeferredCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.DeviceIDs.controllerIDs;
 import frc.robot.commands.AddVisionMeasurement;
 import frc.robot.commands.ResetPose;
+import frc.robot.commands.states.*;
+import frc.robot.commands.zeroing.*;
 import frc.robot.constants.ChoreoTraj;
 import frc.robot.constants.ConstAuto;
 import frc.robot.constants.ConstDrivetrain;
@@ -91,6 +95,28 @@ public class RobotContainer {
   Command TRY_DEFENSE = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.DEFENSE));
 
+  public Command makeZeroSubsystemsCommand() {
+    Command zeroHood = new ZeroHood().withTimeout(ConstMotion.ZEROING_TIMEOUT.in(Units.Seconds));
+
+    Command zeroIntake = new ZeroIntake().withTimeout(ConstMotion.ZEROING_TIMEOUT.in(Units.Seconds));
+    // If intake already zeroed, replace with a no-op so the parallel group doesn't
+    // block.
+    if (RobotContainer.motionInstance.hasIntakePivotZeroed) {
+      zeroIntake = Commands.none();
+    }
+
+    return new ParallelCommandGroup(zeroHood, zeroIntake)
+        .withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming)
+        .withName("ZeroSubsystems");
+  }
+
+  // NOTE: manualZeroSubsystems is initialized after subsystem instances are
+  // created
+  // (see below). The field is declared here but initialized later to avoid
+  // constructing commands that reference subsystems before those subsystems
+  // exist (which would cause NPEs during RobotContainer class initialization).
+  Command manualZeroSubsystems;
+
   private static AutoFactory autoFactory;
 
   private final SN_XboxController conDriver = new SN_XboxController(controllerIDs.DRIVER_USB);
@@ -111,6 +137,16 @@ public class RobotContainer {
   private final Vision loggedVisionInstance = visionInstance;
   public static Telemetry telemetryInstance = new Telemetry();
   private final Telemetry loggedTelemetryInstance = telemetryInstance;
+
+  // Initialize manualZeroSubsystems after subsystem instances are created so the
+  // ManualZero commands can safely reference subsystems.
+
+  // we have to zero hood first
+  {
+    manualZeroSubsystems = new HumanZeroHood()
+        .andThen(new HumanZeroIntake())
+        .ignoringDisable(true).withName("ManualZeroSubsystems");
+  }
 
   Command MANUAL = new DeferredCommand(
       driverStateMachineInstance.tryState(
@@ -145,7 +181,7 @@ public class RobotContainer {
   public final Trigger readyToShootTrigger = new Trigger(
       () -> rotorsInstance.areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
           && drivetrainInstance.isAtDesiredRotation(ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE)
-          && motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE));
+          && motionInstance.isMotorAtPosition(ConstMotion.HOOD_TOLERANCE, motionInstance.hood));
 
   public RobotContainer() {
     RobotController.setBrownoutVoltage(5.5);
@@ -449,5 +485,9 @@ public class RobotContainer {
   public Command addVisionMeasurement() {
     return new AddVisionMeasurement()
         .withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming).ignoringDisable(false);
+  }
+
+  public boolean allZeroed() {
+    return RobotContainer.motionInstance.hasHoodZeroed && RobotContainer.motionInstance.hasIntakePivotZeroed;
   }
 }
