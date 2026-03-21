@@ -30,8 +30,6 @@ public class Shooting extends Command {
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.SERIALIZER_ROLLERS_SPEED);
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.SHOOTER_TRANSFER_SPEED);
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.INTAKE_ROLLER_SPEED);
-    RobotContainer.motionInstance.setClimberPosition(ConstMotion.STORE_CLIMBER,
-        ConstMotion.CLIMBER_HOPPER_EXPANSION_PID_SLOT);
     liftIntakeTimer.reset();
     liftIntakeTimer.start();
   }
@@ -64,6 +62,9 @@ public class Shooting extends Command {
     liftIntakeTimer.stop();
     deployIntakeTimer.stop();
     RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
+    RobotContainer.motionInstance.setClimberPosition(ConstMotion.STORE_CLIMBER,
+        ConstMotion.CLIMBER_HOPPER_EXPANSION_PID_SLOT);
+
   }
 
   // Returns true when the command should end.

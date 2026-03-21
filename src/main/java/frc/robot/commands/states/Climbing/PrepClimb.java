@@ -30,7 +30,8 @@ public class PrepClimb extends Command {
     RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.PREP_CLIMB_L1);
     RobotContainer.motionInstance.setClimberPosition(ConstMotion.EXTEND_CLIMBER, ConstMotion.CLIMBER_FAST_PID_SLOT);
     RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.RETRACT_INTAKE_PIVOT_ANGLE);
-
+    RobotContainer.motionInstance.setClimberPosition(ConstMotion.EXTEND_CLIMBER,
+        ConstMotion.CLIMBER_HOPPER_EXPANSION_PID_SLOT);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

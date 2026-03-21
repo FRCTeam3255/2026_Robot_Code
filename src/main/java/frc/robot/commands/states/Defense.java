@@ -21,8 +21,11 @@ public class Defense extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.RETRACT_INTAKE_PIVOT_ANGLE);
-    RobotContainer.motionInstance.setClimberPosition(ConstMotion.STORE_CLIMBER, ConstMotion.CLIMBER_FAST_PID_SLOT);
+    RobotContainer.motionInstance.setClimberPosition(ConstMotion.EXTEND_CLIMBER,
+        ConstMotion.CLIMBER_HOPPER_EXPANSION_PID_SLOT);
+    if (RobotContainer.motionInstance.isClimberAtPosition(ConstMotion.CLIMBER_TOLERANCE)) {
+      RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.RETRACT_INTAKE_PIVOT_ANGLE);
+    }
     RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.DEFENSE);
 
   }
