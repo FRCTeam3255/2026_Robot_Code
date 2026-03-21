@@ -422,9 +422,13 @@ public class RobotContainer {
     readyToShootTrigger
         .whileTrue(
             Commands.run(() -> conDriver.setRumble(RumbleType.kLeftRumble,
-                ConstRumble.READY_TO_SHOOT_RUMBLE), telemetryInstance))
+                ConstRumble.READY_TO_SHOOT_RUMBLE)
+            // , telemetryInstance
+            ))
         .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble,
-            ConstRumble.RUMBLE_OFF), telemetryInstance));
+            ConstRumble.RUMBLE_OFF)
+        // , telemetryInstance
+        ));
     hubSwitchingTrigger
         .whileTrue(
             Commands.run(() -> conDriver.setRumble(RumbleType.kRightRumble,
