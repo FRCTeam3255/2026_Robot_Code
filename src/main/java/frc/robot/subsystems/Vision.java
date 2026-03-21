@@ -5,9 +5,12 @@
 package frc.robot.subsystems;
 
 import java.util.Optional;
+import java.util.HashSet;
+import java.util.Set;
 
 import frc.robot.LimelightHelpers;
 import frc.robot.LimelightHelpers.PoseEstimate;
+import edu.wpi.first.apriltag.AprilTag;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -85,6 +88,25 @@ public class Vision extends SubsystemBase {
     }
 
     return true;
+  }
+
+  public int getDetectedApriltags() {
+
+    // Gather raw fiducial detections from each Limelight and return the
+    // number of unique AprilTag IDs currently visible.
+    Set<Integer> ids = new HashSet<>();
+
+    try {
+      var right = LimelightHelpers.getRawFiducials(ConstVision.LIMELIGHT_RIGHT_NAME);
+      if (right != null) {
+        for (var f : right) {
+          ids.add(f.id);
+        }
+      }
+    } catch (Exception e) {
+    }
+    return ids.size();
+
   }
 
   /**
