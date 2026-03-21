@@ -37,9 +37,8 @@ public class AddVisionMeasurement extends Command {
     LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_TOP_NAME,
         yaw, 0, 0, 0, 0, 0);
     AngularVelocity gyroRate = RobotContainer.drivetrainInstance.getGyroRate();
-
     estimatedPose = RobotContainer.visionInstance.determinePoseEstimate(gyroRate);
-    if (estimatedPose.isPresent()) {
+    if (estimatedPose.isPresent() && RobotContainer.visionInstance.isVisionEnabled()) {
       RobotContainer.drivetrainInstance.addVisionMeasurement(estimatedPose.get().pose,
           estimatedPose.get().timestampSeconds);
     }
