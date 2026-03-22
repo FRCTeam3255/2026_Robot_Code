@@ -134,9 +134,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopExit() {
-    LimelightHelpers.setRewindEnabled(ConstVision.LIMELIGHT_LEFT_NAME, false);
-    LimelightHelpers.setRewindEnabled(ConstVision.LIMELIGHT_RIGHT_NAME, false);
-    LimelightHelpers.setRewindEnabled(ConstVision.LIMELIGHT_TOP_NAME, false);
+    LimelightHelpers.triggerRewindCapture(ConstVision.LIMELIGHT_LEFT_NAME, 165);
+    LimelightHelpers.triggerRewindCapture(ConstVision.LIMELIGHT_RIGHT_NAME, 165);
+    LimelightHelpers.triggerRewindCapture(ConstVision.LIMELIGHT_TOP_NAME, 165);
   }
 
   @Override
