@@ -39,6 +39,7 @@ public class StateMachine extends SubsystemBase {
           case INTAKING:
           case EJECTING_HOPPER:
           case REVERSING_SHOOTER:
+          case EXPANDING_HOPPER:
           case SHOOTING:
             return new None();
         }

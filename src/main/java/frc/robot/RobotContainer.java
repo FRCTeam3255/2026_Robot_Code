@@ -213,7 +213,8 @@ public class RobotContainer {
     conDriver.btn_RightStick
         .onTrue(TRY_DEFENSE);
     conDriver.btn_LeftStick
-        .onTrue(TRY_EXPANDING_HOPPER);
+        .whileTrue(TRY_EXPANDING_HOPPER)
+        .onFalse(TRY_NONE);
     conDriver.btn_North.whileTrue(new ResetPose());
   }
 

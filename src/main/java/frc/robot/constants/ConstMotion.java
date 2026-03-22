@@ -87,7 +87,6 @@ public class ConstMotion {
     CLIMBER_CONFIGURATION.Slot1.kS = 0.15;
     CLIMBER_CONFIGURATION.Slot1.kP = 20;
     CLIMBER_CONFIGURATION.Slot1.StaticFeedforwardSign = StaticFeedforwardSignValue.UseClosedLoopSign;
-    CLIMBER_CONFIGURATION.Feedback.SensorToMechanismRatio = 3.0769;
 
     // Slot 2 HOPPER TODO: Adjust
     CLIMBER_CONFIGURATION.Slot2.GravityType = GravityTypeValue.Elevator_Static;

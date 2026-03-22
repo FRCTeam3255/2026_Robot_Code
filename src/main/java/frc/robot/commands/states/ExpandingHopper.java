@@ -4,20 +4,25 @@
 
 package frc.robot.commands.states;
 
+import java.util.Set;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
+import frc.robot.subsystems.StateMachine;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ExpandingHopper extends Command {
   /** Creates a new ExpandingHopper. */
   public ExpandingHopper() {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.motionInstance);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.EXPANDING_HOPPER);
     RobotContainer.motionInstance.setClimberPosition(ConstMotion.EXTEND_CLIMBER,
         ConstMotion.CLIMBER_HOPPER_EXPANSION_PID_SLOT);
   }

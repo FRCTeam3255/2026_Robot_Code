@@ -17,7 +17,7 @@ public class Intaking extends Command {
   public Intaking() {
     // Use addRequirements() here to declare subsystem dependencies.
 
-    addRequirements(RobotContainer.stateMachineInstance);
+    addRequirements(RobotContainer.stateMachineInstance, RobotContainer.motionInstance, RobotContainer.rotorsInstance);
   }
 
   // Called when the command is initially scheduled.
