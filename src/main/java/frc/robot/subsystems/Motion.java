@@ -6,7 +6,6 @@ package frc.robot.subsystems;
 
 import static edu.wpi.first.units.Units.Degrees;
 import static edu.wpi.first.units.Units.Inches;
-import static edu.wpi.first.units.Units.Meters;
 
 import com.ctre.phoenix6.controls.MotionMagicExpoVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -18,7 +17,6 @@ import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DeviceIDs;
 import frc.robot.Robot;
-import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
 
 @Logged
@@ -35,6 +33,10 @@ public class Motion extends SubsystemBase {
   Angle lastDesiredHoodAngle = Degrees.zero();
   Angle lastDesiredIntakePivotAngle = Degrees.zero();
   Distance lastDesiredClimberPosition = Inches.zero();
+
+  private boolean hoodAtPosition = false;
+  private boolean intakePivotAtPosition = false;
+  private boolean climberAtPosition = false;
 
   public Motion() {
     intakePivot.getConfigurator().apply(ConstMotion.INTAKE_PIVOT_CONFIGURATION);
@@ -83,8 +85,9 @@ public class Motion extends SubsystemBase {
 
     Angle hoodAngle = getHoodAngle();
 
-    return hoodAngle.gte(lowerLim)
+    hoodAtPosition = hoodAngle.gte(lowerLim)
         && hoodAngle.lte(upperLim);
+    return hoodAtPosition;
   }
 
   public boolean isIntakePivotAtPosition(Angle tolerance) {
@@ -93,8 +96,9 @@ public class Motion extends SubsystemBase {
 
     Angle pivotAngle = getPivotAngle();
 
-    return pivotAngle.gte(lowerLim)
+    intakePivotAtPosition = pivotAngle.gte(lowerLim)
         && pivotAngle.lte(upperLim);
+    return intakePivotAtPosition;
   }
 
   public boolean isIntakePivotAtPosition(Angle target, Angle tolerance) {
@@ -103,8 +107,9 @@ public class Motion extends SubsystemBase {
 
     Angle pivotAngle = getPivotAngle();
 
-    return pivotAngle.gte(lowerLim)
+    intakePivotAtPosition = pivotAngle.gte(lowerLim)
         && pivotAngle.lte(upperLim);
+    return intakePivotAtPosition;
   }
 
   public static Angle getMappedHoodAngle(Distance distance) {
@@ -124,7 +129,8 @@ public class Motion extends SubsystemBase {
 
     Distance climberPosition = getClimberPosition();
 
-    return climberPosition.gte(lowerLim)
+    climberAtPosition = climberPosition.gte(lowerLim)
         && climberPosition.lte(upperLim);
+    return climberAtPosition;
   }
 }

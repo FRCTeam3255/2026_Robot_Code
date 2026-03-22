@@ -20,6 +20,7 @@ public class Vision extends SubsystemBase {
   PoseEstimate lastEstimateRight = new PoseEstimate();
   PoseEstimate lastEstimateLeft = new PoseEstimate();
   PoseEstimate lastEstimateBack = new PoseEstimate();
+  private boolean visionEnabled = true;
 
   // Not logged, as they turn to false immediately after being read
   @NotLogged
@@ -137,6 +138,14 @@ public class Vision extends SubsystemBase {
       backPose = currentEstimateBack.pose;
       newBackEstimate = true;
     }
+  }
+
+  public boolean isVisionEnabled() {
+    return visionEnabled;
+  }
+
+  public void setVisionEnabled(boolean enabled) {
+    this.visionEnabled = enabled;
   }
 
   public Optional<PoseEstimate> determinePoseEstimate(AngularVelocity gyroRate) {

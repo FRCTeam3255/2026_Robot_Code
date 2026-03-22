@@ -11,4 +11,5 @@ public class ConstRumble {
   public static final double READY_TO_SHOOT_RUMBLE = 0.5;
   public static final double SHIFT_CHANGE_RUMBLE = 1;
   public static final double RUMBLE_OFF = 0.0;
+  public static final double OUR_SHIFT_FIRST_RUMBLE = 1;
 }
