@@ -36,6 +36,7 @@ public class Vision extends SubsystemBase {
   Pose2d rightPose = new Pose2d();
   Pose2d leftPose = new Pose2d();
   Pose2d backPose = new Pose2d();
+  Set<Integer> getDetectedApriltags = new HashSet<>();
 
   private boolean useMegaTag2 = ConstVision.USE_MEGA_TAG_2;
 
@@ -90,11 +91,11 @@ public class Vision extends SubsystemBase {
     return true;
   }
 
-  public Set<Integer> getDetectedApriltags() {
+  public Set<Integer> logDetectedAprilTags() {
 
     // Gather raw fiducial detections from each Limelight and return the
     // number of unique AprilTag IDs currently visible.
-    Set<Integer> ids = new HashSet<>();
+    Set<Integer> ids = getDetectedApriltags;
 
     try {
       var right = LimelightHelpers.getRawFiducials(ConstVision.LIMELIGHT_RIGHT_NAME);
@@ -127,7 +128,7 @@ public class Vision extends SubsystemBase {
       // ignore
     }
 
-    return ids;
+    return getDetectedApriltags = ids;
 
   }
 
