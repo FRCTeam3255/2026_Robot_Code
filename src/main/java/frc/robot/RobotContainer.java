@@ -145,7 +145,16 @@ public class RobotContainer {
   public final Trigger readyToShootTrigger = new Trigger(
       () -> rotorsInstance.areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
           && drivetrainInstance.isAtDesiredRotation(ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE)
-          && motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE));
+          && motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE)
+          && (stateMachineInstance.getRobotState() == RobotState.PREP_ANYWHERE
+              || stateMachineInstance.getRobotState() == RobotState.PREP_TRENCH
+              || stateMachineInstance.getRobotState() == RobotState.PREP_CORNER
+              || stateMachineInstance.getRobotState() == RobotState.PREP_DEPOT
+              || stateMachineInstance.getRobotState() == RobotState.PREP_TOWER
+              || stateMachineInstance.getRobotState() == RobotState.PREP_HUB
+              || stateMachineInstance.getRobotState() == RobotState.PREP_NON_OUTPOST
+              || stateMachineInstance.getRobotState() == RobotState.PREP_OPPONENT_TO_ALLIANCE
+              || stateMachineInstance.getRobotState() == RobotState.PREP_NEUTRAL_TO_ALLIANCE));
 
   public RobotContainer() {
     RobotController.setBrownoutVoltage(5.5);
@@ -193,7 +202,9 @@ public class RobotContainer {
     conDriver.btn_B
         .onTrue(TRY_PREP_CORNER);
     conDriver.btn_Y
-        .onTrue(TRY_PREP_HUB);
+        .onTrue(TRY_PREP_OPPONENT_TO_ALLIANCE);
+    // .onTrue(TRY_PREP_HUB);
+    // .onTrue(TRY_DEFENSE) rethink where to put defense
     // .onFalse(TRY_NONE);
     conDriver.btn_X
         .onTrue(TRY_PREP_TOWER);
@@ -409,27 +420,28 @@ public class RobotContainer {
   }
 
   public void configFeedback() {
-    readyToShootTrigger
-        .whileTrue(
-            Commands.run(() -> conDriver.setRumble(RumbleType.kLeftRumble,
-                ConstRumble.READY_TO_SHOOT_RUMBLE)))
-        .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble,
-            ConstRumble.RUMBLE_OFF)));
+    // readyToShootTrigger
+    // .whileTrue(
+    // Commands.run(() -> conDriver.setRumble(RumbleType.kLeftRumble,
+    // ConstRumble.READY_TO_SHOOT_RUMBLE), telemetryInstance))
+    // .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble,
+    // ConstRumble.RUMBLE_OFF), telemetryInstance));
     hubSwitchingTrigger
         .whileTrue(
             Commands.run(() -> conDriver.setRumble(RumbleType.kRightRumble,
-                ConstRumble.SHIFT_CHANGE_RUMBLE)))
+                ConstRumble.SHIFT_CHANGE_RUMBLE), telemetryInstance))
         .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble,
-            ConstRumble.RUMBLE_OFF)));
+            ConstRumble.RUMBLE_OFF), telemetryInstance));
 
     isOurShiftFirstTrigger
         .whileTrue(Commands.run(() -> {
           double t = Timer.getFPGATimestamp(); // seconds since FPGA boot
           boolean on = ((int) Math.floor(t) % 2) == 0; // toggle every 1 second
-          conDriver.setRumble(RumbleType.kRightRumble,
+          conDriver.setRumble(RumbleType.kLeftRumble,
               on ? ConstRumble.OUR_SHIFT_FIRST_RUMBLE : ConstRumble.RUMBLE_OFF);
-        }))
-        .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kRightRumble, ConstRumble.RUMBLE_OFF)));
+        }, telemetryInstance))
+        .onFalse(Commands.runOnce(() -> conDriver.setRumble(RumbleType.kLeftRumble, ConstRumble.RUMBLE_OFF),
+            telemetryInstance));
     // Add feedback bindings here if needed
   }
 
