@@ -54,6 +54,8 @@ public class RobotContainer {
   // STATES
   Command TRY_EJECTING_HOPPER = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.EJECTING_HOPPER));
+  Command TRY_EXPANDING_HOPPER = Commands.deferredProxy(
+      () -> stateMachineInstance.tryState(RobotState.EXPANDING_HOPPER));
   Command TRY_UNCLIMB_L1 = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.UNCLIMB_L1));
   Command TRY_PREP_CLIMB_L1 = Commands.deferredProxy(
@@ -200,6 +202,8 @@ public class RobotContainer {
         .onTrue(TRY_PREP_TOWER);
     conDriver.btn_RightStick
         .onTrue(TRY_DEFENSE);
+    conDriver.btn_LeftStick
+        .onTrue(TRY_EXPANDING_HOPPER);
     conDriver.btn_North.whileTrue(new ResetPose());
   }
 

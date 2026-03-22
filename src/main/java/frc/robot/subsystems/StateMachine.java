@@ -48,6 +48,7 @@ public class StateMachine extends SubsystemBase {
         switch (currentRobotState) {
           case NONE:
           case DEFENSE:
+          case EXPANDING_HOPPER:
           case PREP_CLIMB_L1:
           case UNCLIMB_L1:
           case PREP_HUB:
@@ -238,6 +239,22 @@ public class StateMachine extends SubsystemBase {
         }
         break;
 
+      case EXPANDING_HOPPER:
+        switch (currentRobotState) {
+          case NONE:
+          case PREP_DEPOT:
+          case PREP_HUB:
+          case PREP_ANYWHERE:
+          case PREP_TRENCH:
+          case PREP_CORNER:
+          case PREP_TOWER:
+          case PREP_NON_OUTPOST:
+          case PREP_NEUTRAL_TO_ALLIANCE:
+          case PREP_OPPONENT_TO_ALLIANCE:
+            return new ExpandingHopper();
+        }
+        break;
+
       case REVERSING_SHOOTER:
         switch (currentRobotState) {
           case NONE:
@@ -312,6 +329,7 @@ public class StateMachine extends SubsystemBase {
     PREP_OPPONENT_TO_ALLIANCE,
     SHOOTING,
     EJECTING_HOPPER,
+    EXPANDING_HOPPER,
     REVERSING_SHOOTER,
     PREP_CLIMB_L1,
     CLIMBING_L1,

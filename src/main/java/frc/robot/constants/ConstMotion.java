@@ -75,6 +75,7 @@ public class ConstMotion {
     CLIMBER_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
     CLIMBER_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitThreshold = EXTEND_CLIMBER.in(Inches);
     CLIMBER_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitThreshold = STORE_CLIMBER.in(Inches);
+    CLIMBER_CONFIGURATION.Feedback.SensorToMechanismRatio = 1.0 / ((12.0 / 60.0) * (20.0 / 60.0));
     // Slot 0
     CLIMBER_CONFIGURATION.Slot0.GravityType = GravityTypeValue.Elevator_Static;
     CLIMBER_CONFIGURATION.Slot0.kS = 0.15;
@@ -93,7 +94,6 @@ public class ConstMotion {
     CLIMBER_CONFIGURATION.Slot2.kS = 0.15;
     CLIMBER_CONFIGURATION.Slot2.kP = 20;
     CLIMBER_CONFIGURATION.Slot2.StaticFeedforwardSign = StaticFeedforwardSignValue.UseClosedLoopSign;
-    CLIMBER_CONFIGURATION.Feedback.SensorToMechanismRatio = 1.0 / ((12.0 / 60.0) * (20.0 / 60.0));
 
     HOOD_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     HOOD_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;

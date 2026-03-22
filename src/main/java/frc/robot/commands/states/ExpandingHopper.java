@@ -2,34 +2,24 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.states.Climbing;
+package frc.robot.commands.states;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.StateMachine;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class PrepClimb extends Command {
-  Drivetrain globalDrivetrain = RobotContainer.drivetrainInstance;
-
-  /** Creates a new PrepClimb. */
-  public PrepClimb() {
+public class ExpandingHopper extends Command {
+  /** Creates a new ExpandingHopper. */
+  public ExpandingHopper() {
     // Use addRequirements() here to declare subsystem dependencies.
-
-    addRequirements(RobotContainer.stateMachineInstance);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // TOdo: replace nulls with proper values
-    // globalDrivetrain.rotationalAlign(ConstField.TOWER_POSE,
-    // ConstDrivetrain.TURN_SPEED);
-    RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.PREP_CLIMB_L1);
-    RobotContainer.motionInstance.setClimberPosition(ConstMotion.EXTEND_CLIMBER, ConstMotion.CLIMBER_FAST_PID_SLOT);
-    RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.RETRACT_INTAKE_PIVOT_ANGLE);
+    RobotContainer.motionInstance.setClimberPosition(ConstMotion.EXTEND_CLIMBER,
+        ConstMotion.CLIMBER_HOPPER_EXPANSION_PID_SLOT);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -40,11 +30,13 @@ public class PrepClimb extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    RobotContainer.motionInstance.setClimberPosition(ConstMotion.RETRACT_CLIMBER,
+        ConstMotion.CLIMBER_HOPPER_EXPANSION_PID_SLOT);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return RobotContainer.motionInstance.isClimberAtPosition(ConstMotion.CLIMBER_TOLERANCE);
+    return false;
   }
 }

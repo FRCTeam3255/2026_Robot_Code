@@ -25,7 +25,6 @@ public class Intaking extends Command {
   public void initialize() {
     RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.INTAKING);
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.INTAKE_ROLLER_SPEED);
-    RobotContainer.motionInstance.setClimberPosition(ConstMotion.STORE_CLIMBER, ConstMotion.CLIMBER_FAST_PID_SLOT);
     RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
     RobotContainer.motionInstance.setClimberPosition(ConstMotion.EXTEND_CLIMBER,
         ConstMotion.CLIMBER_HOPPER_EXPANSION_PID_SLOT);
