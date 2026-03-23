@@ -31,7 +31,7 @@ public class Rotors extends SubsystemBase {
   final TalonFX flywheelBottomWest = new TalonFX(rotorIDs.FLYWHEEL_BOTTOM_WEST_CAN);
   final TalonFX flywheelBottomEast = new TalonFX(rotorIDs.FLYWHEEL_BOTTOM_EAST_CAN);
   AngularVelocity lastDesiredFlywheelSpeed = Units.RPM.of(0);
-  AngularVelocity lastDesiredTransferPercentOutput = Units.RPM.of(0);
+  AngularVelocity lastDesiredTransferVelocity = Units.RPM.of(0);
   Follower flywheelEastFollower = new Follower(flywheelTopEast.getDeviceID(), MotorAlignmentValue.Aligned);
   Follower flywheelWestFollower = new Follower(flywheelTopEast.getDeviceID(), MotorAlignmentValue.Opposed);
   Follower shooterTransferFollower = new Follower(shooterTransferEast.getDeviceID(), MotorAlignmentValue.Opposed);
@@ -63,13 +63,13 @@ public class Rotors extends SubsystemBase {
   public void setShooterTransferSpeed(AngularVelocity speed) {
     shooterTransferEast.setControl(shooterTransferVelocityRequest.withVelocity(speed));
     shooterTransferWest.setControl(shooterTransferFollower);
-    lastDesiredTransferPercentOutput = speed;
+    lastDesiredTransferVelocity = speed;
   }
 
-  public void setShooterTransferSpeed(double percent) {
+  public void setShooterTransferPercentOutput(double percent) {
     shooterTransferEast.set(percent);
     shooterTransferWest.set(percent);
-    lastDesiredTransferPercentOutput = Units.RPM.of(5400 * percent);
+    lastDesiredTransferVelocity = Units.RPM.of(5400 * percent);
   }
 
   public AngularVelocity getShooterTransferSpeed() {
@@ -111,8 +111,8 @@ public class Rotors extends SubsystemBase {
   }
 
   public boolean isShooterTransferAtSpeed(AngularVelocity tolerance) {
-    AngularVelocity lowerLim = lastDesiredTransferPercentOutput.minus(tolerance);
-    AngularVelocity upperLim = lastDesiredTransferPercentOutput.plus(tolerance);
+    AngularVelocity lowerLim = lastDesiredTransferVelocity.minus(tolerance);
+    AngularVelocity upperLim = lastDesiredTransferVelocity.plus(tolerance);
 
     AngularVelocity shooterTransferSpeed = getShooterTransferSpeed();
 
