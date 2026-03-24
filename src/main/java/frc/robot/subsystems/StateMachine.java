@@ -290,7 +290,7 @@ public class StateMachine extends SubsystemBase {
           case NONE:
             return new RetractIntake();
         }
-
+        break;
     }
 
     return Commands
