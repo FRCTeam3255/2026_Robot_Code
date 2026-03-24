@@ -27,7 +27,6 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.units.measure.Angle;
 import frc.robot.DeviceIDs;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ChoreoTraj;
 import frc.robot.constants.ConstDrivetrain;

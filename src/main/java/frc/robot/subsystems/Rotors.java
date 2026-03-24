@@ -68,7 +68,7 @@ public class Rotors extends SubsystemBase {
 
   public void setShooterTransferPercentOutput(double percent) {
     shooterTransferEast.set(percent);
-    shooterTransferWest.set(percent);
+    shooterTransferWest.setControl(shooterTransferFollower);
     lastDesiredTransferVelocity = Units.RPM.of(5400 * percent);
   }
 
@@ -86,9 +86,9 @@ public class Rotors extends SubsystemBase {
 
   public void setFlywheelPercentOutput(double percent) {
     flywheelTopEast.set(percent);
-    flywheelTopWest.setControl(flywheelEastFollower);
+    flywheelTopWest.setControl(flywheelWestFollower);
     flywheelBottomEast.setControl(flywheelEastFollower);
-    flywheelBottomWest.setControl(flywheelEastFollower);
+    flywheelBottomWest.setControl(flywheelWestFollower);
     lastDesiredFlywheelSpeed = Units.RPM.of(5400 * percent);
   }
 
