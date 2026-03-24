@@ -10,9 +10,9 @@ import frc.robot.constants.ConstMotion;
 import frc.robot.subsystems.StateMachine;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class Defense extends Command {
-  /** Creates a new Defense. */
-  public Defense() {
+public class RetractIntake extends Command {
+  /** Creates a new retract intake. */
+  public RetractIntake() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.motionInstance, RobotContainer.stateMachineInstance);
   }
@@ -22,7 +22,7 @@ public class Defense extends Command {
   public void initialize() {
     RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.RETRACT_INTAKE_PIVOT_ANGLE);
     RobotContainer.motionInstance.setClimberPosition(ConstMotion.STORE_CLIMBER, ConstMotion.CLIMBER_FAST_PID_SLOT);
-    RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.DEFENSE);
+    RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.RETRACT_INTAKE);
 
   }
 

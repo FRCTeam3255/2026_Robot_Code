@@ -88,8 +88,8 @@ public class RobotContainer {
       () -> stateMachineInstance.tryState(RobotState.PREP_NEUTRAL_TO_ALLIANCE));
   Command TRY_NONE = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.NONE));
-  Command TRY_DEFENSE = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.DEFENSE));
+  Command TRY_RETRACT_INTAKE = Commands.deferredProxy(
+      () -> stateMachineInstance.tryState(RobotState.RETRACT_INTAKE));
 
   private static AutoFactory autoFactory;
 
@@ -190,7 +190,7 @@ public class RobotContainer {
         .onFalse(TRY_NONE);
     conDriver.btn_Back
         .onFalse(TRY_CLIMBING_L1);
-    // .onTrue(TRY_DEFENSE)
+    // .onTrue(TRY_RETRACT_INTAKE)
     // .onFalse(TRY_NONE);
     conDriver.btn_RightBumper
         .onTrue(TRY_PREP_ANYWHERE);
@@ -209,7 +209,7 @@ public class RobotContainer {
     conDriver.btn_X
         .onTrue(TRY_PREP_TOWER);
     conDriver.btn_RightStick
-        .onTrue(TRY_DEFENSE);
+        .onTrue(TRY_RETRACT_INTAKE);
     conDriver.btn_North.whileTrue(new ResetPose());
   }
 
