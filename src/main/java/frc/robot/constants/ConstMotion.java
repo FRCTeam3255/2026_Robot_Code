@@ -26,7 +26,7 @@ public class ConstMotion {
   public static final TalonFXConfiguration CLIMBER_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration HOOD_CONFIGURATION = new TalonFXConfiguration();
   public static final double STOP = 0.0;
-  public static final Angle DEPLOY_INTAKE_PIVOT_ANGLE = Units.Degrees.of(126);
+  public static final Angle DEPLOY_INTAKE_PIVOT_ANGLE = Units.Degrees.of(123);
   public static final Angle RETRACT_INTAKE_PIVOT_ANGLE = Units.Degrees.of(0);
   public static final Angle LIFT_INTAKE_SHOOTING_ANGLE = Units.Degrees.of(63);
   public static final double EXTEND_CLIMBER_SPEED = 0;
@@ -89,8 +89,8 @@ public class ConstMotion {
     CLIMBER_CONFIGURATION.Feedback.SensorToMechanismRatio = 3.0769;
 
     HOOD_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-    HOOD_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
-    HOOD_CONFIGURATION.Feedback.SensorToMechanismRatio = 1.0 / ((10.0 / 44.0) * (10.0 / 190.0));
+    HOOD_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+    HOOD_CONFIGURATION.Feedback.SensorToMechanismRatio = 1.0 / ((10.0 / 42.0) * (10.0 / 210.0));
     HOOD_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitEnable = true;
     HOOD_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
     HOOD_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitThreshold = Units.Degrees.of(46).in(Rotations);
