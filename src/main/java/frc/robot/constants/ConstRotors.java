@@ -37,11 +37,11 @@ public class ConstRotors {
   }
 
   // different shooting locations shooting speeds
-  public static final AngularVelocity FLYWHEEL_TRENCH_SPEED = RPM.of(4100);
-  public static final AngularVelocity FLYWHEEL_CORNER_SPEED = RPM.of(4650);
+  public static final AngularVelocity FLYWHEEL_TRENCH_SPEED = RPM.of(4000);
+  public static final AngularVelocity FLYWHEEL_CORNER_SPEED = RPM.of(4250);
   public static final AngularVelocity FLYWHEEL_NON_OUTPOST_SPEED = RPM.of(4100);
-  public static final AngularVelocity FLYWHEEL_TOWER_SPEED = RPM.of(6000);
-  public static final AngularVelocity FLYWHEEL_HUB_SPEED = RPM.of(3700); // TODO: adjust
+  public static final AngularVelocity FLYWHEEL_TOWER_SPEED = RPM.of(4000);
+  public static final AngularVelocity FLYWHEEL_HUB_SPEED = RPM.of(4000); // TODO: adjust
   public static final AngularVelocity FLYWHEEL_DEPOT_SPEED = RPM.of(4100);
   public static final AngularVelocity FLYWHEEL_ANYWHERE_SPEED = RPM.of(4100);
   public static final AngularVelocity FLYWHEEL_NEUTRAL_TO_ALLIANCE_SPEED = RPM.of(3700);
@@ -101,6 +101,8 @@ public class ConstRotors {
     // flywheelSpeedMap.put(Inches.of(150).in(Inches), RPM.of(4300).in(RPM));
     // flywheelSpeedMap.put(Inches.of(187.8).in(Inches), RPM.of(5200).in(RPM));
     flywheelSpeedMap.put(Inches.of(187.8).in(Inches), RPM.of(4100).in(RPM));
-    flywheelSpeedMap.put(Inches.of(0).in(Inches), RPM.of(4100).in(RPM));
+    flywheelSpeedMap.put(Inches.of(130.1).in(Inches), RPM.of(4100).in(RPM));
+    flywheelSpeedMap.put(Inches.of(130).in(Inches), RPM.of(4000).in(RPM));
+    flywheelSpeedMap.put(Inches.of(0).in(Inches), RPM.of(4000).in(RPM));
   }
 }
