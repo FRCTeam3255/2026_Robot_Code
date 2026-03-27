@@ -76,8 +76,8 @@ public record ChoreoTraj(
 	public static final ChoreoTraj DSideNeutral_DSidePrep = new ChoreoTraj(
 	    "DSideNeutral_DSidePrep",
 	    OptionalInt.empty(),
-	    1.59961,
-	    new Pose2d(7.448, 5.857, Rotation2d.fromRadians(1.588)),
+	    1.56934,
+	    new Pose2d(7.448, 5.707, Rotation2d.fromRadians(1.588)),
 	    new Pose2d(2.779, 5.269, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj DSidePrep_DSideBump = new ChoreoTraj(
@@ -118,9 +118,9 @@ public record ChoreoTraj(
 	public static final ChoreoTraj DSideTrench_Neutral = new ChoreoTraj(
 	    "DSideTrench_Neutral",
 	    OptionalInt.empty(),
-	    3.86053,
+	    4.10665,
 	    new Pose2d(3.683, 7.568, Rotation2d.fromRadians(1.571)),
-	    new Pose2d(7.448, 5.857, Rotation2d.fromRadians(1.588))
+	    new Pose2d(7.448, 5.707, Rotation2d.fromRadians(1.588))
 	);
 	public static final ChoreoTraj Hub_ShootPreload = new ChoreoTraj(
 	    "Hub_ShootPreload",
@@ -146,16 +146,16 @@ public record ChoreoTraj(
 	public static final ChoreoTraj OSideNeutral_OSidePrep = new ChoreoTraj(
 	    "OSideNeutral_OSidePrep",
 	    OptionalInt.empty(),
-	    1.25663,
-	    new Pose2d(7.448, 2.375, Rotation2d.fromRadians(-1.571)),
+	    1.25305,
+	    new Pose2d(7.448, 2.505, Rotation2d.fromRadians(-1.571)),
 	    new Pose2d(2.779, 2.582, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj OSideNeutral_OSidePrep_CC = new ChoreoTraj(
 	    "OSideNeutral_OSidePrep_CC",
 	    OptionalInt.empty(),
-	    10.35579,
+	    10.32053,
 	    new Pose2d(2.779, 2.582, Rotation2d.fromRadians(0)),
-	    new Pose2d(7.448, 2.375, Rotation2d.fromRadians(3.142))
+	    new Pose2d(7.448, 2.505, Rotation2d.fromRadians(3.142))
 	);
 	public static final ChoreoTraj OSideShoot_OSideTrench = new ChoreoTraj(
 	    "OSideShoot_OSideTrench",
@@ -188,9 +188,9 @@ public record ChoreoTraj(
 	public static final ChoreoTraj OSideTrench_Neutral = new ChoreoTraj(
 	    "OSideTrench_Neutral",
 	    OptionalInt.empty(),
-	    4.00156,
+	    4.21487,
 	    new Pose2d(3.684, 0.499, Rotation2d.fromRadians(-1.571)),
-	    new Pose2d(7.448, 2.375, Rotation2d.fromRadians(-1.571))
+	    new Pose2d(7.448, 2.505, Rotation2d.fromRadians(-1.571))
 	);
 	public static final ChoreoTraj OSideTrench_Neutral_CC = new ChoreoTraj(
 	    "OSideTrench_Neutral_CC",

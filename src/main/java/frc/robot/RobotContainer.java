@@ -259,7 +259,12 @@ public class RobotContainer {
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command DoubleOutpostSideNeutral = Commands.sequence(
-        OutpostSideNeutral.asProxy(),
+        CollectAndScore(
+            ChoreoTraj.OSideTrench_MidlineNeutral,
+            ChoreoTraj.OSideMidline_OSidePrep,
+            TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
+            ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
         runPath(ChoreoTraj.OSideShoot_OSideTrench).asProxy(),
         OutpostSideNeutral.asProxy());
 
@@ -277,7 +282,11 @@ public class RobotContainer {
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command DoubleDepotSideNeutral = Commands.sequence(
-        DepotSideNeutral.asProxy(),
+        CollectAndScore(ChoreoTraj.DSideTrench_MidlineNeutral,
+            ChoreoTraj.DSideMidline_DSidePrep,
+            TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
+            ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
         runPath(ChoreoTraj.DSideShoot_DSideTrench).asProxy(),
         DepotSideNeutral.asProxy());
 
@@ -402,6 +411,9 @@ public class RobotContainer {
   public static Pose2d pathEndPose = new Pose2d();
 
   public static Command runPath(ChoreoTraj path) {
+    if (path == null) {
+      return Commands.none();
+    }
     return autoFactory.trajectoryCmd(path.name()).asProxy()
         .alongWith(Commands.runOnce(() -> {
           pathString = path.name();
