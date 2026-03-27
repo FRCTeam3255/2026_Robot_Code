@@ -36,7 +36,7 @@ public class ConstMotion {
   public static final Angle HOOD_CORNER_ANGLE = Units.Degrees.of(23.5);
   public static final Angle HOOD_NON_OUTPOST_ANGLE = Units.Degrees.of(12);
   public static final Angle HOOD_TOWER_ANGLE = Units.Degrees.of(14);
-  public static final Angle HOOD_HUB_ANGLE = Units.Degrees.of(3.7); // TODO: adjust
+  public static final Angle HOOD_HUB_ANGLE = Units.Degrees.of(9.5); // TODO: adjust
   public static final Angle HOOD_DEPOT_ANGLE = Units.Degrees.of(18);
   public static final Angle HOOD_ANYWHERE_ANGLE = Units.Degrees.of(45);
   public static final Angle HOOD_NUETRAL_TO_ALLIANCE_ANGLE = Units.Degrees.of(45);
