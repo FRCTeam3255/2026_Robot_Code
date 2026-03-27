@@ -197,8 +197,8 @@ public class RobotContainer {
     conDriver.btn_A
         .onTrue(TRY_PREP_TRENCH);
     conDriver.btn_West
-        .onTrue(TRY_PREP_NEAUTRAL_TO_ALLIANCE)
-        .onTrue(TRY_PREP_OPPONENT_TO_ALLIANCE);
+        .onTrue(TRY_PREP_NEAUTRAL_TO_ALLIANCE);
+    // .onTrue(TRY_PREP_OPPONENT_TO_ALLIANCE);
     conDriver.btn_B
         .onTrue(TRY_PREP_CORNER);
     conDriver.btn_Y
