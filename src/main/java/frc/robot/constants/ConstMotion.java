@@ -32,7 +32,7 @@ public class ConstMotion {
   public static final double EXTEND_CLIMBER_SPEED = 0;
   public static final double RETRACT_CLIMBER_SPEED = -0.5;
   public static final double ANGLE_HOOD_SPEED = 0.5;
-  public static final Angle HOOD_TRENCH_ANGLE = Units.Degrees.of(16);
+  public static final Angle HOOD_TRENCH_ANGLE = Units.Degrees.of(13);
   public static final Angle HOOD_CORNER_ANGLE = Units.Degrees.of(27);
   public static final Angle HOOD_NON_OUTPOST_ANGLE = Units.Degrees.of(12);
   public static final Angle HOOD_TOWER_ANGLE = Units.Degrees.of(14);
