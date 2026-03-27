@@ -11,9 +11,9 @@ public class ConstAuto {
   public static final Time SHOOT_FROM_DEPOT_TIMEOUT = Units.Seconds.of(3.0);
   public static final Time INTAKE_DEPOT_TIMEOUT = Units.Seconds.of(4.0);
 
-  public static final Time SHOOT_FROM_OUTPOST_TIMEOUT = Units.Seconds.of(6.0);
+  public static final Time SHOOT_FROM_OUTPOST_TIMEOUT = Units.Seconds.of(3.0);
   public static final Time INTAKE_OUTPOST_TIMEOUT = Units.Seconds.of(3.5);
 
   public static final Time INTAKE_NEUTRAL_ZONE_TIMEOUT = Units.Seconds.of(3.0);
-  public static final Time SHOOT_NEUTRAL_ZONE_TIMEOUT = Units.Seconds.of(5.0);
+  public static final Time SHOOT_NEUTRAL_ZONE_TIMEOUT = Units.Seconds.of(3.0);
 }

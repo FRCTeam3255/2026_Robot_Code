@@ -216,9 +216,6 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     List<Pose2d> towerPoses = ConstField.FieldElementGroups.TOWER_POSES.getAlliancePoses();
     Pose2d currentPose = getPose();
     Pose2d desiredTower = currentPose.nearest(towerPoses);
-    if (!RobotContainer.visionInstance.isVisionEnabled()) {
-      return null;
-    }
     if (desiredTower == towerPoses.get(0)) {
       return ChoreoTraj.DSideClimb;
     } else {

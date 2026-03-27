@@ -322,7 +322,9 @@ public class RobotContainer {
 
     Command AutoPIDTuning = Commands.sequence(runPath(ChoreoTraj.AutoPIDTuning));
 
-    autoChooser.setDefaultOption("Do Nothing", Commands.none());
+    Command DoNothing = Commands.none();
+
+    autoChooser.setDefaultOption("Do Nothing", DoNothing);
     autoChooser.addOption("OutpostSideNeutralZone", OutpostSideNeutral);
     autoChooser.addOption("DoubleOutpostSideNeutral", DoubleOutpostSideNeutral);
     autoChooser.addOption("OutpostSideNeutralWithClimb", OutpostSideNeutralWithClimb);
@@ -343,6 +345,7 @@ public class RobotContainer {
     // make our entries name
     final Map<Command, ChoreoTraj> autoStartingPoses = Map.ofEntries(
         // Example
+        Map.entry(DoNothing, ChoreoTraj.Hub_ShootPreload),
         Map.entry(PreloadOutpost, ChoreoTraj.OSideTrench_Outpost),
         Map.entry(OutpostWithClimb, ChoreoTraj.OSideTrench_Outpost),
         Map.entry(PreloadDepotWithOutpost, ChoreoTraj.DSideBump_Depot),
@@ -413,9 +416,6 @@ public class RobotContainer {
   public static Pose2d pathEndPose = new Pose2d();
 
   public static Command runPath(ChoreoTraj path) {
-    if (path == null) {
-      return Commands.none();
-    }
     return autoFactory.trajectoryCmd(path.name()).asProxy()
         .alongWith(Commands.runOnce(() -> {
           pathString = path.name();
