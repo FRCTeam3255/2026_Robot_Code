@@ -261,7 +261,13 @@ public class RobotContainer {
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command DoubleOutpostSideNeutral = Commands.sequence(
-        OutpostSideNeutral.asProxy(),
+        TRY_INTAKING.asProxy().withTimeout(0.3), // Force intake down before moving and going under trench
+        CollectAndScore(
+            ChoreoTraj.OSideTrench_MidlineNeutral,
+            ChoreoTraj.OSideMidline_OSidePrep,
+            TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
+            ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
         runPath(ChoreoTraj.OSideShoot_OSideTrench).asProxy(),
         OutpostSideNeutral.asProxy());
 
@@ -279,7 +285,12 @@ public class RobotContainer {
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command DoubleDepotSideNeutral = Commands.sequence(
-        DepotSideNeutral.asProxy(),
+        TRY_INTAKING.asProxy().withTimeout(0.3), // Force intake down before moving and going under trench
+        CollectAndScore(ChoreoTraj.DSideTrench_MidlineNeutral,
+            ChoreoTraj.DSideMidline_DSidePrep,
+            TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
+            ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
         runPath(ChoreoTraj.DSideShoot_DSideTrench).asProxy(),
         DepotSideNeutral.asProxy());
 
@@ -313,7 +324,9 @@ public class RobotContainer {
 
     Command AutoPIDTuning = Commands.sequence(runPath(ChoreoTraj.AutoPIDTuning));
 
-    autoChooser.setDefaultOption("Do Nothing", Commands.none());
+    Command DoNothing = Commands.none();
+
+    autoChooser.setDefaultOption("Do Nothing", DoNothing);
     autoChooser.addOption("OutpostSideNeutralZone", OutpostSideNeutral);
     autoChooser.addOption("DoubleOutpostSideNeutral", DoubleOutpostSideNeutral);
     autoChooser.addOption("OutpostSideNeutralWithClimb", OutpostSideNeutralWithClimb);
@@ -334,6 +347,7 @@ public class RobotContainer {
     // make our entries name
     final Map<Command, ChoreoTraj> autoStartingPoses = Map.ofEntries(
         // Example
+        Map.entry(DoNothing, ChoreoTraj.Hub_ShootPreload),
         Map.entry(PreloadOutpost, ChoreoTraj.OSideTrench_Outpost),
         Map.entry(OutpostWithClimb, ChoreoTraj.OSideTrench_Outpost),
         Map.entry(PreloadDepotWithOutpost, ChoreoTraj.DSideBump_Depot),

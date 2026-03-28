@@ -23,7 +23,7 @@ import frc.robot.constants.ConstMotion;
 public class Motion extends SubsystemBase {
   /** Creates a new Motion. */
   final TalonFX intakePivot = new TalonFX(DeviceIDs.motionIDs.INTAKE_PIVOT_CAN);
-  final TalonFX climber = new TalonFX(DeviceIDs.motionIDs.CLIMBER_CAN);
+  // final TalonFX climber = new TalonFX(DeviceIDs.motionIDs.CLIMBER_CAN);
   final TalonFX hood = new TalonFX(DeviceIDs.motionIDs.HOOD_CAN);
 
   MotionMagicExpoVoltage climberMotionRequest = new MotionMagicExpoVoltage(0);
@@ -40,7 +40,7 @@ public class Motion extends SubsystemBase {
 
   public Motion() {
     intakePivot.getConfigurator().apply(ConstMotion.INTAKE_PIVOT_CONFIGURATION);
-    climber.getConfigurator().apply(ConstMotion.CLIMBER_CONFIGURATION);
+    // climber.getConfigurator().apply(ConstMotion.CLIMBER_CONFIGURATION);
     hood.getConfigurator().apply(ConstMotion.HOOD_CONFIGURATION);
   }
 
@@ -61,7 +61,7 @@ public class Motion extends SubsystemBase {
   }
 
   public void setClimberPosition(Distance setpoint, int slot) {
-    climber.setControl(climberMotionRequest.withPosition(setpoint.in(Units.Inches)).withSlot(slot));
+    // climber.setControl(climberMotionRequest.withPosition(setpoint.in(Units.Inches)).withSlot(slot));
     lastDesiredClimberPosition = setpoint;
   }
 
@@ -120,7 +120,8 @@ public class Motion extends SubsystemBase {
     if (Robot.isSimulation()) {
       return lastDesiredClimberPosition;
     }
-    return Units.Inches.of(climber.getPosition().getValueAsDouble());
+    // return Units.Inches.of(climber.getPosition().getValueAsDouble());
+    return Inches.of(0);
   }
 
   public boolean isClimberAtPosition(Distance distanceTolerance) {
