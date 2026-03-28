@@ -56,6 +56,8 @@ public class ConstRotors {
 
     INTAKE_ROLLER_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     INTAKE_ROLLER_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+    INTAKE_ROLLER_CONFIGURATION.CurrentLimits.SupplyCurrentLimitEnable = true;
+    INTAKE_ROLLER_CONFIGURATION.CurrentLimits.SupplyCurrentLowerLimit = 45;
 
     SERIALIZER_ROLLERS_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     SERIALIZER_ROLLERS_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
@@ -101,8 +103,8 @@ public class ConstRotors {
     // flywheelSpeedMap.put(Inches.of(150).in(Inches), RPM.of(4300).in(RPM));
     // flywheelSpeedMap.put(Inches.of(187.8).in(Inches), RPM.of(5200).in(RPM));
     flywheelSpeedMap.put(Inches.of(187.8).in(Inches), RPM.of(4100).in(RPM));
-    flywheelSpeedMap.put(Inches.of(130.1).in(Inches), RPM.of(4100).in(RPM));
-    flywheelSpeedMap.put(Inches.of(130).in(Inches), RPM.of(4000).in(RPM));
+    flywheelSpeedMap.put(Inches.of(165.1).in(Inches), RPM.of(4100).in(RPM));
+    flywheelSpeedMap.put(Inches.of(165).in(Inches), RPM.of(4000).in(RPM));
     flywheelSpeedMap.put(Inches.of(0).in(Inches), RPM.of(4000).in(RPM));
   }
 }
