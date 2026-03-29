@@ -172,7 +172,7 @@ public class ConstDrivetrain {
               // relatively low
               // stator current limit to help avoid brownouts without impacting performance.
               .withSupplyCurrentLimitEnable(true)
-              .withSupplyCurrentLimit(52.5));
+              .withSupplyCurrentLimit(60));
   public static final TalonFXConfiguration steerInitialConfigs = new TalonFXConfiguration()
       .withCurrentLimits(
           new CurrentLimitsConfigs()
