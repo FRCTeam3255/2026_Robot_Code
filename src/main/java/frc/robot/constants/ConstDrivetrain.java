@@ -165,7 +165,14 @@ public class ConstDrivetrain {
   // cannot be null.
   // Some configs will be overwritten; check the `with*InitialConfigs()` API
   // documentation.
-  public static final TalonFXConfiguration driveInitialConfigs = new TalonFXConfiguration();
+  public static final TalonFXConfiguration driveInitialConfigs = new TalonFXConfiguration()
+      .withCurrentLimits(
+          new CurrentLimitsConfigs()
+              // Swerve azimuth does not require much torque output, so we can set a
+              // relatively low
+              // stator current limit to help avoid brownouts without impacting performance.
+              .withSupplyCurrentLimitEnable(true)
+              .withSupplyCurrentLimit(52.5));
   public static final TalonFXConfiguration steerInitialConfigs = new TalonFXConfiguration()
       .withCurrentLimits(
           new CurrentLimitsConfigs()
