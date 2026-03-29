@@ -57,7 +57,7 @@ public class ConstRotors {
     INTAKE_ROLLER_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     INTAKE_ROLLER_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
     INTAKE_ROLLER_CONFIGURATION.CurrentLimits.SupplyCurrentLimitEnable = true;
-    INTAKE_ROLLER_CONFIGURATION.CurrentLimits.SupplyCurrentLowerLimit = 45;
+    INTAKE_ROLLER_CONFIGURATION.CurrentLimits.SupplyCurrentLowerLimit = 35;
 
     SERIALIZER_ROLLERS_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     SERIALIZER_ROLLERS_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
