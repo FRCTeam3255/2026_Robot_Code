@@ -23,7 +23,8 @@ import frc.robot.constants.ConstRotors;
 public class Rotors extends SubsystemBase {
 
   final TalonFX serializerRollers = new TalonFX(rotorIDs.SERIALIZER_ROLLERS_CAN);
-  final TalonFX intakeRoller = new TalonFX(rotorIDs.INTAKE_ROLLERS_CAN);
+  final TalonFX intakeRollerWest = new TalonFX(rotorIDs.INTAKE_ROLLERS_WEST_CAN);
+  final TalonFX intakeRollerEast = new TalonFX(rotorIDs.INTAKE_ROLLERS_EAST_CAN);
   final TalonFX shooterTransferEast = new TalonFX(rotorIDs.SHOOTER_TRANSFER_EAST_CAN);
   final TalonFX shooterTransferWest = new TalonFX(rotorIDs.SHOOTER_TRANSFER_WEST_CAN);
   final TalonFX flywheelTopWest = new TalonFX(rotorIDs.FLYWHEEL_TOP_WEST_CAN);
@@ -35,12 +36,14 @@ public class Rotors extends SubsystemBase {
   Follower flywheelEastFollower = new Follower(flywheelTopEast.getDeviceID(), MotorAlignmentValue.Aligned);
   Follower flywheelWestFollower = new Follower(flywheelTopEast.getDeviceID(), MotorAlignmentValue.Opposed);
   Follower shooterTransferFollower = new Follower(shooterTransferEast.getDeviceID(), MotorAlignmentValue.Opposed);
+  Follower intakeRollerFollower = new Follower(intakeRollerWest.getDeviceID(), MotorAlignmentValue.Opposed);
   private boolean flywheelsAtSpeed = false;
 
   /** Creates a new Rotors. */
   public Rotors() {
     serializerRollers.getConfigurator().apply(ConstRotors.SERIALIZER_ROLLERS_CONFIGURATION);
-    intakeRoller.getConfigurator().apply(ConstRotors.INTAKE_ROLLER_CONFIGURATION);
+    intakeRollerWest.getConfigurator().apply(ConstRotors.INTAKE_ROLLER_WEST_CONFIGURATION);
+    intakeRollerEast.getConfigurator().apply(ConstRotors.INTAKE_ROLLER_WEST_CONFIGURATION);
     shooterTransferEast.getConfigurator().apply(ConstRotors.SHOOTER_TRANSFER_EAST_CONFIGURATION);
     shooterTransferWest.getConfigurator().apply(ConstRotors.SHOOTER_TRANSFER_WEST_CONFIGURATION);
     flywheelTopWest.getConfigurator().apply(ConstRotors.FLYWHEEL_WEST_CONFIGURATION);
@@ -57,7 +60,8 @@ public class Rotors extends SubsystemBase {
   }
 
   public void setIntakeRollersSpeed(double speed) {
-    intakeRoller.set(speed);
+    intakeRollerWest.set(speed);
+    intakeRollerEast.setControl(intakeRollerFollower);
   }
 
   public void setShooterTransferSpeed(AngularVelocity speed) {

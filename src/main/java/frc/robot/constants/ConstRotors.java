@@ -18,7 +18,8 @@ import edu.wpi.first.units.measure.AngularVelocity;
 public class ConstRotors {
 
   public static final TalonFXConfiguration SERIALIZER_ROLLERS_CONFIGURATION = new TalonFXConfiguration();
-  public static final TalonFXConfiguration INTAKE_ROLLER_CONFIGURATION = new TalonFXConfiguration();
+  public static final TalonFXConfiguration INTAKE_ROLLER_WEST_CONFIGURATION = new TalonFXConfiguration();
+  public static final TalonFXConfiguration INTAKE_ROLLER_EAST_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration SHOOTER_TRANSFER_EAST_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration SHOOTER_TRANSFER_WEST_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration FLYWHEEL_WEST_CONFIGURATION = new TalonFXConfiguration();
@@ -54,8 +55,11 @@ public class ConstRotors {
   public static final double STOP = 0.0;
   static {
 
-    INTAKE_ROLLER_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-    INTAKE_ROLLER_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+    INTAKE_ROLLER_WEST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+    INTAKE_ROLLER_WEST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+
+    INTAKE_ROLLER_EAST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+    INTAKE_ROLLER_EAST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
 
     SERIALIZER_ROLLERS_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     SERIALIZER_ROLLERS_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
