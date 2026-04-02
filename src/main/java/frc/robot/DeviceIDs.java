@@ -42,7 +42,7 @@ public class DeviceIDs {
   public static class rotorIDs {
     public static final int SERIALIZER_ROLLERS_CAN = 10;
     public static final int INTAKE_ROLLERS_WEST_CAN = 11;
-    public static final int INTAKE_ROLLERS_EAST_CAN = 14;
+    public static final int INTAKE_ROLLERS_EAST_CAN = 18;
     public static final int SHOOTER_TRANSFER_EAST_CAN = 12;
     public static final int SHOOTER_TRANSFER_WEST_CAN = 13;
 

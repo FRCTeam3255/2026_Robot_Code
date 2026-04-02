@@ -43,7 +43,7 @@ public class Rotors extends SubsystemBase {
   public Rotors() {
     serializerRollers.getConfigurator().apply(ConstRotors.SERIALIZER_ROLLERS_CONFIGURATION);
     intakeRollerWest.getConfigurator().apply(ConstRotors.INTAKE_ROLLER_WEST_CONFIGURATION);
-    intakeRollerEast.getConfigurator().apply(ConstRotors.INTAKE_ROLLER_WEST_CONFIGURATION);
+    intakeRollerEast.getConfigurator().apply(ConstRotors.INTAKE_ROLLER_EAST_CONFIGURATION);
     shooterTransferEast.getConfigurator().apply(ConstRotors.SHOOTER_TRANSFER_EAST_CONFIGURATION);
     shooterTransferWest.getConfigurator().apply(ConstRotors.SHOOTER_TRANSFER_WEST_CONFIGURATION);
     flywheelTopWest.getConfigurator().apply(ConstRotors.FLYWHEEL_WEST_CONFIGURATION);
