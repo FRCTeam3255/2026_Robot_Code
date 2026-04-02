@@ -48,7 +48,6 @@ public class ConstMotion {
   public static final Distance EXTEND_CLIMBER = Inches.of(13.1);
   public static final Angle HOOD_TOLERANCE = Units.Degrees.of(1.0);
   public final static InterpolatingDoubleTreeMap hoodAngleMap = new InterpolatingDoubleTreeMap();
-  public static final Time LIFT_INTAKE_DELAY = Units.Seconds.of(0.5);
   public static final Time LIFT_INTAKE_INTERVAL_TIME = Units.Seconds.of(1.0 / 3.0);
   public static final Angle INTAKE_PIVOT_ANGLE_TOLERANCE = Units.Degrees.of(5);
   public static final int CLIMBER_SLOW_PID_SLOT = 0;
