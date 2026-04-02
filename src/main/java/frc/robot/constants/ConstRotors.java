@@ -56,6 +56,8 @@ public class ConstRotors {
 
     INTAKE_ROLLER_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     INTAKE_ROLLER_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+    INTAKE_ROLLER_CONFIGURATION.CurrentLimits.SupplyCurrentLimitEnable = true;
+    INTAKE_ROLLER_CONFIGURATION.CurrentLimits.SupplyCurrentLowerLimit = 35;
 
     SERIALIZER_ROLLERS_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     SERIALIZER_ROLLERS_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
@@ -82,6 +84,8 @@ public class ConstRotors {
     FLYWHEEL_WEST_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity = 0;
     FLYWHEEL_WEST_CONFIGURATION.MotionMagic.MotionMagicAcceleration = 9999;
     FLYWHEEL_WEST_CONFIGURATION.MotionMagic.MotionMagicJerk = 0;
+    FLYWHEEL_WEST_CONFIGURATION.CurrentLimits.SupplyCurrentLimitEnable = true;
+    FLYWHEEL_WEST_CONFIGURATION.CurrentLimits.SupplyCurrentLowerLimit = 70;
 
     FLYWHEEL_EAST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     FLYWHEEL_EAST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
@@ -92,6 +96,8 @@ public class ConstRotors {
     FLYWHEEL_EAST_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity = 0;
     FLYWHEEL_EAST_CONFIGURATION.MotionMagic.MotionMagicAcceleration = 9999;
     FLYWHEEL_EAST_CONFIGURATION.MotionMagic.MotionMagicJerk = 0;
+    FLYWHEEL_EAST_CONFIGURATION.CurrentLimits.SupplyCurrentLimitEnable = true;
+    FLYWHEEL_EAST_CONFIGURATION.CurrentLimits.SupplyCurrentLowerLimit = 70;
 
     // flywheelSpeedMap.put(Inches.of(0.0).in(Inches), RPM.of(3200).in(RPM));
     // TODO: Consider re-adding a close-range (0 in) calibration point if required.
@@ -101,8 +107,8 @@ public class ConstRotors {
     // flywheelSpeedMap.put(Inches.of(150).in(Inches), RPM.of(4300).in(RPM));
     // flywheelSpeedMap.put(Inches.of(187.8).in(Inches), RPM.of(5200).in(RPM));
     flywheelSpeedMap.put(Inches.of(187.8).in(Inches), RPM.of(4100).in(RPM));
-    flywheelSpeedMap.put(Inches.of(130.1).in(Inches), RPM.of(4100).in(RPM));
-    flywheelSpeedMap.put(Inches.of(130).in(Inches), RPM.of(4000).in(RPM));
+    flywheelSpeedMap.put(Inches.of(165.1).in(Inches), RPM.of(4100).in(RPM));
+    flywheelSpeedMap.put(Inches.of(165).in(Inches), RPM.of(4000).in(RPM));
     flywheelSpeedMap.put(Inches.of(0).in(Inches), RPM.of(4000).in(RPM));
   }
 }
