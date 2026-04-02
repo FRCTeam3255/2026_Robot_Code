@@ -157,7 +157,7 @@ public class RobotContainer {
               || stateMachineInstance.getRobotState() == RobotState.PREP_NEUTRAL_TO_ALLIANCE));
 
   public RobotContainer() {
-    RobotController.setBrownoutVoltage(5.5);
+    // RobotController.setBrownoutVoltage(5.5);
 
     conDriver.setLeftDeadband(constControllers.DRIVER_LEFT_STICK_DEADBAND);
 
@@ -197,19 +197,21 @@ public class RobotContainer {
     conDriver.btn_A
         .onTrue(TRY_PREP_TRENCH);
     conDriver.btn_West
-        .onTrue(TRY_PREP_NEAUTRAL_TO_ALLIANCE)
-        .onTrue(TRY_PREP_OPPONENT_TO_ALLIANCE);
+        .onTrue(TRY_PREP_NEAUTRAL_TO_ALLIANCE);
+    // .onTrue(TRY_PREP_OPPONENT_TO_ALLIANCE);
     conDriver.btn_B
         .onTrue(TRY_PREP_CORNER);
     conDriver.btn_Y
-        .onTrue(TRY_PREP_OPPONENT_TO_ALLIANCE);
-    // .onTrue(TRY_PREP_HUB);
+        // .onTrue(TRY_PREP_OPPONENT_TO_ALLIANCE);
+        .onTrue(TRY_PREP_HUB);
     // .onTrue(TRY_DEFENSE) rethink where to put defense
     // .onFalse(TRY_NONE);
     conDriver.btn_X
         .onTrue(TRY_PREP_TOWER);
     conDriver.btn_RightStick
         .onTrue(TRY_RETRACT_INTAKE);
+    conDriver.btn_LeftStick
+        .onTrue(TRY_PREP_OPPONENT_TO_ALLIANCE);
     conDriver.btn_North.whileTrue(new ResetPose());
   }
 
@@ -259,7 +261,13 @@ public class RobotContainer {
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command DoubleOutpostSideNeutral = Commands.sequence(
-        OutpostSideNeutral.asProxy(),
+        TRY_INTAKING.asProxy().withTimeout(0.3), // Force intake down before moving and going under trench
+        CollectAndScore(
+            ChoreoTraj.OSideTrench_MidlineNeutral,
+            ChoreoTraj.OSideMidline_OSidePrep,
+            TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
+            ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
         runPath(ChoreoTraj.OSideShoot_OSideTrench).asProxy(),
         OutpostSideNeutral.asProxy());
 
@@ -277,7 +285,12 @@ public class RobotContainer {
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command DoubleDepotSideNeutral = Commands.sequence(
-        DepotSideNeutral.asProxy(),
+        TRY_INTAKING.asProxy().withTimeout(0.3), // Force intake down before moving and going under trench
+        CollectAndScore(ChoreoTraj.DSideTrench_MidlineNeutral,
+            ChoreoTraj.DSideMidline_DSidePrep,
+            TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
+            ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
         runPath(ChoreoTraj.DSideShoot_DSideTrench).asProxy(),
         DepotSideNeutral.asProxy());
 
@@ -311,7 +324,9 @@ public class RobotContainer {
 
     Command AutoPIDTuning = Commands.sequence(runPath(ChoreoTraj.AutoPIDTuning));
 
-    autoChooser.setDefaultOption("Do Nothing", Commands.none());
+    Command DoNothing = Commands.none();
+
+    autoChooser.setDefaultOption("Do Nothing", DoNothing);
     autoChooser.addOption("OutpostSideNeutralZone", OutpostSideNeutral);
     autoChooser.addOption("DoubleOutpostSideNeutral", DoubleOutpostSideNeutral);
     autoChooser.addOption("OutpostSideNeutralWithClimb", OutpostSideNeutralWithClimb);
@@ -332,6 +347,7 @@ public class RobotContainer {
     // make our entries name
     final Map<Command, ChoreoTraj> autoStartingPoses = Map.ofEntries(
         // Example
+        Map.entry(DoNothing, ChoreoTraj.Hub_ShootPreload),
         Map.entry(PreloadOutpost, ChoreoTraj.OSideTrench_Outpost),
         Map.entry(OutpostWithClimb, ChoreoTraj.OSideTrench_Outpost),
         Map.entry(PreloadDepotWithOutpost, ChoreoTraj.DSideBump_Depot),
