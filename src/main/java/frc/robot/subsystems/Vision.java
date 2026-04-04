@@ -5,9 +5,12 @@
 package frc.robot.subsystems;
 
 import java.util.Optional;
+import java.util.HashSet;
+import java.util.Set;
 
 import frc.robot.LimelightHelpers;
 import frc.robot.LimelightHelpers.PoseEstimate;
+import edu.wpi.first.apriltag.AprilTag;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -33,6 +36,7 @@ public class Vision extends SubsystemBase {
   Pose2d rightPose = new Pose2d();
   Pose2d leftPose = new Pose2d();
   Pose2d backPose = new Pose2d();
+  Set<Integer> getDetectedApriltags = new HashSet<>();
 
   private boolean useMegaTag2 = ConstVision.USE_MEGA_TAG_2;
 
@@ -85,6 +89,47 @@ public class Vision extends SubsystemBase {
     }
 
     return true;
+  }
+
+  public Set<Integer> logDetectedAprilTags() {
+
+    // Gather raw fiducial detections from each Limelight and return the
+    // number of unique AprilTag IDs currently visible.
+    Set<Integer> ids = getDetectedApriltags;
+
+    try {
+      var right = LimelightHelpers.getRawFiducials(ConstVision.LIMELIGHT_RIGHT_NAME);
+      if (right != null) {
+        for (var f : right) {
+          ids.add(f.id);
+        }
+      }
+    } catch (Exception e) {
+    }
+
+    try {
+      var left = LimelightHelpers.getRawFiducials(ConstVision.LIMELIGHT_LEFT_NAME);
+      if (left != null) {
+        for (var f : left) {
+          ids.add(f.id);
+        }
+      }
+    } catch (Exception e) {
+    }
+
+    try {
+      var back = LimelightHelpers.getRawFiducials(ConstVision.LIMELIGHT_TOP_NAME);
+      if (back != null) {
+        for (var f : back) {
+          ids.add(f.id);
+        }
+      }
+    } catch (Exception e) {
+      // ignore
+    }
+
+    return getDetectedApriltags = ids;
+
   }
 
   /**

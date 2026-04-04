@@ -461,6 +461,10 @@ public class RobotContainer {
     // Add feedback bindings here if needed
   }
 
+  public Set<Integer> getDetectedAprilTags() {
+    return visionInstance.logDetectedAprilTags();
+  }
+
   public RobotState getRobotState() {
     return stateMachineInstance.getRobotState();
   }
