@@ -59,19 +59,20 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     selectTab("Disabled");
+    LimelightHelpers.SetIMUAssistAlpha(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.IMU_ASSIST_ALPHA_VALUE);
+    LimelightHelpers.SetIMUAssistAlpha(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.IMU_ASSIST_ALPHA_VALUE);
+    LimelightHelpers.SetIMUAssistAlpha(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.IMU_ASSIST_ALPHA_VALUE);
     LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.DisabledThrottle);
     LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.DisabledThrottle);
     LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.DisabledThrottle);
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.IMUMode.EXTERNAL_SEED);
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.IMUMode.EXTERNAL_SEED);
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.IMUMode.EXTERNAL_SEED);
+    m_robotContainer.visionInstance.setIMUAssistMode(false);
   }
 
   @Override
   public void disabledPeriodic() {
     ConstField.ALLIANCE = DriverStation.getAlliance();
     SmartDashboard.putString("ALLIANCE", ConstField.ALLIANCE.toString());
-    double yaw = m_robotContainer.drivetrainInstance.getPose().getRotation().getDegrees();
+    double yaw = m_robotContainer.drivetrainInstance.getPigeon2().getYaw().getValueAsDouble();
     LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_RIGHT_NAME,
         yaw, 0, 0, 0, 0, 0);
     LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_LEFT_NAME,
@@ -86,9 +87,7 @@ public class Robot extends TimedRobot {
     LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.TeleopThrottle);
     LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.TeleopThrottle);
     LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.TeleopThrottle);
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.IMUMode.INTERNAL_ONLY);
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.IMUMode.INTERNAL_ONLY);
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.IMUMode.INTERNAL_ONLY);
+    m_robotContainer.visionInstance.setIMUAssistMode(true);
     m_robotContainer.addVisionMeasurement().schedule();
     LimelightHelpers.setRewindEnabled(ConstVision.LIMELIGHT_LEFT_NAME, true);
     LimelightHelpers.setRewindEnabled(ConstVision.LIMELIGHT_RIGHT_NAME, true);

@@ -218,7 +218,7 @@ public class RobotContainer {
   public void configAutonomous() {
     autoFactory = new AutoFactory(
         drivetrainInstance::getPose, // A function that returns the current robot pose
-        drivetrainInstance::resetPose, // A function that resets the current robot pose to the provided Pose2d
+        drivetrainInstance::resetPoseAndYaw, // A function that resets the current robot pose to the provided Pose2d
         drivetrainInstance::followTrajectory, // The drive subsystem trajectory follower
         true, // If alliance flipping should be enabled
         driverStateMachineInstance // The drive subsystem

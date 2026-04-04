@@ -47,6 +47,18 @@ public class Vision extends SubsystemBase {
     this.useMegaTag2 = useMegaTag2;
   }
 
+  public void setIMUAssistMode(boolean useAssist) {
+    if (useAssist == true) {
+      LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.IMUMode.INTERNAL_MT1_ASSIST);
+      LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.IMUMode.INTERNAL_MT1_ASSIST);
+      LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.IMUMode.INTERNAL_MT1_ASSIST);
+    } else {
+      LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.IMUMode.EXTERNAL_SEED);
+      LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.IMUMode.EXTERNAL_SEED);
+      LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.IMUMode.EXTERNAL_SEED);
+    }
+  }
+
   /**
    * Determines if a given pose estimate should be rejected.
    * 
@@ -76,6 +88,12 @@ public class Vision extends SubsystemBase {
       return true;
     }
 
+    // If MegaTag 2 do not reject if other items passed
+    if (useMegaTag2) {
+      return false;
+    }
+
+    // If MegaTag 1 have additional checks
     // 1 Tag with a large area
     if (poseEstimate.tagCount == 1 && poseEstimate.avgTagArea > areaThreshold) {
       return false;
