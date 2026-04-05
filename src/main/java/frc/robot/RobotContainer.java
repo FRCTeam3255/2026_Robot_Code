@@ -158,7 +158,6 @@ public class RobotContainer {
 
   public RobotContainer() {
     // RobotController.setBrownoutVoltage(5.5);
-    RobotController.getMeasureBatteryVoltage();
     conDriver.setLeftDeadband(constControllers.DRIVER_LEFT_STICK_DEADBAND);
 
     driverStateMachineInstance
