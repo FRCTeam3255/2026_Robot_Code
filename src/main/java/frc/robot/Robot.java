@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import java.util.Optional;
-
 import edu.wpi.first.epilogue.Epilogue;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.net.WebServer;
@@ -15,7 +13,6 @@ import edu.wpi.first.networktables.StringPublisher;
 import edu.wpi.first.networktables.StringTopic;
 import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -62,12 +59,13 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     selectTab("Disabled");
+    LimelightHelpers.SetIMUAssistAlpha(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.IMU_ASSIST_ALPHA_VALUE);
+    LimelightHelpers.SetIMUAssistAlpha(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.IMU_ASSIST_ALPHA_VALUE);
+    LimelightHelpers.SetIMUAssistAlpha(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.IMU_ASSIST_ALPHA_VALUE);
     LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.DisabledThrottle);
     LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.DisabledThrottle);
     LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.DisabledThrottle);
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.IMUMode.EXTERNAL_SEED);
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.IMUMode.EXTERNAL_SEED);
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.IMUMode.EXTERNAL_SEED);
+    m_robotContainer.visionInstance.setIMUAssistMode(false);
   }
 
   @Override
@@ -89,10 +87,11 @@ public class Robot extends TimedRobot {
     LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.TeleopThrottle);
     LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.TeleopThrottle);
     LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.TeleopThrottle);
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.IMUMode.INTERNAL_ONLY);
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.IMUMode.INTERNAL_ONLY);
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.IMUMode.INTERNAL_ONLY);
+    m_robotContainer.visionInstance.setIMUAssistMode(true);
     m_robotContainer.addVisionMeasurement().schedule();
+    LimelightHelpers.setRewindEnabled(ConstVision.LIMELIGHT_LEFT_NAME, true);
+    LimelightHelpers.setRewindEnabled(ConstVision.LIMELIGHT_RIGHT_NAME, true);
+    LimelightHelpers.setRewindEnabled(ConstVision.LIMELIGHT_TOP_NAME, true);
   }
 
   @Override
@@ -131,6 +130,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopExit() {
+    LimelightHelpers.triggerRewindCapture(ConstVision.LIMELIGHT_LEFT_NAME, 165);
+    LimelightHelpers.triggerRewindCapture(ConstVision.LIMELIGHT_RIGHT_NAME, 165);
+    LimelightHelpers.triggerRewindCapture(ConstVision.LIMELIGHT_TOP_NAME, 165);
   }
 
   @Override

@@ -13,19 +13,20 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
 import edu.wpi.first.units.measure.AngularVelocity;
-import frc.robot.RobotContainer;
 
 /** Add your docs here. */
 public class ConstRotors {
 
   public static final TalonFXConfiguration SERIALIZER_ROLLERS_CONFIGURATION = new TalonFXConfiguration();
-  public static final TalonFXConfiguration INTAKE_ROLLER_CONFIGURATION = new TalonFXConfiguration();
-  public static final TalonFXConfiguration SHOOTER_TRANSFER_CONFIGURATION = new TalonFXConfiguration();
+  public static final TalonFXConfiguration INTAKE_ROLLER_WEST_CONFIGURATION = new TalonFXConfiguration();
+  public static final TalonFXConfiguration INTAKE_ROLLER_EAST_CONFIGURATION = new TalonFXConfiguration();
+  public static final TalonFXConfiguration SHOOTER_TRANSFER_EAST_CONFIGURATION = new TalonFXConfiguration();
+  public static final TalonFXConfiguration SHOOTER_TRANSFER_WEST_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration FLYWHEEL_WEST_CONFIGURATION = new TalonFXConfiguration();
   public static final TalonFXConfiguration FLYWHEEL_EAST_CONFIGURATION = new TalonFXConfiguration();
   public static final double INTAKE_ROLLER_SPEED = 1;
   public static final double SERIALIZER_ROLLERS_SPEED = 1;
-  public static final double SHOOTER_TRANSFER_SPEED = 1;
+  public static final AngularVelocity SHOOTER_TRANSFER_SPEED = RPM.of(3400);
   public static final AngularVelocity FLYWHEEL_TOLERANCE = RPM.of(100);
   public final static InterpolatingDoubleTreeMap flywheelSpeedMap = new InterpolatingDoubleTreeMap();
 
@@ -37,11 +38,11 @@ public class ConstRotors {
   }
 
   // different shooting locations shooting speeds
-  public static final AngularVelocity FLYWHEEL_TRENCH_SPEED = RPM.of(4100);
-  public static final AngularVelocity FLYWHEEL_CORNER_SPEED = RPM.of(4650);
+  public static final AngularVelocity FLYWHEEL_TRENCH_SPEED = RPM.of(4000);
+  public static final AngularVelocity FLYWHEEL_CORNER_SPEED = RPM.of(4250);
   public static final AngularVelocity FLYWHEEL_NON_OUTPOST_SPEED = RPM.of(4100);
-  public static final AngularVelocity FLYWHEEL_TOWER_SPEED = RPM.of(4300);
-  public static final AngularVelocity FLYWHEEL_HUB_SPEED = RPM.of(3700); // TODO: adjust
+  public static final AngularVelocity FLYWHEEL_TOWER_SPEED = RPM.of(4000);
+  public static final AngularVelocity FLYWHEEL_HUB_SPEED = RPM.of(4000); // TODO: adjust
   public static final AngularVelocity FLYWHEEL_DEPOT_SPEED = RPM.of(4100);
   public static final AngularVelocity FLYWHEEL_ANYWHERE_SPEED = RPM.of(4100);
   public static final AngularVelocity FLYWHEEL_NEUTRAL_TO_ALLIANCE_SPEED = RPM.of(3700);
@@ -54,19 +55,34 @@ public class ConstRotors {
   public static final double STOP = 0.0;
   static {
 
-    INTAKE_ROLLER_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-    INTAKE_ROLLER_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+    INTAKE_ROLLER_WEST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+    INTAKE_ROLLER_WEST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+    INTAKE_ROLLER_WEST_CONFIGURATION.CurrentLimits.SupplyCurrentLimitEnable = true;
+    INTAKE_ROLLER_WEST_CONFIGURATION.CurrentLimits.SupplyCurrentLowerLimit = 35;
+
+    INTAKE_ROLLER_EAST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+    INTAKE_ROLLER_EAST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+    INTAKE_ROLLER_EAST_CONFIGURATION.CurrentLimits.SupplyCurrentLimitEnable = true;
+    INTAKE_ROLLER_EAST_CONFIGURATION.CurrentLimits.SupplyCurrentLowerLimit = 35;
 
     SERIALIZER_ROLLERS_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
-    SERIALIZER_ROLLERS_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+    SERIALIZER_ROLLERS_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
 
-    SHOOTER_TRANSFER_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-    SHOOTER_TRANSFER_CONFIGURATION.MotorOutput.Inverted = (RobotContainer.isPracticeBot())
-        ? InvertedValue.Clockwise_Positive
-        : InvertedValue.CounterClockwise_Positive;
+    SHOOTER_TRANSFER_EAST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+    SHOOTER_TRANSFER_EAST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+    SHOOTER_TRANSFER_EAST_CONFIGURATION.Slot0.kP = 0.7;
+    SHOOTER_TRANSFER_EAST_CONFIGURATION.Slot0.kS = 0.15;
+    SHOOTER_TRANSFER_EAST_CONFIGURATION.Slot0.kV = 0.12;
+    SHOOTER_TRANSFER_EAST_CONFIGURATION.Slot0.kA = 0;
+    SHOOTER_TRANSFER_EAST_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity = 0;
+    SHOOTER_TRANSFER_EAST_CONFIGURATION.MotionMagic.MotionMagicAcceleration = 9999;
+    SHOOTER_TRANSFER_EAST_CONFIGURATION.MotionMagic.MotionMagicJerk = 0;
+
+    SHOOTER_TRANSFER_WEST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+    SHOOTER_TRANSFER_WEST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
 
     FLYWHEEL_WEST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
-    FLYWHEEL_WEST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+    FLYWHEEL_WEST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
     FLYWHEEL_WEST_CONFIGURATION.Slot0.kS = 0.14;
     FLYWHEEL_WEST_CONFIGURATION.Slot0.kV = 0.11167;
     FLYWHEEL_WEST_CONFIGURATION.Slot0.kA = 0;
@@ -74,9 +90,11 @@ public class ConstRotors {
     FLYWHEEL_WEST_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity = 0;
     FLYWHEEL_WEST_CONFIGURATION.MotionMagic.MotionMagicAcceleration = 9999;
     FLYWHEEL_WEST_CONFIGURATION.MotionMagic.MotionMagicJerk = 0;
+    FLYWHEEL_WEST_CONFIGURATION.CurrentLimits.SupplyCurrentLimitEnable = true;
+    FLYWHEEL_WEST_CONFIGURATION.CurrentLimits.SupplyCurrentLowerLimit = 70;
 
     FLYWHEEL_EAST_CONFIGURATION.MotorOutput.NeutralMode = NeutralModeValue.Coast;
-    FLYWHEEL_EAST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+    FLYWHEEL_EAST_CONFIGURATION.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
     FLYWHEEL_EAST_CONFIGURATION.Slot0.kS = 0.14;
     FLYWHEEL_EAST_CONFIGURATION.Slot0.kV = 0.11167;
     FLYWHEEL_EAST_CONFIGURATION.Slot0.kA = 0;
@@ -84,6 +102,8 @@ public class ConstRotors {
     FLYWHEEL_EAST_CONFIGURATION.MotionMagic.MotionMagicCruiseVelocity = 0;
     FLYWHEEL_EAST_CONFIGURATION.MotionMagic.MotionMagicAcceleration = 9999;
     FLYWHEEL_EAST_CONFIGURATION.MotionMagic.MotionMagicJerk = 0;
+    FLYWHEEL_EAST_CONFIGURATION.CurrentLimits.SupplyCurrentLimitEnable = true;
+    FLYWHEEL_EAST_CONFIGURATION.CurrentLimits.SupplyCurrentLowerLimit = 70;
 
     // flywheelSpeedMap.put(Inches.of(0.0).in(Inches), RPM.of(3200).in(RPM));
     // TODO: Consider re-adding a close-range (0 in) calibration point if required.
@@ -93,6 +113,8 @@ public class ConstRotors {
     // flywheelSpeedMap.put(Inches.of(150).in(Inches), RPM.of(4300).in(RPM));
     // flywheelSpeedMap.put(Inches.of(187.8).in(Inches), RPM.of(5200).in(RPM));
     flywheelSpeedMap.put(Inches.of(187.8).in(Inches), RPM.of(4100).in(RPM));
-    flywheelSpeedMap.put(Inches.of(0).in(Inches), RPM.of(4100).in(RPM));
+    flywheelSpeedMap.put(Inches.of(165.1).in(Inches), RPM.of(4100).in(RPM));
+    flywheelSpeedMap.put(Inches.of(165).in(Inches), RPM.of(4000).in(RPM));
+    flywheelSpeedMap.put(Inches.of(0).in(Inches), RPM.of(4000).in(RPM));
   }
 }

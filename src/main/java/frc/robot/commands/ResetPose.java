@@ -20,24 +20,17 @@ public class ResetPose extends Command {
   @Override
   public void initialize() {
     RobotContainer.visionInstance.setVisionEnabled(false);
-    RobotContainer.drivetrainInstance.resetPose(getAlliancePose());
-    RobotContainer.drivetrainInstance.getPigeon2()
-        .setYaw(getAlliancePose().getRotation().getMeasure());
-    RobotContainer.drivetrainInstance.setDriveRotation(getAlliancePose().getRotation().getMeasure());
+    RobotContainer.drivetrainInstance.resetPoseAndYaw(getAlliancePose());
   }
 
   @Override
   public void execute() {
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.IMUMode.EXTERNAL_SEED);
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.IMUMode.EXTERNAL_SEED);
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.IMUMode.EXTERNAL_SEED);
+    RobotContainer.visionInstance.setIMUAssistMode(false);
   }
 
   @Override
   public void end(boolean interrupted) {
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.IMUMode.INTERNAL_ONLY);
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.IMUMode.INTERNAL_ONLY);
-    LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.IMUMode.INTERNAL_ONLY);
+    RobotContainer.visionInstance.setIMUAssistMode(true);
   }
 
   @Override

@@ -27,7 +27,6 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.units.measure.Angle;
 import frc.robot.DeviceIDs;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ChoreoTraj;
 import frc.robot.constants.ConstDrivetrain;
@@ -127,6 +126,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
   public final TalonFX BackLeftSteer;
   public final TalonFX BackRightDrive;
   public final TalonFX BackRightSteer;
+  private Angle resetYawValue = Degrees.zero();
 
   public Drivetrain() {
     super(
@@ -257,5 +257,20 @@ public class Drivetrain extends SN_SuperSwerveV2 {
 
   public void setIsManualRotationEnabled(boolean set) {
     manualRotationEnabled = set;
+  }
+
+  public void resetPoseAndYaw(Pose2d pose) {
+    resetPose(pose);
+    resetYawValue = pose.getRotation().getMeasure();
+    getPigeon2().setYaw(resetYawValue);
+    setDriveRotation(resetYawValue);
+  }
+
+  public Angle pigeonYaw() {
+    return getPigeon2().getYaw().getValue();
+  }
+
+  public Rotation2d getRawHeading() {
+    return getState().RawHeading;
   }
 }

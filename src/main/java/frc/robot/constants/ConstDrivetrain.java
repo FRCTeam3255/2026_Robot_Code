@@ -55,10 +55,10 @@ public class ConstDrivetrain {
 
   public static class PRACTICE_BOT {
     // TODO: Swoffsets
-    public static final Angle FRONT_LEFT_ABS_ENCODER_OFFSET = Rotations.of(-0.178466796875);
-    public static final Angle FRONT_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(-0.498779296875);
-    public static final Angle BACK_LEFT_ABS_ENCODER_OFFSET = Rotations.of(-0.459716796875);
-    public static final Angle BACK_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(-0.31201171875);
+    public static final Angle FRONT_LEFT_ABS_ENCODER_OFFSET = Rotations.of(-0.199462890625);
+    public static final Angle FRONT_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(0.474365234375);
+    public static final Angle BACK_LEFT_ABS_ENCODER_OFFSET = Rotations.of(-0.447265625);
+    public static final Angle BACK_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(-0.3193359375);
   }
 
   // TODO: Swoffsets
@@ -71,6 +71,7 @@ public class ConstDrivetrain {
   // ====== TO MOVE TO SUPERCODE - START ======
   public static class ModuleLocations {
     public static final Distance frame25x25 = Inches.of(19.75).div(2);
+    public static final Distance frame27x27 = Inches.of(21.75).div(2);
     public static final Distance frame29x29 = Inches.of(23.75).div(2);
   }
 
@@ -165,7 +166,14 @@ public class ConstDrivetrain {
   // cannot be null.
   // Some configs will be overwritten; check the `with*InitialConfigs()` API
   // documentation.
-  public static final TalonFXConfiguration driveInitialConfigs = new TalonFXConfiguration();
+  public static final TalonFXConfiguration driveInitialConfigs = new TalonFXConfiguration()
+      .withCurrentLimits(
+          new CurrentLimitsConfigs()
+              // Swerve azimuth does not require much torque output, so we can set a
+              // relatively low
+              // stator current limit to help avoid brownouts without impacting performance.
+              .withSupplyCurrentLimitEnable(true)
+              .withSupplyCurrentLimit(60));
   public static final TalonFXConfiguration steerInitialConfigs = new TalonFXConfiguration()
       .withCurrentLimits(
           new CurrentLimitsConfigs()
