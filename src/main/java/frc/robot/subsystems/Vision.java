@@ -219,12 +219,12 @@ public class Vision extends SubsystemBase {
           && rightTagCount >= backTagCount) {
         limelightInUse = LL_INUSE.RIGHT.toString();
         return Optional.of(lastEstimateRight);
-      } else if (leftTagCount > rightTagCount
+      } else if (leftTagCount >= rightTagCount
           && leftTagCount >= backTagCount) {
         limelightInUse = LL_INUSE.LEFT.toString();
         return Optional.of(lastEstimateLeft);
-      } else if (backTagCount > rightTagCount
-          && backTagCount > leftTagCount) {
+      } else if (backTagCount >= rightTagCount
+          && backTagCount >= leftTagCount) {
         limelightInUse = LL_INUSE.BACK.toString();
         return Optional.of(lastEstimateBack);
       } else {
