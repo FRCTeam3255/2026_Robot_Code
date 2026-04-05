@@ -126,6 +126,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
   public final TalonFX BackLeftSteer;
   public final TalonFX BackRightDrive;
   public final TalonFX BackRightSteer;
+  private Angle resetYawValue = Degrees.zero();
 
   public Drivetrain() {
     super(
@@ -256,5 +257,20 @@ public class Drivetrain extends SN_SuperSwerveV2 {
 
   public void setIsManualRotationEnabled(boolean set) {
     manualRotationEnabled = set;
+  }
+
+  public void resetPoseAndYaw(Pose2d pose) {
+    resetPose(pose);
+    resetYawValue = pose.getRotation().getMeasure();
+    getPigeon2().setYaw(resetYawValue);
+    setDriveRotation(resetYawValue);
+  }
+
+  public Angle pigeonYaw() {
+    return getPigeon2().getYaw().getValue();
+  }
+
+  public Rotation2d getRawHeading() {
+    return getState().RawHeading;
   }
 }
