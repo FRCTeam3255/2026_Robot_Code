@@ -154,20 +154,26 @@ public class Vision extends SubsystemBase {
       lastEstimateRight = currentEstimateRight;
       rightPose = currentEstimateRight.pose;
       newRightEstimate = true;
+      rightTagCount = currentEstimateRight.tagCount;
+    } else {
+      rightTagCount = 0;
     }
     if (currentEstimateLeft != null && !rejectUpdate(currentEstimateLeft, gyroRate, ConstVision.AREA_THRESHOLD_FRONT)) {
       lastEstimateLeft = currentEstimateLeft;
       leftPose = currentEstimateLeft.pose;
       newLeftEstimate = true;
+      leftTagCount = currentEstimateLeft.tagCount;
+    } else {
+      leftTagCount = 0;
     }
     if (currentEstimateBack != null && !rejectUpdate(currentEstimateBack, gyroRate, ConstVision.AREA_THRESHOLD_BACK)) {
       lastEstimateBack = currentEstimateBack;
       backPose = currentEstimateBack.pose;
       newBackEstimate = true;
+      backTagCount = currentEstimateBack.tagCount;
+    } else {
+      backTagCount = 0;
     }
-    leftTagCount = currentEstimateLeft != null ? currentEstimateLeft.tagCount : 0;
-    rightTagCount = currentEstimateRight != null ? currentEstimateRight.tagCount : 0;
-    backTagCount = currentEstimateBack != null ? currentEstimateBack.tagCount : 0;
   }
 
   public boolean isVisionEnabled() {
@@ -209,16 +215,16 @@ public class Vision extends SubsystemBase {
       newRightEstimate = false;
       newLeftEstimate = false;
       newBackEstimate = false;
-      if (lastEstimateRight.tagCount > lastEstimateLeft.tagCount
-          && lastEstimateRight.tagCount > lastEstimateBack.tagCount) {
+      if (rightTagCount >= leftTagCount
+          && rightTagCount >= backTagCount) {
         limelightInUse = LL_INUSE.RIGHT.toString();
         return Optional.of(lastEstimateRight);
-      } else if (lastEstimateLeft.tagCount > lastEstimateRight.tagCount
-          && lastEstimateLeft.tagCount > lastEstimateBack.tagCount) {
+      } else if (leftTagCount > rightTagCount
+          && leftTagCount > backTagCount) {
         limelightInUse = LL_INUSE.LEFT.toString();
         return Optional.of(lastEstimateLeft);
-      } else if (lastEstimateBack.tagCount > lastEstimateRight.tagCount
-          && lastEstimateBack.tagCount > lastEstimateLeft.tagCount) {
+      } else if (backTagCount > rightTagCount
+          && backTagCount > leftTagCount) {
         limelightInUse = LL_INUSE.BACK.toString();
         return Optional.of(lastEstimateBack);
       } else {
