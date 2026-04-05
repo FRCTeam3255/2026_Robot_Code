@@ -33,6 +33,11 @@ public class Vision extends SubsystemBase {
   Pose2d rightPose = new Pose2d();
   Pose2d leftPose = new Pose2d();
   Pose2d backPose = new Pose2d();
+  int rightTagCount = 0;
+  int leftTagCount = 0;
+  int backTagCount = 0;
+
+  String LLInUse = "none";
 
   private boolean useMegaTag2 = ConstVision.USE_MEGA_TAG_2;
 
@@ -156,6 +161,9 @@ public class Vision extends SubsystemBase {
       backPose = currentEstimateBack.pose;
       newBackEstimate = true;
     }
+    leftTagCount = currentEstimateLeft.tagCount;
+    rightTagCount = currentEstimateRight.tagCount;
+    backTagCount = currentEstimateBack.tagCount;
   }
 
   public boolean isVisionEnabled() {
@@ -175,17 +183,20 @@ public class Vision extends SubsystemBase {
 
     } else if (newRightEstimate && !newLeftEstimate && !newBackEstimate) {
       // One valid pose estimate (right)
+      LLInUse = "Right";
       newRightEstimate = false;
       return Optional.of(lastEstimateRight);
 
     } else if (!newRightEstimate && newLeftEstimate && !newBackEstimate) {
       // One valid pose estimate (left)
+      LLInUse = "Left";
       newLeftEstimate = false;
       return Optional.of(lastEstimateLeft);
 
     } else if (!newRightEstimate && !newLeftEstimate && newBackEstimate) {
       // One valid pose estimate (back)
       newLeftEstimate = false;
+      LLInUse = "Top";
       return Optional.of(lastEstimateBack);
 
     } else {
@@ -193,16 +204,20 @@ public class Vision extends SubsystemBase {
       newRightEstimate = false;
       newLeftEstimate = false;
       newBackEstimate = false;
-      if (lastEstimateRight.avgTagDist < lastEstimateLeft.avgTagDist
-          && lastEstimateRight.avgTagDist < lastEstimateBack.avgTagDist) {
+      if (lastEstimateRight.tagCount > lastEstimateLeft.tagCount
+          && lastEstimateRight.tagCount > lastEstimateBack.tagCount) {
+        LLInUse = "Right";
         return Optional.of(lastEstimateRight);
-      } else if (lastEstimateLeft.avgTagDist < lastEstimateRight.avgTagDist
-          && lastEstimateLeft.avgTagDist < lastEstimateBack.avgTagDist) {
+      } else if (lastEstimateLeft.tagCount > lastEstimateRight.tagCount
+          && lastEstimateLeft.tagCount > lastEstimateBack.tagCount) {
+        LLInUse = "Left";
         return Optional.of(lastEstimateLeft);
-      } else if (lastEstimateBack.avgTagDist < lastEstimateRight.avgTagDist
-          && lastEstimateBack.avgTagDist < lastEstimateLeft.avgTagDist) {
+      } else if (lastEstimateBack.tagCount > lastEstimateRight.tagCount
+          && lastEstimateBack.tagCount > lastEstimateLeft.tagCount) {
+        LLInUse = "Top";
         return Optional.of(lastEstimateBack);
       } else {
+        LLInUse = "none";
         return Optional.empty();
       }
     }
