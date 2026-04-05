@@ -37,7 +37,11 @@ public class Vision extends SubsystemBase {
   int leftTagCount = 0;
   int backTagCount = 0;
 
-  String LLInUse = "none";
+  String limelightInUse = LL_INUSE.NONE.toString();
+
+  public enum LL_INUSE {
+    RIGHT, LEFT, BACK, NONE
+  }
 
   private boolean useMegaTag2 = ConstVision.USE_MEGA_TAG_2;
 
@@ -161,9 +165,9 @@ public class Vision extends SubsystemBase {
       backPose = currentEstimateBack.pose;
       newBackEstimate = true;
     }
-    leftTagCount = currentEstimateLeft.tagCount;
-    rightTagCount = currentEstimateRight.tagCount;
-    backTagCount = currentEstimateBack.tagCount;
+    leftTagCount = currentEstimateLeft != null ? currentEstimateLeft.tagCount : 0;
+    rightTagCount = currentEstimateRight != null ? currentEstimateRight.tagCount : 0;
+    backTagCount = currentEstimateBack != null ? currentEstimateBack.tagCount : 0;
   }
 
   public boolean isVisionEnabled() {
@@ -179,24 +183,25 @@ public class Vision extends SubsystemBase {
 
     // No valid pose estimates :(
     if (!newRightEstimate && !newLeftEstimate && !newBackEstimate) {
+      limelightInUse = LL_INUSE.NONE.toString();
       return Optional.empty();
 
     } else if (newRightEstimate && !newLeftEstimate && !newBackEstimate) {
       // One valid pose estimate (right)
-      LLInUse = "Right";
+      limelightInUse = LL_INUSE.RIGHT.toString();
       newRightEstimate = false;
       return Optional.of(lastEstimateRight);
 
     } else if (!newRightEstimate && newLeftEstimate && !newBackEstimate) {
       // One valid pose estimate (left)
-      LLInUse = "Left";
+      limelightInUse = LL_INUSE.LEFT.toString();
       newLeftEstimate = false;
       return Optional.of(lastEstimateLeft);
 
     } else if (!newRightEstimate && !newLeftEstimate && newBackEstimate) {
       // One valid pose estimate (back)
-      newLeftEstimate = false;
-      LLInUse = "Top";
+      newBackEstimate = false;
+      limelightInUse = LL_INUSE.BACK.toString();
       return Optional.of(lastEstimateBack);
 
     } else {
@@ -206,18 +211,18 @@ public class Vision extends SubsystemBase {
       newBackEstimate = false;
       if (lastEstimateRight.tagCount > lastEstimateLeft.tagCount
           && lastEstimateRight.tagCount > lastEstimateBack.tagCount) {
-        LLInUse = "Right";
+        limelightInUse = LL_INUSE.RIGHT.toString();
         return Optional.of(lastEstimateRight);
       } else if (lastEstimateLeft.tagCount > lastEstimateRight.tagCount
           && lastEstimateLeft.tagCount > lastEstimateBack.tagCount) {
-        LLInUse = "Left";
+        limelightInUse = LL_INUSE.LEFT.toString();
         return Optional.of(lastEstimateLeft);
       } else if (lastEstimateBack.tagCount > lastEstimateRight.tagCount
           && lastEstimateBack.tagCount > lastEstimateLeft.tagCount) {
-        LLInUse = "Top";
+        limelightInUse = LL_INUSE.BACK.toString();
         return Optional.of(lastEstimateBack);
       } else {
-        LLInUse = "none";
+        limelightInUse = LL_INUSE.NONE.toString();
         return Optional.empty();
       }
     }
