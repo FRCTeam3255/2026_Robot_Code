@@ -211,7 +211,7 @@ public class Telemetry extends SubsystemBase {
     return RobotController.getMeasureBatteryVoltage();
   }
 
-  public boolean brownOut() {
+  public boolean isBrownedOut() {
     return RobotController.isBrownedOut();
   }
 
