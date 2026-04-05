@@ -4,12 +4,19 @@
 
 package frc.robot.subsystems;
 
+import static edu.wpi.first.units.Units.Value;
+
+import java.util.Currency;
 import java.util.Optional;
 
 import edu.wpi.first.epilogue.Logged;
+import edu.wpi.first.units.measure.Current;
+import edu.wpi.first.units.measure.Voltage;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
+import edu.wpi.first.wpilibj.RobotController;
 
 @Logged
 public class Telemetry extends SubsystemBase {
@@ -34,6 +41,7 @@ public class Telemetry extends SubsystemBase {
     if (gameData.isEmpty()) {
       gameData = DriverStation.getGameSpecificMessage();
     }
+
   }
 
   public boolean redIsNotFirst() {
@@ -198,4 +206,13 @@ public class Telemetry extends SubsystemBase {
     }
     return false;
   }
+
+  public Voltage batteryVoltage() {
+    return RobotController.getMeasureBatteryVoltage();
+  }
+
+  public boolean brownOut() {
+    return RobotController.isBrownedOut();
+  }
+
 }
