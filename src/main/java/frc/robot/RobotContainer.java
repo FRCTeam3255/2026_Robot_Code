@@ -218,7 +218,7 @@ public class RobotContainer {
   public void configAutonomous() {
     autoFactory = new AutoFactory(
         drivetrainInstance::getPose, // A function that returns the current robot pose
-        drivetrainInstance::resetPoseAndYaw, // A function that resets the current robot pose to the provided Pose2d
+        drivetrainInstance::resetPose, // A function that resets the current robot pose to the provided Pose2d
         drivetrainInstance::followTrajectory, // The drive subsystem trajectory follower
         true, // If alliance flipping should be enabled
         driverStateMachineInstance // The drive subsystem
@@ -326,6 +326,21 @@ public class RobotContainer {
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
+    Command GlendaleWithUturn = Commands.sequence(
+        TRY_INTAKING.asProxy().withTimeout(0.3), // Force intake down before moving and going under trench
+        CollectAndScore(ChoreoTraj.DSideTrench_MidlineNeutral,
+            ChoreoTraj.DSideMidline_DSidePrep,
+            TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
+            ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
+        runPath(ChoreoTraj.DSideShoot_DSideTrench).asProxy(),
+        CollectAndScore(
+            ChoreoTraj.SecondUTurn_DSideTrench_Neutral,
+            ChoreoTraj.SecondUTurnDSideNeutral_DSidePrep,
+            TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
+            ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
+
     Command DepotSideNeutralWithClimb = Commands.sequence(
         DepotSideNeutral.asProxy(),
         Climb(ChoreoTraj.DSideBump_PrepClimb));
@@ -362,6 +377,7 @@ public class RobotContainer {
     autoChooser.addOption("OutpostSideNeutralZone", OutpostSideNeutral);
     autoChooser.addOption("DoubleOutpostSideNeutral", DoubleOutpostSideNeutral);
     autoChooser.addOption("UTurnOutpostSideNeutral", DoubleUTurnOutpostSideNeutral);
+    autoChooser.addOption("GlendaleWithUturn", GlendaleWithUturn);
     autoChooser.addOption("OutpostSideNeutralWithClimb", OutpostSideNeutralWithClimb);
     autoChooser.addOption("OutpostSideNeutralWithOutpost", OutpostSideNeutralWithOutpost);
     autoChooser.addOption("Outpost", PreloadOutpost);
@@ -390,6 +406,7 @@ public class RobotContainer {
         Map.entry(PreloadWithClimb, ChoreoTraj.Hub_ShootPreload),
         Map.entry(DepotSideNeutral, ChoreoTraj.DSideTrench_Neutral),
         Map.entry(DoubleDepotSideNeutral, ChoreoTraj.DSideTrench_Neutral),
+        Map.entry(GlendaleWithUturn, ChoreoTraj.DSideTrench_Neutral),
         Map.entry(PreloadDepot, ChoreoTraj.DSideBump_Depot),
         Map.entry(DepotSideNeutralWithClimb, ChoreoTraj.DSideTrench_Neutral),
         Map.entry(DoubleUTurnDepotSideNeutral, ChoreoTraj.FirstUTurn_DSideTrench_Neutral),
