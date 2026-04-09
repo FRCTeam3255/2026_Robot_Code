@@ -71,6 +71,7 @@ public class ConstDrivetrain {
   // ====== TO MOVE TO SUPERCODE - START ======
   public static class ModuleLocations {
     public static final Distance frame25x25 = Inches.of(19.75).div(2);
+    public static final Distance frame27x27 = Inches.of(21.75).div(2);
     public static final Distance frame29x29 = Inches.of(23.75).div(2);
   }
 

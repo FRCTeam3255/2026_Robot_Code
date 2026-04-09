@@ -33,6 +33,15 @@ public class Vision extends SubsystemBase {
   Pose2d rightPose = new Pose2d();
   Pose2d leftPose = new Pose2d();
   Pose2d backPose = new Pose2d();
+  int rightTagCount = 0;
+  int leftTagCount = 0;
+  int backTagCount = 0;
+
+  String limelightInUse = LL_INUSE.NONE.toString();
+
+  public enum LL_INUSE {
+    RIGHT, LEFT, BACK, NONE
+  }
 
   private boolean useMegaTag2 = ConstVision.USE_MEGA_TAG_2;
 
@@ -45,6 +54,18 @@ public class Vision extends SubsystemBase {
 
   public void setMegaTag2(boolean useMegaTag2) {
     this.useMegaTag2 = useMegaTag2;
+  }
+
+  public void setIMUAssistMode(boolean useAssist) {
+    if (useAssist == true) {
+      LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.IMUMode.INTERNAL_MT1_ASSIST);
+      LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.IMUMode.INTERNAL_MT1_ASSIST);
+      LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.IMUMode.INTERNAL_MT1_ASSIST);
+    } else {
+      LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.IMUMode.EXTERNAL_SEED);
+      LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.IMUMode.EXTERNAL_SEED);
+      LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.IMUMode.EXTERNAL_SEED);
+    }
   }
 
   /**
@@ -76,6 +97,12 @@ public class Vision extends SubsystemBase {
       return true;
     }
 
+    // If MegaTag 2 do not reject if other items passed
+    if (useMegaTag2) {
+      return false;
+    }
+
+    // If MegaTag 1 have additional checks
     // 1 Tag with a large area
     if (poseEstimate.tagCount == 1 && poseEstimate.avgTagArea > areaThreshold) {
       return false;
@@ -127,16 +154,25 @@ public class Vision extends SubsystemBase {
       lastEstimateRight = currentEstimateRight;
       rightPose = currentEstimateRight.pose;
       newRightEstimate = true;
+      rightTagCount = currentEstimateRight.tagCount;
+    } else {
+      rightTagCount = 0;
     }
     if (currentEstimateLeft != null && !rejectUpdate(currentEstimateLeft, gyroRate, ConstVision.AREA_THRESHOLD_FRONT)) {
       lastEstimateLeft = currentEstimateLeft;
       leftPose = currentEstimateLeft.pose;
       newLeftEstimate = true;
+      leftTagCount = currentEstimateLeft.tagCount;
+    } else {
+      leftTagCount = 0;
     }
     if (currentEstimateBack != null && !rejectUpdate(currentEstimateBack, gyroRate, ConstVision.AREA_THRESHOLD_BACK)) {
       lastEstimateBack = currentEstimateBack;
       backPose = currentEstimateBack.pose;
       newBackEstimate = true;
+      backTagCount = currentEstimateBack.tagCount;
+    } else {
+      backTagCount = 0;
     }
   }
 
@@ -153,21 +189,25 @@ public class Vision extends SubsystemBase {
 
     // No valid pose estimates :(
     if (!newRightEstimate && !newLeftEstimate && !newBackEstimate) {
+      limelightInUse = LL_INUSE.NONE.toString();
       return Optional.empty();
 
     } else if (newRightEstimate && !newLeftEstimate && !newBackEstimate) {
       // One valid pose estimate (right)
+      limelightInUse = LL_INUSE.RIGHT.toString();
       newRightEstimate = false;
       return Optional.of(lastEstimateRight);
 
     } else if (!newRightEstimate && newLeftEstimate && !newBackEstimate) {
       // One valid pose estimate (left)
+      limelightInUse = LL_INUSE.LEFT.toString();
       newLeftEstimate = false;
       return Optional.of(lastEstimateLeft);
 
     } else if (!newRightEstimate && !newLeftEstimate && newBackEstimate) {
       // One valid pose estimate (back)
-      newLeftEstimate = false;
+      newBackEstimate = false;
+      limelightInUse = LL_INUSE.BACK.toString();
       return Optional.of(lastEstimateBack);
 
     } else {
@@ -175,16 +215,20 @@ public class Vision extends SubsystemBase {
       newRightEstimate = false;
       newLeftEstimate = false;
       newBackEstimate = false;
-      if (lastEstimateRight.avgTagDist < lastEstimateLeft.avgTagDist
-          && lastEstimateRight.avgTagDist < lastEstimateBack.avgTagDist) {
+      if (rightTagCount >= leftTagCount
+          && rightTagCount >= backTagCount) {
+        limelightInUse = LL_INUSE.RIGHT.toString();
         return Optional.of(lastEstimateRight);
-      } else if (lastEstimateLeft.avgTagDist < lastEstimateRight.avgTagDist
-          && lastEstimateLeft.avgTagDist < lastEstimateBack.avgTagDist) {
+      } else if (leftTagCount >= rightTagCount
+          && leftTagCount >= backTagCount) {
+        limelightInUse = LL_INUSE.LEFT.toString();
         return Optional.of(lastEstimateLeft);
-      } else if (lastEstimateBack.avgTagDist < lastEstimateRight.avgTagDist
-          && lastEstimateBack.avgTagDist < lastEstimateLeft.avgTagDist) {
+      } else if (backTagCount >= rightTagCount
+          && backTagCount >= leftTagCount) {
+        limelightInUse = LL_INUSE.BACK.toString();
         return Optional.of(lastEstimateBack);
       } else {
+        limelightInUse = LL_INUSE.NONE.toString();
         return Optional.empty();
       }
     }
