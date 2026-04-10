@@ -69,21 +69,21 @@ public record ChoreoTraj(
 	public static final ChoreoTraj DSideMidline_DSidePrep = new ChoreoTraj(
 	    "DSideMidline_DSidePrep",
 	    OptionalInt.empty(),
-	    2.54798,
+	    2.33342,
 	    new Pose2d(7.876, 5.902, Rotation2d.fromRadians(1.588)),
 	    new Pose2d(2.779, 5.469, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj DSideNeutral_DSidePrep = new ChoreoTraj(
 	    "DSideNeutral_DSidePrep",
 	    OptionalInt.empty(),
-	    2.65724,
+	    2.37765,
 	    new Pose2d(7.448, 5.707, Rotation2d.fromRadians(1.588)),
 	    new Pose2d(2.779, 5.469, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj DSideOffset_DSidePrep = new ChoreoTraj(
 	    "DSideOffset_DSidePrep",
 	    OptionalInt.empty(),
-	    2.72807,
+	    2.48068,
 	    new Pose2d(8.386, 5.902, Rotation2d.fromRadians(1.588)),
 	    new Pose2d(2.779, 5.469, Rotation2d.fromRadians(0))
 	);
@@ -139,21 +139,21 @@ public record ChoreoTraj(
 	public static final ChoreoTraj FirstCCOSideNeutral_OSidePrep = new ChoreoTraj(
 	    "FirstCCOSideNeutral_OSidePrep",
 	    OptionalInt.empty(),
-	    2.46402,
+	    2.20755,
 	    new Pose2d(7.017, 2.359, Rotation2d.fromRadians(1.571)),
 	    new Pose2d(2.779, 2.582, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj FirstUTurnDSideNeutral_DSidePrep = new ChoreoTraj(
 	    "FirstUTurnDSideNeutral_DSidePrep",
 	    OptionalInt.empty(),
-	    2.30489,
+	    2.09464,
 	    new Pose2d(6.92, 5.306, Rotation2d.fromRadians(-1.571)),
 	    new Pose2d(2.779, 5.469, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj FirstUTurnOSideNeutral_OSidePrep = new ChoreoTraj(
 	    "FirstUTurnOSideNeutral_OSidePrep",
 	    OptionalInt.empty(),
-	    2.46402,
+	    2.20755,
 	    new Pose2d(7.017, 2.359, Rotation2d.fromRadians(1.571)),
 	    new Pose2d(2.779, 2.582, Rotation2d.fromRadians(0))
 	);
@@ -188,21 +188,21 @@ public record ChoreoTraj(
 	public static final ChoreoTraj OSideMidline_OSidePrep = new ChoreoTraj(
 	    "OSideMidline_OSidePrep",
 	    OptionalInt.empty(),
-	    2.48539,
+	    2.28891,
 	    new Pose2d(7.881, 2.149, Rotation2d.fromRadians(-1.571)),
 	    new Pose2d(2.779, 2.582, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj OSideNeutral_OSidePrep = new ChoreoTraj(
 	    "OSideNeutral_OSidePrep",
 	    OptionalInt.empty(),
-	    2.51209,
+	    2.26726,
 	    new Pose2d(7.448, 2.505, Rotation2d.fromRadians(-1.571)),
 	    new Pose2d(2.779, 2.582, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj OSideOffset_OSidePrep = new ChoreoTraj(
 	    "OSideOffset_OSidePrep",
 	    OptionalInt.empty(),
-	    2.59077,
+	    2.39342,
 	    new Pose2d(8.386, 2.149, Rotation2d.fromRadians(-1.571)),
 	    new Pose2d(2.779, 2.582, Rotation2d.fromRadians(0))
 	);
@@ -286,14 +286,14 @@ public record ChoreoTraj(
 	public static final ChoreoTraj SecondUTurnDSideNeutral_DSidePrep = new ChoreoTraj(
 	    "SecondUTurnDSideNeutral_DSidePrep",
 	    OptionalInt.empty(),
-	    2.17225,
+	    1.96516,
 	    new Pose2d(6.62, 5.525, Rotation2d.fromRadians(0)),
 	    new Pose2d(2.779, 5.469, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj SecondUTurnOSideNeutral_OSidePrep = new ChoreoTraj(
 	    "SecondUTurnOSideNeutral_OSidePrep",
 	    OptionalInt.empty(),
-	    2.12421,
+	    1.93385,
 	    new Pose2d(6.594, 2.329, Rotation2d.fromRadians(0)),
 	    new Pose2d(2.779, 2.582, Rotation2d.fromRadians(0))
 	);

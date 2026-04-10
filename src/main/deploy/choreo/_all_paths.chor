@@ -14,8 +14,8 @@
    "over_bump":{
     "dimension":"LinVel",
     "var":{
-     "exp":"6 ft / s",
-     "val":1.8288
+     "exp":"7 ft / s",
+     "val":2.1336
     }
    }
   },
