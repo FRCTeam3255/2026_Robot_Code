@@ -157,7 +157,7 @@ public class RobotContainer {
               || stateMachineInstance.getRobotState() == RobotState.PREP_NEUTRAL_TO_ALLIANCE));
 
   public RobotContainer() {
-    // RobotController.setBrownoutVoltage(5.5);
+    RobotController.setBrownoutVoltage(5.5);
     conDriver.setLeftDeadband(constControllers.DRIVER_LEFT_STICK_DEADBAND);
 
     driverStateMachineInstance

@@ -12,6 +12,7 @@ import edu.wpi.first.units.measure.*;
  */
 public final class ChoreoVars {
     public static final LinearVelocity ground_intaking = Units.MetersPerSecond.of(1.219);
+    public static final LinearVelocity over_bump = Units.MetersPerSecond.of(0.914);
 
     public static final class Poses {
         public static final Pose2d D_side_climb_starting_pose = new Pose2d(2.229, 4.205, Rotation2d.fromRadians(-1.571));

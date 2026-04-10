@@ -10,6 +10,13 @@
      "exp":"4 ft / s",
      "val":1.2192
     }
+   },
+   "over_bump":{
+    "dimension":"LinVel",
+    "var":{
+     "exp":"3 ft / s",
+     "val":0.9144
+    }
    }
   },
   "poses":{
