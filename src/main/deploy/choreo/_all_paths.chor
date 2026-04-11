@@ -7,15 +7,15 @@
    "ground_intaking":{
     "dimension":"LinVel",
     "var":{
-     "exp":"5 ft / s",
-     "val":1.524
+     "exp":"5.5 ft / s",
+     "val":1.6764
     }
    },
    "over_bump":{
     "dimension":"LinVel",
     "var":{
-     "exp":"7 ft / s",
-     "val":2.1336
+     "exp":"6 ft / s",
+     "val":1.8288
     }
    }
   },

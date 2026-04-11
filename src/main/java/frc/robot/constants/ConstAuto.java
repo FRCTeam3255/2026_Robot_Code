@@ -4,6 +4,8 @@ import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Time;
 
 public class ConstAuto {
+  public static final double INTAKE_DEPLOY_DELAY = 0.15;
+
   public static final Time PREP_SHOOT_TIMEOUT = Units.Seconds.of(2.0);
   public static final Time SHOOT_PRELOAD_TIMEOUT = Units.Seconds.of(3.0);
   public static final Time SHOOT_DEFAULT_TIMEOUT = Units.Seconds.of(3.0);
