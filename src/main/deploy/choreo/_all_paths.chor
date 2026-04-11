@@ -4,6 +4,13 @@
  "type":"Swerve",
  "variables":{
   "expressions":{
+   "dside_over_bumb_angle":{
+    "dimension":"Angle",
+    "var":{
+     "exp":"-45 deg",
+     "val":-0.7853981633974483
+    }
+   },
    "ground_intaking":{
     "dimension":"LinVel",
     "var":{
@@ -11,11 +18,18 @@
      "val":1.6764
     }
    },
+   "oside_over_bump_angle":{
+    "dimension":"Angle",
+    "var":{
+     "exp":"45 deg",
+     "val":0.7853981633974483
+    }
+   },
    "over_bump":{
     "dimension":"LinVel",
     "var":{
-     "exp":"6 ft / s",
-     "val":1.8288
+     "exp":"7 ft / s",
+     "val":2.1336
     }
    }
   },
@@ -254,8 +268,8 @@
      "val":5.468722534179688
     },
     "heading":{
-     "exp":"0 deg",
-     "val":0.0
+     "exp":"dside_over_bumb_angle",
+     "val":-0.7853981633974483
     }
    },
    "depot_side_offset_neutral":{
@@ -422,8 +436,8 @@
      "val":2.581735610961914
     },
     "heading":{
-     "exp":"0 deg",
-     "val":0.0
+     "exp":"oside_over_bump_angle",
+     "val":0.7853981633974483
     }
    },
    "outpost_side_neutral_zone":{
