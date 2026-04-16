@@ -157,7 +157,7 @@ public class RobotContainer {
               || stateMachineInstance.getRobotState() == RobotState.PREP_NEUTRAL_TO_ALLIANCE));
 
   public RobotContainer() {
-    // RobotController.setBrownoutVoltage(5.5);
+    RobotController.setBrownoutVoltage(5.5);
     conDriver.setLeftDeadband(constControllers.DRIVER_LEFT_STICK_DEADBAND);
 
     driverStateMachineInstance
@@ -251,7 +251,8 @@ public class RobotContainer {
             ConstAuto.SHOOT_FROM_OUTPOST_TIMEOUT));
 
     Command OutpostSideNeutral = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(0.3), // Force intake down before moving and going under trench
+        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+                                                                           // under trench
         CollectAndScore(
             ChoreoTraj.OSideTrench_Neutral,
             ChoreoTraj.OSideNeutral_OSidePrep,
@@ -260,7 +261,8 @@ public class RobotContainer {
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command DoubleOutpostSideNeutral = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(0.3), // Force intake down before moving and going under trench
+        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+                                                                           // under trench
         CollectAndScore(
             ChoreoTraj.OSideTrench_MidlineNeutral,
             ChoreoTraj.OSideMidline_OSidePrep,
@@ -271,7 +273,8 @@ public class RobotContainer {
         OutpostSideNeutral.asProxy());
 
     Command OutpostSideGlendaleWithUturn = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(0.3), // Force intake down before moving and going under trench
+        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+                                                                           // under trench
         CollectAndScore(ChoreoTraj.OSideTrench_MidlineNeutral,
             ChoreoTraj.OSideMidline_OSidePrep,
             TRY_PREP_ANYWHERE,
@@ -286,7 +289,8 @@ public class RobotContainer {
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command OutpostSideOffsetGlendale = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(0.3), // Force intake down before moving and going under trench
+        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+                                                                           // under trench
         CollectAndScore(ChoreoTraj.OSideTrench_OffsetNeutral,
             ChoreoTraj.OSideOffset_OSidePrep,
             TRY_PREP_ANYWHERE,
@@ -301,7 +305,8 @@ public class RobotContainer {
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command DoubleUTurnOutpostSideNeutral = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(0.3), // Force intake down before moving and going under trench
+        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+                                                                           // under trench
         CollectAndScore(
             ChoreoTraj.FirstUTurn_OSideTrench_Neutral,
             ChoreoTraj.FirstUTurnOSideNeutral_OSidePrep,
@@ -321,7 +326,8 @@ public class RobotContainer {
         Climb(ChoreoTraj.OSideShoot_PrepClimb));
 
     Command DepotSideNeutral = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(0.3), // Force intake down before moving and going under trench
+        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+                                                                           // under trench
         CollectAndScore(
             ChoreoTraj.DSideTrench_Neutral,
             ChoreoTraj.DSideNeutral_DSidePrep,
@@ -330,7 +336,8 @@ public class RobotContainer {
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command DoubleDepotSideNeutral = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(0.3), // Force intake down before moving and going under trench
+        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+                                                                           // under trench
         CollectAndScore(ChoreoTraj.DSideTrench_MidlineNeutral,
             ChoreoTraj.DSideMidline_DSidePrep,
             TRY_PREP_ANYWHERE,
@@ -340,7 +347,8 @@ public class RobotContainer {
         DepotSideNeutral.asProxy());
 
     Command DoubleUTurnDepotSideNeutral = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(0.3), // Force intake down before moving and going under trench
+        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+                                                                           // under trench
         CollectAndScore(
             ChoreoTraj.FirstUTurn_DSideTrench_Neutral,
             ChoreoTraj.FirstUTurnDSideNeutral_DSidePrep,
@@ -356,7 +364,8 @@ public class RobotContainer {
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command DepotSideGlendaleWithUturn = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(0.3), // Force intake down before moving and going under trench
+        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+                                                                           // under trench
         CollectAndScore(ChoreoTraj.DSideTrench_MidlineNeutral,
             ChoreoTraj.DSideMidline_DSidePrep,
             TRY_PREP_ANYWHERE,
@@ -371,7 +380,8 @@ public class RobotContainer {
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command DepotSideOffsetGlendale = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(0.3), // Force intake down before moving and going under trench
+        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+                                                                           // under trench
         CollectAndScore(ChoreoTraj.DSideTrench_OffsetNeutral,
             ChoreoTraj.DSideOffset_DSidePrep,
             TRY_PREP_ANYWHERE,
