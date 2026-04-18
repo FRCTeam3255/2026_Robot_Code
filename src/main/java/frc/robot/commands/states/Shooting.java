@@ -35,9 +35,12 @@ public class Shooting extends Command {
   @Override
   public void execute() {
 
-    if (RobotContainer.drivetrainInstance.isXbreakAllowed()) {
-      RobotContainer.drivetrainInstance.xBrake();
+    if (!RobotContainer.drivetrainInstance.isXbreakAllowed()) {
+      RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
+      deployIntakeTimer.reset();
+      return;
     }
+    RobotContainer.drivetrainInstance.xBrake();
     deployIntakeTimer.start();
     if (!RobotContainer.motionInstance.isIntakePivotAtPosition(ConstMotion.LIFT_INTAKE_SHOOTING_ANGLE,
         ConstMotion.INTAKE_PIVOT_ANGLE_TOLERANCE)
