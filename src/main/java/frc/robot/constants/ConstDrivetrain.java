@@ -62,10 +62,10 @@ public class ConstDrivetrain {
   }
 
   // TODO: Swoffsets
-  public static final Angle FRONT_LEFT_ABS_ENCODER_OFFSET = Rotations.of(0.22265625);
-  public static final Angle FRONT_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(0.40185546875);
-  public static final Angle BACK_LEFT_ABS_ENCODER_OFFSET = Rotations.of(-0.498291015625);
-  public static final Angle BACK_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(-0.182861328125);
+  public static final Angle FRONT_LEFT_ABS_ENCODER_OFFSET = Rotations.of(0.22900390625);
+  public static final Angle FRONT_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(0.408203125);
+  public static final Angle BACK_LEFT_ABS_ENCODER_OFFSET = Rotations.of(0.491943359375);
+  public static final Angle BACK_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(-0.1826171875);
   public static final Angle DRIVETRAIN_ROTATION_TOLERANCE = Units.Degrees.of(1);
 
   // ====== TO MOVE TO SUPERCODE - START ======
