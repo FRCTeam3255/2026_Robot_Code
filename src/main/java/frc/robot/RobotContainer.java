@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.DeferredCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -172,6 +173,7 @@ public class RobotContainer {
     configOperatorBindings();
     configAutonomous();
     configFeedback();
+    CommandScheduler.getInstance().schedule(autoFactory.warmupCmd());
     // subDrivetrain.resetModulesToAbsolute();
   }
 
