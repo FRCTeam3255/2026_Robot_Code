@@ -77,13 +77,13 @@ public class DriveManual extends Command {
             .setDriveRotation(RobotContainer.drivetrainInstance.getPose().getRotation().getMeasure());
 
       }
-      if (RobotContainer.drivetrainInstance.isStickHit(xAxis, yAxis)
-          || RobotContainer.drivetrainInstance.isStickHit(rotationXAxis, rotationYAxis)) {
-        RobotContainer.drivetrainInstance.setXbrakeAllowed(false);
+    }
+    if (RobotContainer.drivetrainInstance.isStickHit(xAxis, yAxis) ||
+        RobotContainer.drivetrainInstance.isStickHit(rotationXAxis, rotationYAxis)) {
+      RobotContainer.drivetrainInstance.setXbrakeAllowed(false);
 
-      } else {
-        RobotContainer.drivetrainInstance.setXbrakeAllowed(true);
-      }
+    } else {
+      RobotContainer.drivetrainInstance.setXbrakeAllowed(true);
     }
   }
 
