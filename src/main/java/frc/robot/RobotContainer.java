@@ -15,6 +15,7 @@ import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.units.measure.Time;
+import edu.wpi.first.units.Units;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -50,6 +51,10 @@ public class RobotContainer {
 
   @NotLogged
   SendableChooser<Command> autoChooser = new SendableChooser<>();
+
+  public String pathString = "";
+  public Pose2d pathStartPose = new Pose2d();
+  public Pose2d pathEndPose = new Pose2d();
 
   // STATES
   Command TRY_EJECTING_HOPPER = Commands.deferredProxy(
@@ -498,9 +503,16 @@ public class RobotContainer {
     return Commands.sequence(
         Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
         runPath(collectPath).asProxy().deadlineFor(TRY_INTAKING.asProxy()),
-        runPath(prepShootPath).asProxy().deadlineFor(TRY_INTAKING.asProxy()),
-        TRY_NONE.asProxy(),
-        try_prep_shoot.asProxy().withTimeout(ConstAuto.PREP_SHOOT_TIMEOUT),
+        // Follow the prep-shoot path while starting the intake.
+        // Keep the intake running until we are "behind" the horizontal line
+        // (determined by the prep path's end X position), then run the prep
+        // shoot command. We run the path and this intake/transition sequence
+        // in parallel so the drivetrain follows the trajectory while the
+        // intake and prep-shoot logic proceed.
+        Commands.parallel(
+            runPath(prepShootPath).asProxy(),
+            TRY_INTAKING.asProxy().until(() -> drivetrainInstance.isBehindHorizontalLine()),
+            try_prep_shoot.asProxy().withTimeout(ConstAuto.PREP_SHOOT_TIMEOUT)),
         TRY_SHOOTING.asProxy().withTimeout(shootingTime),
         TRY_NONE.asProxy());
   }
@@ -526,11 +538,7 @@ public class RobotContainer {
     return RobotController.getSerialNumber().equals(ConstSystem.PRACTICE_BOT_RIO);
   }
 
-  public static String pathString = "";
-  public static Pose2d pathStartPose = new Pose2d();
-  public static Pose2d pathEndPose = new Pose2d();
-
-  public static Command runPath(ChoreoTraj path) {
+  public Command runPath(ChoreoTraj path) {
     return autoFactory.trajectoryCmd(path.name()).asProxy()
         .alongWith(Commands.runOnce(() -> {
           pathString = path.name();

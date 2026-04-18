@@ -69,7 +69,7 @@ public record ChoreoTraj(
 	public static final ChoreoTraj DSideMidline_DSidePrep = new ChoreoTraj(
 	    "DSideMidline_DSidePrep",
 	    OptionalInt.empty(),
-	    2.36485,
+	    2.36475,
 	    new Pose2d(7.876, 5.902, Rotation2d.fromRadians(1.588)),
 	    new Pose2d(2.779, 5.469, Rotation2d.fromRadians(-0.785))
 	);
