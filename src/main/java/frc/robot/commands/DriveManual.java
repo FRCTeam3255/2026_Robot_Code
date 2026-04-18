@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstField;
+import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.DriverStateMachine.DriverState;
 
 public class DriveManual extends Command {
@@ -54,35 +55,39 @@ public class DriveManual extends Command {
     RobotContainer.driverStateMachineInstance.setDriverState(DriverState.MANUAL);
 
     double rotInput = -rotationXAxis.getAsDouble();
-
-    if (Math.abs(rotInput) > ConstDrivetrain.ROTATION_STICK_DEADBAND) {
-      RobotContainer.drivetrainInstance.setIsManualRotationEnabled(true);
-      RobotContainer.drivetrainInstance.drive(velocities);
-      RobotContainer.drivetrainInstance
-          .setDriveRotation(RobotContainer.drivetrainInstance.getPose().getRotation().getMeasure());
-      delayTimer.reset();
-    } else {
-      delayTimer.start();
-      if (delayTimer.hasElapsed(ConstDrivetrain.ROTATION_DELAY)) {
-        RobotContainer.drivetrainInstance.drive(
-            velocities,
-            RobotContainer.drivetrainInstance.getTargetRotation(),
-            ConstDrivetrain.ROTATION_PID.kP,
-            ConstDrivetrain.ROTATION_PID.kI,
-            ConstDrivetrain.ROTATION_PID.kD);
-      } else {
+    if (RobotContainer.drivetrainInstance.isStickHit(xAxis, yAxis)
+        || RobotContainer.drivetrainInstance.isStickHit(rotationXAxis, rotationYAxis)) {
+      if (Math.abs(rotInput) > ConstDrivetrain.ROTATION_STICK_DEADBAND) {
+        RobotContainer.drivetrainInstance.setIsManualRotationEnabled(true);
         RobotContainer.drivetrainInstance.drive(velocities);
         RobotContainer.drivetrainInstance
             .setDriveRotation(RobotContainer.drivetrainInstance.getPose().getRotation().getMeasure());
+        delayTimer.reset();
+      } else {
+        delayTimer.start();
+        if (delayTimer.hasElapsed(ConstDrivetrain.ROTATION_DELAY)) {
+          RobotContainer.drivetrainInstance.drive(
+              velocities,
+              RobotContainer.drivetrainInstance.getTargetRotation(),
+              ConstDrivetrain.ROTATION_PID.kP,
+              ConstDrivetrain.ROTATION_PID.kI,
+              ConstDrivetrain.ROTATION_PID.kD);
+        } else {
+          RobotContainer.drivetrainInstance.drive(velocities);
+          RobotContainer.drivetrainInstance
+              .setDriveRotation(RobotContainer.drivetrainInstance.getPose().getRotation().getMeasure());
 
+        }
+
+        // RobotContainer.drivetrainInstance.setXbrakeAllowed(false);
+        // RobotContainer.drivetrainInstance.drive(velocities);
+        // RobotContainer.drivetrainInstance
+        // .setDriveRotation(RobotContainer.drivetrainInstance.getPose().getRotation().getMeasure());
       }
-      double rightStickX = xAxis.getAsDouble();
-      double rightStickY = yAxis.getAsDouble();
-
-      if (Math.abs(rightStickX) > ConstDrivetrain.ROTATION_STICK_DEADBAND || Math.abs(rightStickY) > ConstDrivetrain.ROTATION_STICK_DEADBAND) {
-        
-
+    } else {
+      RobotContainer.drivetrainInstance.setXbrakeAllowed(true);
     }
+
   }
 
   @Override

@@ -203,7 +203,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     return isXbreakAllowed;
   }
 
-  public boolean isRotationStickHit(DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis) {
+  public boolean isStickHit(DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis) {
     double rightStickX = rotationXAxis.getAsDouble();
     double rightStickY = rotationYAxis.getAsDouble();
     double hypotenuse = Math.hypot(rightStickX, rightStickY);
