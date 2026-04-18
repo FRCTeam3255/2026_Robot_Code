@@ -269,4 +269,7 @@ public class ConstDrivetrain {
     public static final double kD = 0;
   }
 
+  public static double isStickHitHighTol = 1.15;
+  public static double isStickHitLowTol = 0.15;
+
 }
