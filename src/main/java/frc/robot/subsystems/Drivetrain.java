@@ -208,7 +208,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     double rightStickY = rotationYAxis.getAsDouble();
     double hypotenuse = Math.hypot(rightStickX, rightStickY);
 
-    return (hypotenuse < 1.15 && hypotenuse > 0.85);
+    return (hypotenuse < ConstDrivetrain.isStickHitHighTol && hypotenuse > ConstDrivetrain.isStickHitLowTol);
   }
 
   public double getStickRadians(DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis) {
@@ -216,7 +216,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     double rightStickY = rotationYAxis.getAsDouble();
     double hypotenuse = Math.hypot(rightStickX, rightStickY);
 
-    if (hypotenuse < 1.15 && hypotenuse > 0.85) {
+    if (hypotenuse < ConstDrivetrain.isStickHitHighTol && hypotenuse > ConstDrivetrain.isStickHitLowTol) {
       manualDriveRotation = Math.atan2(rightStickY, rightStickX) - Math.PI / 2;
     }
     return manualDriveRotation;
