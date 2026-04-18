@@ -15,7 +15,6 @@ import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.units.measure.Time;
-import edu.wpi.first.units.Units;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -556,8 +555,14 @@ public class RobotContainer {
         runPath(collectPath).asProxy().deadlineFor(TRY_INTAKING.asProxy()),
         Commands.parallel(
             runPath(prepShootPath).asProxy(),
-            TRY_INTAKING.asProxy().until(() -> drivetrainInstance.isBehindHorizontalLine()),
-            try_prep_shoot.asProxy().withTimeout(ConstAuto.PREP_SHOOT_TIMEOUT)),
+            Commands.sequence(
+                // TRY_INTAKING is a deferred/instant command that finishes immediately after
+                // requesting the state. Using .until(...) on it will therefore end right away.
+                // Instead, explicitly request the INTAKING state once and then wait until the
+                // drivetrain is behind the horizontal line before continuing to prep shooting.
+                TRY_INTAKING.asProxy(),
+                Commands.waitUntil(() -> drivetrainInstance.isBehindHorizontalLine()),
+                try_prep_shoot.asProxy().withTimeout(ConstAuto.PREP_SHOOT_TIMEOUT))),
         TRY_SHOOTING.asProxy().withTimeout(shootingTime),
         TRY_NONE.asProxy());
   }
