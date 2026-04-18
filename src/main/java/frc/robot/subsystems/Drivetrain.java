@@ -207,8 +207,6 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     double rightStickX = rotationXAxis.getAsDouble();
     double rightStickY = rotationYAxis.getAsDouble();
     double hypotenuse = Math.hypot(rightStickX, rightStickY);
-    System.out.println("hypotonuse");
-    System.out.println(hypotenuse);
 
     return (hypotenuse < 1.15 && hypotenuse > 0.85);
   }

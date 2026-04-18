@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstField;
-import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.DriverStateMachine.DriverState;
 
 public class DriveManual extends Command {
