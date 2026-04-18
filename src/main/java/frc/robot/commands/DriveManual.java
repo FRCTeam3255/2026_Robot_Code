@@ -76,6 +76,12 @@ public class DriveManual extends Command {
             .setDriveRotation(RobotContainer.drivetrainInstance.getPose().getRotation().getMeasure());
 
       }
+      double rightStickX = xAxis.getAsDouble();
+      double rightStickY = yAxis.getAsDouble();
+
+      if (Math.abs(rightStickX) > ConstDrivetrain.ROTATION_STICK_DEADBAND || Math.abs(rightStickY) > ConstDrivetrain.ROTATION_STICK_DEADBAND) {
+        
+
     }
   }
 

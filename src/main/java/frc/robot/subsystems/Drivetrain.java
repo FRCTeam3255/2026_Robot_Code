@@ -127,6 +127,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
   public final TalonFX BackRightDrive;
   public final TalonFX BackRightSteer;
   private Angle resetYawValue = Degrees.zero();
+  private boolean isXbreakAllowed = true;
 
   public Drivetrain() {
     super(
@@ -192,6 +193,14 @@ public class Drivetrain extends SN_SuperSwerveV2 {
       automatedDTVelocity.vyMetersPerSecond = manualVelocities.vyMetersPerSecond;
     }
     drive(automatedDTVelocity);
+  }
+
+  public void setXbrakeAllowed(boolean isAllowed) {
+    this.isXbreakAllowed = isAllowed;
+  }
+
+  public boolean isXbreakAllowed() {
+    return isXbreakAllowed;
   }
 
   public boolean isRotationStickHit(DoubleSupplier rotationXAxis, DoubleSupplier rotationYAxis) {
