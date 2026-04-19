@@ -163,8 +163,6 @@ public class Drivetrain extends SN_SuperSwerveV2 {
 
     if (!manualRotationEnabled) { // keep the !, manualRotationEnabled is false in prepanywhere
       targetHeading = targetDriveRotation.getRadians();
-    } else {
-      targetHeading = sample.heading;
     }
 
     // Generate the next speeds for the robot
@@ -294,13 +292,13 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     return getState().RawHeading;
   }
 
-  public boolean isBehindHorizontalLine() {
+  public boolean isBehindHorizontalLine(Distance blueXValueInMeters) {
     if (!ConstField.isRedAlliance()) {
-      isDTBehindHorizontalLine = getPose().getMeasureX().lt(Units.Meters.of(4.008662700653076));
+      isDTBehindHorizontalLine = getPose().getMeasureX().lt(blueXValueInMeters);
       return isDTBehindHorizontalLine;
     } else {
       isDTBehindHorizontalLine = getPose().getMeasureX()
-          .gt(ConstField.FIELD_LENGTH.minus(Units.Meters.of(4.008662700653076)));
+          .gt(ConstField.FIELD_LENGTH.minus(blueXValueInMeters));
       return isDTBehindHorizontalLine;
     }
   }

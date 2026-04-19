@@ -30,6 +30,7 @@ import frc.robot.commands.ResetPose;
 import frc.robot.constants.ChoreoTraj;
 import frc.robot.constants.ConstAuto;
 import frc.robot.constants.ConstDrivetrain;
+import frc.robot.constants.ConstField;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
 import frc.robot.constants.ConstSystem;
@@ -561,7 +562,8 @@ public class RobotContainer {
                 // Instead, explicitly request the INTAKING state once and then wait until the
                 // drivetrain is behind the horizontal line before continuing to prep shooting.
                 TRY_INTAKING.asProxy(),
-                Commands.waitUntil(() -> drivetrainInstance.isBehindHorizontalLine()),
+                Commands
+                    .waitUntil(() -> drivetrainInstance.isBehindHorizontalLine(ConstField.FieldElements.ALLIENCE_LINE)),
                 try_prep_shoot.asProxy().withTimeout(ConstAuto.PREP_SHOOT_TIMEOUT))),
         TRY_SHOOTING.asProxy().withTimeout(shootingTime),
         TRY_NONE.asProxy());
