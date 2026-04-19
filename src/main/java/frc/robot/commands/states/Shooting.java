@@ -34,6 +34,12 @@ public class Shooting extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
+    if (!RobotContainer.drivetrainInstance.isXbreakAllowed()) {
+      RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
+      deployIntakeTimer.reset();
+      return;
+    }
     RobotContainer.drivetrainInstance.xBrake();
     deployIntakeTimer.start();
     if (!RobotContainer.motionInstance.isIntakePivotAtPosition(ConstMotion.LIFT_INTAKE_SHOOTING_ANGLE,

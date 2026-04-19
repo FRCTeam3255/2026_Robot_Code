@@ -88,6 +88,13 @@ public class DriveManual extends Command {
 
       }
     }
+    if (RobotContainer.drivetrainInstance.isStickHit(xAxis, yAxis) ||
+        RobotContainer.drivetrainInstance.isStickHit(rotationXAxis, rotationYAxis)) {
+      RobotContainer.drivetrainInstance.setXbrakeAllowed(false);
+
+    } else {
+      RobotContainer.drivetrainInstance.setXbrakeAllowed(true);
+    }
   }
 
   @Override
