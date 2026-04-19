@@ -34,16 +34,16 @@ public record ChoreoTraj(
 	public static final ChoreoTraj Depot_DSidePrep = new ChoreoTraj(
 	    "Depot_DSidePrep",
 	    OptionalInt.empty(),
-	    0.89109,
-	    new Pose2d(0.677, 5.994, Rotation2d.fromRadians(0)),
-	    new Pose2d(2.458, 5.825, Rotation2d.fromRadians(0))
+	    0.44393,
+	    new Pose2d(0.685, 6.495, Rotation2d.fromRadians(-1.047)),
+	    new Pose2d(1.046, 7.302, Rotation2d.fromRadians(-0.785))
 	);
 	public static final ChoreoTraj DSideBump_Depot = new ChoreoTraj(
 	    "DSideBump_Depot",
 	    OptionalInt.empty(),
-	    4.57843,
-	    new Pose2d(3.592, 6.054, Rotation2d.fromRadians(0)),
-	    new Pose2d(0.677, 5.994, Rotation2d.fromRadians(0))
+	    8.65615,
+	    new Pose2d(3.597, 4.01, Rotation2d.fromRadians(0)),
+	    new Pose2d(0.685, 6.495, Rotation2d.fromRadians(-1.047))
 	);
 	public static final ChoreoTraj DSideBump_PrepClimb = new ChoreoTraj(
 	    "DSideBump_PrepClimb",

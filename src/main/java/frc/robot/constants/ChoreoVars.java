@@ -53,6 +53,7 @@ public final class ChoreoVars {
         public static final Pose2d preload_shoot = new Pose2d(2.512, 4.004, Rotation2d.kZero);
         public static final Pose2d second_dside_neutral_intake_end = new Pose2d(6.62, 5.525, Rotation2d.kZero);
         public static final Pose2d second_oside_neutral_intake_end = new Pose2d(6.594, 2.329, Rotation2d.kZero);
+        public static final Pose2d depot_intake_end = new Pose2d(0.685, 6.495, Rotation2d.fromRadians(-1.047));
 
         private Poses() {}
     }
