@@ -25,7 +25,9 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
+import edu.wpi.first.units.measure.Distance;
 import frc.robot.DeviceIDs;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ChoreoTraj;
@@ -41,6 +43,7 @@ public class Drivetrain extends SN_SuperSwerveV2 {
   private double manualDriveRotation = 0.0;
   private boolean manualRotationEnabled = true;
   private boolean drivetrainAtRotation = false;
+  private boolean isDTBehindHorizontalLine = false;
 
   /** Creates a new Drivetrain. */
   public static final SwerveModuleConstantsFactory<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> constantCreator = new SwerveModuleConstantsFactory<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>()
@@ -156,12 +159,18 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     // Get the current pose of the robot
     Pose2d pose = getPose();
 
+    double targetHeading = sample.heading;
+
+    if (!manualRotationEnabled) { // keep the !, manualRotationEnabled is false in prepanywhere
+      targetHeading = targetDriveRotation.getRadians();
+    }
+
     // Generate the next speeds for the robot
     ChassisSpeeds speeds = new ChassisSpeeds(
         sample.vx + ConstDrivetrain.AUTO_ALIGN.POSE_TRANS_CONTROLLER.calculate(pose.getX(), sample.x),
         sample.vy + ConstDrivetrain.AUTO_ALIGN.POSE_TRANS_CONTROLLER.calculate(pose.getY(), sample.y),
         sample.omega + ConstDrivetrain.AUTO_ALIGN.POSE_ROTATION_CONTROLLER.calculate(pose.getRotation().getRadians(),
-            sample.heading));
+            targetHeading));
     drive(speeds);
   }
 
@@ -281,5 +290,16 @@ public class Drivetrain extends SN_SuperSwerveV2 {
 
   public Rotation2d getRawHeading() {
     return getState().RawHeading;
+  }
+
+  public boolean isBehindHorizontalLine(Distance blueXValueInMeters) {
+    if (!ConstField.isRedAlliance()) {
+      isDTBehindHorizontalLine = getPose().getMeasureX().lt(blueXValueInMeters);
+      return isDTBehindHorizontalLine;
+    } else {
+      isDTBehindHorizontalLine = getPose().getMeasureX()
+          .gt(ConstField.FIELD_LENGTH.minus(blueXValueInMeters));
+      return isDTBehindHorizontalLine;
+    }
   }
 }

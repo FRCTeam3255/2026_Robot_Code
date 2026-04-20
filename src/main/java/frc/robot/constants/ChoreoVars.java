@@ -11,10 +11,10 @@ import edu.wpi.first.units.measure.*;
  * in the Choreo GUI.
  */
 public final class ChoreoVars {
-    public static final LinearVelocity ground_intaking = Units.MetersPerSecond.of(1.676);
-    public static final LinearVelocity over_bump = Units.MetersPerSecond.of(2.134);
     public static final Angle dside_over_bumb_angle = Units.Radians.of(-0.785);
+    public static final LinearVelocity ground_intaking = Units.MetersPerSecond.of(1.676);
     public static final Angle oside_over_bump_angle = Units.Radians.of(0.785);
+    public static final LinearVelocity over_bump = Units.MetersPerSecond.of(2.134);
 
     public static final class Poses {
         public static final Pose2d D_side_climb_starting_pose = new Pose2d(2.229, 4.205, Rotation2d.fromRadians(-1.571));
@@ -53,6 +53,7 @@ public final class ChoreoVars {
         public static final Pose2d preload_shoot = new Pose2d(2.512, 4.004, Rotation2d.kZero);
         public static final Pose2d second_dside_neutral_intake_end = new Pose2d(6.62, 5.525, Rotation2d.kZero);
         public static final Pose2d second_oside_neutral_intake_end = new Pose2d(6.594, 2.329, Rotation2d.kZero);
+        public static final Pose2d depot_intake_end = new Pose2d(0.685, 6.495, Rotation2d.fromRadians(-1.047));
 
         private Poses() {}
     }

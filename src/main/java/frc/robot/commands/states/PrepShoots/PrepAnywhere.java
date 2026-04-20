@@ -17,6 +17,7 @@ import frc.robot.constants.ConstPoseDrive;
 import frc.robot.constants.ConstRotors;
 import frc.robot.subsystems.Rotors;
 import frc.robot.subsystems.StateMachine.RobotState;
+import frc.robot.subsystems.DriverStateMachine.DriverState;
 import frc.robot.subsystems.Motion;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -65,6 +66,7 @@ public class PrepAnywhere extends Command {
             .isHoodAtPosition(ConstMotion.HOOD_TOLERANCE)
         && RobotContainer.drivetrainInstance
             .isAtDesiredRotation(ConstPoseDrive.PrepShootRotations.DRIVETRAIN_TOLERANCE)
-        && DriverStation.isAutonomousEnabled();
+        && DriverStation.isAutonomousEnabled()
+        && RobotContainer.driverStateMachineInstance.getDriverState() == DriverState.MANUAL;
   }
 }

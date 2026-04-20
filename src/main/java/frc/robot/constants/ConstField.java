@@ -153,6 +153,7 @@ public class ConstField {
         new Rotation2d(ConstPoseDrive.PrepShootRotations.OPPONENT_TO_ALLIANCE_PREP_SHOOT_ROTATION));
     private static final Pose2d ANYWHERE_PREP_SHOOT_ROTATION = new Pose2d(Translation2d.kZero,
         new Rotation2d(ConstPoseDrive.PrepShootRotations.ANYWHERE_PREP_SHOOT_ROTATION));
+    public static final Distance ALLIENCE_LINE = Units.Meters.of(4.008662700653076);
   }
 
   public static class FieldElementGroups {

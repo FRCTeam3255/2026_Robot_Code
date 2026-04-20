@@ -7,6 +7,7 @@ package frc.robot.commands;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -54,6 +55,16 @@ public class DriveManual extends Command {
     RobotContainer.driverStateMachineInstance.setDriverState(DriverState.MANUAL);
 
     double rotInput = -rotationXAxis.getAsDouble();
+
+    if (DriverStation.isAutonomousEnabled()) {
+      RobotContainer.drivetrainInstance.drive(
+          velocities,
+          RobotContainer.drivetrainInstance.getTargetRotation(),
+          ConstDrivetrain.ROTATION_PID.kP,
+          ConstDrivetrain.ROTATION_PID.kI,
+          ConstDrivetrain.ROTATION_PID.kD);
+      return;
+    }
 
     if (Math.abs(rotInput) > ConstDrivetrain.ROTATION_STICK_DEADBAND) {
       RobotContainer.drivetrainInstance.setIsManualRotationEnabled(true);
