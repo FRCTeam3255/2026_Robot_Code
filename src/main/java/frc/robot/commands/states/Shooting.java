@@ -45,6 +45,11 @@ public class Shooting extends Command {
         && !RobotContainer.drivetrainInstance.isAtDesiredRotation(ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE)) {
       SubCommands
           .aim(true);
+    } else if (previousState == RobotState.PREP_ANYWHERE
+        && RobotContainer.visionInstance.seesTags()
+        && !RobotContainer.motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE)) {
+      SubCommands.aim(false);
+      RobotContainer.drivetrainInstance.xBrake();
     } else if (RobotContainer.drivetrainInstance.isXbreakAllowed()) {
       RobotContainer.drivetrainInstance.xBrake();
     }
