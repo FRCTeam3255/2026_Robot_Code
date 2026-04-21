@@ -39,6 +39,10 @@ public class Vision extends SubsystemBase {
 
   String limelightInUse = LL_INUSE.NONE.toString();
 
+  public String getLimelightInUse() {
+    return limelightInUse;
+  }
+
   public enum LL_INUSE {
     RIGHT, LEFT, BACK, NONE
   }

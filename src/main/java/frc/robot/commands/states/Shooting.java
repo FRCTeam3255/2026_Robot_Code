@@ -12,6 +12,7 @@ import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
 import frc.robot.subsystems.StateMachine;
 import frc.robot.subsystems.StateMachine.RobotState;
+import frc.robot.subsystems.Vision;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class Shooting extends Command {
@@ -38,7 +39,8 @@ public class Shooting extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (previousState == RobotState.PREP_ANYWHERE) {
+    if (previousState == RobotState.PREP_ANYWHERE
+        && RobotContainer.visionInstance.getLimelightInUse() != Vision.LL_INUSE.NONE.toString()) {
       SubCommands.aim();
     }
 
