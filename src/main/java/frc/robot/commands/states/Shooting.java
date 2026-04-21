@@ -7,13 +7,16 @@ package frc.robot.commands.states;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
+import frc.robot.commands.SubCommands;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
 import frc.robot.subsystems.StateMachine;
+import frc.robot.subsystems.StateMachine.RobotState;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class Shooting extends Command {
   private final Timer deployIntakeTimer = new Timer();
+  private RobotState previousState;
 
   /** Creates a new Shooting. */
   public Shooting() {
@@ -25,6 +28,7 @@ public class Shooting extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    previousState = RobotContainer.stateMachineInstance.getRobotState();
     RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.SHOOTING);
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.SERIALIZER_ROLLERS_SPEED);
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.SHOOTER_TRANSFER_SPEED);
@@ -34,6 +38,9 @@ public class Shooting extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if (previousState == RobotState.PREP_ANYWHERE) {
+      SubCommands.aim();
+    }
 
     if (!RobotContainer.drivetrainInstance.isXbreakAllowed()) {
       RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
