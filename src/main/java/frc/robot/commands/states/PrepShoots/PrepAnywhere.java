@@ -32,7 +32,7 @@ public class PrepAnywhere extends Command {
 
   @Override
   public void execute() {
-    SubCommands.aim();
+    SubCommands.aim(true);
   }
 
   // Called once the command ends or is interrupted.

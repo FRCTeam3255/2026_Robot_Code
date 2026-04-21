@@ -9,13 +9,16 @@ import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Distance;
 import frc.robot.RobotContainer;
+import frc.robot.constants.ConstDrivetrain;
+import frc.robot.constants.ConstMotion;
 import frc.robot.subsystems.Motion;
 import frc.robot.subsystems.Rotors;
+import frc.robot.subsystems.StateMachine.RobotState;
 
 /** Add your docs here. */
 public class SubCommands {
 
-  public static void aim() {
+  public static void aim(boolean aimDT) {
     Pose2d hubPose = RobotContainer.robotPose.getHub();
     Distance distanceToHub = RobotContainer.robotPose.getDistanceToHub();
     AngularVelocity targetFlyWheelSpeed = Rotors.getMappedFlywheelSpeed(distanceToHub);
@@ -25,7 +28,8 @@ public class SubCommands {
 
     RobotContainer.rotorsInstance.setFlywheelSpeed(targetFlyWheelSpeed);
     RobotContainer.motionInstance.setHoodAngle(targetHoodAngle);
-    RobotContainer.drivetrainInstance.setDriveRotation(targetDrivetrainRotation);
+    if (aimDT) {
+      RobotContainer.drivetrainInstance.setDriveRotation(targetDrivetrainRotation);
+    }
   }
-
 }

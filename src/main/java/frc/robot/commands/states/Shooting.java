@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.commands.SubCommands;
+import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
 import frc.robot.subsystems.StateMachine;
@@ -40,8 +41,12 @@ public class Shooting extends Command {
   @Override
   public void execute() {
     if (previousState == RobotState.PREP_ANYWHERE
-        && RobotContainer.visionInstance.getLimelightInUse() != Vision.LL_INUSE.NONE.toString()) {
-      SubCommands.aim();
+        && RobotContainer.visionInstance.seesTags()
+        && !RobotContainer.drivetrainInstance.isAtDesiredRotation(ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE)) {
+      SubCommands
+          .aim(true);
+    } else if (RobotContainer.drivetrainInstance.isXbreakAllowed()) {
+      RobotContainer.drivetrainInstance.xBrake();
     }
 
     if (!RobotContainer.drivetrainInstance.isXbreakAllowed()) {
@@ -49,7 +54,6 @@ public class Shooting extends Command {
       deployIntakeTimer.reset();
       return;
     }
-    RobotContainer.drivetrainInstance.xBrake();
     deployIntakeTimer.start();
     if (!RobotContainer.motionInstance.isIntakePivotAtPosition(ConstMotion.LIFT_INTAKE_SHOOTING_ANGLE,
         ConstMotion.INTAKE_PIVOT_ANGLE_TOLERANCE)
