@@ -244,6 +244,20 @@
      "val":-1.0471975511965976
     }
    },
+   "depot_side_far_intake_end":{
+    "x":{
+     "exp":"8.352774620056152 m",
+     "val":8.352774620056152
+    },
+    "y":{
+     "exp":"5.951603889465332 m",
+     "val":5.951603889465332
+    },
+    "heading":{
+     "exp":"90 deg",
+     "val":1.5707963267948966
+    }
+   },
    "depot_side_midline_neutral":{
     "x":{
      "exp":"7.875580787658691 m",
@@ -410,6 +424,20 @@
     "heading":{
      "exp":"0 deg",
      "val":0.0
+    }
+   },
+   "outpost_side_far_intake_end":{
+    "x":{
+     "exp":"8.352774620056152 m",
+     "val":8.352774620056152
+    },
+    "y":{
+     "exp":"outpost_side_midline_neutral.y",
+     "val":2.1492248249053953
+    },
+    "heading":{
+     "exp":"outpost_side_midline_neutral.heading",
+     "val":-1.5707963267948966
     }
    },
    "outpost_side_midline_neutral":{

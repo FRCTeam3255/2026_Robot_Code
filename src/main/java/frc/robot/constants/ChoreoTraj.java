@@ -41,7 +41,7 @@ public record ChoreoTraj(
 	public static final ChoreoTraj DSideBump_Depot = new ChoreoTraj(
 	    "DSideBump_Depot",
 	    OptionalInt.empty(),
-	    8.65615,
+	    4.78248,
 	    new Pose2d(3.597, 4.01, Rotation2d.fromRadians(0)),
 	    new Pose2d(0.685, 6.495, Rotation2d.fromRadians(-1.047))
 	);
@@ -311,6 +311,13 @@ public record ChoreoTraj(
 	    new Pose2d(3.684, 0.499, Rotation2d.fromRadians(-1.571)),
 	    new Pose2d(6.594, 2.329, Rotation2d.fromRadians(0))
 	);
+	public static final ChoreoTraj WCMP_DSideFar_DSidePrep = new ChoreoTraj(
+	    "WCMP_DSideFar_DSidePrep",
+	    OptionalInt.empty(),
+	    2.29776,
+	    new Pose2d(8.353, 5.952, Rotation2d.fromRadians(1.571)),
+	    new Pose2d(2.779, 5.469, Rotation2d.fromRadians(-0.785))
+	);
 	public static final ChoreoTraj WCMP_DSideMidline_DSidePrep = new ChoreoTraj(
 	    "WCMP_DSideMidline_DSidePrep",
 	    OptionalInt.empty(),
@@ -325,12 +332,26 @@ public record ChoreoTraj(
 	    new Pose2d(2.779, 5.469, Rotation2d.fromRadians(-0.785)),
 	    new Pose2d(3.683, 7.568, Rotation2d.fromRadians(1.571))
 	);
+	public static final ChoreoTraj WCMP_DSideTrench_FarNeutral = new ChoreoTraj(
+	    "WCMP_DSideTrench_FarNeutral",
+	    OptionalInt.empty(),
+	    2.06642,
+	    new Pose2d(3.683, 7.568, Rotation2d.fromRadians(1.571)),
+	    new Pose2d(8.353, 5.952, Rotation2d.fromRadians(1.571))
+	);
 	public static final ChoreoTraj WCMP_DSideTrench_MidlineNeutral = new ChoreoTraj(
 	    "WCMP_DSideTrench_MidlineNeutral",
 	    OptionalInt.empty(),
 	    1.99871,
 	    new Pose2d(3.683, 7.568, Rotation2d.fromRadians(1.571)),
 	    new Pose2d(7.876, 5.902, Rotation2d.fromRadians(1.588))
+	);
+	public static final ChoreoTraj WCMP_OSideFar_OSidePrep = new ChoreoTraj(
+	    "WCMP_OSideFar_OSidePrep",
+	    OptionalInt.empty(),
+	    2.24969,
+	    new Pose2d(8.353, 2.149, Rotation2d.fromRadians(-1.571)),
+	    new Pose2d(2.779, 2.582, Rotation2d.fromRadians(0.785))
 	);
 	public static final ChoreoTraj WCMP_OSideMidline_OSidePrep = new ChoreoTraj(
 	    "WCMP_OSideMidline_OSidePrep",
@@ -345,6 +366,13 @@ public record ChoreoTraj(
 	    1.37996,
 	    new Pose2d(2.779, 2.582, Rotation2d.fromRadians(0.785)),
 	    new Pose2d(3.684, 0.499, Rotation2d.fromRadians(-1.571))
+	);
+	public static final ChoreoTraj WCMP_OSideTrench_FarNeutral = new ChoreoTraj(
+	    "WCMP_OSideTrench_FarNeutral",
+	    OptionalInt.empty(),
+	    2.32709,
+	    new Pose2d(3.684, 0.499, Rotation2d.fromRadians(-1.571)),
+	    new Pose2d(8.353, 2.149, Rotation2d.fromRadians(-1.571))
 	);
 	public static final ChoreoTraj WCMP_OSideTrench_MidlineNeutral = new ChoreoTraj(
 	    "WCMP_OSideTrench_MidlineNeutral",
@@ -428,11 +456,15 @@ public record ChoreoTraj(
 		Map.entry("SecondUTurnOSideNeutral_OSidePrep", SecondUTurnOSideNeutral_OSidePrep),
 		Map.entry("SecondUTurn_DSideTrench_Neutral", SecondUTurn_DSideTrench_Neutral),
 		Map.entry("SecondUTurn_OSideTrench_Neutral", SecondUTurn_OSideTrench_Neutral),
+		Map.entry("WCMP_DSideFar_DSidePrep", WCMP_DSideFar_DSidePrep),
 		Map.entry("WCMP_DSideMidline_DSidePrep", WCMP_DSideMidline_DSidePrep),
 		Map.entry("WCMP_DSideShoot_DSideTrench", WCMP_DSideShoot_DSideTrench),
+		Map.entry("WCMP_DSideTrench_FarNeutral", WCMP_DSideTrench_FarNeutral),
 		Map.entry("WCMP_DSideTrench_MidlineNeutral", WCMP_DSideTrench_MidlineNeutral),
+		Map.entry("WCMP_OSideFar_OSidePrep", WCMP_OSideFar_OSidePrep),
 		Map.entry("WCMP_OSideMidline_OSidePrep", WCMP_OSideMidline_OSidePrep),
 		Map.entry("WCMP_OSideShoot_OSideTrench", WCMP_OSideShoot_OSideTrench),
+		Map.entry("WCMP_OSideTrench_FarNeutral", WCMP_OSideTrench_FarNeutral),
 		Map.entry("WCMP_OSideTrench_MidlineNeutral", WCMP_OSideTrench_MidlineNeutral),
 		Map.entry("WCMP_SecondUTurnDSideNeutral_DSidePrep", WCMP_SecondUTurnDSideNeutral_DSidePrep),
 		Map.entry("WCMP_SecondUTurnOSideNeutral_OSidePrep", WCMP_SecondUTurnOSideNeutral_OSidePrep),

@@ -311,6 +311,22 @@ public class RobotContainer {
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
+    Command FarOutpostSideWCMPWithUturn = Commands.sequence(
+        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+                                                                           // under trench
+        WCMPCollectAndScore(ChoreoTraj.WCMP_OSideTrench_FarNeutral,
+            ChoreoTraj.WCMP_OSideFar_OSidePrep,
+            TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
+            ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
+        runPath(ChoreoTraj.WCMP_OSideShoot_OSideTrench).asProxy(),
+        WCMPCollectAndScore(
+            ChoreoTraj.WCMP_SecondUTurn_OSideTrench_Neutral,
+            ChoreoTraj.WCMP_SecondUTurnOSideNeutral_OSidePrep,
+            TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
+            ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
+
     Command OutpostSideOffsetGlendale = Commands.sequence(
         TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
                                                                            // under trench
@@ -434,6 +450,22 @@ public class RobotContainer {
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
+    Command FarDepotSideWCMPWithUturn = Commands.sequence(
+        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+                                                                           // under trench
+        WCMPCollectAndScore(ChoreoTraj.WCMP_DSideTrench_FarNeutral,
+            ChoreoTraj.WCMP_DSideFar_DSidePrep,
+            TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
+            ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
+        runPath(ChoreoTraj.WCMP_DSideShoot_DSideTrench).asProxy(),
+        WCMPCollectAndScore(
+            ChoreoTraj.WCMP_SecondUTurn_DSideTrench_Neutral,
+            ChoreoTraj.WCMP_SecondUTurnDSideNeutral_DSidePrep,
+            TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
+            ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
+
     Command DepotSideNeutralWithClimb = Commands.sequence(
         DepotSideNeutral.asProxy(),
         Climb(ChoreoTraj.DSideBump_PrepClimb));
@@ -468,10 +500,12 @@ public class RobotContainer {
 
     autoChooser.setDefaultOption("Do Nothing", DoNothing);
     autoChooser.addOption("OutpostSideWCMPWithUturn", OutpostSideWCMPWithUturn);
+    autoChooser.addOption("FarOutpostSideWCMPWithUturn", FarOutpostSideWCMPWithUturn);
+    autoChooser.addOption("DepotSideWCMPWithUturn", DepotSideWCMPWithUturn);
+    autoChooser.addOption("FarDepotSideWCMPWithUturn", FarDepotSideWCMPWithUturn);
     autoChooser.addOption("OutpostSideGlendaleWithUturn", OutpostSideGlendaleWithUturn);
     autoChooser.addOption("DoubleOutpostSideNeutral", DoubleOutpostSideNeutral);
     autoChooser.addOption("OutpostSideOffsetGlendale", OutpostSideOffsetGlendale);
-    autoChooser.addOption("DepotSideWCMPWithUturn", DepotSideWCMPWithUturn);
     autoChooser.addOption("DepotSideGlendaleWithUturn", DepotSideGlendaleWithUturn);
     autoChooser.addOption("DoubleDepotSideNeutral", DoubleDepotSideNeutral);
     autoChooser.addOption("DepotSideOffsetGlendale", DepotSideOffsetGlendale);
@@ -496,10 +530,12 @@ public class RobotContainer {
     final Map<Command, ChoreoTraj> autoStartingPoses = Map.ofEntries(
         Map.entry(DoNothing, ChoreoTraj.Hub_ShootPreload),
         Map.entry(OutpostSideWCMPWithUturn, ChoreoTraj.OSideTrench_Neutral),
+        Map.entry(FarOutpostSideWCMPWithUturn, ChoreoTraj.OSideTrench_Neutral),
         Map.entry(OutpostSideGlendaleWithUturn, ChoreoTraj.OSideTrench_Neutral),
         Map.entry(DoubleOutpostSideNeutral, ChoreoTraj.OSideTrench_Neutral),
         Map.entry(OutpostSideOffsetGlendale, ChoreoTraj.OSideTrench_Neutral),
         Map.entry(DepotSideWCMPWithUturn, ChoreoTraj.DSideTrench_Neutral),
+        Map.entry(FarDepotSideWCMPWithUturn, ChoreoTraj.DSideTrench_Neutral),
         Map.entry(DepotSideGlendaleWithUturn, ChoreoTraj.DSideTrench_Neutral),
         Map.entry(DoubleDepotSideNeutral, ChoreoTraj.DSideTrench_Neutral),
         Map.entry(DepotSideOffsetGlendale, ChoreoTraj.DSideTrench_Neutral),
