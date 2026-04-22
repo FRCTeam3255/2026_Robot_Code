@@ -13,7 +13,6 @@ import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
 import frc.robot.subsystems.StateMachine;
 import frc.robot.subsystems.StateMachine.RobotState;
-import frc.robot.subsystems.Vision;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class Shooting extends Command {
@@ -40,17 +39,18 @@ public class Shooting extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (previousState == RobotState.PREP_ANYWHERE
-        && RobotContainer.visionInstance.seesTags()
-        && !RobotContainer.drivetrainInstance.isAtDesiredRotation(ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE)) {
-      SubCommands
-          .aim(true);
-    } else if (previousState == RobotState.PREP_ANYWHERE
-        && RobotContainer.visionInstance.seesTags()
-        && !RobotContainer.motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE)) {
-      SubCommands.aim(false);
-      RobotContainer.drivetrainInstance.xBrake();
-    } else if (RobotContainer.drivetrainInstance.isXbreakAllowed()) {
+    boolean seesTags = RobotContainer.visionInstance.seesTags();
+    boolean atDesiredRotation = RobotContainer.drivetrainInstance
+        .isAtDesiredRotation(ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE);
+    boolean xBrakeAllowed = RobotContainer.drivetrainInstance.isXbreakAllowed();
+    boolean allowedToAim = previousState == RobotState.PREP_ANYWHERE && seesTags;
+
+    if (allowedToAim && !atDesiredRotation) {
+      SubCommands.aim(true);
+    } else if (xBrakeAllowed) {
+      if (allowedToAim) {
+        SubCommands.aim(false);
+      }
       RobotContainer.drivetrainInstance.xBrake();
     }
 
