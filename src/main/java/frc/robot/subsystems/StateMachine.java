@@ -66,6 +66,7 @@ public class StateMachine extends SubsystemBase {
       case PREP_ANYWHERE:
         switch (currentRobotState) {
           case NONE:
+          case INTAKING:
           case PREP_DEPOT:
           case PREP_HUB:
           case PREP_ANYWHERE:
@@ -257,8 +258,8 @@ public class StateMachine extends SubsystemBase {
       case PREP_CLIMB_L1:
         switch (currentRobotState) {
           case NONE:
-            return new PrepClimb()
-                .alongWith(RobotContainer.runPath(RobotContainer.drivetrainInstance.getDesiredClimbingPath()));
+            return new PrepClimb();
+          // .alongWith(RobotContainer.runPath(RobotContainer.drivetrainInstance.getDesiredClimbingPath()));
         }
         break;
 
