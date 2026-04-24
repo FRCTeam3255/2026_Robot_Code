@@ -56,6 +56,7 @@ public class RobotContainer {
   public String pathString = "";
   public Pose2d pathStartPose = new Pose2d();
   public Pose2d pathEndPose = new Pose2d();
+  Command DoNothing = Commands.none();
 
   // STATES
   Command TRY_EJECTING_HOPPER = Commands.deferredProxy(
@@ -464,8 +465,6 @@ public class RobotContainer {
 
     Command AutoPIDTuning = Commands.sequence(runPath(ChoreoTraj.AutoPIDTuning));
 
-    Command DoNothing = Commands.none();
-
     autoChooser.setDefaultOption("Do Nothing", DoNothing);
     autoChooser.addOption("OutpostSideWCMPWithUturn", OutpostSideWCMPWithUturn);
     autoChooser.addOption("OutpostSideGlendaleWithUturn", OutpostSideGlendaleWithUturn);
@@ -601,7 +600,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return autoChooser.getSelected();
+    return autoChooser.getSelected() == null ? DoNothing : autoChooser.getSelected();
   }
 
   private void configOperatorBindings() {
