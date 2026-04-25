@@ -4,21 +4,15 @@
 
 package frc.robot.commands.states.PrepShoots;
 
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.units.measure.Angle;
-import edu.wpi.first.units.measure.AngularVelocity;
-import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
+import frc.robot.commands.SubCommands;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstPoseDrive;
 import frc.robot.constants.ConstRotors;
-import frc.robot.subsystems.Rotors;
-import frc.robot.subsystems.StateMachine.RobotState;
 import frc.robot.subsystems.DriverStateMachine.DriverState;
-import frc.robot.subsystems.Motion;
+import frc.robot.subsystems.StateMachine.RobotState;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -38,16 +32,7 @@ public class PrepAnywhere extends Command {
 
   @Override
   public void execute() {
-    Pose2d hubPose = RobotContainer.robotPose.getHub();
-    Distance distanceToHub = RobotContainer.robotPose.getDistanceToHub();
-    AngularVelocity targetFlyWheelSpeed = Rotors.getMappedFlywheelSpeed(distanceToHub);
-    Angle targetHoodAngle = Motion.getMappedHoodAngle(distanceToHub);
-    Angle targetDrivetrainRotation = RobotContainer.drivetrainInstance
-        .snapToTarget(hubPose);
-
-    RobotContainer.rotorsInstance.setFlywheelSpeed(targetFlyWheelSpeed);
-    RobotContainer.motionInstance.setHoodAngle(targetHoodAngle);
-    RobotContainer.drivetrainInstance.setDriveRotation(targetDrivetrainRotation);
+    SubCommands.aim(true);
   }
 
   // Called once the command ends or is interrupted.

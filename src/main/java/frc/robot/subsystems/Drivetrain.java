@@ -269,6 +269,14 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     return drivetrainAtRotation;
   }
 
+  public boolean isAtDesiredRotation(Angle target, Angle tolerance) {
+    Angle upperLim = target.plus(tolerance);
+    Angle lowerLim = target.minus(tolerance);
+    drivetrainAtRotation = getDrivetrainRotation().gte(lowerLim)
+        && getDrivetrainRotation().lte(upperLim);
+    return drivetrainAtRotation;
+  }
+
   public boolean isManualRotationEnabled() {
     return manualRotationEnabled;
   }

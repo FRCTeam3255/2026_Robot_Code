@@ -7,13 +7,18 @@ package frc.robot.commands.states;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
+import frc.robot.commands.SubCommands;
+import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
 import frc.robot.subsystems.StateMachine;
+import frc.robot.subsystems.StateMachine.RobotState;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class Shooting extends Command {
   private final Timer deployIntakeTimer = new Timer();
+  private RobotState previousState;
+  boolean atDesiredRotation = true;
 
   /** Creates a new Shooting. */
   public Shooting() {
@@ -25,6 +30,7 @@ public class Shooting extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    previousState = RobotContainer.stateMachineInstance.getRobotState();
     RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.SHOOTING);
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.SERIALIZER_ROLLERS_SPEED);
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.SHOOTER_TRANSFER_SPEED);
@@ -34,13 +40,25 @@ public class Shooting extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    boolean seesTags = RobotContainer.visionInstance.seesTags();
+    boolean xBrakeAllowed = RobotContainer.drivetrainInstance.isXbreakAllowed();
+    boolean allowedToAim = previousState == RobotState.PREP_ANYWHERE && seesTags;
 
-    if (!RobotContainer.drivetrainInstance.isXbreakAllowed()) {
+    if (allowedToAim && !atDesiredRotation) {
+      atDesiredRotation = RobotContainer.drivetrainInstance
+          .isAtDesiredRotation(SubCommands.aim(true), ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE);
+    } else if (allowedToAim && atDesiredRotation) {
+      atDesiredRotation = RobotContainer.drivetrainInstance
+          .isAtDesiredRotation(SubCommands.aim(false), ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE);
+    }
+
+    if (!xBrakeAllowed) {
       RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
       deployIntakeTimer.reset();
       return;
+    } else if (atDesiredRotation || !allowedToAim) {
+      RobotContainer.drivetrainInstance.xBrake();
     }
-    RobotContainer.drivetrainInstance.xBrake();
     deployIntakeTimer.start();
     if (!RobotContainer.motionInstance.isIntakePivotAtPosition(ConstMotion.LIFT_INTAKE_SHOOTING_ANGLE,
         ConstMotion.INTAKE_PIVOT_ANGLE_TOLERANCE)

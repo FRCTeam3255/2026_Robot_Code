@@ -6,13 +6,13 @@ package frc.robot.subsystems;
 
 import java.util.Optional;
 
-import frc.robot.LimelightHelpers;
-import frc.robot.LimelightHelpers.PoseEstimate;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.LimelightHelpers;
+import frc.robot.LimelightHelpers.PoseEstimate;
 import frc.robot.constants.ConstVision;
 
 @Logged
@@ -38,6 +38,10 @@ public class Vision extends SubsystemBase {
   int backTagCount = 0;
 
   String limelightInUse = LL_INUSE.NONE.toString();
+
+  public String getLimelightInUse() {
+    return limelightInUse;
+  }
 
   public enum LL_INUSE {
     RIGHT, LEFT, BACK, NONE
@@ -232,6 +236,14 @@ public class Vision extends SubsystemBase {
         return Optional.empty();
       }
     }
+  }
+
+  public int getTotalTagCount() {
+    return rightTagCount + leftTagCount + backTagCount;
+  }
+
+  public boolean seesTags() {
+    return getTotalTagCount() > 0;
   }
 
   @Override
