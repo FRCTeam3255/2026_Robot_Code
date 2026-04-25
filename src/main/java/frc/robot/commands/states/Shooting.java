@@ -50,16 +50,13 @@ public class Shooting extends Command {
     } else if (allowedToAim && atDesiredRotation) {
       atDesiredRotation = RobotContainer.drivetrainInstance
           .isAtDesiredRotation(SubCommands.aim(false), ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE);
-      if (xBrakeAllowed) {
-        RobotContainer.drivetrainInstance.xBrake();
-      }
     }
 
     if (!xBrakeAllowed) {
       RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
       deployIntakeTimer.reset();
       return;
-    } else if (!allowedToAim && xBrakeAllowed) {
+    } else if (atDesiredRotation || !allowedToAim) {
       RobotContainer.drivetrainInstance.xBrake();
     }
     deployIntakeTimer.start();
