@@ -42,6 +42,7 @@ public class Motion extends SubsystemBase {
     intakePivot.getConfigurator().apply(ConstMotion.INTAKE_PIVOT_CONFIGURATION);
     // climber.getConfigurator().apply(ConstMotion.CLIMBER_CONFIGURATION);
     hood.getConfigurator().apply(ConstMotion.HOOD_CONFIGURATION);
+    hood.setPosition(ConstMotion.HOOD_NONE_ANGLE);
   }
 
   @Override
