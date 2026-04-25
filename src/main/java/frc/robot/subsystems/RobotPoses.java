@@ -59,6 +59,7 @@ public class RobotPoses extends SubsystemBase {
       Rotation3d.kZero);
 
   public RobotPoses() {
+    SmartDashboard.putData(field2d);
   }
 
   @Override
@@ -109,7 +110,6 @@ public class RobotPoses extends SubsystemBase {
     leftLimelight.setPose(RobotContainer.visionInstance.leftPose);
     rightLimelight.setPose(RobotContainer.visionInstance.rightPose);
     topLimelight.setPose(RobotContainer.visionInstance.backPose);
-    SmartDashboard.putData(field2d);
   }
 
   public Pose2d getHub() {
