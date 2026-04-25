@@ -9,11 +9,8 @@ import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Distance;
 import frc.robot.RobotContainer;
-import frc.robot.constants.ConstDrivetrain;
-import frc.robot.constants.ConstMotion;
 import frc.robot.subsystems.Motion;
 import frc.robot.subsystems.Rotors;
-import frc.robot.subsystems.StateMachine.RobotState;
 
 /** Add your docs here. */
 public class SubCommands {

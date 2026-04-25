@@ -54,7 +54,7 @@ public class Shooting extends Command {
       RobotContainer.drivetrainInstance.xBrake();
     }
 
-    if (!RobotContainer.drivetrainInstance.isXbreakAllowed()) {
+    if (!xBrakeAllowed) {
       RobotContainer.motionInstance.setIntakePivotAngle(ConstMotion.DEPLOY_INTAKE_PIVOT_ANGLE);
       deployIntakeTimer.reset();
       return;
