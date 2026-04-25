@@ -13,6 +13,9 @@ import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Distance;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import edu.wpi.first.wpilibj.smartdashboard.FieldObject2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstField;
@@ -22,6 +25,12 @@ import frc.robot.constants.ConstMotion;
 public class RobotPoses extends SubsystemBase {
   /** Creates a new RobotPoses. */
   public static final Distance HOPPER_ELEVATION = Inches.of(0);
+
+  Field2d field2d = new Field2d();
+  FieldObject2d robotObject = field2d.getObject("Robot");
+  FieldObject2d leftLimelight = field2d.getObject("Left_LL");
+  FieldObject2d rightLimelight = field2d.getObject("Right_LL");
+  FieldObject2d topLimelight = field2d.getObject("Top_LL");
 
   Pose3d modelDrivetrain = Pose3d.kZero;
   Pose3d model0IntakePivot = Pose3d.kZero;
@@ -50,6 +59,7 @@ public class RobotPoses extends SubsystemBase {
       Rotation3d.kZero);
 
   public RobotPoses() {
+    SmartDashboard.putData("Field", field2d);
   }
 
   @Override
@@ -94,6 +104,12 @@ public class RobotPoses extends SubsystemBase {
     Pose2d hubPose = getHub();
     distanceToHub = Units.Meters.of(
         RobotContainer.drivetrainInstance.getPose().getTranslation().getDistance(hubPose.getTranslation()));
+
+    // Update the field object with the current robot pose
+    robotObject.setPose(RobotContainer.drivetrainInstance.getPose());
+    leftLimelight.setPose(RobotContainer.visionInstance.leftPose);
+    rightLimelight.setPose(RobotContainer.visionInstance.rightPose);
+    topLimelight.setPose(RobotContainer.visionInstance.backPose);
   }
 
   public Pose2d getHub() {

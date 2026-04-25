@@ -62,6 +62,8 @@ public class ConstMotion {
     INTAKE_PIVOT_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
     INTAKE_PIVOT_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitThreshold = DEPLOY_INTAKE_PIVOT_ANGLE.in(Rotations);
     INTAKE_PIVOT_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitThreshold = RETRACT_INTAKE_PIVOT_ANGLE.in(Rotations);
+    INTAKE_PIVOT_CONFIGURATION.CurrentLimits.StatorCurrentLimitEnable = true;
+    INTAKE_PIVOT_CONFIGURATION.CurrentLimits.StatorCurrentLimit = 60;
     INTAKE_PIVOT_CONFIGURATION.Slot0.GravityType = GravityTypeValue.Arm_Cosine;
     INTAKE_PIVOT_CONFIGURATION.Slot0.kS = 0.3;
     INTAKE_PIVOT_CONFIGURATION.Slot0.kP = 40;
@@ -92,6 +94,9 @@ public class ConstMotion {
     HOOD_CONFIGURATION.Feedback.SensorToMechanismRatio = 1.0 / ((10.0 / 42.0) * (10.0 / 210.0));
     HOOD_CONFIGURATION.SoftwareLimitSwitch.ReverseSoftLimitEnable = true;
     HOOD_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
+    HOOD_CONFIGURATION.CurrentLimits.StatorCurrentLimitEnable = true;
+    HOOD_CONFIGURATION.CurrentLimits.StatorCurrentLimit = 60;
+
     HOOD_CONFIGURATION.SoftwareLimitSwitch.ForwardSoftLimitThreshold = Units.Degrees.of(46).in(Rotations);
     // Do not change, it's not at zero because the hood is not perfectly at 0 when
     // the encoder reads 0
