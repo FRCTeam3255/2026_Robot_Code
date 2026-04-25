@@ -59,7 +59,7 @@ public class RobotPoses extends SubsystemBase {
       Rotation3d.kZero);
 
   public RobotPoses() {
-    SmartDashboard.putData(field2d);
+    SmartDashboard.putData("Field", field2d);
   }
 
   @Override
