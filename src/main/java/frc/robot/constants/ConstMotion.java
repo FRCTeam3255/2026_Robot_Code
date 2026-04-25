@@ -41,7 +41,7 @@ public class ConstMotion {
   public static final Angle HOOD_ANYWHERE_ANGLE = Units.Degrees.of(45);
   public static final Angle HOOD_NUETRAL_TO_ALLIANCE_ANGLE = Units.Degrees.of(45);
   public static final Angle HOOD_OPPENENT_TO_ALLIANCE_ANGLE = Units.Degrees.of(37);
-  public static final Angle HOOD_NONE_ANGLE = Units.Degrees.of(1.6); // Do not change, it's not at zero because the hood
+  public static final Angle HOOD_NONE_ANGLE = Units.Degrees.of(3.2); // Do not change, it's not at zero because the hood
                                                                      // is not perfectly at 0 when the encoder reads 0
   public static final Distance STORE_CLIMBER = Inches.of(0);
   public static final Distance RETRACT_CLIMBER = Inches.of(1.5);
