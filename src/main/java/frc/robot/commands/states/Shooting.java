@@ -18,6 +18,7 @@ import frc.robot.subsystems.StateMachine.RobotState;
 public class Shooting extends Command {
   private final Timer deployIntakeTimer = new Timer();
   private RobotState previousState;
+  boolean atDesiredRotation = true;
 
   /** Creates a new Shooting. */
   public Shooting() {
@@ -40,15 +41,15 @@ public class Shooting extends Command {
   @Override
   public void execute() {
     boolean seesTags = RobotContainer.visionInstance.seesTags();
-    boolean atDesiredRotation = RobotContainer.drivetrainInstance
-        .isAtDesiredRotation(ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE);
     boolean xBrakeAllowed = RobotContainer.drivetrainInstance.isXbreakAllowed();
     boolean allowedToAim = previousState == RobotState.PREP_ANYWHERE && seesTags;
 
     if (allowedToAim && !atDesiredRotation) {
-      SubCommands.aim(true);
+      atDesiredRotation = RobotContainer.drivetrainInstance
+          .isAtDesiredRotation(SubCommands.aim(true), ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE);
     } else if (allowedToAim && atDesiredRotation) {
-      SubCommands.aim(true);
+      atDesiredRotation = RobotContainer.drivetrainInstance
+          .isAtDesiredRotation(SubCommands.aim(false), ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE);
       if (xBrakeAllowed) {
         RobotContainer.drivetrainInstance.xBrake();
       }

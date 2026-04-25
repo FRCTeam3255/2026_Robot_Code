@@ -15,7 +15,7 @@ import frc.robot.subsystems.Rotors;
 /** Add your docs here. */
 public class SubCommands {
 
-  public static void aim(boolean aimDT) {
+  public static Angle aim(boolean aimDT) {
     Pose2d hubPose = RobotContainer.robotPose.getHub();
     Distance distanceToHub = RobotContainer.robotPose.getDistanceToHub();
     AngularVelocity targetFlyWheelSpeed = Rotors.getMappedFlywheelSpeed(distanceToHub);
@@ -28,5 +28,7 @@ public class SubCommands {
     if (aimDT) {
       RobotContainer.drivetrainInstance.setDriveRotation(targetDrivetrainRotation);
     }
+    return targetDrivetrainRotation;
   }
+
 }
