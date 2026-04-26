@@ -106,7 +106,7 @@ public class ConstMotion {
     HOOD_CONFIGURATION.Slot0.kP = 300;
     HOOD_CONFIGURATION.Slot0.kG = 0.1;
     HOOD_CONFIGURATION.Slot0.StaticFeedforwardSign = StaticFeedforwardSignValue.UseClosedLoopSign;
-    // 120;
+
     // hoodAngleMap.put(Inches.of(0).in(Inches), Degrees.of(3).in(Degrees));
     hoodAngleMap.put(Inches.of(200).in(Inches), Degrees.of(29).in(Degrees));
     // hoodAngleMap.put(Inches.of(190).in(Inches), Degrees.of(29).in(Degrees));

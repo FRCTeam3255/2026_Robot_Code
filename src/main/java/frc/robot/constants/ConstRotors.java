@@ -116,7 +116,7 @@ public class ConstRotors {
     flywheelSpeedMap.put(Inches.of(180).in(Inches), RPM.of(4125).in(RPM));
     flywheelSpeedMap.put(Inches.of(165.1).in(Inches), RPM.of(4100).in(RPM));
     flywheelSpeedMap.put(Inches.of(165).in(Inches), RPM.of(4000).in(RPM));
-    flywheelSpeedMap.put(Inches.of(140).in(Inches), RPM.of(3700).in(RPM));
+    flywheelSpeedMap.put(Inches.of(140).in(Inches), RPM.of(3600).in(RPM));
     flywheelSpeedMap.put(Inches.of(120).in(Inches), RPM.of(3400).in(RPM));
     flywheelSpeedMap.put(Inches.of(0).in(Inches), RPM.of(3400).in(RPM));
   }
