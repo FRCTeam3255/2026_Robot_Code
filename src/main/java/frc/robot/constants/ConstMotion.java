@@ -115,11 +115,11 @@ public class ConstMotion {
     // hoodAngleMap.put(Inches.of(150).in(Inches), Degrees.of(24).in(Degrees));
     hoodAngleMap.put(Inches.of(140).in(Inches), Degrees.of(14).in(Degrees)); // good
     // hoodAngleMap.put(Inches.of(130).in(Inches), Degrees.of(16).in(Degrees));
-    hoodAngleMap.put(Inches.of(120).in(Inches), Degrees.of(13).in(Degrees)); // good
+    hoodAngleMap.put(Inches.of(120).in(Inches), Degrees.of(21).in(Degrees)); // good
     // hoodAngleMap.put(Inches.of(110).in(Inches), Degrees.of(13).in(Degrees));
-    hoodAngleMap.put(Inches.of(100).in(Inches), Degrees.of(8).in(Degrees)); // little too far, made most
+    hoodAngleMap.put(Inches.of(100).in(Inches), Degrees.of(16).in(Degrees)); // little too far, made most
     // hoodAngleMap.put(Inches.of(90).in(Inches), Degrees.of(9).in(Degrees));
-    hoodAngleMap.put(Inches.of(80).in(Inches), Degrees.of(5.25).in(Degrees)); //
+    hoodAngleMap.put(Inches.of(80).in(Inches), Degrees.of(13.25).in(Degrees)); //
     // hoodAngleMap.put(Inches.of(70).in(Inches), Degrees.of(6).in(Degrees));
     // hoodAngleMap.put(Inches.of(60).in(Inches), Degrees.of(6).in(Degrees));
     hoodAngleMap.put(Inches.of(50).in(Inches), Degrees.of(1).in(Degrees)); //
