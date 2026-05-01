@@ -328,7 +328,7 @@ public record ChoreoTraj(
 	public static final ChoreoTraj WCMP_DSideTrench_MidlineNeutral = new ChoreoTraj(
 	    "WCMP_DSideTrench_MidlineNeutral",
 	    OptionalInt.empty(),
-	    2.02183,
+	    2.02123,
 	    new Pose2d(3.683, 7.568, Rotation2d.fromRadians(1.571)),
 	    new Pose2d(7.876, 5.902, Rotation2d.fromRadians(1.588))
 	);
@@ -349,7 +349,7 @@ public record ChoreoTraj(
 	public static final ChoreoTraj WCMP_OSideTrench_MidlineNeutral = new ChoreoTraj(
 	    "WCMP_OSideTrench_MidlineNeutral",
 	    OptionalInt.empty(),
-	    1.78372,
+	    1.80691,
 	    new Pose2d(3.684, 0.499, Rotation2d.fromRadians(-1.571)),
 	    new Pose2d(7.881, 2.149, Rotation2d.fromRadians(-1.571))
 	);
@@ -370,14 +370,14 @@ public record ChoreoTraj(
 	public static final ChoreoTraj WCMP_SecondUTurn_DSideTrench_Neutral = new ChoreoTraj(
 	    "WCMP_SecondUTurn_DSideTrench_Neutral",
 	    OptionalInt.empty(),
-	    4.76634,
+	    4.88734,
 	    new Pose2d(3.683, 7.568, Rotation2d.fromRadians(1.571)),
 	    new Pose2d(6.62, 5.525, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj WCMP_SecondUTurn_OSideTrench_Neutral = new ChoreoTraj(
 	    "WCMP_SecondUTurn_OSideTrench_Neutral",
 	    OptionalInt.empty(),
-	    4.75362,
+	    4.87346,
 	    new Pose2d(3.684, 0.499, Rotation2d.fromRadians(-1.571)),
 	    new Pose2d(6.594, 2.329, Rotation2d.fromRadians(0))
 	);
