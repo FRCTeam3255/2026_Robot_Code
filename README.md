@@ -14,7 +14,10 @@ Jump into the code: `src/main/java/frc/robot`
 
 ## Competitions
 
-- FIRST Championship
+- California District Port Hueneme Event
+- Califoania District Glendale Event
+- FIRST South California State Champinship presented by Magna
+- FIRST Championship - Hohnson Division
 
 ## Social
 
