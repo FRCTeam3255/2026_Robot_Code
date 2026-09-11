@@ -2,6 +2,11 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+/* Welcome to the Robot Controls Project! 
+ * We will be walking you through this project with these comments
+ * Please scroll down to line 65 to see further instructions
+ */
+
 package frc.robot;
 
 import java.util.Map;
@@ -12,9 +17,9 @@ import com.frcteam3255.joystick.SN_XboxController;
 import choreo.auto.AutoFactory;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.units.measure.Time;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -33,8 +38,8 @@ import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstField;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
-import frc.robot.constants.ConstSystem;
 import frc.robot.constants.ConstRumble;
+import frc.robot.constants.ConstSystem;
 import frc.robot.constants.ConstSystem.constControllers;
 import frc.robot.subsystems.DriverStateMachine;
 import frc.robot.subsystems.DriverStateMachine.DriverState;
@@ -44,8 +49,8 @@ import frc.robot.subsystems.RobotPoses;
 import frc.robot.subsystems.Rotors;
 import frc.robot.subsystems.StateMachine;
 import frc.robot.subsystems.StateMachine.RobotState;
-import frc.robot.subsystems.Vision;
 import frc.robot.subsystems.Telemetry;
+import frc.robot.subsystems.Vision;
 
 @Logged
 public class RobotContainer {
@@ -58,16 +63,17 @@ public class RobotContainer {
   public Pose2d pathEndPose = new Pose2d();
 
   // STATES
+  /*
+   * Here are all the different actions that the robot can perform in a match
+   * Watch the game animation video and come back
+   * 
+   * Now think: if you are the driver, how do you want to map each action to the
+   * buttons?
+   * 
+   * Scroll down to line 182 to see further instructions
+   */
   Command TRY_EJECTING_HOPPER = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.EJECTING_HOPPER));
-  Command TRY_UNCLIMB_L1 = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.UNCLIMB_L1));
-  Command TRY_PREP_CLIMB_L1 = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.PREP_CLIMB_L1));
-  Command TRY_CLIMBING_L1 = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.CLIMBING_L1));
-  Command TRY_CLIMBING_L2_3 = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.CLIMBING_L2_3));
   Command TRY_INTAKING = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.INTAKING));
   Command TRY_SHOOTING = Commands.deferredProxy(
@@ -84,18 +90,17 @@ public class RobotContainer {
       () -> stateMachineInstance.tryState(RobotState.PREP_TOWER));
   Command TRY_PREP_HUB = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.PREP_HUB));
-  Command TRY_PREP_NON_OUTPOST = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.PREP_NON_OUTPOST));
   Command TRY_REVERSING_SHOOTER = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.REVERSING_SHOOTER));
   Command TRY_PREP_OPPONENT_TO_ALLIANCE = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.PREP_OPPONENT_TO_ALLIANCE));
-  Command TRY_PREP_NEAUTRAL_TO_ALLIANCE = Commands.deferredProxy(
+  Command TRY_PREP_NEUTRAL_TO_ALLIANCE = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.PREP_NEUTRAL_TO_ALLIANCE));
   Command TRY_NONE = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.NONE));
   Command TRY_RETRACT_INTAKE = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.RETRACT_INTAKE));
+  /* ---- **END** ---- */
 
   private static AutoFactory autoFactory;
 
@@ -174,52 +179,57 @@ public class RobotContainer {
     configAutonomous();
     configFeedback();
     CommandScheduler.getInstance().schedule(autoFactory.warmupCmd());
-    // subDrivetrain.resetModulesToAbsolute();
   }
 
+  /* Controller Bindings */
+  /*
+   * You will be binding the controller buttons to the corresponding actions here
+   * Here are the different functions you can use:
+   * onTrue(YOUR_ACTION) - this will perform the action once you hit the button
+   * whileTrue(YOUR_ACTION) - this will perform the action while you hold the
+   * button
+   * onFalse(YOUR_ACTION) - this will perForm the action once you release a
+   * button.
+   * All the buttons are currently bind to NONE once you release the button,
+   * NONE is the natural resting state of the robot
+   * 
+   * Here is the format of binding a button:
+   * conDriver.your_Button
+   * .onTrue(YOUR_ACTION)
+   * .onFalse(YOUR_ACTION);
+   */
   private void configDriverBindings() {
     conDriver.btn_South
-        .whileTrue(TRY_EJECTING_HOPPER)
         .onFalse(TRY_NONE);
     conDriver.btn_RightTrigger
-        .whileTrue(TRY_SHOOTING)
         .onFalse(TRY_NONE);
     conDriver.btn_East
-        .whileTrue(TRY_REVERSING_SHOOTER)
         .onFalse(TRY_NONE);
     conDriver.btn_Start
-        .whileTrue(TRY_PREP_CLIMB_L1)
-        .onTrue(TRY_UNCLIMB_L1);
-    // .onTrue(TRY_CLIMBING_L2_3);
+        .onFalse(TRY_NONE);
     conDriver.btn_LeftTrigger
-        .whileTrue(TRY_INTAKING)
         .onFalse(TRY_NONE);
     conDriver.btn_Back
-        .onFalse(TRY_CLIMBING_L1);
-    // .onTrue(TRY_RETRACT_INTAKE)
-    // .onFalse(TRY_NONE);
+        .onFalse(TRY_NONE);
     conDriver.btn_RightBumper
-        .onTrue(TRY_PREP_ANYWHERE);
+        .onFalse(TRY_NONE);
     conDriver.btn_A
-        .onTrue(TRY_PREP_TRENCH);
+        .onFalse(TRY_NONE);
     conDriver.btn_West
-        .onTrue(TRY_PREP_NEAUTRAL_TO_ALLIANCE);
-    // .onTrue(TRY_PREP_OPPONENT_TO_ALLIANCE);
+        .onFalse(TRY_NONE);
     conDriver.btn_B
-        .onTrue(TRY_PREP_CORNER);
+        .onFalse(TRY_NONE);
     conDriver.btn_Y
-        // .onTrue(TRY_PREP_OPPONENT_TO_ALLIANCE);
-        .onTrue(TRY_PREP_HUB);
-    // .onTrue(TRY_DEFENSE) rethink where to put defense
-    // .onFalse(TRY_NONE);
+        .onFalse(TRY_NONE);
     conDriver.btn_X
-        .onTrue(TRY_PREP_TOWER);
+        .onFalse(TRY_NONE);
     conDriver.btn_RightStick
-        .onTrue(TRY_RETRACT_INTAKE);
+        .onFalse(TRY_NONE);
     conDriver.btn_LeftStick
-        .onTrue(TRY_PREP_OPPONENT_TO_ALLIANCE);
+        .onFalse(TRY_NONE);
     conDriver.btn_North.whileTrue(new ResetPose());
   }
+  /* ---- **END** ---- */
 
   public void configAutonomous() {
     autoFactory = new AutoFactory(
@@ -235,8 +245,8 @@ public class RobotContainer {
             TRY_PREP_ANYWHERE,
             ConstAuto.SHOOT_PRELOAD_TIMEOUT));
 
-    Command PreloadWithClimb = Commands.sequence(PreloadOnly.asProxy(),
-        Climb(ChoreoTraj.Preload_PrepClimb));
+    // Command PreloadWithClimb = Commands.sequence(PreloadOnly.asProxy(),
+    // Climb(ChoreoTraj.Preload_PrepClimb));
 
     Command PreloadDepot = Commands.sequence(
         CollectAndScore(ChoreoTraj.DSideBump_Depot,
@@ -245,9 +255,9 @@ public class RobotContainer {
             ConstAuto.INTAKE_DEPOT_TIMEOUT,
             ConstAuto.SHOOT_FROM_DEPOT_TIMEOUT));
 
-    Command PreloadDepotWithClimb = Commands.sequence(
-        PreloadDepot.asProxy(),
-        Climb(ChoreoTraj.DSidePrep_PrepClimb));
+    // Command PreloadDepotWithClimb = Commands.sequence(
+    // PreloadDepot.asProxy(),
+    // Climb(ChoreoTraj.DSidePrep_PrepClimb));
 
     Command PreloadDepotWithOutpost = Commands.sequence(
         PreloadDepot.asProxy(),
@@ -344,9 +354,9 @@ public class RobotContainer {
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
-    Command OutpostSideNeutralWithClimb = Commands.sequence(
-        OutpostSideNeutral.asProxy(),
-        Climb(ChoreoTraj.OSideShoot_PrepClimb));
+    // Command OutpostSideNeutralWithClimb = Commands.sequence(
+    // OutpostSideNeutral.asProxy(),
+    // Climb(ChoreoTraj.OSideShoot_PrepClimb));
 
     Command DepotSideNeutral = Commands.sequence(
         TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
@@ -434,9 +444,9 @@ public class RobotContainer {
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
-    Command DepotSideNeutralWithClimb = Commands.sequence(
-        DepotSideNeutral.asProxy(),
-        Climb(ChoreoTraj.DSideBump_PrepClimb));
+    // Command DepotSideNeutralWithClimb = Commands.sequence(
+    // DepotSideNeutral.asProxy(),
+    // Climb(ChoreoTraj.DSideBump_PrepClimb));
 
     Command DepotSideNeutralWithDepot = Commands.sequence(DepotSideNeutral.asProxy(),
         runPath(ChoreoTraj.DSidePrep_DSideBump).asProxy(),
@@ -450,8 +460,8 @@ public class RobotContainer {
             ConstAuto.INTAKE_OUTPOST_TIMEOUT,
             ConstAuto.SHOOT_FROM_OUTPOST_TIMEOUT));
 
-    Command OutpostWithClimb = Commands.sequence(PreloadOutpost.asProxy(),
-        Climb(ChoreoTraj.Outpost_PrepClimb));
+    // Command OutpostWithClimb = Commands.sequence(PreloadOutpost.asProxy(),
+    // Climb(ChoreoTraj.Outpost_PrepClimb));
 
     Command OutpostSideNeutralWithOutpost = Commands.sequence(
         OutpostSideNeutral.asProxy(),
@@ -477,18 +487,20 @@ public class RobotContainer {
     autoChooser.addOption("DepotSideOffsetGlendale", DepotSideOffsetGlendale);
     autoChooser.addOption("OutpostSideNeutralZone", OutpostSideNeutral);
     autoChooser.addOption("UTurnOutpostSideNeutral", DoubleUTurnOutpostSideNeutral);
-    autoChooser.addOption("OutpostSideNeutralWithClimb", OutpostSideNeutralWithClimb);
+    // autoChooser.addOption("OutpostSideNeutralWithClimb",
+    // OutpostSideNeutralWithClimb);
     autoChooser.addOption("Outpost", PreloadOutpost);
     autoChooser.addOption("OutpostSideNeutralWithOutpost", OutpostSideNeutralWithOutpost);
-    autoChooser.addOption("OutpostWithClimb", OutpostWithClimb);
+    // autoChooser.addOption("OutpostWithClimb", OutpostWithClimb);
     autoChooser.addOption("DepotSideNeutralZone", DepotSideNeutral);
     autoChooser.addOption("UTurnDepotSideNeutral", DoubleUTurnDepotSideNeutral);
-    autoChooser.addOption("DepotSideNeutralWithClimb", DepotSideNeutralWithClimb);
+    // autoChooser.addOption("DepotSideNeutralWithClimb",
+    // DepotSideNeutralWithClimb);
     autoChooser.addOption("DepotSideNeutralWithDepot", DepotSideNeutralWithDepot);
     autoChooser.addOption("Depot", PreloadDepot);
-    autoChooser.addOption("DepotWithClimb", PreloadDepotWithClimb);
+    // autoChooser.addOption("DepotWithClimb", PreloadDepotWithClimb);
     autoChooser.addOption("PreloadOnly", PreloadOnly);
-    autoChooser.addOption("PreloadWithClimb", PreloadWithClimb);
+    // autoChooser.addOption("PreloadWithClimb", PreloadWithClimb);
     autoChooser.addOption("DepotOutpost", PreloadDepotWithOutpost);
     autoChooser.addOption("AutoPIDTuning", AutoPIDTuning);
 
@@ -505,18 +517,18 @@ public class RobotContainer {
         Map.entry(DepotSideOffsetGlendale, ChoreoTraj.DSideTrench_Neutral),
         Map.entry(OutpostSideNeutral, ChoreoTraj.OSideTrench_Neutral),
         Map.entry(DoubleUTurnOutpostSideNeutral, ChoreoTraj.FirstUTurn_OSideTrench_Neutral),
-        Map.entry(OutpostSideNeutralWithClimb, ChoreoTraj.OSideTrench_Neutral),
+        // Map.entry(OutpostSideNeutralWithClimb, ChoreoTraj.OSideTrench_Neutral),
         Map.entry(PreloadOutpost, ChoreoTraj.OSideTrench_Outpost),
         Map.entry(OutpostSideNeutralWithOutpost, ChoreoTraj.OSideTrench_Neutral),
-        Map.entry(OutpostWithClimb, ChoreoTraj.OSideTrench_Outpost),
+        // Map.entry(OutpostWithClimb, ChoreoTraj.OSideTrench_Outpost),
         Map.entry(DepotSideNeutral, ChoreoTraj.DSideTrench_Neutral),
         Map.entry(DoubleUTurnDepotSideNeutral, ChoreoTraj.FirstUTurn_DSideTrench_Neutral),
-        Map.entry(DepotSideNeutralWithClimb, ChoreoTraj.DSideTrench_Neutral),
+        // Map.entry(DepotSideNeutralWithClimb, ChoreoTraj.DSideTrench_Neutral),
         Map.entry(DepotSideNeutralWithDepot, ChoreoTraj.DSideTrench_Neutral),
         Map.entry(PreloadDepot, ChoreoTraj.DSideBump_Depot),
-        Map.entry(PreloadDepotWithClimb, ChoreoTraj.DSideBump_Depot),
+        // Map.entry(PreloadDepotWithClimb, ChoreoTraj.DSideBump_Depot),
         Map.entry(PreloadOnly, ChoreoTraj.Hub_ShootPreload),
-        Map.entry(PreloadWithClimb, ChoreoTraj.Hub_ShootPreload),
+        // Map.entry(PreloadWithClimb, ChoreoTraj.Hub_ShootPreload),
         Map.entry(PreloadDepotWithOutpost, ChoreoTraj.DSideBump_Depot),
         Map.entry(AutoPIDTuning, ChoreoTraj.AutoPIDTuning));
 
@@ -576,14 +588,6 @@ public class RobotContainer {
         try_prep_shoot.asProxy().withTimeout(ConstAuto.PREP_SHOOT_TIMEOUT),
         TRY_SHOOTING.asProxy().withTimeout(shootingTime),
         TRY_NONE.asProxy());
-  }
-
-  Command Climb(ChoreoTraj startPath) {
-    return Commands.sequence(
-        Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
-        runPath(startPath).asProxy(),
-        TRY_PREP_CLIMB_L1.asProxy().withTimeout(6),
-        TRY_CLIMBING_L1.asProxy().withTimeout(4));
   }
 
   public static boolean isPracticeBot() {
