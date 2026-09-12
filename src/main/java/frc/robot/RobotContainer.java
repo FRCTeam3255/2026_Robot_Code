@@ -65,13 +65,13 @@ public class RobotContainer {
   // STATES
   /*
    * Here are all the different actions that the robot can perform in a match
-   * Watch the game animation video and come back
    * 
    * Now think: if you are the driver, how do you want to map each action to the
    * buttons?
    * 
    * Scroll down to line 182 to see further instructions
    */
+
   Command TRY_EJECTING_HOPPER = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.EJECTING_HOPPER));
   Command TRY_INTAKING = Commands.deferredProxy(
@@ -80,6 +80,19 @@ public class RobotContainer {
       () -> stateMachineInstance.tryState(RobotState.SHOOTING));
   Command TRY_PREP_ANYWHERE = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.PREP_ANYWHERE));
+  Command TRY_NONE = Commands.deferredProxy(
+      () -> stateMachineInstance.tryState(RobotState.NONE));
+  Command TRY_RETRACT_INTAKE = Commands.deferredProxy(
+      () -> stateMachineInstance.tryState(RobotState.RETRACT_INTAKE));
+  Command TRY_REVERSING_SHOOTER = Commands.deferredProxy(
+      () -> stateMachineInstance.tryState(RobotState.REVERSING_SHOOTER));
+  Command TRY_PREP_OPPONENT_TO_ALLIANCE = Commands.deferredProxy(
+      () -> stateMachineInstance.tryState(RobotState.PREP_OPPONENT_TO_ALLIANCE));
+  Command TRY_PREP_NEUTRAL_TO_ALLIANCE = Commands.deferredProxy(
+      () -> stateMachineInstance.tryState(RobotState.PREP_NEUTRAL_TO_ALLIANCE));
+
+  /* ---- **END** ---- */
+
   Command TRY_PREP_TRENCH = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.PREP_TRENCH));
   Command TRY_PREP_CORNER = Commands.deferredProxy(
@@ -90,17 +103,6 @@ public class RobotContainer {
       () -> stateMachineInstance.tryState(RobotState.PREP_TOWER));
   Command TRY_PREP_HUB = Commands.deferredProxy(
       () -> stateMachineInstance.tryState(RobotState.PREP_HUB));
-  Command TRY_REVERSING_SHOOTER = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.REVERSING_SHOOTER));
-  Command TRY_PREP_OPPONENT_TO_ALLIANCE = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.PREP_OPPONENT_TO_ALLIANCE));
-  Command TRY_PREP_NEUTRAL_TO_ALLIANCE = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.PREP_NEUTRAL_TO_ALLIANCE));
-  Command TRY_NONE = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.NONE));
-  Command TRY_RETRACT_INTAKE = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.RETRACT_INTAKE));
-  /* ---- **END** ---- */
 
   private static AutoFactory autoFactory;
 
