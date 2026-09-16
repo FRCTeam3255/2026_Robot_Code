@@ -11,8 +11,7 @@ import frc.robot.commands.SubCommands;
 import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
-import frc.robot.subsystems.StateMachine;
-import frc.robot.subsystems.StateMachine.RobotState;
+import frc.robot.constants.ConstStateMachine.RobotState;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class Shooting extends Command {
@@ -22,16 +21,12 @@ public class Shooting extends Command {
 
   /** Creates a new Shooting. */
   public Shooting() {
-    // Use addRequirements() here to declare subsystem dependencies.
-
-    addRequirements(RobotContainer.stateMachineInstance);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    previousState = RobotContainer.stateMachineInstance.getRobotState();
-    RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.SHOOTING);
+    previousState = RobotContainer.stateMachineInstance.getPreviousRobotState();
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.SERIALIZER_ROLLERS_SPEED);
     RobotContainer.rotorsInstance.setShooterTransferSpeed(ConstRotors.SHOOTER_TRANSFER_SPEED);
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.INTAKE_ROLLER_SPEED);

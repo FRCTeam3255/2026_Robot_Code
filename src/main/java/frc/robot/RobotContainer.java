@@ -35,6 +35,8 @@ import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
 import frc.robot.constants.ConstSystem;
 import frc.robot.constants.ConstRumble;
+import frc.robot.constants.ConstStateMachine.RobotState;
+import static frc.robot.constants.ConstStateMachine.RobotState.*;
 import frc.robot.constants.ConstSystem.constControllers;
 import frc.robot.subsystems.DriverStateMachine;
 import frc.robot.subsystems.DriverStateMachine.DriverState;
@@ -43,7 +45,6 @@ import frc.robot.subsystems.Motion;
 import frc.robot.subsystems.RobotPoses;
 import frc.robot.subsystems.Rotors;
 import frc.robot.subsystems.StateMachine;
-import frc.robot.subsystems.StateMachine.RobotState;
 import frc.robot.subsystems.Vision;
 import frc.robot.subsystems.Telemetry;
 
@@ -56,50 +57,6 @@ public class RobotContainer {
   public String pathString = "";
   public Pose2d pathStartPose = new Pose2d();
   public Pose2d pathEndPose = new Pose2d();
-
-  // STATES
-  Command TRY_EJECTING_HOPPER = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.EJECTING_HOPPER));
-  Command TRY_UNCLIMB_L1 = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.UNCLIMB_L1));
-  Command TRY_PREP_CLIMB_L1 = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.PREP_CLIMB_L1));
-  Command TRY_CLIMBING_L1 = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.CLIMBING_L1));
-  Command TRY_CLIMBING_L2_3 = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.CLIMBING_L2_3));
-  Command TRY_INTAKING = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.INTAKING));
-  Command TRY_SHOOTING = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.SHOOTING));
-  Command TRY_PREP_ANYWHERE = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.PREP_ANYWHERE));
-  Command TRY_PREP_TRENCH = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.PREP_TRENCH));
-  Command TRY_PREP_CORNER = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.PREP_CORNER));
-  Command TRY_PREP_DEPOT = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.PREP_DEPOT));
-  Command TRY_PREP_TOWER = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.PREP_TOWER));
-  Command TRY_PREP_HUB = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.PREP_HUB));
-  Command TRY_PREP_NON_OUTPOST = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.PREP_NON_OUTPOST));
-  Command TRY_REVERSING_SHOOTER = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.REVERSING_SHOOTER));
-  Command TRY_PREP_OPPONENT_TO_ALLIANCE = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.PREP_OPPONENT_TO_ALLIANCE));
-  Command TRY_PREP_NEAUTRAL_TO_ALLIANCE = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.PREP_NEUTRAL_TO_ALLIANCE));
-  Command TRY_NONE = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.NONE));
-  Command TRY_RETRACT_INTAKE = Commands.deferredProxy(
-      () -> stateMachineInstance.tryState(RobotState.RETRACT_INTAKE));
-
-  private static AutoFactory autoFactory;
-
-  private final SN_XboxController conDriver = new SN_XboxController(controllerIDs.DRIVER_USB);
 
   public static Rotors rotorsInstance = new Rotors();
   private final Rotors loggedRotorsInstance = rotorsInstance;
@@ -117,6 +74,11 @@ public class RobotContainer {
   private final Vision loggedVisionInstance = visionInstance;
   public static Telemetry telemetryInstance = new Telemetry();
   private final Telemetry loggedTelemetryInstance = telemetryInstance;
+
+
+  private static AutoFactory autoFactory;
+
+  private final SN_XboxController conDriver = new SN_XboxController(controllerIDs.DRIVER_USB);
 
   Command MANUAL = new DeferredCommand(
       driverStateMachineInstance.tryState(
@@ -145,22 +107,22 @@ public class RobotContainer {
   public final Trigger hubSwitchingTrigger = new Trigger(
       () -> telemetryInstance.hubsIsSwitching());
   public final Trigger climbingL1Trigger = new Trigger(
-      () -> stateMachineInstance.getRobotState() == RobotState.CLIMBING_L1);
+      () -> stateMachineInstance.getRobotState() == CLIMBING_L1);
   public final Trigger climbingL2_L3Trigger = new Trigger(
-      () -> stateMachineInstance.getRobotState() == RobotState.CLIMBING_L2_3);
+      () -> stateMachineInstance.getRobotState() == CLIMBING_L2_3);
   public final Trigger readyToShootTrigger = new Trigger(
       () -> rotorsInstance.areFlywheelsAtSpeed(ConstRotors.FLYWHEEL_TOLERANCE)
           && drivetrainInstance.isAtDesiredRotation(ConstDrivetrain.DRIVETRAIN_ROTATION_TOLERANCE)
           && motionInstance.isHoodAtPosition(ConstMotion.HOOD_TOLERANCE)
-          && (stateMachineInstance.getRobotState() == RobotState.PREP_ANYWHERE
-              || stateMachineInstance.getRobotState() == RobotState.PREP_TRENCH
-              || stateMachineInstance.getRobotState() == RobotState.PREP_CORNER
-              || stateMachineInstance.getRobotState() == RobotState.PREP_DEPOT
-              || stateMachineInstance.getRobotState() == RobotState.PREP_TOWER
-              || stateMachineInstance.getRobotState() == RobotState.PREP_HUB
-              || stateMachineInstance.getRobotState() == RobotState.PREP_NON_OUTPOST
-              || stateMachineInstance.getRobotState() == RobotState.PREP_OPPONENT_TO_ALLIANCE
-              || stateMachineInstance.getRobotState() == RobotState.PREP_NEUTRAL_TO_ALLIANCE));
+          && (stateMachineInstance.getRobotState() == PREP_ANYWHERE
+              || stateMachineInstance.getRobotState() == PREP_TRENCH
+              || stateMachineInstance.getRobotState() == PREP_CORNER
+              || stateMachineInstance.getRobotState() == PREP_DEPOT
+              || stateMachineInstance.getRobotState() == PREP_TOWER
+              || stateMachineInstance.getRobotState() == PREP_HUB
+              || stateMachineInstance.getRobotState() == PREP_NON_OUTPOST
+              || stateMachineInstance.getRobotState() == PREP_OPPONENT_TO_ALLIANCE
+              || stateMachineInstance.getRobotState() == PREP_NEUTRAL_TO_ALLIANCE));
 
   public RobotContainer() {
     RobotController.setBrownoutVoltage(5.5);
@@ -179,45 +141,45 @@ public class RobotContainer {
 
   private void configDriverBindings() {
     conDriver.btn_South
-        .whileTrue(TRY_EJECTING_HOPPER)
-        .onFalse(TRY_NONE);
+        .whileTrue(EJECTING_HOPPER.TRY())
+        .onFalse(NONE.TRY());
     conDriver.btn_RightTrigger
-        .whileTrue(TRY_SHOOTING)
-        .onFalse(TRY_NONE);
+        .whileTrue(SHOOTING.TRY())
+        .onFalse(NONE.TRY());
     conDriver.btn_East
-        .whileTrue(TRY_REVERSING_SHOOTER)
-        .onFalse(TRY_NONE);
+        .whileTrue(REVERSING_SHOOTER.TRY())
+        .onFalse(NONE.TRY());
     conDriver.btn_Start
-        .whileTrue(TRY_PREP_CLIMB_L1)
-        .onTrue(TRY_UNCLIMB_L1);
-    // .onTrue(TRY_CLIMBING_L2_3);
+        .whileTrue(PREP_CLIMB_L1.TRY())
+        .onTrue(UNCLIMB_L1.TRY());
+    // .onTrue(CLIMBING_L2_3.TRY());
     conDriver.btn_LeftTrigger
-        .whileTrue(TRY_INTAKING)
-        .onFalse(TRY_NONE);
+        .whileTrue(INTAKING.TRY())
+        .onFalse(NONE.TRY());
     conDriver.btn_Back
-        .onFalse(TRY_CLIMBING_L1);
-    // .onTrue(TRY_RETRACT_INTAKE)
-    // .onFalse(TRY_NONE);
+        .onFalse(CLIMBING_L1.TRY());
+    // .onTrue(RETRACT_INTAKE.TRY())
+    // .onFalse(NONE.TRY());
     conDriver.btn_RightBumper
-        .onTrue(TRY_PREP_ANYWHERE);
+        .onTrue(PREP_ANYWHERE.TRY());
     conDriver.btn_A
-        .onTrue(TRY_PREP_TRENCH);
+        .onTrue(PREP_TRENCH.TRY());
     conDriver.btn_West
-        .onTrue(TRY_PREP_NEAUTRAL_TO_ALLIANCE);
-    // .onTrue(TRY_PREP_OPPONENT_TO_ALLIANCE);
+        .onTrue(PREP_NEUTRAL_TO_ALLIANCE.TRY());
+    // .onTrue(PREP_OPPONENT_TO_ALLIANCE.TRY());
     conDriver.btn_B
-        .onTrue(TRY_PREP_CORNER);
+        .onTrue(PREP_CORNER.TRY());
     conDriver.btn_Y
-        // .onTrue(TRY_PREP_OPPONENT_TO_ALLIANCE);
-        .onTrue(TRY_PREP_HUB);
+        // .onTrue(PREP_OPPONENT_TO_ALLIANCE.TRY());
+        .onTrue(PREP_HUB.TRY());
     // .onTrue(TRY_DEFENSE) rethink where to put defense
-    // .onFalse(TRY_NONE);
+    // .onFalse(NONE.TRY());
     conDriver.btn_X
-        .onTrue(TRY_PREP_TOWER);
+        .onTrue(PREP_TOWER.TRY());
     conDriver.btn_RightStick
-        .onTrue(TRY_RETRACT_INTAKE);
+        .onTrue(RETRACT_INTAKE.TRY());
     conDriver.btn_LeftStick
-        .onTrue(TRY_PREP_OPPONENT_TO_ALLIANCE);
+        .onTrue(PREP_OPPONENT_TO_ALLIANCE.TRY());
     conDriver.btn_North.whileTrue(new ResetPose());
   }
 
@@ -232,7 +194,7 @@ public class RobotContainer {
 
     Command PreloadOnly = Commands.sequence(
         ScoreOnly(ChoreoTraj.Hub_ShootPreload,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.SHOOT_PRELOAD_TIMEOUT));
 
     Command PreloadWithClimb = Commands.sequence(PreloadOnly.asProxy(),
@@ -241,7 +203,7 @@ public class RobotContainer {
     Command PreloadDepot = Commands.sequence(
         CollectAndScore(ChoreoTraj.DSideBump_Depot,
             ChoreoTraj.Depot_DSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_DEPOT_TIMEOUT,
             ConstAuto.SHOOT_FROM_DEPOT_TIMEOUT));
 
@@ -253,94 +215,94 @@ public class RobotContainer {
         PreloadDepot.asProxy(),
         CollectAndScore(ChoreoTraj.DSidePrep_Outpost,
             ChoreoTraj.Outpost_OSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_OUTPOST_TIMEOUT,
             ConstAuto.SHOOT_FROM_OUTPOST_TIMEOUT));
 
     Command OutpostSideNeutral = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+        INTAKING.TRY().asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
                                                                            // under trench
         CollectAndScore(
             ChoreoTraj.OSideTrench_Neutral,
             ChoreoTraj.OSideNeutral_OSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command DoubleOutpostSideNeutral = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+        INTAKING.TRY().asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
                                                                            // under trench
         CollectAndScore(
             ChoreoTraj.OSideTrench_MidlineNeutral,
             ChoreoTraj.OSideMidline_OSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
         runPath(ChoreoTraj.OSideShoot_OSideTrench).asProxy(),
         OutpostSideNeutral.asProxy());
 
     Command OutpostSideGlendaleWithUturn = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+        INTAKING.TRY().asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
                                                                            // under trench
         CollectAndScore(ChoreoTraj.OSideTrench_MidlineNeutral,
             ChoreoTraj.OSideMidline_OSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
         runPath(ChoreoTraj.OSideShoot_OSideTrench).asProxy(),
         CollectAndScore(
             ChoreoTraj.SecondUTurn_OSideTrench_Neutral,
             ChoreoTraj.SecondUTurnOSideNeutral_OSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command OutpostSideWCMPWithUturn = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+        INTAKING.TRY().asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
                                                                            // under trench
         WCMPCollectAndScore(ChoreoTraj.WCMP_OSideTrench_MidlineNeutral,
             ChoreoTraj.WCMP_OSideMidline_OSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
         runPath(ChoreoTraj.WCMP_OSideShoot_OSideTrench).asProxy(),
         WCMPCollectAndScore(
             ChoreoTraj.WCMP_SecondUTurn_OSideTrench_Neutral,
             ChoreoTraj.WCMP_SecondUTurnOSideNeutral_OSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command OutpostSideOffsetGlendale = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+        INTAKING.TRY().asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
                                                                            // under trench
         CollectAndScore(ChoreoTraj.OSideTrench_OffsetNeutral,
             ChoreoTraj.OSideOffset_OSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
         runPath(ChoreoTraj.OSideShoot_OSideTrench).asProxy(),
         CollectAndScore(
             ChoreoTraj.SecondUTurn_OSideTrench_Neutral,
             ChoreoTraj.SecondUTurnOSideNeutral_OSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command DoubleUTurnOutpostSideNeutral = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+        INTAKING.TRY().asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
                                                                            // under trench
         CollectAndScore(
             ChoreoTraj.FirstUTurn_OSideTrench_Neutral,
             ChoreoTraj.FirstUTurnOSideNeutral_OSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
         runPath(ChoreoTraj.OSideShoot_OSideTrench).asProxy(),
         CollectAndScore(
             ChoreoTraj.SecondUTurn_OSideTrench_Neutral,
             ChoreoTraj.SecondUTurnOSideNeutral_OSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
@@ -349,88 +311,88 @@ public class RobotContainer {
         Climb(ChoreoTraj.OSideShoot_PrepClimb));
 
     Command DepotSideNeutral = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+        INTAKING.TRY().asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
                                                                            // under trench
         CollectAndScore(
             ChoreoTraj.DSideTrench_Neutral,
             ChoreoTraj.DSideNeutral_DSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command DoubleDepotSideNeutral = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+        INTAKING.TRY().asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
                                                                            // under trench
         CollectAndScore(ChoreoTraj.DSideTrench_MidlineNeutral,
             ChoreoTraj.DSideMidline_DSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
         runPath(ChoreoTraj.DSideShoot_DSideTrench).asProxy(),
         DepotSideNeutral.asProxy());
 
     Command DoubleUTurnDepotSideNeutral = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+        INTAKING.TRY().asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
                                                                            // under trench
         CollectAndScore(
             ChoreoTraj.FirstUTurn_DSideTrench_Neutral,
             ChoreoTraj.FirstUTurnDSideNeutral_DSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
         runPath(ChoreoTraj.DSideShoot_DSideTrench).asProxy(),
         CollectAndScore(
             ChoreoTraj.SecondUTurn_DSideTrench_Neutral,
             ChoreoTraj.SecondUTurnDSideNeutral_DSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command DepotSideGlendaleWithUturn = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+        INTAKING.TRY().asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
                                                                            // under trench
         CollectAndScore(ChoreoTraj.DSideTrench_MidlineNeutral,
             ChoreoTraj.DSideMidline_DSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
         runPath(ChoreoTraj.DSideShoot_DSideTrench).asProxy(),
         CollectAndScore(
             ChoreoTraj.SecondUTurn_DSideTrench_Neutral,
             ChoreoTraj.SecondUTurnDSideNeutral_DSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command DepotSideOffsetGlendale = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+        INTAKING.TRY().asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
                                                                            // under trench
         CollectAndScore(ChoreoTraj.DSideTrench_OffsetNeutral,
             ChoreoTraj.DSideOffset_DSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
         runPath(ChoreoTraj.DSideShoot_DSideTrench).asProxy(),
         CollectAndScore(
             ChoreoTraj.SecondUTurn_DSideTrench_Neutral,
             ChoreoTraj.SecondUTurnDSideNeutral_DSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
     Command DepotSideWCMPWithUturn = Commands.sequence(
-        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+        INTAKING.TRY().asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
                                                                            // under trench
         WCMPCollectAndScore(ChoreoTraj.WCMP_DSideTrench_MidlineNeutral,
             ChoreoTraj.WCMP_DSideMidline_DSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
         runPath(ChoreoTraj.WCMP_DSideShoot_DSideTrench).asProxy(),
         WCMPCollectAndScore(
             ChoreoTraj.WCMP_SecondUTurn_DSideTrench_Neutral,
             ChoreoTraj.WCMP_SecondUTurnDSideNeutral_DSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
@@ -446,7 +408,7 @@ public class RobotContainer {
         CollectAndScore(
             ChoreoTraj.OSideTrench_Outpost,
             ChoreoTraj.Outpost_OSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_OUTPOST_TIMEOUT,
             ConstAuto.SHOOT_FROM_OUTPOST_TIMEOUT));
 
@@ -458,7 +420,7 @@ public class RobotContainer {
         CollectAndScore(
             ChoreoTraj.OSideShoot_Outpost,
             ChoreoTraj.Outpost_OSidePrep,
-            TRY_PREP_ANYWHERE,
+            PREP_ANYWHERE.TRY(),
             ConstAuto.INTAKE_OUTPOST_TIMEOUT,
             ConstAuto.SHOOT_FROM_OUTPOST_TIMEOUT));
 
@@ -539,51 +501,51 @@ public class RobotContainer {
   Command CollectAndScore(ChoreoTraj collectPath, ChoreoTraj prepShootPath, Command try_prep_shoot, Time intakingTime,
       Time shootingTime) {
     return Commands.sequence(
-        Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
-        runPath(collectPath).asProxy().deadlineFor(TRY_INTAKING.asProxy()),
-        runPath(prepShootPath).asProxy().deadlineFor(TRY_INTAKING.asProxy()),
-        TRY_NONE.asProxy(),
+        Commands.runOnce(() -> stateMachineInstance.setRobotState(NONE)).asProxy(),
+        runPath(collectPath).asProxy().deadlineFor(INTAKING.TRY().asProxy()),
+        runPath(prepShootPath).asProxy().deadlineFor(INTAKING.TRY().asProxy()),
+        NONE.TRY().asProxy(),
         try_prep_shoot.asProxy().withTimeout(ConstAuto.PREP_SHOOT_TIMEOUT),
-        TRY_SHOOTING.asProxy().withTimeout(shootingTime),
-        TRY_NONE.asProxy());
+        SHOOTING.TRY().asProxy().withTimeout(shootingTime),
+        NONE.TRY().asProxy());
   }
 
   Command WCMPCollectAndScore(ChoreoTraj collectPath, ChoreoTraj prepShootPath, Command try_prep_shoot,
       Time intakingTime,
       Time shootingTime) {
     return Commands.sequence(
-        Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
-        runPath(collectPath).asProxy().deadlineFor(TRY_INTAKING.asProxy()),
+        Commands.runOnce(() -> stateMachineInstance.setRobotState(NONE)).asProxy(),
+        runPath(collectPath).asProxy().deadlineFor(INTAKING.TRY().asProxy()),
         Commands.parallel(
             runPath(prepShootPath).asProxy(),
             Commands.sequence(
-                // TRY_INTAKING is a deferred/instant command that finishes immediately after
+                // INTAKING.TRY() is a deferred/instant command that finishes immediately after
                 // requesting the state. Using .until(...) on it will therefore end right away.
                 // Instead, explicitly request the INTAKING state once and then wait until the
                 // drivetrain is behind the horizontal line before continuing to prep shooting.
-                TRY_INTAKING.asProxy(),
+                INTAKING.TRY().asProxy(),
                 Commands
                     .waitUntil(() -> drivetrainInstance.isBehindHorizontalLine(ConstField.FieldElements.ALLIENCE_LINE)),
                 try_prep_shoot.asProxy().withTimeout(ConstAuto.PREP_SHOOT_TIMEOUT))),
-        TRY_SHOOTING.asProxy().withTimeout(shootingTime),
-        TRY_NONE.asProxy());
+        SHOOTING.TRY().asProxy().withTimeout(shootingTime),
+        NONE.TRY().asProxy());
   }
 
   Command ScoreOnly(ChoreoTraj prepShootPath, Command try_prep_shoot, Time shootingTime) {
     return Commands.sequence(
-        Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
+        Commands.runOnce(() -> stateMachineInstance.setRobotState(NONE)).asProxy(),
         runPath(prepShootPath).asProxy(),
         try_prep_shoot.asProxy().withTimeout(ConstAuto.PREP_SHOOT_TIMEOUT),
-        TRY_SHOOTING.asProxy().withTimeout(shootingTime),
-        TRY_NONE.asProxy());
+        SHOOTING.TRY().asProxy().withTimeout(shootingTime),
+        NONE.TRY().asProxy());
   }
 
   Command Climb(ChoreoTraj startPath) {
     return Commands.sequence(
-        Commands.runOnce(() -> stateMachineInstance.setRobotState(RobotState.NONE)).asProxy(),
+        Commands.runOnce(() -> stateMachineInstance.setRobotState(NONE)).asProxy(),
         runPath(startPath).asProxy(),
-        TRY_PREP_CLIMB_L1.asProxy().withTimeout(6),
-        TRY_CLIMBING_L1.asProxy().withTimeout(4));
+        PREP_CLIMB_L1.TRY().asProxy().withTimeout(6),
+        CLIMBING_L1.TRY().asProxy().withTimeout(4));
   }
 
   public static boolean isPracticeBot() {

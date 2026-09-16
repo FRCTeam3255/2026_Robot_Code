@@ -12,7 +12,6 @@ import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstPoseDrive;
 import frc.robot.constants.ConstRotors;
 import frc.robot.subsystems.DriverStateMachine.DriverState;
-import frc.robot.subsystems.StateMachine.RobotState;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -20,13 +19,11 @@ import frc.robot.subsystems.StateMachine.RobotState;
 public class PrepAnywhere extends Command {
 
   public PrepAnywhere() {
-    addRequirements(RobotContainer.stateMachineInstance);
   }
 
   @Override
   public void initialize() {
     RobotContainer.visionInstance.setVisionEnabled(true);
-    RobotContainer.stateMachineInstance.setRobotState(RobotState.PREP_ANYWHERE);
     RobotContainer.drivetrainInstance.setIsManualRotationEnabled(false);
   }
 
