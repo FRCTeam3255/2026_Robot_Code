@@ -12,8 +12,6 @@ import frc.robot.constants.ConstMotion;
 public class RetractIntake extends Command {
   /** Creates a new retract intake. */
   public RetractIntake() {
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.motionInstance);
   }
 
   // Called when the command is initially scheduled.

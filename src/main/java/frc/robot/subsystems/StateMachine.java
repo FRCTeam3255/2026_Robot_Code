@@ -16,6 +16,7 @@ import java.util.Set;
 @Logged
 public class StateMachine extends SubsystemBase {
   private RobotState currentRobotState = RobotState.NONE;
+  private RobotState previousRobotState = RobotState.NONE;
 
   public void setRobotState(RobotState robotState) {
     currentRobotState = robotState;
@@ -23,6 +24,10 @@ public class StateMachine extends SubsystemBase {
 
   public RobotState getRobotState() {
     return currentRobotState;
+  }
+
+  public RobotState getPreviousRobotState() {
+    return previousRobotState;
   }
 
   public boolean canGoTo(RobotState desiredState) {
@@ -39,6 +44,7 @@ public class StateMachine extends SubsystemBase {
                     + " while at "
                     + currentRobotState);
           }
+          previousRobotState = currentRobotState;
           return desiredState.commandFactory.get()
               .beforeStarting(() -> currentRobotState = desiredState);
         },
