@@ -6,15 +6,13 @@ package frc.robot.commands.states.PrepShoots;
 
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
-import frc.robot.subsystems.StateMachine;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PrepTrench extends BasePrepShooter {
   public PrepTrench() {
-    super(ConstRotors.FLYWHEEL_TRENCH_SPEED, ConstMotion.HOOD_TRENCH_ANGLE,
-        StateMachine.RobotState.PREP_TRENCH);
+    super(ConstRotors.FLYWHEEL_TRENCH_SPEED, ConstMotion.HOOD_TRENCH_ANGLE);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 }

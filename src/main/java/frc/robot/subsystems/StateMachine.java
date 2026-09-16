@@ -4,23 +4,18 @@
 
 package frc.robot.subsystems;
 
+import static frc.robot.constants.ConstStateMachine.LEGAL_MOVES;
+
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.commands.states.Climbing.*;
-import frc.robot.RobotContainer;
-import frc.robot.commands.states.*;
-import frc.robot.commands.states.PrepShoots.*;
+import frc.robot.constants.ConstStateMachine.RobotState;
+import java.util.Set;
 
 @Logged
 public class StateMachine extends SubsystemBase {
-  public static RobotState currentRobotState;
-
-  /** Creates a new StateMachine. */
-  public StateMachine() {
-    currentRobotState = RobotState.NONE;
-  }
+  private RobotState currentRobotState = RobotState.NONE;
 
   public void setRobotState(RobotState robotState) {
     currentRobotState = robotState;
@@ -30,299 +25,23 @@ public class StateMachine extends SubsystemBase {
     return currentRobotState;
   }
 
+  public boolean canGoTo(RobotState desiredState) {
+    return LEGAL_MOVES.get(desiredState).contains(currentRobotState);
+  }
+
   public Command tryState(RobotState desiredState) {
-    switch (desiredState) {
-      case NONE:
-        switch (currentRobotState) {
-          case NONE:
-          case UNCLIMB_L1:
-          case INTAKING:
-          case EJECTING_HOPPER:
-          case REVERSING_SHOOTER:
-          case SHOOTING:
-            return new None();
-        }
-        break;
-
-      case INTAKING:
-        switch (currentRobotState) {
-          case NONE:
-          case RETRACT_INTAKE:
-          case PREP_CLIMB_L1:
-          case UNCLIMB_L1:
-          case PREP_HUB:
-          case PREP_ANYWHERE:
-          case PREP_DEPOT:
-          case PREP_TRENCH:
-          case PREP_CORNER:
-          case PREP_TOWER:
-          case PREP_NON_OUTPOST:
-          case PREP_NEUTRAL_TO_ALLIANCE:
-          case PREP_OPPONENT_TO_ALLIANCE:
-            return new Intaking();
-        }
-        break;
-
-      case PREP_ANYWHERE:
-        switch (currentRobotState) {
-          case NONE:
-          case INTAKING:
-          case PREP_DEPOT:
-          case PREP_HUB:
-          case PREP_ANYWHERE:
-          case PREP_TRENCH:
-          case PREP_CORNER:
-          case PREP_TOWER:
-          case PREP_NON_OUTPOST:
-          case PREP_NEUTRAL_TO_ALLIANCE:
-          case PREP_OPPONENT_TO_ALLIANCE:
-            return new PrepAnywhere();
-        }
-        break;
-
-      case PREP_DEPOT:
-        switch (currentRobotState) {
-          case NONE:
-          case PREP_DEPOT:
-          case PREP_HUB:
-          case PREP_ANYWHERE:
-          case PREP_TRENCH:
-          case PREP_CORNER:
-          case PREP_TOWER:
-          case PREP_NON_OUTPOST:
-          case PREP_NEUTRAL_TO_ALLIANCE:
-          case PREP_OPPONENT_TO_ALLIANCE:
-            return new PrepDepot();
-        }
-        break;
-
-      case PREP_HUB:
-        switch (currentRobotState) {
-          case NONE:
-          case PREP_DEPOT:
-          case PREP_HUB:
-          case PREP_ANYWHERE:
-          case PREP_TRENCH:
-          case PREP_CORNER:
-          case PREP_TOWER:
-          case PREP_NON_OUTPOST:
-          case PREP_NEUTRAL_TO_ALLIANCE:
-          case PREP_OPPONENT_TO_ALLIANCE:
-            return new PrepHub();
-        }
-        break;
-
-      case PREP_TRENCH:
-        switch (currentRobotState) {
-          case NONE:
-          case PREP_DEPOT:
-          case PREP_HUB:
-          case PREP_ANYWHERE:
-          case PREP_TRENCH:
-          case PREP_CORNER:
-          case PREP_TOWER:
-          case PREP_NON_OUTPOST:
-          case PREP_NEUTRAL_TO_ALLIANCE:
-          case PREP_OPPONENT_TO_ALLIANCE:
-            return new PrepTrench();
-        }
-        break;
-
-      case PREP_CORNER:
-        switch (currentRobotState) {
-          case NONE:
-          case PREP_DEPOT:
-          case PREP_HUB:
-          case PREP_ANYWHERE:
-          case PREP_TRENCH:
-          case PREP_CORNER:
-          case PREP_TOWER:
-          case PREP_NON_OUTPOST:
-          case PREP_NEUTRAL_TO_ALLIANCE:
-          case PREP_OPPONENT_TO_ALLIANCE:
-            return new PrepCorner();
-        }
-        break;
-
-      case PREP_NON_OUTPOST:
-        switch (currentRobotState) {
-          case NONE:
-          case PREP_DEPOT:
-          case PREP_HUB:
-          case PREP_ANYWHERE:
-          case PREP_TRENCH:
-          case PREP_CORNER:
-          case PREP_TOWER:
-          case PREP_NON_OUTPOST:
-          case PREP_NEUTRAL_TO_ALLIANCE:
-          case PREP_OPPONENT_TO_ALLIANCE:
-            return new PrepNonOutpost();
-        }
-        break;
-
-      case PREP_TOWER:
-        switch (currentRobotState) {
-          case NONE:
-          case PREP_DEPOT:
-          case PREP_HUB:
-          case PREP_ANYWHERE:
-          case PREP_TRENCH:
-          case PREP_CORNER:
-          case PREP_TOWER:
-          case PREP_NON_OUTPOST:
-          case PREP_NEUTRAL_TO_ALLIANCE:
-          case PREP_OPPONENT_TO_ALLIANCE:
-            return new PrepTower();
-        }
-        break;
-
-      case PREP_NEUTRAL_TO_ALLIANCE:
-        switch (currentRobotState) {
-          case NONE:
-          case PREP_DEPOT:
-          case PREP_HUB:
-          case PREP_ANYWHERE:
-          case PREP_TRENCH:
-          case PREP_CORNER:
-          case PREP_TOWER:
-          case PREP_NON_OUTPOST:
-          case PREP_NEUTRAL_TO_ALLIANCE:
-          case PREP_OPPONENT_TO_ALLIANCE:
-            return new PrepNeutralToAlliance();
-        }
-        break;
-
-      case PREP_OPPONENT_TO_ALLIANCE:
-        switch (currentRobotState) {
-          case NONE:
-          case PREP_DEPOT:
-          case PREP_HUB:
-          case PREP_ANYWHERE:
-          case PREP_TRENCH:
-          case PREP_CORNER:
-          case PREP_TOWER:
-          case PREP_NON_OUTPOST:
-          case PREP_NEUTRAL_TO_ALLIANCE:
-          case PREP_OPPONENT_TO_ALLIANCE:
-            return new PrepOpponentToAlliance();
-        }
-        break;
-
-      case SHOOTING:
-        switch (currentRobotState) {
-          case PREP_DEPOT:
-          case PREP_HUB:
-          case PREP_ANYWHERE:
-          case PREP_TRENCH:
-          case PREP_CORNER:
-          case PREP_NON_OUTPOST:
-          case PREP_TOWER:
-          case PREP_NEUTRAL_TO_ALLIANCE:
-          case PREP_OPPONENT_TO_ALLIANCE:
-            return new Shooting();
-        }
-        break;
-
-      case EJECTING_HOPPER:
-        switch (currentRobotState) {
-          case NONE:
-          case PREP_DEPOT:
-          case PREP_HUB:
-          case PREP_ANYWHERE:
-          case PREP_TRENCH:
-          case PREP_CORNER:
-          case PREP_TOWER:
-          case PREP_NON_OUTPOST:
-          case PREP_NEUTRAL_TO_ALLIANCE:
-          case PREP_OPPONENT_TO_ALLIANCE:
-            return new EjectingHopper();
-        }
-        break;
-
-      case REVERSING_SHOOTER:
-        switch (currentRobotState) {
-          case NONE:
-          case PREP_DEPOT:
-          case PREP_HUB:
-          case PREP_ANYWHERE:
-          case PREP_TRENCH:
-          case PREP_CORNER:
-          case PREP_TOWER:
-          case PREP_NON_OUTPOST:
-          case PREP_NEUTRAL_TO_ALLIANCE:
-          case PREP_OPPONENT_TO_ALLIANCE:
-            return new ReverseShooter();
-        }
-        break;
-
-      case PREP_CLIMB_L1:
-        switch (currentRobotState) {
-          case NONE:
-            return new PrepClimb();
-          // .alongWith(RobotContainer.runPath(RobotContainer.drivetrainInstance.getDesiredClimbingPath()));
-        }
-        break;
-
-      case CLIMBING_L1:
-        switch (currentRobotState) {
-          case PREP_CLIMB_L1:
-          case UNCLIMB_L1:
-            return new ClimbingL1();
-        }
-        break;
-
-      case UNCLIMB_L1:
-        switch (currentRobotState) {
-          case CLIMBING_L1:
-            return new Unclimb();
-        }
-        break;
-
-      case CLIMBING_L2_3:
-        switch (currentRobotState) {
-          case CLIMBING_L1:
-          case CLIMBING_L2_3:
-            return new ClimbingL2_3();
-        }
-        break;
-
-      case RETRACT_INTAKE:
-        switch (currentRobotState) {
-          case NONE:
-            return new RetractIntake();
-        }
-        break;
-    }
-
-    return Commands
-        .print("ITS SO OVER D: Invalid State Provided, Blame Eli. Attempted to go to: " + desiredState.toString()
-            + " while at " + currentRobotState.toString());
-  }
-
-  public enum RobotState {
-    NONE,
-    INTAKING,
-    PREP_CORNER,
-    PREP_DEPOT,
-    PREP_HUB,
-    PREP_TRENCH,
-    PREP_ANYWHERE,
-    PREP_NON_OUTPOST,
-    PREP_TOWER,
-    PREP_NEUTRAL_TO_ALLIANCE,
-    PREP_OPPONENT_TO_ALLIANCE,
-    SHOOTING,
-    EJECTING_HOPPER,
-    REVERSING_SHOOTER,
-    PREP_CLIMB_L1,
-    CLIMBING_L1,
-    CLIMBING_L2_3,
-    UNCLIMB_L1,
-    RETRACT_INTAKE,
-  }
-
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
+    return Commands.defer(
+        () -> {
+          if (!canGoTo(desiredState)) {
+            return Commands.print(
+                "ITS SO OVER D: Invalid State Provided, Blame Eli. Attempted to go to: "
+                    + desiredState
+                    + " while at "
+                    + currentRobotState);
+          }
+          return desiredState.commandFactory.get()
+              .beforeStarting(() -> currentRobotState = desiredState);
+        },
+        Set.of(this));
   }
 }

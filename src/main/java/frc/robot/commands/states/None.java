@@ -8,15 +8,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
-import frc.robot.subsystems.*;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class None extends Command {
   /** Creates a new None. */
 
   public None() {
-    addRequirements(RobotContainer.stateMachineInstance);
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
@@ -28,7 +25,6 @@ public class None extends Command {
     RobotContainer.rotorsInstance.setShooterTransferPercentOutput(ConstRotors.STOP);
     RobotContainer.rotorsInstance.setIntakeRollersSpeed(ConstRotors.STOP);
     RobotContainer.rotorsInstance.setSerializerRollersSpeed(ConstRotors.STOP);
-    RobotContainer.stateMachineInstance.setRobotState(StateMachine.RobotState.NONE);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

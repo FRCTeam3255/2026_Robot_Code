@@ -6,15 +6,13 @@ package frc.robot.commands.states.PrepShoots;
 
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
-import frc.robot.subsystems.StateMachine;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PrepNonOutpost extends BasePrepShooter {
   public PrepNonOutpost() {
-    super(ConstRotors.FLYWHEEL_NON_OUTPOST_SPEED, ConstMotion.HOOD_NON_OUTPOST_ANGLE,
-        StateMachine.RobotState.PREP_NON_OUTPOST);
+    super(ConstRotors.FLYWHEEL_NON_OUTPOST_SPEED, ConstMotion.HOOD_NON_OUTPOST_ANGLE);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 }

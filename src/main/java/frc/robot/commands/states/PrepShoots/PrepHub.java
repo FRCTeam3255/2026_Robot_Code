@@ -6,13 +6,11 @@ package frc.robot.commands.states.PrepShoots;
 
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
-import frc.robot.subsystems.StateMachine;
 
 /** Add your docs here. */
 public class PrepHub extends BasePrepShooter {
   public PrepHub() {
-    super(ConstRotors.FLYWHEEL_HUB_SPEED, ConstMotion.HOOD_HUB_ANGLE,
-        StateMachine.RobotState.PREP_HUB);
+    super(ConstRotors.FLYWHEEL_HUB_SPEED, ConstMotion.HOOD_HUB_ANGLE);
 
   }
 }
