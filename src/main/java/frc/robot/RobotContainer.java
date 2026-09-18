@@ -1,4 +1,4 @@
-// Copyright (c) FIRST and other WPILib contributors.
+ // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
@@ -201,11 +201,11 @@ public class RobotContainer {
    * .onFalse(YOUR_ACTION);
    */
   private void configDriverBindings() {
-    conDriver.btn_South
+    conDriver.btn_South.onTrue(TRY_REVERSING_SHOOTER)
         .onFalse(TRY_NONE);
     conDriver.btn_RightTrigger
         .onFalse(TRY_NONE);
-    conDriver.btn_East
+    conDriver.btn_East.onTrue(TRY_EJECTING_HOPPER)
         .onFalse(TRY_NONE);
     conDriver.btn_Start
         .onFalse(TRY_NONE);
@@ -213,16 +213,16 @@ public class RobotContainer {
         .onFalse(TRY_NONE);
     conDriver.btn_Back
         .onFalse(TRY_NONE);
-    conDriver.btn_RightBumper
+    conDriver.btn_RightBumper.onTrue(TRY_PREP_ANYWHERE)
         .onFalse(TRY_NONE);
-    conDriver.btn_A
+    conDriver.btn_A.onTrue(TRY_RETRACT_INTAKE)
         .onFalse(TRY_NONE);
     conDriver.btn_West
         .onFalse(TRY_NONE);
     conDriver.btn_B
         .onFalse(TRY_NONE);
     conDriver.btn_Y
-        .onFalse(TRY_NONE);
+        .onFalse(TRY_INTAKING);
     conDriver.btn_X
         .onFalse(TRY_NONE);
     conDriver.btn_RightStick
