@@ -4,6 +4,9 @@
 
 package frc.robot.subsystems;
 
+import static edu.wpi.first.units.Units.Degrees;
+import static edu.wpi.first.units.Units.Meters;
+
 import java.util.Optional;
 
 import edu.wpi.first.epilogue.Logged;
@@ -244,6 +247,32 @@ public class Vision extends SubsystemBase {
 
   public boolean seesTags() {
     return getTotalTagCount() > 0;
+  }
+
+    public void setUpLLPoses() {
+    LimelightHelpers.setCameraPose_RobotSpace(ConstVision.LIMELIGHT_RIGHT_NAME,
+        ConstVision.LimelightRight.LL_FORWARD.in(Meters),
+        ConstVision.LimelightRight.LL_RIGHT.in(Meters),
+        ConstVision.LimelightRight.LL_UP.in(Meters),
+        ConstVision.LimelightRight.LL_ROLL.in(Degrees),
+        ConstVision.LimelightRight.LL_PITCH.in(Degrees),
+        ConstVision.LimelightRight.LL_YAW.in(Degrees));
+
+    LimelightHelpers.setCameraPose_RobotSpace(ConstVision.LIMELIGHT_LEFT_NAME,
+        ConstVision.LimelightLeft.LL_FORWARD.in(Meters),
+        ConstVision.LimelightLeft.LL_RIGHT.in(Meters),
+        ConstVision.LimelightLeft.LL_UP.in(Meters),
+        ConstVision.LimelightLeft.LL_ROLL.in(Degrees),
+        ConstVision.LimelightLeft.LL_PITCH.in(Degrees),
+        ConstVision.LimelightLeft.LL_YAW.in(Degrees));
+
+    LimelightHelpers.setCameraPose_RobotSpace(ConstVision.LIMELIGHT_TOP_NAME,
+        ConstVision.LimelightBack.LL_FORWARD.in(Meters),
+        ConstVision.LimelightBack.LL_RIGHT.in(Meters),
+        ConstVision.LimelightBack.LL_UP.in(Meters),
+        ConstVision.LimelightBack.LL_ROLL.in(Degrees),
+        ConstVision.LimelightBack.LL_PITCH.in(Degrees),
+        ConstVision.LimelightBack.LL_YAW.in(Degrees));
   }
 
   @Override

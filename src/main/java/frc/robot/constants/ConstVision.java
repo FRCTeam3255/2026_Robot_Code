@@ -95,34 +95,33 @@ public class ConstVision {
 
   // The below values are accounted for in the limelight interface, NOT in code
   public static class LimelightRight {
-    public static final Distance LL_FORWARD = Units.Meters.of(0.269494);
-    public static final Distance LL_RIGHT = Units.Meters.of(0.307594);
-    public static final Distance LL_UP = Units.Meters.of(0.211328);
+    public static final Distance LL_FORWARD = Units.Meters.of(0.27623);
+    public static final Distance LL_RIGHT = Units.Meters.of(-0.27623);
+    public static final Distance LL_UP = Units.Meters.of(0.25402);
 
-    public static final Angle LL_ROLL = Units.Degrees.of(180);
-    public static final Angle LL_PITCH = Units.Degrees.of(23.17);
-    public static final Angle LL_YAW = Units.Degrees.of(51.25);
+    public static final Angle LL_ROLL = Units.Degrees.of(0);
+    public static final Angle LL_PITCH = Units.Degrees.of(30);
+    public static final Angle LL_YAW = Units.Degrees.of(0);
   }
 
   public static class LimelightLeft {
-    public static final Distance LL_FORWARD = Units.Meters.of(0.269494);
-    public static final Distance LL_RIGHT = Units.Meters.of(-0.307594);
-    public static final Distance LL_UP = Units.Meters.of(0.211328);
+    public static final Distance LL_FORWARD = Units.Meters.of(0.27623);
+    public static final Distance LL_RIGHT = Units.Meters.of(-0.27623);
+    public static final Distance LL_UP = Units.Meters.of(0.25402);
 
-    public static final Angle LL_ROLL = Units.Degrees.of(180);
-    public static final Angle LL_PITCH = Units.Degrees.of(23.17);
-    public static final Angle LL_YAW = Units.Degrees.of(-51.25);
-
+    public static final Angle LL_ROLL = Units.Degrees.of(0);
+    public static final Angle LL_PITCH = Units.Degrees.of(30);
+    public static final Angle LL_YAW = Units.Degrees.of(0);
   }
 
   public static class LimelightBack {
-    public static final Distance LL_FORWARD = Units.Meters.of(0.3429);
-    public static final Distance LL_RIGHT = Units.Meters.of(0);
-    public static final Distance LL_UP = Units.Meters.of(0.2921);
+    public static final Distance LL_FORWARD = Units.Meters.of(0.1397);
+    public static final Distance LL_RIGHT = Units.Meters.of(-0.34525);
+    public static final Distance LL_UP = Units.Meters.of(0.51434);
 
     public static final Angle LL_ROLL = Units.Degrees.of(0);
-    public static final Angle LL_PITCH = Units.Degrees.of(-20);
-    public static final Angle LL_YAW = Units.Degrees.of(0);
+    public static final Angle LL_PITCH = Units.Degrees.of(0);
+    public static final Angle LL_YAW = Units.Degrees.of(90);
   }
 
 }
