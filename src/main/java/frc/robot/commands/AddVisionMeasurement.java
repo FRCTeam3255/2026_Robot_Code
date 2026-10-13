@@ -34,7 +34,7 @@ public class AddVisionMeasurement extends Command {
         yaw, 0, 0, 0, 0, 0);
     LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_LEFT_NAME,
         yaw, 0, 0, 0, 0, 0);
-    LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_TOP_NAME,
+    LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_SIDE_NAME,
         yaw, 0, 0, 0, 0, 0);
     AngularVelocity gyroRate = RobotContainer.drivetrainInstance.getGyroRate();
     estimatedPose = RobotContainer.visionInstance.determinePoseEstimate(gyroRate);
