@@ -55,9 +55,9 @@ public class ConstDrivetrain {
 
   public static class PRACTICE_BOT {
     // TODO: Swoffsets
-    public static final Angle FRONT_LEFT_ABS_ENCODER_OFFSET = Rotations.of(-0.199462890625);
-    public static final Angle FRONT_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(0.474365234375);
-    public static final Angle BACK_LEFT_ABS_ENCODER_OFFSET = Rotations.of(-0.447265625);
+    public static final Angle FRONT_LEFT_ABS_ENCODER_OFFSET = Rotations.of(-0.188232421875);
+    public static final Angle FRONT_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(0.070556640625);
+    public static final Angle BACK_LEFT_ABS_ENCODER_OFFSET = Rotations.of(-0.4501953125);
     public static final Angle BACK_RIGHT_ABS_ENCODER_OFFSET = Rotations.of(-0.3193359375);
   }
 
