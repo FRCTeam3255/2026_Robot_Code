@@ -4,6 +4,9 @@
 
 package frc.robot.subsystems;
 
+import static edu.wpi.first.units.Units.Degrees;
+import static edu.wpi.first.units.Units.Meters;
+
 import java.util.Optional;
 
 import edu.wpi.first.epilogue.Logged;
@@ -64,11 +67,11 @@ public class Vision extends SubsystemBase {
     if (useAssist == true) {
       LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.IMUMode.INTERNAL_MT1_ASSIST);
       LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.IMUMode.INTERNAL_MT1_ASSIST);
-      LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.IMUMode.INTERNAL_MT1_ASSIST);
+      LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_SIDE_NAME, ConstVision.IMUMode.INTERNAL_MT1_ASSIST);
     } else {
       LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.IMUMode.EXTERNAL_SEED);
       LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.IMUMode.EXTERNAL_SEED);
-      LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.IMUMode.EXTERNAL_SEED);
+      LimelightHelpers.SetIMUMode(ConstVision.LIMELIGHT_SIDE_NAME, ConstVision.IMUMode.EXTERNAL_SEED);
     }
   }
 
@@ -146,11 +149,11 @@ public class Vision extends SubsystemBase {
     if (useMegaTag2) {
       currentEstimateRight = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(ConstVision.LIMELIGHT_RIGHT_NAME);
       currentEstimateLeft = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(ConstVision.LIMELIGHT_LEFT_NAME);
-      currentEstimateBack = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(ConstVision.LIMELIGHT_TOP_NAME);
+      currentEstimateBack = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(ConstVision.LIMELIGHT_SIDE_NAME);
     } else {
       currentEstimateRight = LimelightHelpers.getBotPoseEstimate_wpiBlue(ConstVision.LIMELIGHT_RIGHT_NAME);
       currentEstimateLeft = LimelightHelpers.getBotPoseEstimate_wpiBlue(ConstVision.LIMELIGHT_LEFT_NAME);
-      currentEstimateBack = LimelightHelpers.getBotPoseEstimate_wpiBlue(ConstVision.LIMELIGHT_TOP_NAME);
+      currentEstimateBack = LimelightHelpers.getBotPoseEstimate_wpiBlue(ConstVision.LIMELIGHT_SIDE_NAME);
     }
 
     if (currentEstimateRight != null
@@ -244,6 +247,32 @@ public class Vision extends SubsystemBase {
 
   public boolean seesTags() {
     return getTotalTagCount() > 0;
+  }
+
+  public void setUpLLPoses() {
+    LimelightHelpers.setCameraPose_RobotSpace(ConstVision.LIMELIGHT_RIGHT_NAME,
+        ConstVision.LimelightRight.LL_FORWARD.in(Meters),
+        ConstVision.LimelightRight.LL_RIGHT.in(Meters),
+        ConstVision.LimelightRight.LL_UP.in(Meters),
+        ConstVision.LimelightRight.LL_ROLL.in(Degrees),
+        ConstVision.LimelightRight.LL_PITCH.in(Degrees),
+        ConstVision.LimelightRight.LL_YAW.in(Degrees));
+
+    LimelightHelpers.setCameraPose_RobotSpace(ConstVision.LIMELIGHT_LEFT_NAME,
+        ConstVision.LimelightLeft.LL_FORWARD.in(Meters),
+        ConstVision.LimelightLeft.LL_RIGHT.in(Meters),
+        ConstVision.LimelightLeft.LL_UP.in(Meters),
+        ConstVision.LimelightLeft.LL_ROLL.in(Degrees),
+        ConstVision.LimelightLeft.LL_PITCH.in(Degrees),
+        ConstVision.LimelightLeft.LL_YAW.in(Degrees));
+
+    LimelightHelpers.setCameraPose_RobotSpace(ConstVision.LIMELIGHT_SIDE_NAME,
+        ConstVision.LimelightBack.LL_FORWARD.in(Meters),
+        ConstVision.LimelightBack.LL_RIGHT.in(Meters),
+        ConstVision.LimelightBack.LL_UP.in(Meters),
+        ConstVision.LimelightBack.LL_ROLL.in(Degrees),
+        ConstVision.LimelightBack.LL_PITCH.in(Degrees),
+        ConstVision.LimelightBack.LL_YAW.in(Degrees));
   }
 
   @Override

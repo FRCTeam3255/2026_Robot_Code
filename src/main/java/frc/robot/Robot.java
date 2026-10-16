@@ -49,6 +49,7 @@ public class Robot extends TimedRobot {
     // Log the DS data and joysticks
     DriverStation.startDataLog(DataLogManager.getLog(), true);
     DriverStation.silenceJoystickConnectionWarning(ConstSystem.constControllers.SILENCE_JOYSTICK_WARNINGS);
+    m_robotContainer.visionInstance.setUpLLPoses();
   }
 
   @Override
@@ -61,10 +62,10 @@ public class Robot extends TimedRobot {
     selectTab("Disabled");
     LimelightHelpers.SetIMUAssistAlpha(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.IMU_ASSIST_ALPHA_VALUE);
     LimelightHelpers.SetIMUAssistAlpha(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.IMU_ASSIST_ALPHA_VALUE);
-    LimelightHelpers.SetIMUAssistAlpha(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.IMU_ASSIST_ALPHA_VALUE);
+    LimelightHelpers.SetIMUAssistAlpha(ConstVision.LIMELIGHT_SIDE_NAME, ConstVision.IMU_ASSIST_ALPHA_VALUE);
     LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.DisabledThrottle);
     LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.DisabledThrottle);
-    LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.DisabledThrottle);
+    LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_SIDE_NAME, ConstVision.DisabledThrottle);
     m_robotContainer.visionInstance.setIMUAssistMode(false);
   }
 
@@ -77,7 +78,7 @@ public class Robot extends TimedRobot {
         yaw, 0, 0, 0, 0, 0);
     LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_LEFT_NAME,
         yaw, 0, 0, 0, 0, 0);
-    LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_TOP_NAME,
+    LimelightHelpers.SetRobotOrientation(ConstVision.LIMELIGHT_SIDE_NAME,
         yaw, 0, 0, 0, 0, 0);
 
   }
@@ -86,12 +87,12 @@ public class Robot extends TimedRobot {
   public void disabledExit() {
     LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_RIGHT_NAME, ConstVision.TeleopThrottle);
     LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_LEFT_NAME, ConstVision.TeleopThrottle);
-    LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_TOP_NAME, ConstVision.TeleopThrottle);
+    LimelightHelpers.SetThrottle(ConstVision.LIMELIGHT_SIDE_NAME, ConstVision.TeleopThrottle);
     m_robotContainer.visionInstance.setIMUAssistMode(true);
     m_robotContainer.addVisionMeasurement().schedule();
     LimelightHelpers.setRewindEnabled(ConstVision.LIMELIGHT_LEFT_NAME, true);
     LimelightHelpers.setRewindEnabled(ConstVision.LIMELIGHT_RIGHT_NAME, true);
-    LimelightHelpers.setRewindEnabled(ConstVision.LIMELIGHT_TOP_NAME, true);
+    LimelightHelpers.setRewindEnabled(ConstVision.LIMELIGHT_SIDE_NAME, true);
   }
 
   @Override
@@ -132,7 +133,7 @@ public class Robot extends TimedRobot {
   public void teleopExit() {
     LimelightHelpers.triggerRewindCapture(ConstVision.LIMELIGHT_LEFT_NAME, 165);
     LimelightHelpers.triggerRewindCapture(ConstVision.LIMELIGHT_RIGHT_NAME, 165);
-    LimelightHelpers.triggerRewindCapture(ConstVision.LIMELIGHT_TOP_NAME, 165);
+    LimelightHelpers.triggerRewindCapture(ConstVision.LIMELIGHT_SIDE_NAME, 165);
   }
 
   @Override
