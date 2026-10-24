@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import static edu.wpi.first.units.Units.Degrees;
+import static edu.wpi.first.units.Units.Radians;
 
 import java.util.List;
 import java.util.function.DoubleSupplier;
@@ -289,6 +290,12 @@ public class Drivetrain extends SN_SuperSwerveV2 {
     resetPose(pose);
     resetYawValue = pose.getRotation().getMeasure();
     getPigeon2().setYaw(resetYawValue);
+    setDriveRotation(resetYawValue);
+  }
+
+  public void resetAutoPose(Pose2d pose) {
+    resetPose(pose);
+    resetYawValue = Radians.of(pose.getRotation().getRadians());
     setDriveRotation(resetYawValue);
   }
 
