@@ -96,7 +96,7 @@ public class ConstVision {
   // The below values are accounted for in the limelight interface, NOT in code
   public static class LimelightRight {
     public static final Distance LL_FORWARD = Units.Meters.of(0.27623);
-    public static final Distance LL_RIGHT = Units.Meters.of(-0.27623);
+    public static final Distance LL_RIGHT = Units.Meters.of(0.27623);
     public static final Distance LL_UP = Units.Meters.of(0.25402);
 
     public static final Angle LL_ROLL = Units.Degrees.of(0);
