@@ -370,7 +370,7 @@ public record ChoreoTraj(
     public static final ChoreoTraj Beach_Blitz_DSideShoot_DSideTrench = new ChoreoTraj(
         "Beach_Blitz_DSideShoot_DSideTrench",
         OptionalInt.empty(),
-        1.20358,
+        1.26643,
         new Pose2d(2.77894, 5.46872, Rotation2d.fromRadians(-0.7854)),
         new Pose2d(3.68332, 7.41833, Rotation2d.fromRadians(3.14159))
     );
