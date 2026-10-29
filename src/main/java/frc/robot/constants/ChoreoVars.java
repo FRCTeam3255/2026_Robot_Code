@@ -53,9 +53,9 @@ public final class ChoreoVars {
         public static final Pose2d outpost_side_trench_nuetral = new Pose2d(3.6836977, 0.4991045, Rotation2d.fromRadians(4.712389));
         public static final Pose2d preload_shoot = new Pose2d(2.5119886, 4.0041704, Rotation2d.fromRadians(0));
         public static final Pose2d second_dside_neutral_intake_end = new Pose2d(6.619998, 5.5248582, Rotation2d.fromRadians(0));
-        public static final Pose2d second_dside_trench = new Pose2d(3.6833227, 7.5683317, Rotation2d.fromRadians(3.1415927));
+        public static final Pose2d second_dside_trench = new Pose2d(3.6833227, 7.4183317, Rotation2d.fromRadians(3.1415927));
         public static final Pose2d second_oside_neutral_intake_end = new Pose2d(6.5943604, 2.3292248, Rotation2d.fromRadians(0));
-        public static final Pose2d second_oside_trench_nuetral = new Pose2d(3.6836977, 0.4991045, Rotation2d.fromRadians(3.1415927));
+        public static final Pose2d second_oside_trench_nuetral = new Pose2d(3.6836977, 0.6491045, Rotation2d.fromRadians(3.1415927));
     }
 }
 // spotless:on
