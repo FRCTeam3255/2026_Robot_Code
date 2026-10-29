@@ -12,9 +12,9 @@ import com.frcteam3255.joystick.SN_XboxController;
 import choreo.auto.AutoFactory;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.units.measure.Time;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -33,8 +33,8 @@ import frc.robot.constants.ConstDrivetrain;
 import frc.robot.constants.ConstField;
 import frc.robot.constants.ConstMotion;
 import frc.robot.constants.ConstRotors;
-import frc.robot.constants.ConstSystem;
 import frc.robot.constants.ConstRumble;
+import frc.robot.constants.ConstSystem;
 import frc.robot.constants.ConstSystem.constControllers;
 import frc.robot.subsystems.DriverStateMachine;
 import frc.robot.subsystems.DriverStateMachine.DriverState;
@@ -44,8 +44,8 @@ import frc.robot.subsystems.RobotPoses;
 import frc.robot.subsystems.Rotors;
 import frc.robot.subsystems.StateMachine;
 import frc.robot.subsystems.StateMachine.RobotState;
-import frc.robot.subsystems.Vision;
 import frc.robot.subsystems.Telemetry;
+import frc.robot.subsystems.Vision;
 
 @Logged
 public class RobotContainer {
@@ -311,6 +311,22 @@ public class RobotContainer {
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
+    Command OutpostSideBeachBlitzWithUturn = Commands.sequence(
+        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+                                                                           // under trench
+        WCMPCollectAndScore(ChoreoTraj.WCMP_OSideTrench_MidlineNeutral,
+            ChoreoTraj.WCMP_OSideMidline_OSidePrep,
+            TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
+            ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
+        runPath(ChoreoTraj.Beach_Blitz_OSideShoot_OSideTrench).asProxy(),
+        WCMPCollectAndScore(
+            ChoreoTraj.Beach_Blitz_SecondUTurn_OSideTrench_Neutral,
+            ChoreoTraj.WCMP_SecondUTurnOSideNeutral_OSidePrep,
+            TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
+            ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
+
     Command OutpostSideOffsetGlendale = Commands.sequence(
         TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
                                                                            // under trench
@@ -434,6 +450,22 @@ public class RobotContainer {
             ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
             ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
 
+    Command DepotSideBeachBlitzWithUturn = Commands.sequence(
+        TRY_INTAKING.asProxy().withTimeout(ConstAuto.INTAKE_DEPLOY_DELAY), // Force intake down before moving and going
+                                                                           // under trench
+        WCMPCollectAndScore(ChoreoTraj.WCMP_DSideTrench_MidlineNeutral,
+            ChoreoTraj.WCMP_DSideMidline_DSidePrep,
+            TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
+            ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT),
+        runPath(ChoreoTraj.Beach_Blitz_DSideShoot_DSideTrench).asProxy(),
+        WCMPCollectAndScore(
+            ChoreoTraj.Beach_Blitz_SecondUTurn_DSideTrench_Neutral,
+            ChoreoTraj.WCMP_SecondUTurnDSideNeutral_DSidePrep,
+            TRY_PREP_ANYWHERE,
+            ConstAuto.INTAKE_NEUTRAL_ZONE_TIMEOUT,
+            ConstAuto.SHOOT_NEUTRAL_ZONE_TIMEOUT));
+
     Command DepotSideNeutralWithClimb = Commands.sequence(
         DepotSideNeutral.asProxy(),
         Climb(ChoreoTraj.DSideBump_PrepClimb));
@@ -467,11 +499,13 @@ public class RobotContainer {
     Command DoNothing = Commands.none();
 
     autoChooser.setDefaultOption("Do Nothing", DoNothing);
+    autoChooser.addOption("DepotSideBeachBlitzWithUturn", DepotSideBeachBlitzWithUturn);
+    autoChooser.addOption("OutpostSideBeachBlitzWithUturn", OutpostSideBeachBlitzWithUturn);
     autoChooser.addOption("OutpostSideWCMPWithUturn", OutpostSideWCMPWithUturn);
+    autoChooser.addOption("DepotSideWCMPWithUturn", DepotSideWCMPWithUturn);
     autoChooser.addOption("OutpostSideGlendaleWithUturn", OutpostSideGlendaleWithUturn);
     autoChooser.addOption("DoubleOutpostSideNeutral", DoubleOutpostSideNeutral);
     autoChooser.addOption("OutpostSideOffsetGlendale", OutpostSideOffsetGlendale);
-    autoChooser.addOption("DepotSideWCMPWithUturn", DepotSideWCMPWithUturn);
     autoChooser.addOption("DepotSideGlendaleWithUturn", DepotSideGlendaleWithUturn);
     autoChooser.addOption("DoubleDepotSideNeutral", DoubleDepotSideNeutral);
     autoChooser.addOption("DepotSideOffsetGlendale", DepotSideOffsetGlendale);
@@ -495,11 +529,13 @@ public class RobotContainer {
     // make our entries name
     final Map<Command, ChoreoTraj> autoStartingPoses = Map.ofEntries(
         Map.entry(DoNothing, ChoreoTraj.Hub_ShootPreload),
+        Map.entry(OutpostSideBeachBlitzWithUturn, ChoreoTraj.OSideTrench_Neutral),
+        Map.entry(DepotSideBeachBlitzWithUturn, ChoreoTraj.DSideTrench_Neutral),
         Map.entry(OutpostSideWCMPWithUturn, ChoreoTraj.OSideTrench_Neutral),
+        Map.entry(DepotSideWCMPWithUturn, ChoreoTraj.DSideTrench_Neutral),
         Map.entry(OutpostSideGlendaleWithUturn, ChoreoTraj.OSideTrench_Neutral),
         Map.entry(DoubleOutpostSideNeutral, ChoreoTraj.OSideTrench_Neutral),
         Map.entry(OutpostSideOffsetGlendale, ChoreoTraj.OSideTrench_Neutral),
-        Map.entry(DepotSideWCMPWithUturn, ChoreoTraj.DSideTrench_Neutral),
         Map.entry(DepotSideGlendaleWithUturn, ChoreoTraj.DSideTrench_Neutral),
         Map.entry(DoubleDepotSideNeutral, ChoreoTraj.DSideTrench_Neutral),
         Map.entry(DepotSideOffsetGlendale, ChoreoTraj.DSideTrench_Neutral),

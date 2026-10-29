@@ -538,6 +538,20 @@
      "val":0.0
     }
    },
+   "second_dside_trench":{
+    "x":{
+     "exp":"depot_side_trench.x",
+     "val":3.6833226680755615
+    },
+    "y":{
+     "exp":"depot_side_trench.y",
+     "val":7.568331718444824
+    },
+    "heading":{
+     "exp":"180 deg",
+     "val":3.141592653589793
+    }
+   },
    "second_oside_neutral_intake_end":{
     "x":{
      "exp":"6.5943603515625 m",
@@ -550,6 +564,20 @@
     "heading":{
      "exp":"0 deg",
      "val":0.0
+    }
+   },
+   "second_oside_trench_nuetral":{
+    "x":{
+     "exp":"outpost_side_trench_nuetral.x",
+     "val":3.683697700500488
+    },
+    "y":{
+     "exp":"outpost_side_trench_nuetral.y",
+     "val":0.49910447001457214
+    },
+    "heading":{
+     "exp":"180 deg",
+     "val":3.141592653589793
     }
    }
   }
