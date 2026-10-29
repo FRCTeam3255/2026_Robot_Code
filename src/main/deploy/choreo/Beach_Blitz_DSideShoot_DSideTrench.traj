@@ -16,7 +16,7 @@
  "params":{
   "waypoints":[
     {"x":{"exp":"depot_side_neutral_shoot.x", "val":2.778940439224243}, "y":{"exp":"depot_side_neutral_shoot.y", "val":5.468722534179688}, "heading":{"exp":"depot_side_neutral_shoot.heading", "val":-0.7853981633974483}, "intervals":27, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false},
-    {"x":{"exp":"2.308243989944458 m", "val":2.308243989944458}, "y":{"exp":"6.957701683044434 m", "val":6.957701683044434}, "heading":{"exp":"0 deg", "val":0.0}, "intervals":27, "split":false, "fixTranslation":true, "fixHeading":false, "overrideIntervals":false},
+    {"x":{"exp":"mid_point_dside_shoot_to_trench.x", "val":2.308243989944458}, "y":{"exp":"mid_point_dside_shoot_to_trench.y", "val":6.957701683044434}, "heading":{"exp":"mid_point_dside_shoot_to_trench.heading", "val":0.0}, "intervals":27, "split":false, "fixTranslation":true, "fixHeading":false, "overrideIntervals":false},
     {"x":{"exp":"second_dside_trench.x", "val":3.6833226680755615}, "y":{"exp":"second_dside_trench.y", "val":7.418331718444824}, "heading":{"exp":"second_dside_trench.heading", "val":3.141592653589793}, "intervals":40, "split":false, "fixTranslation":true, "fixHeading":true, "overrideIntervals":false}],
   "constraints":[
     {"from":"first", "to":null, "data":{"type":"StopPoint", "props":{}}, "enabled":true},

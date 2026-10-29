@@ -356,6 +356,20 @@
      "val":5.759586531581287
     }
    },
+   "mid_point_dside_shoot_to_trench":{
+    "x":{
+     "exp":"2.308243989944458 m",
+     "val":2.308243989944458
+    },
+    "y":{
+     "exp":"6.957701683044434 m",
+     "val":6.957701683044434
+    },
+    "heading":{
+     "exp":"0 deg",
+     "val":0.0
+    }
+   },
    "neutral":{
     "x":{
      "exp":"7.7 m",
@@ -544,8 +558,8 @@
      "val":3.6833226680755615
     },
     "y":{
-     "exp":"depot_side_trench.y",
-     "val":7.568331718444824
+     "exp":"depot_side_trench.y - 0.15 m",
+     "val":7.418331718444824
     },
     "heading":{
      "exp":"180 deg",
@@ -572,8 +586,8 @@
      "val":3.683697700500488
     },
     "y":{
-     "exp":"outpost_side_trench_nuetral.y",
-     "val":0.49910447001457214
+     "exp":"outpost_side_trench_nuetral.y + 0.15 m",
+     "val":0.6491044700145722
     },
     "heading":{
      "exp":"180 deg",
